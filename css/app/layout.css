@@ -1,0 +1,139 @@
+body {
+     background: url('../../images/backpattern.jpg');
+
+}
+
+/*
+*  layout css
+*/
+
+/* header */
+#header {
+    background-color:#fff;
+    color:#333;
+
+    background: #ffffff;
+    background: -moz-linear-gradient(top, #ffffff 0%, #f2f2f2 71%, #ffffff 99%, #ffffff 99%, #cccccc 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(71%,#f2f2f2), color-stop(99%,#ffffff), color-stop(99%,#ffffff), color-stop(100%,#cccccc));
+    background: -webkit-linear-gradient(top, #ffffff 0%,#f2f2f2 71%,#ffffff 99%,#ffffff 99%,#cccccc 100%);
+    background: -o-linear-gradient(top, #ffffff 0%,#f2f2f2 71%,#ffffff 99%,#ffffff 99%,#cccccc 100%);
+    background: -ms-linear-gradient(top, #ffffff 0%,#f2f2f2 71%,#ffffff 99%,#ffffff 99%,#cccccc 100%);
+    background: linear-gradient(to bottom, #ffffff 0%,#f2f2f2 71%,#ffffff 99%,#ffffff 99%,#cccccc 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#cccccc',GradientType=0 );
+   /* height: 60px; */ /* should be set  later*/
+   min-height: inherit;
+   
+   -webkit-box-shadow: 0px 0px 6px #333
+    -moz-box-shadow:    0px 0px 6px #333;
+    box-shadow:         0px 0px 6px #333;
+    margin-bottom:0px;
+}
+
+#footer{
+      width: 100%;
+      /* Set the fixed height of the footer here */
+      /* height: 60px; */
+      background-color: rgba(0,0,0,.4);
+}
+
+#footer .container {
+    font-size:12px;
+    text-align: center;
+}
+
+#footer .container p{
+    margin-top:10px;
+}
+
+/* sidebar */
+#sidebar {
+    display: block;
+    padding: 20px 0px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+
+}
+
+/*main */
+#main{
+    position: relative;
+    top: -40px;
+    padding-top: 60px;
+    min-height: 762px;
+    background: #eee;
+    border-radius: 0px 0px 0px 6px;
+    background: url('../../images/mainbg.jpg');
+}
+
+/*transition state */
+#header, #footer, #sidebar, #main {
+   -webkit-transition: all 1s;
+   -o-transition: all 1s;
+   transition: all 1s;
+}
+
+#header.notready {
+   top:-70px;
+}
+
+#header.ready{
+    top:0px;
+    height: 60px; 
+}
+
+#main.notready{
+  right: -1999px;
+}
+
+#main.ready{
+   right: 0px;
+}
+
+#footer.notready {
+  opacity: 0;
+}
+
+#footer.ready{
+  opacity: 1;
+  height: 60px; 
+}
+
+
+#sidebar.notready{
+  left:-250px;
+}
+
+#sidebar.ready{
+  left:0px;
+}
+
+/* splash */
+#splash{
+  position: fixed;
+  top: 30%;
+  font-size: 6em;
+  text-align: center;
+  z-index: -999;
+  width: 100%;
+  color: #fff;
+  text-shadow: 5px 9px 6px #000;
+  -webkit-transition: opacity 1s;
+  -o-transition: opacity 1s;
+  transition: opacity 1s;
+  opacity: 1;
+}
+
+.pace-done #splash{
+   opacity: 0;
+}
+
+#splash .sub{
+    position: relative;
+    font-size: .6em;
+    color: #33aaff;
+    text-shadow: 1px 3px 6px #052236;
+}
+
+#splash.hidden{
+  opacity: 0;
+}

@@ -1,0 +1,9 @@
+<div class="panel-notify-sub-heading">{{contacts.title}}</div>
+<!-- <div class="loading pull-right"><i class="fa fa-refresh fa-spin"></i></div> -->
+
+ <div class="panel-notify-sub-list">
+        {{#each contacts}}
+            <a href="#employees/{{id}}" class="profilelink"><img src="{{image}}" alt="" class="img-circle img-thumbnail"  data-toggle="tooltip" data-placement="top" title="{{name}}({{birthday}})"></a>
+
+        {{/each}}              
+ </div>

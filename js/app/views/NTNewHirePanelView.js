@@ -16,6 +16,10 @@ define([
             }
         },
 
+        templateData: {
+            title: 'New Hire'
+        },
+
         onRender: function () {
             this.$el.find('.carousel').carousel({interval: 6000});
         }

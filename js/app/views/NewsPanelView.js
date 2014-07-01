@@ -12,6 +12,10 @@ define([
             key: 'campus:news:list'
         },
 
+        templateData: {
+            title: 'Campus News'
+        },
+
         onRender: function () {
             this.$el.find('.carousel').carousel({interval: 10000});
         }

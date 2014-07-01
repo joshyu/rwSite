@@ -89,7 +89,7 @@ sidebar nav list
 
 #sidebar .nav-list li a {
     line-height: normal;
-    font-size: 12px;
+    font-size: 10px !important;
     padding: 10px 10px 10px 11px;
     color: #888;
     display: block;
@@ -288,7 +288,7 @@ sidebar nav list
     -webkit-box-shadow: 2px 3px 10px #D3D3D3;
     box-shadow: 2px 3px 10px #D3D3D3;
     border-radius: 0px;
-    font-family: "Helvetica Neue",Helvetica,verdana,Arial,sans-serif;
+    /* font-family: "Helvetica Neue",Helvetica,verdana,Arial,sans-serif; */
     font-size: 12px;
     background: #fff;
 }
@@ -353,7 +353,8 @@ sidebar nav list
 #main .panel-news .panel-body{
     margin: auto 15px;    
 }
-#main .panel-news .panel-body-content {
+#main .panel-news .panel-body-content ,
+.bodycontent{
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -432,10 +433,6 @@ sidebar nav list
     padding-left: 0px;
 }
 
-#main .column-right-side .panel-head h1:before{
-    content: "\2747"
-}
-
 
 #main .panel-head {
      margin-bottom:10px;
@@ -450,6 +447,10 @@ sidebar nav list
     font-weight: bold;
   
     box-shadow: inset  0px -5px 11px -9px #000;
+}
+
+#main .panel-container .list-group .title-icon {
+    padding-right: 5px;
 }
 
  .panel-notify {
@@ -500,8 +501,8 @@ a.profilelink:hover img{
 }
 .panel-notify-birthday .panel-notify-sub-list  a.profilelink img{
     box-shadow: 0px 0px 6px #ccc;
-    width: 28%;
-    height: 28%;
+    width: 25%;
+    height: 25%;
 }
 .panel-notify-sub .panel-body{
     padding:0px 10px 20px;
@@ -514,7 +515,7 @@ a.profilelink:hover img{
 
 .panel-notify-sub-hire-information   a.profilelink img {
      margin:2px;
-     width: 90%;
+     width: 85%;
 }
 
 .panel-notify-sub-hire-information  .small{
@@ -523,11 +524,12 @@ a.profilelink:hover img{
 
 .panel-notify-sub-hire-information  .intro{
     padding-top:20px;   
-    font-size: 14px;
+    font-size: 12px;
     text-align: left;
 }
 .panel-notify-sub-hire-information  .intro .statement {
     margin-bottom: 20px;
+    font-size: 12px;
 }
 
 .panel-notify-sub-hire-information  .intro .statement:before{
@@ -722,4 +724,59 @@ a.profilelink:hover img{
     text-decoration: none;
     color:#333;
     text-shadow:1px 5px 6px #6F6F6F;
+}
+
+/*modal dialog */
+.modal {overflow-y: hidden;}
+.modal .modal-content {top:100px;}
+
+/*campus modal dialog */
+.campus_modal  .modal-title {
+    font-weight: bolder;
+}
+.campus_modal .modal-body {padding:0px;}
+.campus_modal .modal-body a:hover{
+    text-decoration: none;
+
+}
+.campus_modal .modal-body .banner {
+    border-bottom: 1px solid #ddd;
+    padding: 5px 15px;
+}
+
+.campus_modal .modal-body  .splitter {
+    margin:0px 5px;
+}
+
+.campus_modal .modal-body  .content{
+    padding:20px;
+}
+.campus_modal .modal-body .attachments{
+    padding: 10px 20px;
+    margin: 0px;
+    margin-bottom: 40px;
+    background: #ddd;
+    -webkit-box-shadow: 0px 2px 9px -4px #000;
+    -ms-box-shadow:0px 2px 9px -4px #000;
+    box-shadow: 0px 2px 9px -4px #000;
+}
+
+.campus_modal .modal-body .attachments .item{
+    margin-left:5px;
+}
+
+.campus_modal .modal-body .footer{
+    position: relative;
+    margin-top: 20px;
+}
+
+.campus_modal .modal-body .footer .buttons{
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+}
+
+.campus_modal .modal-body .footer .buttons .icon{
+    margin-left: 5px;
+    top: 2px;
 }

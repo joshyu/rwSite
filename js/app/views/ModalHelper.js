@@ -1,11 +1,15 @@
 define([
     'marionette',
-    'views/SrcItemModal'    
-], function(Marionette, SrcItemModal) {
+    'views/SrcItemModal',
+    'views/TrainingItemModal',
+    'views/SurveyItemModal'
+], function(Marionette, SrcItemModal, TrainingItemModal, SurveyItemModal) {
     'use strict';
     var _modalMap = {
         items:{
-             src : SrcItemModal
+             src : SrcItemModal,
+             training: TrainingItemModal,
+             survey: SurveyItemModal
         }
     };
 

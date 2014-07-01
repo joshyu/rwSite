@@ -6,25 +6,24 @@ define([
     'use strict';
     return Marionette.CompositeView.extend({
         renderData: function (data) {
+            data = _.extend(this.myTemplData(), data);
             this.$el.html(this.template(data));
             this.triggerMethod("render", this);
         },
 
         /* can write your own method to overrid it */
-        myTemplData:function  (model) {
+        myTemplData:function  () {
             var data= {};
-            model = model || this.model;
-            if(this.defaults){
-                data = this.defaults;
-            }else if(model && model.defaults){
-                data = model.defaults;
+            if(this.templateData){
+                data = this.templateData;
             }
+            
             return  data;
         },
 
         initialize: function () {
            if(!this.handleRequests()){
-                this.renderData(this.myTemplData());
+                this.renderData();
            }
         },
         handleRequests: function () {
@@ -35,18 +34,26 @@ define([
                 var _reqKey = this.request.key;
 
                 var handler = this.request.dataHandler;
-                var context = this.request.context || this.model;
                 var _reqData = this.request.data || {};
+                var options = this.request.options;
+                var reqOptFunc= this.request.getOptions;
+                if(!options && reqOptFunc){
+                    if(_.isFunction(reqOptFunc)){
+                        options =reqOptFunc.call(this);    
+                    }else if(_.isString(reqOptFunc) && _.isFunction(this[reqOptFunc])){
+                        options = this[reqOptFunc].call(this);
+                    }                    
+                }
 
-                app.modelHelper.request( _reqKey ).then(function(data){
+                app.modelHelper.request( _reqKey, options|| {}).then(function(data){
                     if($.isFunction(handler)){
-                        data= handler.call(context, data);
-                    }else if(typeof handler === 'string' && $.isFunction(context[handler])){
-                        data= context[handler].call(context, data);
+                        data= handler.call(that.model, data);
+                    }else if(typeof handler === 'string' && $.isFunction(that.model[handler])){
+                        data= that.model[handler].call(that.model, data);
                     }
 
                     var _data= {};
-                    _data[modelName] =  _.extend( data , _reqData, that.myTemplData(that.model));
+                    _data[modelName] =  _.extend(data, _reqData);
                     return that.renderData(_data);
                 });
             }else if(this.requests && this.requests.length){
@@ -69,7 +76,7 @@ define([
                             data= context[handler].call(context, data);
                         }
 
-                        data= _.extend( data, _reqData,  that.myTemplData( app.modelHelper.get(modelName)  ));
+                        data= _.extend(data, _reqData);
                         var _id = request.id ? (modelName + '-'+ request.id) : modelName;
                         dfd.resolve({id: _id , data: data});
                     });
@@ -88,6 +95,8 @@ define([
             }else{
                 return false;
             }
+
+            return true;
         },
        render: function  () {
             return this;

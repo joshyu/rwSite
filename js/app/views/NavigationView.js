@@ -15,7 +15,6 @@ define([
         },
         className:"nav nav-list",
 
-
         ui: {
              "folder" : 'li.menu-folder',
              "leaflink" : ".menu-leaf > a"

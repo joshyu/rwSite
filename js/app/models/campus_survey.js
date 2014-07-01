@@ -14,6 +14,30 @@ define([
             //this.service = SPService.List('_sys', 'navigation');
             app.modelHelper.setHandler('campus:survey:newest',  this.fetchNewestSurveys, this);
             app.modelHelper.setHandler('campus:survey:popular',  this.fetchPopularSurveys, this);
+            app.modelHelper.setHandler('campus:survey:item:info',  this.fetchSurveyItem, this);
+        },
+
+        fetchSurveyItem: function(args){
+                var itemId= args.id;
+                var dfd= $.Deferred();
+
+                if(_.isUndefined(itemId)){
+                    dfd.reject(false);
+                }else{
+                    var opts= {
+                        url: "js/data/survey_item.json",
+                        type: 'GET',
+                        dataType: 'json',
+                        data: {id: itemId},
+                        success: function(data){
+                            dfd.resolve(data);
+                        }
+                    };
+
+                    Backbone.ajax(opts);
+                }
+                
+                return dfd.promise();
         },
 
         fetchPopularSurveys: function () {

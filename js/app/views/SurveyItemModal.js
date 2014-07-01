@@ -2,7 +2,7 @@ define([
     'marionette',
     'app',
     'views/ModalBase',
-    'text!templates/srcitem.html',
+    'text!templates/surveyitem.html',
 ], function(Marionette, app, ModalBase,  template) {
     'use strict';
     return ModalBase.extend({
@@ -10,8 +10,8 @@ define([
         className:'modal fade srcitem campus_modal',
         footer: '',
         request: {
-            model: 'campus_src',
-            key: 'campus:src:item:info',
+            model: 'campus_survey',
+            key: 'campus:survey:item:info',
             getOptions: 'getRequestOption'
         },
 

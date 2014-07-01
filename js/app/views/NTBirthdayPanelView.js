@@ -8,7 +8,7 @@ define([
     return ViewBase.extend({
         template: template,
         className: 'panel-body',
-        defaults:{
+        templateData: {
             title: 'Birthday'
         },
         

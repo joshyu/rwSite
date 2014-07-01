@@ -10,6 +10,9 @@ define([
         request: {
             model: 'links',
             key: 'links:quicklinks' 
-        }
+        },
+        templateData: {
+            title: 'Quick Links'
+        },
     });
 });

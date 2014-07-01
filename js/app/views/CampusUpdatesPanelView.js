@@ -13,7 +13,14 @@ define([
             trainingLinks: '.list-group-training .list-group-item'
         },
         events: {
-            'click @ui.srcLinks': 'clickSrcLink'
+            'click @ui.srcLinks': 'clickSrcLink',
+            'click @ui.trainingLinks': 'clickTrainingLink'
+        },
+
+        templateData: {
+            title: 'Campus Updates',
+            subtitle_src: 'SRC Events',
+            subtitle_training: 'Training Center'
         },
         requests: [
             {
@@ -28,10 +35,19 @@ define([
 
         clickSrcLink: function(e){
             //pop up modal dialog.
-            var trigger= e.target;
-            var itemId= Marionette.$(trigger).data('item-id');
+            var domTrigger= e.currentTarget;
+            var itemId= Marionette.$(domTrigger).data('item-id');
             if(itemId){
-                ModalHelper.get('src', {itemId: itemId, trigger: trigger}).show();
+                ModalHelper.get('src', {itemId: itemId}).show();
+            }
+            return false;
+        },
+
+        clickTrainingLink: function(e){
+            var domTrigger= e.currentTarget;
+            var itemId= Marionette.$(domTrigger).data('item-id');
+            if(itemId){
+                ModalHelper.get('training', {itemId: itemId}).show();
             }
             return false;
         }

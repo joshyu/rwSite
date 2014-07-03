@@ -2,7 +2,7 @@ define([
     'marionette',
     'app',
     'views/ModalBase',
-    'text!templates/srcitem.html',
+    'hbs!templates/srcitem',
 ], function(Marionette, app, ModalBase,  template) {
     'use strict';
     return ModalBase.extend({

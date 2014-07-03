@@ -16,7 +16,8 @@ define([
             profile: '.panel-profile',
             quicklink: '.panel-links',
             ntBirthday: '.panel-notify-birthday',
-            ntNewhire:'.panel-notify-hire'
+            ntNewhire:'.panel-notify-hire',
+            suggestion: '.panel-sugesstion'
         },
 
         panels: {
@@ -26,7 +27,8 @@ define([
             profile: 'Profile',
             quicklink: 'Quicklink',
             ntBirthday: 'NTBirthday',
-            ntNewhire: 'NTNewHire'
+            ntNewhire: 'NTNewHire',
+            suggestion: 'Suggestion'
         },
 
         onRender: function () {

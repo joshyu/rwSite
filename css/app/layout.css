@@ -1,5 +1,6 @@
 body {
-     background: url('../../images/backpattern.jpg');
+     /* background: url('../../images/backpattern.jpg'); */
+     background: url('../../images/mainbg.jpg');
 }
 
 /*
@@ -50,7 +51,9 @@ body {
     padding: 20px 0px;
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 0px 0px 10px 0px;
+    box-shadow: inset -8px 0px 12px -10px #1B1B1B;
 }
 
 /*main */
@@ -114,8 +117,8 @@ body {
   text-align: center;
   z-index: -999;
   width: 100%;
-  color: #fff;
-  text-shadow: 5px 9px 6px #000;
+  color: #5C5C5C;
+  text-shadow: 5px 9px 6px #ADADAD;
   -webkit-transition: opacity 1s;
   -o-transition: opacity 1s;
   transition: opacity 1s;
@@ -130,7 +133,7 @@ body {
     position: relative;
     font-size: .6em;
     color: #33aaff;
-    text-shadow: 1px 3px 6px #052236;
+    text-shadow: 7px 8px 6px #5C7383;
 }
 
 #splash.hidden{

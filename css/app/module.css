@@ -49,12 +49,17 @@ sidebar nav list
 
 #sidebar .nav-list  > li:first-child {
     padding:2px 0px;
-    border:1px solid #333;
-    border-width: 1px 0px 1px 0px;
+    -webkit-box-shadow: 1px 2px 3px #999;
+    -moz-box-shadow:1px 2px 3px #999;
+    -ms-box-shadow:1px 2px 3px #999;
+    box-shadow: 1px 2px 3px #999;
+    margin-bottom: 1px;
 }
 
 #sidebar .nav-list li.active > a{
-    color:#fff !important;
+    color:#000 !important;
+    text-shadow: 1px 2px 3px #777;
+    font-weight: bolder;
     position: relative;
 }
 
@@ -89,12 +94,12 @@ sidebar nav list
 
 #sidebar .nav-list li a {
     line-height: normal;
-    font-size: 10px !important;
+    font-size: 11px !important;
     padding: 10px 10px 10px 11px;
-    color: #888;
+    color: #707070;
     display: block;
-    font-weight: 400;
     text-decoration: none!important;
+    font-family: inherit;
     position: relative
 }
 
@@ -326,6 +331,7 @@ sidebar nav list
      box-shadow: 6px 0px 12px -8px #333;
 }
 
+.list-group-survey .list-group-item.highlight,
 .list-group-survey .list-group-item:active{
     background: #F6F6AD;
     box-shadow: 6px 0px 8px -6px #000;
@@ -337,7 +343,9 @@ sidebar nav list
     box-shadow: 6px 0px 12px -8px #333;
 }
 
+.list-group-src .list-group-item.highlight,
 .list-group-src .list-group-item:active,
+.list-group-training .list-group-item.highlight,
 .list-group-training .list-group-item:active{
     background: #BBDFF8;
     box-shadow: 6px 0px 8px -6px #000;
@@ -495,6 +503,7 @@ sidebar nav list
      margin-right: 3%;
  }
 
+a.profilelink.highlight img,
 a.profilelink:hover img{
     border-color: #6EE2FF;
     box-shadow: 0px 0px 14px #6EE2FF !important;
@@ -779,4 +788,75 @@ a.profilelink:hover img{
 .campus_modal .modal-body .footer .buttons .icon{
     margin-left: 5px;
     top: 2px;
+}
+
+/*contact modal */
+.contact_modal  .modal-header{
+    border-bottom: 0;
+}
+
+.contact_modal .image img{
+    width: 120px;
+}
+
+.contact_modal .name{
+    font-weight: 700;
+    color: #aaa;
+    font-size:2em;
+}
+
+.contact_modal .chinese{
+    font-size: 1.5em;
+    font-weight: bolder;
+}
+
+.contact_modal  .below {
+    margin-top: 20px
+}
+
+.contact_modal  .below dt {
+    width: auto;
+}
+
+.contact_modal  .below  dd{
+    margin-left: 100px;
+}
+
+/* suggestion box */
+.suggestion_modal .modal-header{
+    padding: 20px 0px 10px 0px;
+}
+
+.suggestion_modal  .modal-title{
+    text-shadow: 1px 1px 3px #aaa;
+    font-weight: bolder;
+}
+
+.suggestion_modal  .modal-title:before{
+    content:'';
+    background: url(images/contact-icon.png);
+}
+
+.suggestion_modal  .modal-content {
+    padding: 20px;
+}
+
+.suggestion_modal  .modal-content  form  .item{
+    padding-bottom: 10px;
+}
+
+
+.suggestion_modal .modal-body{
+    padding: 10px;
+}
+
+.suggestion_modal .modal-body .footer{
+    position: relative;
+    margin-top: 20px;
+}
+
+.suggestion_modal .modal-body .footer .buttons{
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
 }

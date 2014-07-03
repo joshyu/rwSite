@@ -2,14 +2,18 @@ define([
     'marionette',
     'views/SrcItemModal',
     'views/TrainingItemModal',
-    'views/SurveyItemModal'
-], function(Marionette, SrcItemModal, TrainingItemModal, SurveyItemModal) {
+    'views/SurveyItemModal',
+    'views/EmployeeItemModal',
+    'views/SuggestionModal'
+], function(Marionette, SrcItemModal, TrainingItemModal, SurveyItemModal, EmployeeItemModal, SuggestionModal) {
     'use strict';
     var _modalMap = {
         items:{
              src : SrcItemModal,
              training: TrainingItemModal,
-             survey: SurveyItemModal
+             survey: SurveyItemModal,
+             employee: EmployeeItemModal,
+             suggestion:  SuggestionModal
         }
     };
 

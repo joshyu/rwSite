@@ -1,0 +1,10 @@
+{
+    "id": 1,
+    "image" : "images/defaultavatar.png",
+    "name" : "Josh peng Yu",
+    "chineseName": "于鹏",
+    "title" :"Software Engineer , Sr.",
+    "team" : "FTVP",
+    "manager" : "Zeno Jia",
+    "ext" : "22233"
+}

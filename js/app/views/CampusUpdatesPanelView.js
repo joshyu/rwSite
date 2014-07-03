@@ -38,7 +38,7 @@ define([
             var domTrigger= e.currentTarget;
             var itemId= Marionette.$(domTrigger).data('item-id');
             if(itemId){
-                ModalHelper.get('src', {itemId: itemId}).show();
+                ModalHelper.get('src', {itemId: itemId, domTrigger: domTrigger}).show();
             }
             return false;
         },
@@ -47,7 +47,7 @@ define([
             var domTrigger= e.currentTarget;
             var itemId= Marionette.$(domTrigger).data('item-id');
             if(itemId){
-                ModalHelper.get('training', {itemId: itemId}).show();
+                ModalHelper.get('training', {itemId: itemId, domTrigger: domTrigger}).show();
             }
             return false;
         }

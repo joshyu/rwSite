@@ -3,7 +3,6 @@
 
  <div class="panel-notify-sub-list">
         {{#each contacts}}
-            <a href="#employees/{{id}}" class="profilelink"><img src="{{image}}" alt="" class="img-circle img-thumbnail"  data-toggle="tooltip" data-placement="top" title="{{name}}({{birthday}})"></a>
-
+            <a href="#employees/{{id}}" data-employee-id="{{id}}" class="profilelink"><img src="{{image}}" alt="" class="img-circle img-thumbnail"  data-toggle="tooltip" data-placement="top" title="{{name}}({{birthday}})"></a>
         {{/each}}              
  </div>

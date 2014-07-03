@@ -35,7 +35,7 @@ define([
             var domTrigger= e.currentTarget;
             var itemId= Marionette.$(domTrigger).data('item-id');
             if(itemId){
-                ModalHelper.get('survey', {itemId: itemId}).show();
+                ModalHelper.get('survey', {itemId: itemId, domTrigger: domTrigger}).show();
             }
             return false;
         }

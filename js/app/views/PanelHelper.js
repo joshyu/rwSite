@@ -6,7 +6,8 @@ define([
     'views/CampusUpdatesPanelView',
     'views/SurveyPanelView',
     'views/NTBirthdayPanelView',
-    'views/NTNewHirePanelView'
+    'views/NTNewHirePanelView',
+    'views/SuggestionPanelView'
 ], function(require) {
     'use strict';
     return {

@@ -2,9 +2,8 @@ define([
     'marionette',
     'app',
     'views/ViewBase',
-    'text!templates/modalbase.html',
-    'hbs/handlebars'
-], function(Marionette, app, ViewBase,template,Handlebars) {
+    'hbs!templates/modalbase'
+], function(Marionette, app, ViewBase,template) {
     'use strict';
     return ViewBase.extend({
         template: template,
@@ -13,9 +12,16 @@ define([
         
         onRender: function(){
             this.$el.appendTo(document.body);
+            this.hilightTrigger();
+            var $domTrigger= $(this.options.domTrigger);
             this.$el.on('hidden.bs.modal', function(){
                 this.remove();
+                $domTrigger.removeClass('highlight');
             });
+        },
+
+        hilightTrigger :function(){
+            $(this.options.domTrigger).addClass('highlight');
         },
 
         show: function(){
@@ -23,6 +29,8 @@ define([
         },
 
         handleData: function(data){
+            data = data || {};
+            
             if(data.title){
                 return data;
             }
@@ -35,11 +43,9 @@ define([
         },
 
          renderData: function  (data) {
-            data = this.handleData(data);
-            Handlebars.compile(this.bodyTmpl);
-            Handlebars.registerPartial('itemdata', this.bodyTmpl);
-            var template = Handlebars.compile(this.template);
-            this.$el.html(template(data));
+            data = _.extend(this.myTemplData(), this.handleData(data));
+            data.itemdata = this.bodyTmpl ? this.bodyTmpl(data) : '';
+            this.$el.html(this.template(data));
             this.triggerMethod("render", this);
         }
     });

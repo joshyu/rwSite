@@ -12,11 +12,11 @@ define([
 
     return Backbone.Model.extend({
         initialize: function () {
-              this._bindHandlers(this.requests, _reqres, this);
-              this._bindHandlers(this.commands, _commands, this);
-              this.request =_reqres.request.bind(_reqres);
-              this.execute =_commands.execute.bind(_commands);
-              //this.service = SPService.
+            this._bindHandlers(this.requests, _reqres, this);
+            this._bindHandlers(this.commands, _commands, this);
+            this.request =_reqres.request.bind(_reqres);
+            this.execute =_commands.execute.bind(_commands);
+            //this.service = SPService.
         },
 
         requests: {},
@@ -32,7 +32,7 @@ define([
             for(var key in _keys){
                 var _meth= _keys[key];
                 if( typeof _meth == 'string' && $.isFunction(context[_meth])){
-                    _cols.setHandler( key, _meth, context);
+                    _cols.setHandler( key, context[_meth], context);
                 }
 
                 if(typeof _meth == 'object' && _meth.url){
@@ -48,7 +48,7 @@ define([
             return function(args){
                 return this['_fetch' + (opts.type || 'item')]({
                     url: opts.url,
-                    data: _.extend(opts.data, args),
+                    data: _.extend(opts.data || {}, args),
                     cached: opts.cached
                 }).then(function(data){
                     var _parseData = opts.parseData,

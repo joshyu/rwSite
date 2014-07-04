@@ -7,30 +7,19 @@ define([
     'use strict';
     return ModelBase.extend({
         requests: {
-            'campus:survey:newest' :  "fetchNewestSurveys",
-            'campus:survey:popular' : 'fetchPopularSurveys',
-            'campus:survey:item:info' : 'fetchSurveyItem'
-        },
+            'campus:survey:newest' : {
+                url: "js/data/survey_newest.json",
+                type: 'list'
+            },
 
-        fetchSurveyItem: function(args){
-            return this._fetchItem({
-                url: "js/data/survey_item.json",
-                data: {
-                    id: args.id
-                }
-            });
-        },
+            'campus:survey:popular' : {
+                url:'js/data/survey_popular.json',
+                type: 'list'
+            },
 
-        fetchPopularSurveys: function () {
-            return this._fetchList({
-                url: "js/data/survey_popular.json"
-            });
-        },
-
-        fetchNewestSurveys: function () {
-             return this._fetchList({
-                url: "js/data/survey_newest.json"
-            });
+            'campus:survey:item:info' : {
+                url: 'js/data/survey_item.json'
+            }
         }
     });
 });

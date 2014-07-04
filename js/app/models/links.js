@@ -2,32 +2,15 @@ define([
     'app',
     'backbone',
     'underscore',
-    'models/SPService'
-], function (app, Backbone,  _,  SPService) {
+    'models/ModelBase'
+], function (app, Backbone,  _,  ModelBase) {
     'use strict';
-    return Backbone.Model.extend({
-        defaults: {
-            title: 'Quick Links',
-        },
-
-        initialize: function () {
-            //this.service = SPService.List('_sys', 'navigation');
-            app.modelHelper.setHandler('links:quicklinks',  this.fetchQuickLinks, this);
-        },
-
-        fetchQuickLinks: function() {
-            var dfd= $.Deferred();
-            var opts= {
+    return ModelBase.extend({
+        requests:{
+            'links:quicklinks' : {
                 url: "js/data/qlinks.json",
-                type: 'GET',
-                dataType: 'json',
-                success: function(data){
-                    dfd.resolve(data.data);
-                }
-            };
-
-            Backbone.ajax(opts);
-            return dfd.promise();
+                type: 'list'
+            }
         }        
     });
 });

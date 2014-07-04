@@ -23,7 +23,8 @@ define([
         },
 
         onRender: function(){
-            this.getRegion('content').show(new EmpItemView());
+            var itemId= this.options.itemId;
+            this.getRegion('content').show(new EmpItemView({itemId: itemId}));
             this.hilightTrigger();
             this.$el.appendTo(document.body);
             var $domTrigger= $(this.options.domTrigger);

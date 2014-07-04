@@ -11,7 +11,6 @@ define([
             this.triggerMethod("render", this);
         },
 
-        /* can write your own method to overrid it */
         myTemplData:function  () {
             var data= {};
             if(this.templateData){
@@ -26,17 +25,30 @@ define([
                 this.renderData();
            }
         },
-        handleRequests: function () {
-            var that= this;
-            if(this.request && this.request.key){
-                var modelName = this.request.model;
-                var _model= this.model =  this.model || app.modelHelper.get(modelName);
-                var _reqKey = this.request.key;
 
-                var handler = this.request.dataHandler;
-                var _reqData = this.request.data || {};
-                var options = this.request.options;
-                var reqOptFunc= this.request.getOptions;
+        handleRequests: function(){
+            var reqs= this.requests;
+            if(!reqs || !reqs.length){
+                if(!this.request || !this.request.key){
+                    return false;
+                }
+
+                reqs = [ this.request ];
+            }
+
+            var _dfds= [];
+            var that = this;
+            _.each(reqs, _.bind(function (request,index){
+                var modelName = request.model;
+                var _model =  app.modelHelper.get(modelName);
+                var _reqKey = request.key;
+                var dfd= $.Deferred();
+
+                var handler = request.dataHandler;                  
+                var _reqData = request.data || {};
+                var options = request.options;
+                var reqOptFunc = request.getOptions;
+                
                 if(!options && reqOptFunc){
                     if(_.isFunction(reqOptFunc)){
                         options =reqOptFunc.call(this);    
@@ -46,60 +58,41 @@ define([
                 }
 
                 $.when(_model.request( _reqKey, options|| {})).done(function(data){
-                /*_model.request( _reqKey, options|| {}).then(function(data){*/
                     if($.isFunction(handler)){
-                        data= handler.call(that.model, data);
-                    }else if(typeof handler === 'string' && $.isFunction(that.model[handler])){
-                        data= that.model[handler].call(that.model, data);
+                        data= handler.call(_model, data);
+                    }else if(typeof handler === 'string' && $.isFunction(_model[handler])){
+                        data= _model[handler].call(_model, data);
                     }
 
-                    var _data= {};
-                    _data[modelName] =  _.extend(data, _reqData);
-                    return that.renderData(_data);
-                });
-            }else if(this.requests && this.requests.length){
-                var _model = null;
-                var _dfds= [];
-                _.each(this.requests, function (request){
-                    var modelName = request.model;
-                    _model =  app.modelHelper.get(modelName);
-                    var _reqKey = request.key;
-                    var dfd= $.Deferred();
-
-                    var handler = request.dataHandler;
-                    var context = request.context || _model;                    
-                    var _reqData = request.data || {};
-
-                    app.modelHelper.request( _reqKey ).then(function(data){
-                        if($.isFunction(handler)){
-                            data= handler.call(context, data);
-                        }else if(typeof handler === 'string' && $.isFunction(context[handler])){
-                            data= context[handler].call(context, data);
-                        }
-
-                        data= _.extend(data, _reqData);
-                        var _id = request.id ? (modelName + '-'+ request.id) : modelName;
-                        dfd.resolve({id: _id , data: data});
-                    });
-
-                    _dfds.push(dfd);
+                    data= _.extend(data, _reqData);
+                    var _id = request.id ? (modelName + '-'+ request.id) : modelName;
+                    dfd.resolve({id: _id , data: data});
                 });
 
-                $.when.apply($, _dfds).done(function (){
-                    var data= {};
-                    _.each(arguments, function(_data){
-                        data[_data.id] = _data.data;
-                    });
+                _dfds.push(dfd);
 
-                    that.renderData(data);
+            },this));
+
+            $.when.apply($, _dfds).done(function (){
+                var data= {};
+                _.each(arguments, function(_data){
+                    var _key= _data.id;
+                    if(!data[_key]){
+                        data[_key] = _data.data;
+                    }else if(_.isArray(data[_key])){
+                        data[_key].push(_data.data);
+                    }else{
+                        data[_key] = [data[_key], _data.data];
+                    }
                 });
-            }else{
-                return false;
-            }
+
+                that.renderData(data);
+            });
 
             return true;
         },
-       render: function  () {
+
+        render: function  () {
             return this;
         }
     });

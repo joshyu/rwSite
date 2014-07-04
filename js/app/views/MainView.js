@@ -23,12 +23,12 @@ define([
         panels: {
             news: 'News',
             updates: 'CampusUpdates',
-     /*       survey:'Survey',
+            survey:'Survey',
             profile: 'Profile',
             quicklink: 'Quicklink',
             ntBirthday: 'NTBirthday',
             ntNewhire: 'NTNewHire',
-            suggestion: 'Suggestion'*/
+            suggestion: 'Suggestion'
         },
 
         onRender: function () {

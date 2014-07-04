@@ -5,7 +5,7 @@ define([
     'models/ModelBase'
 ], function (app, Backbone,  _,  ModelBase) {
     'use strict';
-    return Backbone.Model.extend({
+    return ModelBase.extend({
         defaults: {
             title: 'Training Center',
         },

@@ -1,3 +1,38 @@
+/*splash */
+#splash .inner{
+    width: auto;
+     font-size: 6em;
+}
+
+#splash .words > div{
+    display: inline-block;
+}
+#splash .w1 {
+     color: #F70505;
+     text-shadow:4px 3px 6px #F76F74;
+}
+
+#splash .w2{
+    color:#aaa;
+    text-shadow:4px 3px 6px #eee;
+}
+
+.pace-done #splash{
+   opacity: 0;
+}
+
+#splash .sub{
+    position: relative;
+    font-size: .6em;
+    color: #249CB9;
+    text-shadow:3px 3px 6px #3D91CC;
+}
+
+#splash.hidden{
+  opacity: 0;
+}
+
+
 /*header */
 #header  .navbar-brand {
     color: #333;
@@ -12,6 +47,11 @@
     bottom: -5px;
     right: 15px;
     font-size: 12px;
+}
+
+/*footer*/
+#footer .text-muted{
+    color:#fff;
 }
 
 /* pace */
@@ -824,7 +864,7 @@ a.profilelink:hover img{
 
 /* suggestion box */
 .suggestion_modal .modal-header{
-    padding: 20px 0px 10px 0px;
+    padding: 0px 0px 10px 0px;
 }
 
 .suggestion_modal  .modal-title{
@@ -832,13 +872,16 @@ a.profilelink:hover img{
     font-weight: bolder;
 }
 
-.suggestion_modal  .modal-title:before{
-    content:'';
-    background: url(images/contact-icon.png);
-}
-
 .suggestion_modal  .modal-content {
     padding: 20px;
+}
+
+.suggestion_modal  .modal-content  .content {
+    margin-top: 20px;
+}
+
+.suggestion_modal .modal-body ul.wysihtml5-toolbar>li {
+    margin-bottom: 5px;
 }
 
 .suggestion_modal  .modal-content  form  .item{
@@ -848,11 +891,13 @@ a.profilelink:hover img{
 
 .suggestion_modal .modal-body{
     padding: 10px;
+    position: initial;
 }
 
 .suggestion_modal .modal-body .footer{
     position: relative;
     margin-top: 20px;
+    position: initial;
 }
 
 .suggestion_modal .modal-body .footer .buttons{

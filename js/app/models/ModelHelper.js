@@ -13,8 +13,8 @@ define(['require',
     var app= require('app');
 
     var mfactory=  {
-        get: function  (modelName) {
-            if(_cache[modelName]){
+        get: function  (modelName,forceNew) {
+            if(!forceNew && _cache[modelName]){
                 return _cache[modelName];
             }
 
@@ -22,15 +22,20 @@ define(['require',
             if(!_model  ||  $.type(_model) !== 'function'){
                 return false;
             }
+
+            var _m = new _model();
+
+            if(!forceNew){
+                _cache[modelName] = _m;
+            }
             
-            return _cache[modelName] = new _model();            
+            return _m;
         },
 
         init: function  () {
             this.reqres = app.reqres;
             this.request = app.reqres.request.bind(this.reqres);
             this.setHandler = app.reqres.setHandler.bind(this.reqres);
-
             return this;
         }
     };

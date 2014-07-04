@@ -1,24 +1,24 @@
-<form role="form">
-    <div class="content row">
+<form role="form" class="frmSuggestion">
+    <div class="row">
        <div class="to item">
             <label class="radio-inline">
-              <input type="radio" class="input" name="input" value="campus_manager"> Campus Manager
+              <input type="radio" class="input" name="input" value="campus_manager" checked> Campus Manager
             </label>
             <label class="radio-inline">
               <input type="radio" class="input" name="input" value="hr"> HR Specialist
             </label>    
        </div>
        <div class="subject item">
-            <input type="text" class="form-control input">
+            <input type="text" class="form-control input" name="subject" placeholder="enter the subject.">
        </div>
        <div class="content item">
-           <textarea class="form-control input" rows="3"></textarea>
+           <textarea class="form-control input" rows="15"  name="content" placeholder="Enter what you want to say here."></textarea>
        </div>   
     </div>
 
     <div class="footer">
         <div class="buttons">
-             <button type="submit" class="btn btn-primary">Submit</button>
+             <button type="submit" class="btn btn-primary btnsubmit">Submit</button>
         </div>
     </div>
 </form>

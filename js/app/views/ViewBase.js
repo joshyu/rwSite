@@ -30,7 +30,7 @@ define([
             var that= this;
             if(this.request && this.request.key){
                 var modelName = this.request.model;
-                this.model =  this.model || app.modelHelper.get(modelName);
+                var _model= this.model =  this.model || app.modelHelper.get(modelName);
                 var _reqKey = this.request.key;
 
                 var handler = this.request.dataHandler;
@@ -45,7 +45,8 @@ define([
                     }                    
                 }
 
-                app.modelHelper.request( _reqKey, options|| {}).then(function(data){
+                $.when(_model.request( _reqKey, options|| {})).done(function(data){
+                /*_model.request( _reqKey, options|| {}).then(function(data){*/
                     if($.isFunction(handler)){
                         data= handler.call(that.model, data);
                     }else if(typeof handler === 'string' && $.isFunction(that.model[handler])){

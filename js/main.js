@@ -9,7 +9,8 @@ require.config({
         hbs: "../vendor/hbs",
         text: "../vendor/text",
         handlebars:"../vendor/hbs/handlebars",
-        pace: "../vendor/pace.min"
+        pace: "../vendor/pace.min",
+        bt3wysihtml5: "../vendor/bootstrap3-wysihtml5.all.min",
     },
 
     shim: {

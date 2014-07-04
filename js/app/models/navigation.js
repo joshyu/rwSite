@@ -2,27 +2,28 @@ define([
     'app',
     'backbone',
     'underscore',
-    'models/SPService'
-], function (app, Backbone,  _,  SPService) {
+    'models/ModelBase'
+], function (app, Backbone,  _,  ModelBase) {
     'use strict';
-    return Backbone.Model.extend({
-        defaults: {
-            landingpageLink: {
+    return ModelBase.extend({
+        requests:{
+            'navigation:fetch:list' :  {
+                type: 'list',
+                url: 'js/data/navigation.json', 
+                cached: true,
+                parseData: '_reformatDataAsTree'
+            }
+        },
+
+        formatMenuList: function (data) {
+            data.unshift({
                 "id": 0,
                 "title" : "Home",
                 "parentid": 0,
                 "icon": "fa-home",
                 "link":"#"
-            }
-        },
+            });
 
-        initialize: function () {
-            //this.service = SPService.List('_sys', 'navigation');
-            app.modelHelper.setHandler('navigation:fetch:list', this.fetchList, this);
-        },
-
-        formatMenuList: function (data) {
-            data.unshift( this.get('landingpageLink') );
             return data;
         },
 
@@ -46,22 +47,6 @@ define([
             }
 
             return _data.roots;
-        },
-
-        fetchList: function() {
-            var that= this;
-            var dfd= $.Deferred();
-            var opts= {
-                url: "js/data/navigation.json",
-                type: 'GET',
-                dataType: 'json',
-                success: function(data){
-                    dfd.resolve(that._reformatDataAsTree(data.data));
-                }
-            };
-
-            Backbone.ajax(opts);
-            return dfd.promise();
-        }        
+        }
     });
 });

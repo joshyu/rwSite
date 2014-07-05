@@ -11,6 +11,7 @@ require.config({
         handlebars:"../vendor/hbs/handlebars",
         pace: "../vendor/pace.min",
         bt3wysihtml5: "../vendor/bootstrap3-wysihtml5.all.min",
+        noty: "../vendor/jquery.noty.packaged.min"
     },
 
     shim: {

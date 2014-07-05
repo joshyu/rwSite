@@ -9,9 +9,6 @@ define([
     return ModalBase.extend({
         bodyTmpl : template,
         className:'modal fade suggestion_modal',
-        ui:{
-            editor : '.content .input'
-        },
         events: {
             'submit .frmSuggestion' : "onPostSuggestion"
         },
@@ -23,8 +20,7 @@ define([
         onRender: function(){
             ModalBase.prototype.onRender.apply(this, arguments);
 
-            this.bindUIElements();
-            this.ui.editor.wysihtml5({
+            this.$('.content .input').wysihtml5({
                  fa: true,
                 size: 'sm',
                 image: false,
@@ -32,12 +28,33 @@ define([
             });
         },
 
+        validateForm: function(){
+            var elems= this.$('.frmSuggestion ').find('input, textarea').filter(function(id, elem){
+                return $.trim(elem.value).length === 0;
+            });
+
+            return elems.length === 0;
+        },
+
         onPostSuggestion: function(e){
             e.preventDefault();
-            var data = {formData: this.$(e.target).serialize() };
-            var dfd= app.modelHelper.get('suggestion').execute('suggestion:post',{data: data, success: function(status){
-                debugger;
+            if(! this.validateForm()){
+                this.showErrorMsg('Some Fields not provided');
+                return false;
+            }
+
+            var $butSubmit = this.$('.btnsubmit');
+            $butSubmit.button('loading');
+            var frm= e.target;
+            var data = {formData: this.$(frm).serialize() };
+            var that = this;
+            app.modelHelper.get('suggestion').execute('suggestion:post',{data: data, success: function(status){
+                 that.showSuccessMsg('Post Message Successfully.');
+                 $butSubmit.button('reset');
+                 frm.reset();
             }});
+
+            return false;
         }
     });
 });

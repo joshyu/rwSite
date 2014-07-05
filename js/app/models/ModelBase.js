@@ -8,7 +8,6 @@ define([
     
     return Backbone.Model.extend({
         initialize: function () {
-            var _vent = new Backbone.Wreqr.EventAggregator();
             var _commands = new Backbone.Wreqr.Commands();
             var _reqres = new Backbone.Wreqr.RequestResponse();
 
@@ -24,13 +23,14 @@ define([
         commands : {},
 
         _bindHandlers: function(_keys, _cols, context, funcNameByType){
+            var key = null;
             if(!_keys || !_cols || !_cols.setHandler){
                 return false;
             }
 
             context= context || this;
 
-            for(var key in _keys){
+            for(key in _keys){
                 var _meth= _keys[key];
                 if( typeof _meth == 'string' && $.isFunction(context[_meth])){
                     _cols.setHandler( key, context[_meth], context);
@@ -67,16 +67,12 @@ define([
                 var options= {
                     url: opts.url,
                     type: 'POST',
-                    contentType: "application/json;odata=verbose",
-                    headers: {
-                        "Accept": "application/json;odata=verbose",
-                    },
                     dataType: 'json',
                     data: data.formData || ''
                 };
 
                 Backbone.ajax(options).done(function (status) {
-                    var status = data.status || data;
+                    var status = status.status || status;
                     if(opts.success){
                         opts.success(status);
                     }

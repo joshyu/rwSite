@@ -2,7 +2,8 @@ define([
     'marionette',
     'app',
     'views/ViewBase',
-    'hbs!templates/modalbase'
+    'hbs!templates/modalbase',
+    'noty'
 ], function(Marionette, app, ViewBase,template) {
     'use strict';
     return ViewBase.extend({
@@ -18,6 +19,26 @@ define([
                 this.remove();
                 $domTrigger.removeClass('highlight');
             });
+        },
+
+        showMessage: function(options){
+            this.$('.modal-content').noty(options);
+        },
+
+        showSuccessMsg: function(txt){
+            this.showMessage({
+                timeout:500,
+                type:'success',
+                text : txt
+             });
+        },
+
+        showErrorMsg:  function(txt){
+            this.showMessage({
+                timeout:500,
+                type:'error',
+                text : txt
+             });
         },
 
         hilightTrigger :function(){

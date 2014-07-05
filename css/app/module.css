@@ -778,6 +778,11 @@ a.profilelink:hover img{
 /*modal dialog */
 .modal {overflow-y: hidden;}
 .modal .modal-content {top:100px;}
+.modal .modal-content .noty_inline_layout_container {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
 
 /*campus modal dialog */
 .campus_modal  .modal-title {

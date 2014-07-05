@@ -8,7 +8,7 @@ define([
     return ModelBase.extend({
         commands: {
             'suggestion:post' : {
-                url: "js/data/postsuccess.json"
+                url: "js/data/postsuccess.json.aspx"
             }
         }      
     });

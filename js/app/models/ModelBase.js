@@ -6,14 +6,15 @@ define([
 ], function (app, Backbone, _, SPService) {
     'use strict';
     
-    var _vent = new Backbone.Wreqr.EventAggregator();
-    var _commands = new Backbone.Wreqr.Commands();
-    var _reqres = new Backbone.Wreqr.RequestResponse();
-
     return Backbone.Model.extend({
         initialize: function () {
-            this._bindHandlers(this.requests, _reqres, this);
-            this._bindHandlers(this.commands, _commands, this);
+            var _vent = new Backbone.Wreqr.EventAggregator();
+            var _commands = new Backbone.Wreqr.Commands();
+            var _reqres = new Backbone.Wreqr.RequestResponse();
+
+
+            this._bindHandlers(this.requests, _reqres, this, '_fetchByType');
+            this._bindHandlers(this.commands, _commands, this, '_executeByType');
             this.request =_reqres.request.bind(_reqres);
             this.execute =_commands.execute.bind(_commands);
             //this.service = SPService.
@@ -22,7 +23,7 @@ define([
         requests: {},
         commands : {},
 
-        _bindHandlers: function(_keys, _cols, context){
+        _bindHandlers: function(_keys, _cols, context, funcNameByType){
             if(!_keys || !_cols || !_cols.setHandler){
                 return false;
             }
@@ -35,20 +36,65 @@ define([
                     _cols.setHandler( key, context[_meth], context);
                 }
 
-                if(typeof _meth == 'object' && _meth.url){
+                if(typeof _meth == 'object' && _meth.url && funcNameByType && $.isFunction(context[funcNameByType])){
                     _meth.context = context;
-                    _meth = context['_fetchByType'](_meth);
+                    _meth = context[ funcNameByType ](_meth);
 
                     _cols.setHandler( key, _meth, context);
                 }                
             }
         }, 
 
+        _executeByType: function (opts) {  /* define */
+            return function (args) { /*invoke */
+                return this['_post']({
+                    url: opts.url,
+                    data: _.extend(opts.data || {}, args.data),
+                    success: args.success,
+                    fail : args.fail,
+                });
+            }
+        },
+
+        _post: function (opts) {
+            var data= opts.data || {};
+
+            if(!opts || !opts.url){
+                opts.fail && opts.fail();
+                return false;
+            
+            }else{
+                var options= {
+                    url: opts.url,
+                    type: 'POST',
+                    contentType: "application/json;odata=verbose",
+                    headers: {
+                        "Accept": "application/json;odata=verbose",
+                    },
+                    dataType: 'json',
+                    data: data.formData || ''
+                };
+
+                Backbone.ajax(options).done(function (status) {
+                    var status = data.status || data;
+                    if(opts.success){
+                        opts.success(status);
+                    }
+                }).fail(function (err) {
+                    if(opts.fail){
+                        opts.fail(err);
+                    }
+                });
+            }
+
+            return true;
+        },
+
         _fetchByType: function(opts){
             return function(args){
                 return this['_fetch' + (opts.type || 'item')]({
                     url: opts.url,
-                    data: _.extend(opts.data || {}, args),
+                    data: _.extend(opts.data || {}, args.data),
                     cached: opts.cached
                 }).then(function(data){
                     var _parseData = opts.parseData,

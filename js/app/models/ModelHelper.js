@@ -6,7 +6,8 @@ define(['require',
             'models/campus_src',
             'models/campus_training',
             'models/campus_survey',
-            'models/contacts'
+            'models/contacts',
+            'models/suggestion'
             ],  function (require) {
     'use strict';
     var _cache= {};

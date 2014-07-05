@@ -33,7 +33,11 @@ define([
         },
 
         onPostSuggestion: function(e){
-            //ModalHelper.get('suggestion').execute('post', )
+            e.preventDefault();
+            var data = {formData: this.$(e.target).serialize() };
+            var dfd= app.modelHelper.get('suggestion').execute('suggestion:post',{data: data, success: function(status){
+                debugger;
+            }});
         }
     });
 });

@@ -58,14 +58,12 @@ define([
             }
         },
 
-        clickMenuItem: function  (e) {
-            var link = $(e.target).attr('href');
-            if(/^http\:\/\//.test(link)) {
-                window.open(link);
-            }else{
-                this.highlight(e.target);
+        clickMenuItem: function(e) {
+            var linkdom = e.target;
+            var href = $(linkdom).attr('href');
+            if(! /^http(s)?\:/.test(href)) {
+                this.highlight(linkdom);
             }
-            return false;
         },
 
         highlight: function  (dom) {

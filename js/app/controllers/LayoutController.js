@@ -1,24 +1,33 @@
-define(['marionette', 'app', 'views/HeaderView', 'views/MainView', 'views/FooterView', 'views/NavigationView'],
-    function(Marionette, app, HeaderView, MainView, FooterView, NavigationView) {
+define(['marionette', 'app', 'views/HeaderView', 'views/FooterView', 'views/NavigationView'],
+    function(Marionette, app, HeaderView, FooterView, NavigationView) {
         var _regionBase = Marionette.Region.extend({
             initialize: function(){
                 app.vent.on('app:pace:done',  this._ready,  this);
+                this.bindEvents();
                 this._show();
             },
 
             _ready: function(){
                 this.$el.addClass('ready').removeClass('notready');
+                app.vent.off('app:pace:done', this._ready, this);
             },
 
-            _show: function(){
+            bindEvents: function () {},
+
+            _show:function(view) {
                 this.ensureEl();
-                var _view= this.view;
-                if(!_view && this.vname){
-                    _view = eval('new '+ this.vname +'()');
+                view = view || this.view;
+                
+                if(typeof view === 'string'){
+                    view = eval('new '+ view +'()');
+                }else if(typeof view === 'function'){
+                    view = new view();
+                }else if(typeof view === 'object'){
+                    view = view;
                 }
 
-                if(_view){
-                    this.show(_view);
+                if(view){
+                    this.show(view);
                 }
             }
         });
@@ -26,24 +35,26 @@ define(['marionette', 'app', 'views/HeaderView', 'views/MainView', 'views/Footer
         var _regions = {
             header: _regionBase.extend({
                 el: '#header',
-                vname: 'HeaderView'
-         }),
+                view: 'HeaderView'
+            }),
 
             leftNavigation: _regionBase.extend({
                 el: '#sidebar',
-                vname: 'NavigationView'
+                view: 'NavigationView'
             }),
 
             main: _regionBase.extend({
                 el: '#main',
-                vname: 'MainView',
-                switchPage: function  (pageId) {
+
+                initialize: function () {
+                    _regionBase.prototype.initialize.apply(this, arguments);
+                    app.commands.setHandler('main:showpage', this._show, this);
                 }
             }),
 
             footer: _regionBase.extend({
                 el: '#footer',
-                vname: 'FooterView'
+                view: 'FooterView'
             }),
         };
 
@@ -67,8 +78,8 @@ define(['marionette', 'app', 'views/HeaderView', 'views/MainView', 'views/Footer
                 return this._regionManager.get(regionName);
             },
 
-            switchPage: function  (pageId) {
-                this.get('main').switchPage(pageId);
+            showPage: function  (view) {
+                this.get('main')._show(view);
             }
         };
 

@@ -1,12 +1,7 @@
-define(['jquery', 'backbone', 'marionette', 'underscore' ],
+define(['jquery', 'backbone', 'marionette', 'underscore'],
     function($, Backbone, Marionette, _) {
         var app = new Marionette.Application();
-         window.app = app;
-         
-         app.addInitializer(function() {
-            /*Backbone.history.start();*/
-
-        });
+        window.app = app;
 
         return app;
     }

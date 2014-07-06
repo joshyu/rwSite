@@ -9,7 +9,7 @@ require.config({
         hbs: "../vendor/hbs",
         text: "../vendor/text",
         handlebars:"../vendor/hbs/handlebars",
-        pace: "../vendor/pace.min",
+        pace: "../vendor/pace",
         bt3wysihtml5: "../vendor/bootstrap3-wysihtml5.all.min",
         noty: "../vendor/jquery.noty.packaged.min"
     },
@@ -52,9 +52,22 @@ require.config({
 
 require([
     'app' ,
+     'controllers/MainController',
      'controllers/LayoutController',
      'controllers/PaceController',
      'models/ModelHelper'
-], function (app) {
-       app.start();
+], function (app, MainController) {
+    
+    app.on('start',  function () {
+        if(Backbone.history){
+            Backbone.history.start();
+        }
+    });
+
+    app.router = new Marionette.AppRouter({
+        controller : MainController,
+        appRoutes  : MainController.routes
+    });
+
+    app.start();
 });

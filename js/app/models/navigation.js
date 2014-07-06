@@ -36,6 +36,11 @@ define([
            var i,len,item,pid;
            for(i=0,len=data.length;i<len;++i){
                 item= data[i];
+
+                if(item.link && /^http(s)?\:/.test(item.link)){
+                    item.isExternalLink = true;
+                }
+
                 pid= item.parentid;
                 _data[item.id] =_.extend(item, {subs: []});
 

@@ -15,6 +15,6 @@
           </ul>    
     {{else}}
     <li class="menu menu-leaf menu-{{id}}">
-            <a href="{{link}}"><i class="fa fa-fw fa-lg {{#if icon}}{{icon}}{{else}}fa-file-text{{/if}}"></i> {{title}}</a>
+            <a {{#if isExternalLink}}class="external" target="_blank"{{else}}class="internal"{{/if}}  href="{{link}}"><i class="fa fa-fw fa-lg {{#if icon}}{{icon}}{{else}}fa-file-text{{/if}}"></i> {{title}}</a>
     {{/if}}
 </li>

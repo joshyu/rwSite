@@ -11,6 +11,10 @@ define([
         request: {
             model: 'user',
             key: 'user:info'
+        },
+
+        events: {
+            
         }
     });
 });

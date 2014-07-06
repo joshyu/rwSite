@@ -6,15 +6,18 @@
 
 #splash .words > div{
     display: inline-block;
+    font-weight: bolder;
+    margin: 0;
+    padding: 0;
 }
 #splash .w1 {
-     color: #F70505;
-     text-shadow:4px 3px 6px #F76F74;
+     color: #C50606;
+     text-shadow: 5px 3px 6px #E49C9C;
 }
 
 #splash .w2{
-    color:#aaa;
-    text-shadow:4px 3px 6px #eee;
+    color: #525252;
+    text-shadow: 2px 3px 6px #7c7c7c;
 }
 
 .pace-done #splash{
@@ -24,8 +27,8 @@
 #splash .sub{
     position: relative;
     font-size: .6em;
-    color: #249CB9;
-    text-shadow:3px 3px 6px #3D91CC;
+    color: #868686;
+    text-shadow:2px 3px 6px #B4AEAE;
 }
 
 #splash.hidden{
@@ -98,8 +101,7 @@ sidebar nav list
 }
 
 #sidebar .nav-list li.active > a{
-    color:#000 !important;
-    text-shadow: 1px 2px 3px #777;
+    color:#474747;
     font-weight: bolder;
     position: relative;
 }
@@ -118,7 +120,8 @@ sidebar nav list
     right: -21px;
     top:5px;
     font-size: 20px;
-    color: #eee
+    color: #fff;
+    text-shadow:-1px 0px 9px #8B8B8B;
 }
 
 #sidebar .nav-list li {
@@ -154,13 +157,12 @@ sidebar nav list
 }
 
 #sidebar .nav-list li a:hover {
-    color: #fff;
     text-decoration: none;
     background: none;
 }
 
 #sidebar .nav-list  > li > a:hover{
-    background-color: rgba(0,0,0,.8);  
+    background-color: rgba(0,0,0,.4);  
 }
 
 #sidebar .nav-list b {
@@ -224,7 +226,7 @@ sidebar nav list
     left: 23px;
     top: 37px;
     bottom: 0;
-    border-left: 1px solid #7A7A7A
+    border-left: 1px solid #ACACAC
 }
 
 #sidebar>.nav-list ul li::before {
@@ -255,7 +257,7 @@ sidebar nav list
 }
 
 #sidebar>.nav-list>li:hover>ul::before,#sidebar>.nav-list>li:hover>ul>li::before {
-    border-color: #ACACAC!important
+    border-color: #7a7a7a !important
 }
 
 #sidebar .nav-list ul {
@@ -281,13 +283,11 @@ sidebar nav list
 }
 
 #sidebar .nav-list ul li>a:hover {
-    background-color: rgba(0,0,0,.3);
-    color: #fff
+    background-color: rgba(0,0,0,.1);
 }
 
 #sidebar .nav-list ul li>a:active {
-    background-color: rgba(0,0,0,.8);
-    color: #fff
+    background-color: rgba(0,0,0,.3);
 }
 #sidebar .nav-list ul li a.folder:hover{
     background:none;
@@ -329,7 +329,7 @@ sidebar nav list
 
 #main .panel {
     border-radius: 4px;
-    border: 1px solid #ccc;
+    border: 1px solid #eee;
     /* box-shadow: 0 0 0 1px #fafafa inset, 0 1px 4px 0px #aaa; */
     -webkit-box-shadow: 2px 3px 10px #D3D3D3;
     box-shadow: 2px 3px 10px #D3D3D3;
@@ -739,9 +739,7 @@ a.profilelink:hover img{
 }
 
 .panel-links .list-group-item:hover{
-    background: #A5A4A3;
-     
-     color:#fff;
+    background: #E9E9E9;
 }
 
 .panel-links .list-group-item:active{

@@ -60,7 +60,7 @@ define(['marionette', 'app', 'views/HeaderView', 'views/MainView', 'views/Footer
 
                 this._regionManager =  app._regionManager;
                 app.layoutManager = this;
-                app.commands.setHandler('switchPage', this.switchPage, this);  //app.execute('switchPage', 'landingpage');
+               // app.commands.setHandler('switchPage', this.switchPage, this);  //app.execute('switchPage', 'landingpage');
             },
 
             get: function  (regionName) {

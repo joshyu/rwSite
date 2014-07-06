@@ -1,5 +1,6 @@
 body {
-     background: url('../../images/mainbg.jpg');
+     /*background: url('../../images/mainbg.jpg');*/
+     background: #F1F1F1;
      overflow: hidden;
 }
 
@@ -49,7 +50,7 @@ body {
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
     background: #fff;
-    box-shadow: inset -8px 0px 7px -10px #1B1B1B;
+    box-shadow: inset -2px 0px 12px -7px #000;
 }
 
 /*main */
@@ -60,7 +61,10 @@ body {
     min-height: 762px;
     background: #eee;
     border-radius: 0px 0px 0px 6px;
-    background: url('../../images/mainbg.jpg');
+    background: #fff;
+    border-bottom-left-radius:6px;
+    border: 1px solid #ddd;
+    border-width: 0px 0px 1px 0px;
 }
 
 /*transition state */
@@ -112,7 +116,7 @@ body.pace-done{
 /* splash */
 #splash{
   position: fixed;
-  top: 30%;
+  top: 40%;
   text-align: center;
   z-index: -999;
   width: 100%;

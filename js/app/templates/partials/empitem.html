@@ -1,16 +1,39 @@
-<div class="col-md-4 image">
-    <img src="{{contacts.image}}" class="img-circle img-thumbnail">
+<div class="col-md-6 userdata">
+    <div class="col-md-5 image">
+        <img src="{{contacts.image}}" class="img-circle img-thumbnail">
+    </div>
+    <div class="col-md-7 info">
+        <p class="name">{{contacts.name}}</p>
+        <p class="chinese">{{contacts.chineseName}}</p>
+        <p class="title">{{contacts.title}}</p>
+        <dl class="below dl-horizontal">
+            <dt>team</dt>
+            <dd>{{contacts.team}}</dd>
+            <dt>manager</dt>
+            <dd>{{contacts.manager}}</dd>
+            <dt>EXT number</dt>
+            <dd>{{contacts.ext}}</dd>
+        </dl>
+    </div>
 </div>
-<div class="col-md-8 info">
-    <p class="name">{{contacts.name}}</p>
-    <p class="chinese">{{contacts.chineseName}}</p>
-    <p class="title">{{contacts.title}}</p>
-    <dl class="below dl-horizontal">
-        <dt>team</dt>
-        <dd>{{contacts.team}}</dd>
-        <dt>manager</dt>
-        <dd>{{contacts.manager}}</dd>
-        <dt>EXT number</dt>
-        <dd>{{contacts.ext}}</dd>
-    </dl>
+<div class="col-md-6 relation">
+      <div class="reportee">
+            <div class="title label label-default">report to</div>
+            <ul class="items list-inline">
+            <li><a class="profilelink" href=""><img src="images/defaultavatar.png" class="img-thumbnail img-circle"></a></li>
+            </ul>
+
+      </div>
+      <div class="reporters">
+          <div class="title label label-default">direct reports</div>
+          <ul class="items   list-inline">
+                <li><a href="" class="profilelink"><img src="images/defaultavatar.png" alt="" class="img-thumbnail img-circle"></a></li>
+                <li><a href="" class="profilelink"><img src="images/defaultavatar.png" alt="" class="img-thumbnail img-circle"></a></li>
+                <li><a href="" class="profilelink"><img src="images/defaultavatar.png" alt="" class="img-thumbnail img-circle"></a></li>
+                <li><a href="" class="profilelink"><img src="images/defaultavatar.png" alt="" class="img-thumbnail img-circle"></a></li>
+                <li><a href="" class="profilelink"><img src="images/defaultavatar.png" alt="" class="img-thumbnail img-circle"></a></li>
+            </ul>
+      </div>
+
 </div>
+

@@ -45,6 +45,12 @@ define(['marionette', 'underscore', 'app', 'views/HeaderView', 'views/FooterView
            in : 'ready'
         };
 
+        //TODO : add multiple effects.
+        var _AnimationEffects = {
+            Slide : 0,
+            Drop : 1,
+        };
+
         var _AnimatedRegion = _regionBase.extend({
                 duration: 500, /*ms*/
 
@@ -67,7 +73,6 @@ define(['marionette', 'underscore', 'app', 'views/HeaderView', 'views/FooterView
                     this.closeview(function() {
                           if (this.currentView && this.currentView !== view) { return; }
                           this.currentView = view;
-
                           this.sleep(this.duration).then( _.bind(function(){
                                 this.openview(view, function(){
                                     if (view.onShow){view.onShow();}
@@ -129,7 +134,8 @@ define(['marionette', 'underscore', 'app', 'views/HeaderView', 'views/FooterView
 
         return {
             RootRegionBase: _regionBase,
-            AnimatedRegion: _AnimatedRegion
+            AnimatedRegion: _AnimatedRegion,
+            Effects : _AnimationEffects
         };
     });
 

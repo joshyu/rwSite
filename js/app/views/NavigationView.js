@@ -37,8 +37,9 @@ define([
             var template = Handlebars.compile(this.templateStr);
             this.$el.html(template(data));
 
-            //highlight the default one.
-            this.highlight();
+            app.commands.setHandler('navigation:highlight', this.highlight, this);
+            app.commands.setHandler('navigation:dehighlight', this.dehighlight, this);
+            //this.highlight();
         },
 
         toggleFolder: function  (e) {
@@ -54,8 +55,9 @@ define([
                           $(this).parent('li').addClass('is-open').find('a:first > i').attr('class', 'fa fa-lg fa-fw fa-folder-open');
                      });
                 }
-
             }
+
+            return false;
         },
 
         clickMenuItem: function(e) {
@@ -66,16 +68,18 @@ define([
             }
         },
 
+        dehighlight: function(){
+            if(this.lastHighlightedDom){
+                this.lastHighlightedDom.removeClass('active').parents('li:first').removeClass('active');
+            }
+        },
         highlight: function  (dom) {
             var $dom= $(dom).parent('li');
             if(!$dom.length){
                 $dom = this.$el.find('> li:first');
             }
 
-            if(this.lastHighlightedDom){
-                this.lastHighlightedDom.removeClass('active').parents('li:first').removeClass('active');
-            }
-
+            this.dehighlight();
             $dom.addClass('active').parents('li:first').addClass('active');
             this.lastHighlightedDom = $dom;
         }

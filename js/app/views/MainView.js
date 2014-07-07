@@ -1,9 +1,10 @@
 define([
     'marionette',
+    'app',
     'hbs!templates/home/layout',
     'views/PanelHelper',
     'bootstrap'
-], function(Marionette, template,  PanelHelper) {
+], function(Marionette, app, template,  PanelHelper) {
     'use strict';
 
     return Marionette.Layout.extend({
@@ -31,8 +32,16 @@ define([
             suggestion: 'Suggestion'
         },
 
+        initialize: function(){
+            this.on('show', function(){
+                app.execute('navigation:highlight');
+            });
+
+            Marionette.Layout.prototype.initialize.apply(this, arguments);
+        },
+
         onRender: function () {
-            PanelHelper.layout(this);
+            PanelHelper.layout(this , 'main');
         }
     });
 });

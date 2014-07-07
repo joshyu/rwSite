@@ -9,9 +9,7 @@ define(['app' , 'views/MainView', 'views/ProfileView'],
             viewMap: {
                 Home : MainView,
                 Profile : ProfileView
-
             },
-
 
             showProfile: function(){
                 app.execute('main:showpage', this.viewMap.Profile);

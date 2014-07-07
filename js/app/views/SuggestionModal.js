@@ -2,7 +2,7 @@ define([
     'marionette',
     'app',
     'views/ModalBase',
-    'hbs!templates/suggestion_modal',
+    'hbs!templates/partials/suggestion_modal',
     'bt3wysihtml5'
 ], function(Marionette, app, ModalBase,  template) {
     'use strict';

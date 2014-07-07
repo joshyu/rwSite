@@ -1,13 +1,13 @@
 define([
     'marionette',
-    'hbs!templates/profileview',
+    'hbs!templates/profile/layout',
     'views/PanelHelper'
 ], function(Marionette, template,  PanelHelper) {
     'use strict';
 
     return Marionette.Layout.extend({
         template: template,
-        className:"row",
+        className:"",
         /*regions: {
             news: '.panel-news',
             updates: '.panel-updates',

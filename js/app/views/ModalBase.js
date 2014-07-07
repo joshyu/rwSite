@@ -2,7 +2,7 @@ define([
     'marionette',
     'app',
     'views/ViewBase',
-    'hbs!templates/modalbase',
+    'hbs!templates/general/modalbase',
     'noty'
 ], function(Marionette, app, ViewBase,template) {
     'use strict';

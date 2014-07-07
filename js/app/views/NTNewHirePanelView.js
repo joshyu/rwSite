@@ -3,7 +3,7 @@ define([
     'app',
     'views/ViewBase',
     'views/ModalHelper',
-    'hbs!templates/notify_newhire'
+    'hbs!templates/home/notify_newhire'
 ], function(Marionette, app, ViewBase, ModalHelper, template) {
     'use strict';
     return ViewBase.extend({

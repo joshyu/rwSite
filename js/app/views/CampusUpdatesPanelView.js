@@ -3,7 +3,7 @@ define([
     'app',
     'views/ViewBase',
     'views/ModalHelper',
-    'hbs!templates/campus_update',
+    'hbs!templates/home/campus_update',
 ], function(Marionette, app, ViewBase, ModalHelper, template) {
     'use strict';
     return ViewBase.extend({

@@ -3,7 +3,7 @@ define([
     'app',
     'views/ViewBase',
     'views/ModalHelper',
-    'hbs!templates/notify_birthday'
+    'hbs!templates/home/notify_birthday'
 ], function(Marionette, app, ViewBase,  ModalHelper, template) {
     'use strict';
     return ViewBase.extend({

@@ -3,7 +3,7 @@ define([
     'app',
     'views/ViewBase',
     'views/ModalHelper',
-    'hbs!templates/survey',
+    'hbs!templates/home/survey',
 ], function(Marionette, app, ViewBase, ModalHelper,  template) {
     'use strict';
     return ViewBase.extend({

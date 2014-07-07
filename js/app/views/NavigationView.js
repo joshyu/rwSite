@@ -3,7 +3,7 @@ define([
     'app',
      'views/ViewBase',
     'underscore',
-    'text!templates/navigation.html',
+    'text!templates/layouts/navigation.html',
     'hbs/handlebars'
 ], function(Marionette, app, ViewBase,  _, partialtemplate, Handlebars) {
     'use strict';

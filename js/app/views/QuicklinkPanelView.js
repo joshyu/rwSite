@@ -2,7 +2,7 @@ define([
     'marionette',
     'app',
     'views/ViewBase',
-    'hbs!templates/qlink',
+    'hbs!templates/home/qlink',
 ], function(Marionette, app, ViewBase,  template) {
     'use strict';
     return ViewBase.extend({

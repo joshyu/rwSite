@@ -2,7 +2,7 @@ define([
     'marionette',
     'app',
     'views/ViewBase',
-    'hbs!templates/news',
+    'hbs!templates/home/news',
 ], function(Marionette, app, ViewBase,  template) {
     'use strict';
     return ViewBase.extend({

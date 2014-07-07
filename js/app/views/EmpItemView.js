@@ -1,7 +1,7 @@
 define([
     'marionette',
     'views/ViewBase',
-    'hbs!templates/empitem'
+    'hbs!templates/partials/empitem'
 ], function(Marionette, ViewBase, template) {
     'use strict';
     return ViewBase.extend({

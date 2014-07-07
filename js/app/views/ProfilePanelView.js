@@ -2,7 +2,7 @@ define([
     'marionette',
     'app',
     'views/ViewBase',
-    'hbs!templates/profile',
+    'hbs!templates/home/profile',
 ], function(Marionette, app, ViewBase,  template) {
     'use strict';
     return ViewBase.extend({

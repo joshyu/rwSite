@@ -2,7 +2,7 @@ define([
     'marionette',
     'app',
     'views/ModalBase',
-    'hbs!templates/surveyitem',
+    'hbs!templates/partials/surveyitem',
 ], function(Marionette, app, ModalBase,  template) {
     'use strict';
     return ModalBase.extend({

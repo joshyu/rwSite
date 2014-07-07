@@ -1,6 +1,6 @@
 define([
     'marionette',
-    'hbs!templates/main',
+    'hbs!templates/home/layout',
     'views/PanelHelper',
     'bootstrap'
 ], function(Marionette, template,  PanelHelper) {

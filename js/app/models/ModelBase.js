@@ -90,7 +90,7 @@ define([
             return function(args){
                 return this['_fetch' + (opts.type || 'item')]({
                     url: opts.url,
-                    data: _.extend(opts.data || {}, args.data),
+                    data: _.extend(opts.data || {}, args),
                     cached: opts.cached
                 }).then(function(data){
                     var _parseData = opts.parseData,

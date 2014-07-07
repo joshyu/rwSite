@@ -21,7 +21,7 @@ define([
         },
 
         panels: {
-            empdata:  'EmpItemView'
+            empdata: 'EmpItemView'
         },
         
         onRender: function () {

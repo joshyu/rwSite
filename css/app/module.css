@@ -21,7 +21,7 @@
 }
 
 .pace-done #splash{
-   opacity: 0;
+  /*  opacity: 0; */
 }
 
 #splash .sub{
@@ -326,6 +326,42 @@ sidebar nav list
 /*
 *  module css
 */
+#main .container{
+    width: auto;
+    padding: 0;
+}
+#main .container.in,
+#main .container.out{
+    -webkit-transition: all 1s;
+    -ms-transition: all 1s;
+    -moz-transition: all 1s;
+    -o-transition: all 1s;
+    transition: all 1s;
+}
+
+#main .container.in {
+    top:0;
+    left: 100%;
+    opacity: 0.5;
+}
+
+#main.swap .container.in {
+    opacity: 1;
+}
+
+#main.swap .container.out {
+    opacity: 0.5;
+}
+
+#main.swap .container.in,
+#main.swap .container.out {
+    -webkit-transform: translateX(100%);
+     -ms-transform: translateX(100%);
+     -moz-transform: translateX(100%);
+     -o-transform: translateX(100%);
+     transform: translateX(100%);
+}
+
 
 #main .panel {
     border-radius: 4px;

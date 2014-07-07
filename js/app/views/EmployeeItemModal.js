@@ -2,7 +2,7 @@ define([
     'marionette',
     'app',
     'views/EmpItemView',
-    'hbs!templates/modalbase',
+    'hbs!templates/general/modalbase',
     'hbs/handlebars'
 ], function(Marionette, app, EmpItemView,template,Handlebars) {
     'use strict';

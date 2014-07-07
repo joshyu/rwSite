@@ -14,14 +14,12 @@ define(['app' , 'views/MainView', 'views/ProfileView'],
 
 
             showProfile: function(){
-                app.pace.init();
                 app.execute('main:showpage', this.viewMap.Profile);
             },
 
             showHome: function () {
-
                 app.execute('main:showpage', this.viewMap.Home);
             }
-        }
+        };
     }
 );

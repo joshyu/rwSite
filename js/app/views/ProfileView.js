@@ -7,7 +7,7 @@ define([
 
     return Marionette.Layout.extend({
         template: template,
-        className:"",
+        className:"container",
         /*regions: {
             news: '.panel-news',
             updates: '.panel-updates',

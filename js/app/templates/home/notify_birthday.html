@@ -1,8 +1,27 @@
 <div class="panel-notify-sub-heading">{{title}}</div>
-<!-- <div class="loading pull-right"><i class="fa fa-refresh fa-spin"></i></div> -->
-
- <div class="panel-notify-sub-list">
-        {{#each contacts}}
-            <a href="#employees/{{id}}" data-employee-id="{{id}}" class="profilelink"><img src="{{image}}" alt="" class="img-circle img-thumbnail"  data-toggle="tooltip" data-placement="top" title="{{name}}({{birthday}})"></a>
-        {{/each}}              
- </div>
+<div class="items active panel-notify-sub-list">
+    <!-- Carousel nav -->
+    <div class="controls pull-right hidden-xs">
+      <a class="carousel-control left fa fa-chevron-left btn btn-success" href=".carousel-birthday" data-slide="prev"></a>
+      <a class="carousel-control right fa fa-chevron-right btn btn-success " href=".carousel-birthday" data-slide="next"></a> 
+    </div>
+      <div class="carousel carousel-birthday slide" data-ride="carousel">
+          <!-- Carousel items -->
+          <div class="carousel-inner">
+                {{#each contacts}}
+                <div class="item  {{#unless @index}}active{{/unless}}">
+                    {{#each this}}
+                            <div class="col-md-4">
+                                <a href="#employees/{{id}}" data-employee-id="{{id}}" class="profilelink"><img src="{{photo}}" alt="" class="img-circle img-thumbnail"  data-toggle="tooltip" data-placement="top" title="{{name}}({{birthday}})"></a>
+                            </div>
+                    {{/each}}
+                </div>
+                {{/each}}
+          </div>
+          <ol class="carousel-indicators">
+            {{#each contacts}}
+            <li data-target=".carousel-birthday" data-slide-to="{{@index}}" class="{{#unless @index}}active{{/unless}}"></li>
+            {{/each}}
+      </ol>
+  </div>
+</div>

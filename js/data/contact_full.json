@@ -1,0 +1,73 @@
+{
+    "data" : [
+           {
+            "id": 5,
+            "name" : "Jerry Xun",
+            "chinesename" : "荀志锋",
+            "email" : "jxun@ra.rockwell.com",
+            "project" : "CCW",
+            "photo" : "images/defaultavatar.png",
+            "lead" : "",
+            "manager" : "",
+            "team" : "Development",
+            "ext" : "22233",
+            "birthday" : "1979/8/3"
+        },
+        {
+            "id": 1,
+            "name" : "Josh Yu1",
+            "chinesename" : "于鹏",
+            "email" : "jyu5@ra.rockwell.com",
+            "project" : "FTVP",
+            "photo" : "images/defaultavatar.png",
+            "lead" : "Zeno Jia",
+            "manager" : "Zeno Jia",
+            "team" : "Development",
+            "ext" : "22233",
+            "birthday" : "1979/8/7", 
+            "intro" : "this is Josh Yu, glad to join in this company.  I  am willing to learn from you and share all I knew with you. Thanks you. "
+        },
+        {
+            "id": 2,
+            "name" : "Josh Yu2",
+            "chinesename" : "于鹏",
+            "email" : "jyu5@ra.rockwell.com",
+            "project" : "FTVP",
+            "photo" : "images/defaultavatar.png",
+            "lead" : "Zeno Jia",
+            "manager" : "Zeno Jia",
+            "team" : "Development",
+            "ext" : "22233",
+            "birthday" : "1979/8/1",
+            "intro" : "this is Josh Yu, glad to join in this company.  I  am willing to learn from you and share all I knew with you. Thanks you. "
+        },
+        {
+            "id": 3,
+            "name" : "Josh Yu3",
+            "chinesename" : "于鹏",
+            "email" : "jyu5@ra.rockwell.com",
+            "project" : "FTVP",
+            "photo" : "images/defaultavatar.png",
+            "lead" : "Zeno Jia",
+            "manager" : "Zeno Jia",
+            "team" : "Development",
+            "ext" : "22233",
+            "birthday" : "1979/8/3",
+            "intro" : "this is Josh Yu, glad to join in this company.  I  am willing to learn from you and share all I knew with you. Thanks you. "
+        },
+        {
+            "id": 4,
+            "name" : "Zeno Jia",
+            "chinesename" : "贾冶",
+            "email" : "zjia@ra.rockwell.com",
+            "project" : "FTVP",
+            "photo" : "images/defaultavatar.png",
+            "lead" : "",
+            "manager" : "Jerry Xun",
+            "team" : "Development",
+            "ext" : "22233",
+            "birthday" : "1979/8/10",
+            "intro" : "this is Josh Yu, glad to join in this company.  I  am willing to learn from you and share all I knew with you. Thanks you. "
+        }
+    ]        
+}

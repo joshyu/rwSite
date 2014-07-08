@@ -21,6 +21,7 @@ define([
 
         requests: {},
         commands : {},
+        cached: {},
 
         _bindHandlers: function(_keys, _cols, context, funcNameByType){
             var key = null;
@@ -32,12 +33,13 @@ define([
 
             for(key in _keys){
                 var _meth= _keys[key];
-                if( typeof _meth == 'string' && $.isFunction(context[_meth])){
+                if( typeof _meth === 'string' && $.isFunction(context[_meth])){
                     _cols.setHandler( key, context[_meth], context);
                 }
 
-                if(typeof _meth == 'object' && _meth.url && funcNameByType && $.isFunction(context[funcNameByType])){
+                if(typeof _meth === 'object' && (_meth.url || _meth.dep ) && funcNameByType && $.isFunction(context[funcNameByType])){
                     _meth.context = context;
+                    _meth.key = key;
                     _meth = context[ funcNameByType ](_meth);
 
                     _cols.setHandler( key, _meth, context);
@@ -72,9 +74,8 @@ define([
                 };
 
                 Backbone.ajax(options).done(function (status) {
-                    var status = status.status || status;
                     if(opts.success){
-                        opts.success(status);
+                        opts.success(status.status || status);
                     }
                 }).fail(function (err) {
                     if(opts.fail){
@@ -87,81 +88,92 @@ define([
         },
 
         _fetchByType: function(opts){
+            var _cached = this.cached;
+            var _cachedKey= opts.cached ? opts.key : false;
+
             return function(args){
-                return this['_fetch' + (opts.type || 'item')]({
-                    url: opts.url,
-                    data: _.extend(opts.data || {}, args),
-                    cached: opts.cached
-                }).then(function(data){
-                    var _parseData = opts.parseData,
-                         _context= opts.context;
-
-                    if(_.isFunction(_context[_parseData])){
-                        return _context[_parseData](data);
-                    }else{
-                        return data;
+                var dfd= $.Deferred();
+                if(_cachedKey && _cached[_cachedKey]){
+                    dfd.resolve(_cached[_cachedKey]);
+                }else{
+                    var def = null;
+                    if(opts.dep){
+                        def = this.request(opts.dep);
+                    }else if(opts.url){
+                        def = this['_fetch' + (opts.type || 'item')]({
+                            url: opts.url,
+                            data: _.extend(opts.data || {}, args)
+                        });
                     }
-                });
-            }
+
+                    def.then(function(data){
+                        var _parseData = opts.parseData,
+                             _context= opts.context;
+                        var options = opts.dep ? args : {};
+
+                        if(_.isFunction(_context[_parseData])){
+                            data = _context[_parseData](data, options);
+                        }
+
+                        if(_cachedKey){
+                            _cached[_cachedKey] = data;
+                        }
+
+                        dfd.resolve(data);
+                    });
+                
+                } //end if
+
+                return dfd.promise();                
+            };
         },
 
-        _fetchitem: function _func(opts){
+        _fetchitem: function (opts){
             var dfd= $.Deferred();
+
             if(!opts || !opts.url){
                 dfd.reject(false);
             }else{
-                if(opts.cached && _func.cached){
-                    dfd.resolve(_func.cached);
-                }else{
-                    var options= {
-                        url: opts.url,
-                        type: 'GET',
-                        dataType: 'json',
-                        data: opts.data,
-                        success: function(data){
-                            if(opts.cached){
-                                _func.cached = data;
-                            }
+                var options= {
+                    url: opts.url,
+                    type: 'GET',
+                    dataType: 'json',
+                    data: opts.data,
+                    success: function(data){
+                        dfd.resolve(data);
+                    }
+                };
 
-                            dfd.resolve(data);
-                        }
-                    };
-
-                    Backbone.ajax(options);
-                }                 
+                Backbone.ajax(options);
             }
 
             return dfd.promise();
         },
 
-        _fetchlist: function _func(opts){
+        _fetchlist: function(opts){
             var dfd= $.Deferred();
+
             if(!opts || !opts.url){
                 dfd.reject(false);
             }else{
-                if(opts.cached && _func.cached){
-                    dfd.resolve(_func.cached);
-                }else{
-                    var options= {
-                        url: opts.url,
-                        type: 'GET',
-                        dataType: 'json',
-                        data: opts.data,
-                        success: function(data){
-                            data = data.data;
-                            if(opts.cached){
-                                _func.cached = data;
-                            }
+                var options= {
+                    url: opts.url,
+                    type: 'GET',
+                    dataType: 'json',
+                    data: opts.data,
+                    success: function(data){
+                        dfd.resolve(data.data);
+                    }
+                };
 
-                            dfd.resolve(data);
-                        }
-                    };
-
-                    Backbone.ajax(options);
-                }                 
+                Backbone.ajax(options);
             }
 
             return dfd.promise();
+        },
+
+        getCached: function(key){
+            return this.cached[key];
         }
 
     });

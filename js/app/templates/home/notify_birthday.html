@@ -1,10 +1,17 @@
 <div class="panel-notify-sub-heading">{{title}}</div>
-<div class="items active panel-notify-sub-list">
+<div class="items active panel-notify-sub-list {{#if contacts.empty}}empty-list{{/if}}">
+    
+    {{#if contacts.morepage}}
     <!-- Carousel nav -->
     <div class="controls pull-right hidden-xs">
       <a class="carousel-control left fa fa-chevron-left btn btn-success" href=".carousel-birthday" data-slide="prev"></a>
       <a class="carousel-control right fa fa-chevron-right btn btn-success " href=".carousel-birthday" data-slide="next"></a> 
     </div>
+    {{/if}}
+
+    {{#if contacts.empty}}
+      <div class="alert" role="alert"> No Birthday Notification in this month. </div>
+    {{else}}
       <div class="carousel carousel-birthday slide" data-ride="carousel">
           <!-- Carousel items -->
           <div class="carousel-inner">
@@ -12,16 +19,22 @@
                 <div class="item  {{#unless @index}}active{{/unless}}">
                     {{#each this}}
                             <div class="col-md-4">
-                                <a href="#employees/{{id}}" data-employee-id="{{id}}" class="profilelink"><img src="{{photo}}" alt="" class="img-circle img-thumbnail"  data-toggle="tooltip" data-placement="top" title="{{name}}({{birthday}})"></a>
+                                <a href="#employees/{{id}}" data-employee-id="{{id}}" class="profilelink"><img src="{{photo}}" alt="" class="img-circle img-thumbnail"  data-toggle="tooltip" data-placement="bottom" title="{{name}}({{birthday}})">
+                                
+                                </a>
+
                             </div>
                     {{/each}}
                 </div>
                 {{/each}}
           </div>
           <ol class="carousel-indicators">
-            {{#each contacts}}
-            <li data-target=".carousel-birthday" data-slide-to="{{@index}}" class="{{#unless @index}}active{{/unless}}"></li>
-            {{/each}}
-      </ol>
-  </div>
+            {{#if contacts.morepage}}
+              {{#each contacts}}
+              <li data-target=".carousel-birthday" data-slide-to="{{@index}}" class="{{#unless @index}}active{{/unless}}"></li>
+              {{/each}}
+            {{/if}}
+          </ol>
+      </div>
+  {{/if}}
 </div>

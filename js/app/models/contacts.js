@@ -39,7 +39,6 @@ define([
             var d = new Date();
             var year = d.getFullYear();
             var month = d.getMonth() + 1;
-            month = 8;
             var days = new Date(year, month ,0).getDate();  // will get the day number of the month
             d = Date.parse(year + '/'+ month +'/' + days);
             var dayminiutes = 1000*3600*24 * days;
@@ -50,9 +49,35 @@ define([
                 }
 
                 var d1 = new Date(item.birthday).setFullYear(year);
-                return d> d1 && (d - d1)  < dayminiutes;
+                var pass = d> d1 && (d - d1)  < dayminiutes;
+                if(pass){
+                    item.birthday = item.birthday.replace(/\/?\b\w{4}\b\/?/,'');
+                }
+
+                return pass;
+
             });
+
+            var _empty = data.length === 0; 
+
+            data =  this._splitArray(data);
+            data.morepage = data.length > 1;
+            data.empty = _empty;
+
             return data;
+        },
+
+        _splitArray: function(arr, num){
+            var NUMPERPAGE = 3;
+            num = num || NUMPERPAGE;
+
+            if(arr.length <= num) return [ arr ];
+            var _arr= [];
+            while(arr.length > 0){
+                _arr.push(arr.splice(0,num));
+            }
+
+            return _arr;
         },
 
         fetchContactInfo: function(data, options){

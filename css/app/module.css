@@ -570,9 +570,29 @@ sidebar nav list
 }
 
  .panel-notify-sub-list {
-     padding-top: 40px;
+     margin-top: 20px;
      text-align: center;
  }
+
+ .panel-notify-sub-list.empty-list {
+    padding-top:20px;
+    padding-bottom: 20px;
+ }
+
+ .panel-notify-sub-list.empty-list .alert{
+    background-color: #F3F3F3;
+    border-color: #D8D8D8;
+    color: #797A7A;
+ }
+
+.panel-notify-sub-list .carousel-inner{
+   padding-bottom: 10px;
+}
+
+.panel-notify-birthday .carousel-inner{
+    padding-bottom: 40px;
+    top: 10px;
+}
 
 .panel-notify-sub-list  .controls {
     position: absolute;
@@ -588,6 +608,19 @@ sidebar nav list
     padding: 3px 15px 3px 8px;
 }
 
+.panel-notify-sub-list a.profilelink:hover{
+    text-decoration: none;
+}
+
+.panel-notify-sub-list a.profilelink .label {
+    position: relative;
+    top: 10px;
+}
+
+.panel-notify-sub-list a.profilelink:hover .label-default {
+    background: #666;
+}
+
 
 a.profilelink.highlight img,
 a.profilelink:hover img{
@@ -600,7 +633,6 @@ a.profilelink:hover img{
 
 .panel-notify-birthday  .carousel-indicators {
     bottom: 0;
-    position: relative;
     right: 0;
     margin: 20px -40px -10px;
     padding: 0;

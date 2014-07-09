@@ -6,6 +6,11 @@ define([
     'use strict';
     return Marionette.CompositeView.extend({
         renderData: function (data) {
+            this._renderData(data);
+        },
+
+        _renderData: function(data){
+            this.triggerMethod('before:render', this);
             data = _.extend(this.myTemplData(), data);
             this.$el.html(this.template(data));
             this.triggerMethod("render", this);
@@ -24,7 +29,9 @@ define([
             return  data;
         },
 
+        bindEvents: function(){ return; },
         initialize: function () {
+            this.bindEvents();
            if(!this.handleRequests()){
                 this.renderData();
            }

@@ -21,23 +21,29 @@
     </div>
 </div>
 <div class="col-md-6 relation">
+      {{#if contacts.managerId}}
       <div class="reportee">
             <div class="title label label-default">report to</div>
             <ul class="items list-inline">
-            <li><a class="profilelink" href=""><img src="images/defaultavatar.png" class="img-thumbnail img-circle"></a></li>
+                <li><a class="profilelink" href="#profile/{{contacts.managerId}}" data-contactId="{{contacts.managerId}}">
+                        <img src="{{contacts.relations.manager.photo}}" class="img-thumbnail img-circle" data-toggle="tooltip" data-placement="bottom" title="{{contacts.relations.manager.name}}"/>
+                    </a>
+                </li>
             </ul>
-
       </div>
+      {{/if}}
+
+      {{#if contacts.relations.reportees}}
       <div class="reporters">
           <div class="title label label-default">direct reports</div>
           <ul class="items   list-inline">
-                <li><a href="" class="profilelink"><img src="images/defaultavatar.png" alt="" class="img-thumbnail img-circle"></a></li>
-                <li><a href="" class="profilelink"><img src="images/defaultavatar.png" alt="" class="img-thumbnail img-circle"></a></li>
-                <li><a href="" class="profilelink"><img src="images/defaultavatar.png" alt="" class="img-thumbnail img-circle"></a></li>
-                <li><a href="" class="profilelink"><img src="images/defaultavatar.png" alt="" class="img-thumbnail img-circle"></a></li>
-                <li><a href="" class="profilelink"><img src="images/defaultavatar.png" alt="" class="img-thumbnail img-circle"></a></li>
+                {{#each contacts.relations.reportees}}
+                    <li><a href="#profile/{{id}}" class="profilelink" data-contactId="{{id}}">
+                        <img src="{{photo}}" alt="" class="img-thumbnail img-circle" data-toggle="tooltip" data-placement="bottom" title="{{name}}"/>
+                        </a>
+                    </li>
+                {{/each}}
             </ul>
       </div>
-
+      {{/if}}
 </div>
-

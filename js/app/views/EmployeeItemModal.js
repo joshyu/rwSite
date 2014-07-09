@@ -9,7 +9,7 @@ define([
     return Marionette.Layout.extend({
         template: template,
         bodyTmpl: null,  //content view.
-        className:'modal fade contact_modal',
+        className:'modal fade contact_modal empitem_modal',
         regions: {
             content: '.modal-body'
         },

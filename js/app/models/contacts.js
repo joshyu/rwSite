@@ -81,19 +81,39 @@ define([
 
         fetchContactInfo: function(data, options){
             var itemId = options.id;
+            var item = null;
             if(itemId){
-                return data[itemId];
-            }
-            
-            //get the user info of current signed in user.
-            var _email = app.user.info.email;
-            var item = _.find(data, function(item){
-                return item.email === _email;
-            });
+                item= data[itemId];
+            }else{
+                //get the user info of current signed in user.
+                var _email = app.user.info.email;
+                item = _.find(data, function(item){
+                    return item.email === _email;
+                });
+            }            
 
+            item.relations= this._fetchRelationData(data, item);
             return item;            
         },
 
+        _fetchRelationData: function(data, item){
+             if(!data || !item){
+                return false;
+             } 
+
+             var _relations = {};
+             if(item.managerId){
+                _relations.manager = data[item.managerId];
+             }
+
+             if(item.reportees){
+                _relations.reportees = _.map(item.reportees, function(id){
+                    return data[id];
+                });
+             }
+
+             return _relations;
+        },
         _parseRelationship: function(data){
              if(!data || !$.isArray(data)){
                 return false;
@@ -109,10 +129,11 @@ define([
             $.each(data, function(i, item){
                  var managerItem = data[ _data[item.manager] ];
                  if(managerItem){
+                    item.managerId = managerItem.id;
                      if(managerItem.reportees){
-                        managerItem.reportees.push(i);
+                        managerItem.reportees.push(item.id);
                      }else{
-                        managerItem.reportees = [i];
+                        managerItem.reportees = [item.id];
                      }
                  }
              });

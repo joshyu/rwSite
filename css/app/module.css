@@ -932,6 +932,17 @@ a.profilelink:hover img{
     width:800px;
 }
 
+.contact_modal_body {
+    -webkit-transition: opacity linear .5s;
+    -moz-transition: opacity linear .5s;
+    -o-transition: opacity linear .5s;
+    transition: opacity linear .5s;
+}
+
+.contact_modal_body.fadeout{
+    opacity: 0;
+}
+
 .contact_modal_body .image{
     text-align: center;
 }
@@ -1034,15 +1045,17 @@ a.profilelink:hover img{
 }
 
 /*profile page : data panel */
+
+.empitem_modal  .modal-content,
 #main .panel-emprofile {
-     background: #ffffff;
-    background: -moz-linear-gradient(left,  #ffffff 0%, #f7f7f7 40%, #dbdbdb 43%, #ffffff 100%);
-    background: -webkit-gradient(linear, left top, right top, color-stop(0%,#ffffff), color-stop(40%,#f7f7f7), color-stop(43%,#dbdbdb), color-stop(100%,#ffffff));
-    background: -webkit-linear-gradient(left,  #ffffff 0%,#f7f7f7 40%,#dbdbdb 43%,#ffffff 100%);
-    background: -o-linear-gradient(left,  #ffffff 0%,#f7f7f7 40%,#dbdbdb 43%,#ffffff 100%);
-    background: -ms-linear-gradient(left,  #ffffff 0%,#f7f7f7 40%,#dbdbdb 43%,#ffffff 100%);
-    background: linear-gradient(to right,  #ffffff 0%,#f7f7f7 40%,#dbdbdb 43%,#ffffff 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=1 );
+      background: #ffffff;
+         background: -moz-linear-gradient(left,  #ffffff 0%, #f7f7f7 44%, #dbdbdb 47%, #ffffff 100%);
+         background: -webkit-gradient(linear, left top, right top, color-stop(0%,#ffffff), color-stop(44%,#f7f7f7), color-stop(47%,#dbdbdb), color-stop(100%,#ffffff));
+         background: -webkit-linear-gradient(left,  #ffffff 0%,#f7f7f7 44%,#dbdbdb 47%,#ffffff 100%);
+         background: -o-linear-gradient(left,  #ffffff 0%,#f7f7f7 44%,#dbdbdb 47%,#ffffff 100%);
+         background: -ms-linear-gradient(left,  #ffffff 0%,#f7f7f7 44%,#dbdbdb 47%,#ffffff 100%);
+         background: linear-gradient(to right,  #ffffff 0%,#f7f7f7 44%,#dbdbdb 47%,#ffffff 100%);
+         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=1 ); 
 }
 .panel-emprofile  .panel-body {
     padding: 0;

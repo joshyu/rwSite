@@ -881,44 +881,49 @@ a.profilelink:hover img{
     text-decoration: none;
 
 }
-.campus_modal .modal-body .banner {
-    border-bottom: 1px solid #ddd;
-    padding: 5px 15px;
+
+.campus-item {
+    position: relative;
 }
 
-.campus_modal .modal-body  .splitter {
+.campus-item .banner {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 15px;
+}
+
+.campus-item .splitter {
     margin:0px 5px;
 }
 
-.campus_modal .modal-body  .content{
+.campus-item .content{
     padding:20px;
 }
-.campus_modal .modal-body .attachments{
+
+.campus-item .attachments{
     padding: 10px 20px;
-    margin: 0px;
-    margin-bottom: 40px;
+    margin: 0px -5px;
+    border-radius: .5em;
+    margin-bottom: 20px;
     background: #ddd;
     -webkit-box-shadow: 0px 2px 9px -4px #000;
     -ms-box-shadow:0px 2px 9px -4px #000;
     box-shadow: 0px 2px 9px -4px #000;
 }
 
-.campus_modal .modal-body .attachments .item{
+.campus-item .attachments .item{
     margin-left:5px;
 }
 
-.campus_modal .modal-body .footer{
-    position: relative;
-    margin-top: 20px;
-}
-
-.campus_modal .modal-body .footer .buttons{
+.campus-item .footer{
     position: absolute;
-    right: 20px;
     bottom: 10px;
+    right: 5px;
 }
 
-.campus_modal .modal-body .footer .buttons .icon{
+.campus-item .footer .buttons{
+}
+
+.campus-item .footer .buttons .icon{
     margin-left: 5px;
     top: 2px;
 }
@@ -1076,7 +1081,15 @@ a.profilelink:hover img{
 
 .profilepage .panel-list .panel-head{
     border-bottom: 1px solid #eee;
-    margin: 0 20px;
+    margin: 0 10px;
+    position: relative;
+}
+
+.profilepage .panel-list .panel-head-right {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    color: #aaa;
 }
 
 .profilepage .panel-list .panel-head h1{
@@ -1085,4 +1098,30 @@ a.profilelink:hover img{
     padding-left: 0;
     padding-bottom: 5px;
     margin-left: 0;
+}
+
+/* profile src list */
+.panel-src-list .campus-item {
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    border-radius: .5em;
+}
+
+.campus-item .head{
+    border-bottom: 1px solid #ddd;
+    padding: 0px 20px;
+}
+
+.campus-item .head h4{
+    font-weight: bolder;
+}
+
+.panel-src-list .campus-item .footer{
+    right: 10px;
+    bottom: 30px
+}
+
+.panel-src-list .campus-item .item-image img{
+    max-width: 70%;
+    margin-left: 15%
 }

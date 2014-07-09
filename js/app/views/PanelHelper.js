@@ -8,7 +8,8 @@ define([
     'views/NTBirthdayPanelView',
     'views/NTNewHirePanelView',
     'views/SuggestionPanelView',
-    'views/EmpItemView'
+    'views/EmpItemView',
+    'views/SrcListView'
 ], function(require) {
     'use strict';
     return {

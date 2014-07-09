@@ -15,6 +15,10 @@ define([
             getOptions: 'getRequestOption'
         },
 
+        templateData: {
+            contentClass : 'campus-item'
+        },
+
         getRequestOption: function(){
             var itemId= this.options.itemId;
             return {

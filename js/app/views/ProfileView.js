@@ -17,11 +17,13 @@ define([
             Marionette.Layout.prototype.initialize.apply(this, arguments);
         },
         regions: {
-            empdata : '.panel-emprofile .panel-body'
+            empdata : '.panel-emprofile .panel-body',
+            srcs:'.panel-src .panel-body'
         },
 
         panels: {
-            empdata: 'EmpItemView'
+            empdata: 'EmpItemView',
+            srcs: 'SrcListView'
         },
                 
         onRender: function () {

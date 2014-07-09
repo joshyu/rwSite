@@ -8,7 +8,7 @@ define([
 
     return Marionette.Layout.extend({
         template: template,
-        className:"container",
+        className:"container profilepage",
         initialize: function(){
             this.on('show', function(){
                 app.execute('navigation:dehighlight');

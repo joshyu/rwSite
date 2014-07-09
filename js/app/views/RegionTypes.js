@@ -12,7 +12,7 @@ define(['marionette', 'underscore', 'app', 'views/HeaderView', 'views/FooterView
             },
 
             _ready: function(){
-                this.$el.addClass('ready').removeClass('notready');
+                this.$el.removeClass('notready').addClass('ready');
                 app.vent.off('app:pace:done', this._ready, this);
             },
 

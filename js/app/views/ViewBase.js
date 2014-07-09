@@ -16,6 +16,10 @@ define([
             if(this.templateData){
                 data = this.templateData;
             }
+
+            if(this.getTemplateData && _.isFunction(this.getTemplateData)){
+                 data = this.getTemplateData();
+            }
             
             return  data;
         },

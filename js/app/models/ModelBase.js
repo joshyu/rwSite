@@ -55,7 +55,7 @@ define([
                     success: args.success,
                     fail : args.fail,
                 });
-            }
+            };
         },
 
         _post: function (opts) {
@@ -174,7 +174,10 @@ define([
 
         getCached: function(key){
             return this.cached[key];
-        }
+        },
 
+        cacheData: function(key, data){
+            this.cached[key] = data;
+        }
     });
 });

@@ -8,13 +8,11 @@ define([
     return ViewBase.extend({
         template: template,
         className:"brand",
-        request: {
-            model: 'user',
-            key: 'user:info'
-        },
-
-        events: {
-            
+        getTemplateData: function(){
+             return  {
+                user : app.user.info
+             };
         }
+
     });
 });

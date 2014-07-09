@@ -14,6 +14,11 @@ define([
                 url: "js/data/events_training_updates.json",
                 type: 'list'
             },
+            'campus:events:training:userowned' : {
+                url: "js/data/events_training_updates.json",
+                type: 'list'
+            },
+
             'campus:training:item:info' : {
                 url: "js/data/training_item.json"
             }

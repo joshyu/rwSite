@@ -11,11 +11,11 @@
             "manager" : "",
             "team" : "Development",
             "ext" : "22233",
-            "birthday" : "1979/8/3"
+            "birthday" : "1979/7/3"
         },
         {
             "id": 1,
-            "name" : "Josh Yu1",
+            "name" : "Josh Yu",
             "chinesename" : "于鹏",
             "email" : "jyu5@ra.rockwell.com",
             "project" : "FTVP",

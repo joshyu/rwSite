@@ -8,9 +8,15 @@ define([
     return ViewBase.extend({
         template: template,
         className: 'panel-body',
-        request: {
+        /*request: {
             model: 'user',
             key: 'user:info' 
+        }*/
+
+        getTemplateData: function(){
+             return  {
+                user : app.user
+             };
         }
     });
 });

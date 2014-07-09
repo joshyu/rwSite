@@ -47,16 +47,31 @@ require.config({
         templateExtension: 'html',
         helperDirectory: "templates/helpers/",
 
+    },
+
+    config: {
+        'controllers/Preloader' : {
+            requests: [
+                {
+                    model : 'user',
+                    key: 'user:info',
+                    callback: 'setUserInfo'
+                }
+            ]
+        }
     }
 });
 
 require([
     'app' ,
+    'backbone',
+    'marionette',
      'controllers/MainController',
      'controllers/LayoutController',
      'controllers/PaceController',
+     'controllers/Preloader',
      'models/ModelHelper'
-], function (app, MainController) {
+], function (app, Backbone, Marionette, MainController) {
     
     app.on('start',  function () {
         if(Backbone.history){

@@ -7,10 +7,6 @@ define([
     'use strict';
     return ModelBase.extend({
         requests: {
-           /* 'contacts:contactInfo' : {
-                url: 'js/data/contact.json'
-            },*/
-
             'contacts:contactInfo' : {
                 dep : 'contacts:fulllist',
                 parseData: 'fetchContactInfo'
@@ -71,7 +67,10 @@ define([
             var NUMPERPAGE = 3;
             num = num || NUMPERPAGE;
 
-            if(arr.length <= num) return [ arr ];
+            if(arr.length <= num){
+                return [ arr ];
+            }
+
             var _arr= [];
             while(arr.length > 0){
                 _arr.push(arr.splice(0,num));
@@ -82,9 +81,17 @@ define([
 
         fetchContactInfo: function(data, options){
             var itemId = options.id;
-            if(!itemId)  return false;
+            if(itemId){
+                return data[itemId];
+            }
+            
+            //get the user info of current signed in user.
+            var _email = app.user.info.email;
+            var item = _.find(data, function(item){
+                return item.email === _email;
+            });
 
-            return data[itemId];
+            return item;            
         },
 
         _parseRelationship: function(data){
@@ -99,7 +106,7 @@ define([
                 _data[name] = i;
             });
 
-             $.each(data, function(i, item){
+            $.each(data, function(i, item){
                  var managerItem = data[ _data[item.manager] ];
                  if(managerItem){
                      if(managerItem.reportees){
@@ -110,7 +117,12 @@ define([
                  }
              });
 
-             return data;
+            _data = {};
+            $.each(data, function(i,item){
+                _data[item.id] = item;
+            });
+
+             return _data;
         }
     });
 });

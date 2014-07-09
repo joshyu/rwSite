@@ -11,6 +11,12 @@ define([
                 url: "js/data/events_src_updates.json",
                 type: "list"
             },
+            
+             'campus:events:src:userowned' : {
+                url: "js/data/events_src_updates.json",
+                type: "list"
+            },
+
             'campus:src:item:info' :{
                 url: "js/data/src_item.json",
             }

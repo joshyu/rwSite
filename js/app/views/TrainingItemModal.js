@@ -14,6 +14,10 @@ define([
             key: 'campus:training:item:info',
             getOptions: 'getRequestOption'
         },
+        
+        templateData: {
+            contentClass : 'campus-item'
+        },
 
         getRequestOption: function(){
             var itemId= this.options.itemId;

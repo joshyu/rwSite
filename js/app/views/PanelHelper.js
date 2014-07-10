@@ -35,13 +35,24 @@ define([
                     continue;
                 }
 
-                var viewKey = 'views/'+ _panels[key] + _suffix;
-                var _view = require(viewKey);
+                var _panelConf = _panels[key];
+                var viewKey = '';
+                var options = {};
+
+                if(typeof _panelConf === 'string'){
+                    viewKey = _panelConf;
+                }else if(typeof _panelConf === 'object' && _panelConf.class){
+                    viewKey = _panelConf.class;
+                    options = _panelConf.options || {};
+                }
+
+
+                var _view = require('views/'+ viewKey + _suffix);
                 if(!_view || $.type(_view) !== 'function'){
                     return false;
                 }
 
-                layoutView[key].show(new _view());                
+                layoutView[key].show(new _view(options));                
             }
         }
     };

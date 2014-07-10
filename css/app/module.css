@@ -895,7 +895,7 @@ a.profilelink:hover img{
 .campus-item .banner-right{
     position: absolute;
     right: 10px;
-    bottom: 5px;
+    top: 5px;
 }
 
 .campus-item .banner .numjoined {
@@ -905,6 +905,7 @@ a.profilelink:hover img{
     top: .1em;
     position: relative;
     font-style: italic;
+    margin-right: 5px;
 }
 
 .campus-item .btnJoin{
@@ -920,7 +921,7 @@ a.profilelink:hover img{
 }
 
 .campus-item .attachments{
-    padding: 15px 20px 8px;
+    padding: 10px;
     border-radius: 0 0 .5em .5em;
     background: #ddd;
     -webkit-box-shadow: 0px 6px 8px -6px #474646;
@@ -1003,8 +1004,8 @@ a.profilelink:hover img{
 }
 
 .contact_modal_body  .relation .items li img{
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     margin-bottom: 10px;
 }
 
@@ -1095,18 +1096,19 @@ a.profilelink:hover img{
 }
 
 .profilepage .panel-list{
-    /* border: 1px solid #D1D1D1; */
+     border: 1px solid #D1D1D1;
+    margin-top: 40px
 }
 
 .profilepage .panel-list .panel-head{
-    border-bottom: 1px solid #eee;
-    margin: 0 10px;
+    border-bottom: 1px solid #ddd;
+    padding: 0 20px;
     position: relative;
 }
 
 .profilepage .panel-list .panel-head-right {
     position: absolute;
-    right: 0;
+    right: 20px;
     bottom: 0;
     color: #aaa;
 }
@@ -1120,9 +1122,9 @@ a.profilelink:hover img{
 }
 
 /* profile src list */
-.panel-src-list .campus-item {
+.campus-items .campus-item {
     border: 1px solid #ddd;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     border-radius: .5em;
 }
 
@@ -1135,11 +1137,11 @@ a.profilelink:hover img{
     font-weight: bolder;
 }
 
-.panel-src-list .campus-item .footer{
+.campus-items .campus-item .footer{
     right: 10px;
 }
 
-.panel-src-list .campus-item .item-image img{
+.campus-items .campus-item .item-image img{
     max-width: 70%;
     margin-left: 15%
 }

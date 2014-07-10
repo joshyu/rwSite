@@ -24,12 +24,18 @@ define([
 
         panels: {
             empdata: 'EmpItemView',
-            srcs: 'SrcListView',
-            trainings: 'TrainingListView'
+            srcs: {
+                class: 'SrcListView',
+                options: {pageId: 'profile'}
+            },
+            trainings: {
+                class: 'TrainingListView',
+                options: {pageId: 'profile'}
+            }
         },
                 
         onRender: function () {
-            PanelHelper.layout(this);
+            PanelHelper.layout(this, 'profile');
         }
     });
 });

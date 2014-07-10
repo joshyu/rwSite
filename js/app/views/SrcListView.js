@@ -1,17 +1,24 @@
 define([
     'marionette',
     'app',
-    'views/ModalBase',
+    'views/ViewBase',
     'hbs!templates/partials/srclist',
-], function(Marionette, app, ModalBase,  template) {
+], function(Marionette, app, ViewBase,  template) {
     'use strict';
-    return ModalBase.extend({
+    return ViewBase.extend({
         template : template,
         className:'panel-src-list campus-items',
         getTemplateData: function(){
-            return  {
+            var opts = {
                campus_src : app.user.srcData
             };
+
+            if(this.options.pageId == 'profile'){
+                opts.noJoinLink = true;
+            }           
+
+
+            return opts;  
         }
     });
 });

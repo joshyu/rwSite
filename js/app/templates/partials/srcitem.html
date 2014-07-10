@@ -2,7 +2,10 @@
     <span class="label label-default">{{campus_src.category}}</span><span class="splitter"></span>
     <span class="glyphicon glyphicon-user"></span> <b>{{campus_src.author}}</b> <span class="splitter"> | </span>
     <span class="glyphicon glyphicon-calendar"></span> {{campus_src.pubdate}}
-    <span class="pull-right numjoined">{{campus_src.numJoined}} joined </span>
+    <span class="banner-right">
+        <span><span class="numjoined">{{campus_src.numJoined}}</span></span>
+        <span class="btnJoin"><a href="#" class="btn btn-default btn-info btn-xs">Join <span class="glyphicon glyphicon-hand-right"></span></a></span>
+    </span>
 </div>
 <div class="content row">
    <div class="col-md-3 item-image"><img src="{{campus_src.imageUrl}}" class="img-responsive"></div>
@@ -11,14 +14,10 @@
     </div>
 </div>
 {{#if campus_src.attachments.length}}
-<div class="attachments row">
+<div class="attachments">
     <span class="glyphicon glyphicon-paperclip"></span> 
     {{#each campus_src.attachments}}
         <span class="attach_{{@index}} item"><a target="_blank" href="{{link}}">{{title}}</a></span> <span class="splitter"></span>
     {{/each}}
 </div>
 {{/if}}
-
-<div class="footer">
-    <div class="buttons"><a target="_blank" href="{{campus_src.joinLink}}">join</a> <span class=" icon glyphicon glyphicon-circle-arrow-right"></span></div>
-</div>

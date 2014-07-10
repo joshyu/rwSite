@@ -18,12 +18,14 @@ define([
         },
         regions: {
             empdata : '.panel-emprofile .panel-body',
-            srcs:'.panel-src .panel-body'
+            srcs:'.panel-src .panel-body',
+            trainings: '.panel-training .panel-body'
         },
 
         panels: {
             empdata: 'EmpItemView',
-            srcs: 'SrcListView'
+            srcs: 'SrcListView',
+            trainings: 'TrainingListView'
         },
                 
         onRender: function () {

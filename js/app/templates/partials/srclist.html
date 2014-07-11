@@ -8,9 +8,9 @@
 	    <span class="banner-right">
 	    	<span><span class="numjoined">{{numJoined}}</span></span>
 	    	{{#if ../noJoinLink}}
-        <span> joined </span>
+        		<span>joined</span><span class="btnJoin"><a href="{{joinLink}}" class="btn btn-default  btn-xs">view<span class="glyphicon glyphicon-hand-right"></span></a></span>
         {{else}}
-	    	<span class="btnJoin"><a href="{{joinLink}}" class="btn btn-default btn-info btn-xs">Join <span class="glyphicon glyphicon-hand-right"></span></a></span>
+	    	<span class="btnJoin"><a href="{{joinLink}}" class="btn btn-default   btn-xs">Join <span class="glyphicon glyphicon-hand-right"></span></a></span>
 	    	{{/if}}
 	    </span>
 	</div>

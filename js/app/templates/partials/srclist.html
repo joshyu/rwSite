@@ -1,18 +1,19 @@
 {{#each campus_src}}
 <div class="campus-item">
-	<div class="head"><h4>{{title}}</h4></div>
+	<div class="head"><h4>{{title}}</h4>
+			<span class="banner-right">
+	    	<span><span class="numjoined">{{numJoined}}</span></span>
+	    	{{#if ../noJoinLink}}
+        		<span>joined</span><span class="btnJoin"><a href="{{joinLink}}" class="btn btn-default  btn-xs">cancel</a></span>
+        {{else}}
+	    	<span class="btnJoin"><a href="{{joinLink}}" class="btn btn-default   btn-xs">Join</a></span>
+	    	{{/if}}
+	    </span>
+	</div>
 	<div class="banner">
 	    <span class="label label-default">{{category}}</span><span class="splitter"></span>
 	    <span class="glyphicon glyphicon-user"></span> <b>{{author}}</b> <span class="splitter"> | </span>
 	    <span class="glyphicon glyphicon-calendar"></span> {{pubdate}}
-	    <span class="banner-right">
-	    	<span><span class="numjoined">{{numJoined}}</span></span>
-	    	{{#if ../noJoinLink}}
-        		<span>joined</span><span class="btnJoin"><a href="{{joinLink}}" class="btn btn-default  btn-xs">view<span class="glyphicon glyphicon-hand-right"></span></a></span>
-        {{else}}
-	    	<span class="btnJoin"><a href="{{joinLink}}" class="btn btn-default   btn-xs">Join <span class="glyphicon glyphicon-hand-right"></span></a></span>
-	    	{{/if}}
-	    </span>
 	</div>
 	<div class="content row">
 	   <div class="col-md-3 item-image"><img src="{{imageUrl}}" class="img-responsive"></div>

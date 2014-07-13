@@ -15,9 +15,9 @@ define([
 
             if(this.options.pageId == 'profile'){
                 opts.noJoinLink = true;
-            }           
+            }
 
-
+            opts.curUser = app.user.info.name;
             return opts;  
         }
     });

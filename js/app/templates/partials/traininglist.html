@@ -1,20 +1,23 @@
 {{#each campus_training}}
 <div class="campus-item">
-	<div class="head"><h4>{{title}}</h4></div>
+	<div class="head"><h4>{{title}}</h4>
+		<span><i class="fa fa-key"></i></span>
+		<span class="banner-right">
+      <span><span class="numjoined">{{numJoined}}</span></span>
+      {{#if ../noJoinLink}}
+      <span> registered </span><span class="btnJoin"><a href="{{joinLink}}" class="btn btn-default   btn-xs">unregister</a></span>
+      {{else}}
+      <span class="btnJoin"><a href="{{joinLink}}" class="btn btn-default btn-xs">register </a></span>
+      {{/if}}
+  	</span>
+	</div>
 	<div class="banner">
     <span class="label label-default">{{category}}</span><span class="splitter">&nbsp;</span>
     <span class="glyphicon glyphicon-user"></span> <b>{{author}}</b> <span class="splitter"> | </span>
     <span class="glyphicon glyphicon-calendar"></span> {{date}} <span class="splitter"> </span> {{timespan}} <span class="splitter"> | </span>
     <span class="glyphicon glyphicon-globe"></span> <b>{{room}}</b> <span class="splitter"> | </span>
     <span>Difficulty:</span> {{Rank}}
-    <span class="banner-right">
-        <span><span class="numjoined">{{numJoined}}</span></span>
-        {{#if ../noJoinLink}}
-        <span> registered </span><span class="btnJoin"><a href="{{joinLink}}" class="btn btn-default   btn-xs">view <span class="glyphicon glyphicon-hand-right"></span></a></span>
-        {{else}}
-        <span class="btnJoin"><a href="{{joinLink}}" class="btn btn-default btn-xs">register <span class="glyphicon glyphicon-hand-right"></span></a></span>
-        {{/if}}
-    </span>
+    
 	</div>
 	<div class="content bodycontent">
 	   <p>{{{content}}}</p>

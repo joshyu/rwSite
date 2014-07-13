@@ -874,7 +874,7 @@ a.profilelink:hover img{
 
 /*campus modal dialog */
 .campus_modal  .modal-title {
-    font-weight: bolder;
+    font-size: 1.3em
 }
 .campus_modal .modal-body {padding:0px;}
 .campus_modal .modal-body a:hover{
@@ -894,11 +894,11 @@ a.profilelink:hover img{
 
 .campus-item .banner-right{
     position: absolute;
-    right: 10px;
+    right: 20px;
     top: 5px;
 }
 
-.campus-item .banner .numjoined {
+.campus-item .banner-right .numjoined {
     color: red;
     font-weight: bolder;
     font-size: 1.5em;
@@ -1096,29 +1096,34 @@ a.profilelink:hover img{
 }
 
 .profilepage .panel-list{
-     border: 1px solid #D1D1D1;
-    margin-top: 40px
+    margin-top: 40px;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -ms-box-shadow: none;
+    box-shadow: none;
+    border-width: 0;
 }
 
 .profilepage .panel-list .panel-head{
     border-bottom: 1px solid #ddd;
-    padding: 0 20px;
+    margin: 0 20px 10px 20px;
     position: relative;
 }
 
 .profilepage .panel-list .panel-head-right {
     position: absolute;
-    right: 20px;
+    right: 0;
     bottom: 0;
     color: #aaa;
 }
 
 .profilepage .panel-list .panel-head h1{
     font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size:1.2em;
+    font-size:1.3em;
     padding-left: 0;
     padding-bottom: 5px;
     margin-left: 0;
+    font-weight: bolder;
 }
 
 /* profile src list */
@@ -1134,7 +1139,7 @@ a.profilelink:hover img{
 }
 
 .campus-item .head h4{
-    font-weight: bolder;
+    font-size: 1.2em
 }
 
 .campus-items .campus-item .footer{

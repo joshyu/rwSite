@@ -1,11 +1,11 @@
 <div class="banner">
     <span class="glyphicon glyphicon-user"></span> <b>{{campus_survey.author}}</b> <span class="splitter"> | </span>
     <span class="glyphicon glyphicon-calendar"></span> {{campus_survey.pubdate}}
-    <span class="pull-right numjoined">{{campus_survey.numJoined}} voted</span>
+    <span class="banner-right">
+        <span><span class="numjoined">{{campus_survey.numJoined}}</span></span>
+        <span class="btnJoin"><a href="{{campus_training.joinLink}}" class="btn btn-default  btn-xs">voted</a></span>
+    </span>
 </div>
 <div class="content bodycontent">
    <p>{{{campus_survey.content}}}</p>
-</div>
-<div class="footer">
-<div class="buttons"><a target="_blank" href="{{campus_survey.votelink}}">vote</a> <span class=" icon glyphicon glyphicon-circle-arrow-right"></span></div>
 </div>

@@ -45,7 +45,7 @@ require.config({
         helpers: true,
         i18n: false,
         templateExtension: 'html',
-        helperDirectory: "templates/helpers/",
+        helperDirectory: "views/helpers/",
 
     },
 
@@ -79,10 +79,6 @@ require([
         }
     });
 
-    app.router = new Marionette.AppRouter({
-        controller : MainController,
-        appRoutes  : MainController.routes
-    });
-
+    MainController.init();
     app.start();
 });

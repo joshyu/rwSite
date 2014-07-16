@@ -8,6 +8,7 @@ define([
     return ViewBase.extend({
         template : template,
         className:'panel-src-list campus-items',
+
         getTemplateData: function(){
             var opts = {
                campus_training : app.user.trainingData
@@ -19,6 +20,10 @@ define([
 
             opts.curUser = app.user.info.name;
             return opts;  
+        },
+
+        onRender: function(){
+            this.$el.find('.trcode-link').popover();
         }
     });
 });

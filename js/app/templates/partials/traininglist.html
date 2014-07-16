@@ -1,28 +1,30 @@
 {{#each campus_training}}
 <div class="campus-item">
-	<div class="head"><h4>{{title}}</h4>
-		<span><i class="fa fa-key"></i></span>
+	<div class="head">
+                    <h4>{{title}}
+                        {{#ifCond ../curUser author}}
+    		      <span class="trcode"><a class="trcode-link" href="javascript:;" data-toggle="popover" data-placement="top"  title="view training code" data-content="{{trainingcode}}"><i class="fa fa-key"></i></a></span>
+                        {{/ifCond}}
+                    </h4>
 		<span class="banner-right">
-      <span><span class="numjoined">{{numJoined}}</span></span>
-      {{#if ../noJoinLink}}
-      <span> registered </span><span class="btnJoin"><a href="{{joinLink}}" class="btn btn-default   btn-xs">unregister</a></span>
-      {{else}}
-      <span class="btnJoin"><a href="{{joinLink}}" class="btn btn-default btn-xs">register </a></span>
-      {{/if}}
-  	</span>
+                              <span><span class="numjoined">{{numJoined}}</span></span>
+                              {{#if ../noJoinLink}}
+                              <span> registered </span><span class="btnJoin"><a href="{{joinLink}}" class="btn btn-default btn-xs" target="_blank"  >unregister</a></span>
+                              {{else}}
+                              <span class="btnJoin"><a href="{{joinLink}}" class="btn btn-default btn-xs" target="_blank"  >register </a></span>
+                              {{/if}}
+              	</span>
 	</div>
 	<div class="banner">
-    <span class="label label-default">{{category}}</span><span class="splitter">&nbsp;</span>
-    <span class="glyphicon glyphicon-user"></span> <b>{{author}}</b> <span class="splitter"> | </span>
-    <span class="glyphicon glyphicon-calendar"></span> {{date}} <span class="splitter"> </span> {{timespan}} <span class="splitter"> | </span>
-    <span class="glyphicon glyphicon-globe"></span> <b>{{room}}</b> <span class="splitter"> | </span>
-    <span>Difficulty:</span> {{Rank}}
-    
+                    <span class="label label-default">{{category}}</span><span class="splitter">&nbsp;</span>
+                    <span class="glyphicon glyphicon-user"></span> <b>{{author}}</b> <span class="splitter"> | </span>
+                    <span class="glyphicon glyphicon-calendar"></span> {{date}} <span class="splitter"> </span> {{timespan}} <span class="splitter"> | </span>
+                    <span class="glyphicon glyphicon-globe"></span> <b>{{room}}</b> <span class="splitter"> | </span>
+                    <span>Difficulty:</span> {{Rank}}
 	</div>
 	<div class="content bodycontent">
 	   <p>{{{content}}}</p>
 	</div>
-
 	{{#if attachments.length}}
 	<div class="attachments">
 	    <span class="glyphicon glyphicon-paperclip"></span> 

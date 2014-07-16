@@ -1,31 +1,38 @@
-define(['app' , 'views/MainView', 'views/ProfileView'],
-    function(app, MainView, ProfileView) {
+define(['app' , 'marionette', 'underscore', 'views/MainView', 'views/ProfileView', 'views/SrcPageView'],
+    function(app, Marionette, _,   MainView, ProfileView, SrcPageView) {
         return {
-            routes: {
-                "" : "showHome",
-                "profile" : "showProfile"
-            },
-
-            viewMap: {
-                Home : MainView,
-                Profile : ProfileView
+            routes: {},
+            pageRouter: {
+                "" :  MainView ,
+                "profile" : ProfileView,
+                "campus/src" : SrcPageView
             },
 
             init: function() {
-                app.router = new Marionette.AppRouter({
-                    controller : this,
-                    appRoutes  : this.routes
-                });
-
+                app.router = this.initRouter();
                 return app.router;
             },
 
-            showProfile: function(){
-                app.execute('main:showpage', this.viewMap.Profile);
+            initRouter: function(){
+                var _router = new Marionette.AppRouter({
+                    controller : this,
+                    appRoutes : this.routes
+                });
+
+                var that = this;
+                _.each(this.pageRouter, function(v,k){
+                    _router.route(k, '_handleViewRouter',  _.bind( that['_handleViewRouter'], that, v ) );
+                });
+
+                return  _router;
             },
 
-            showHome: function () {
-                app.execute('main:showpage', this.viewMap.Home);
+            _handleViewRouter: function(){
+                var view = arguments[0];
+                var parms = [].slice.call(arguments,1);
+                if(!view || !_.isFunction(view)) return false;
+
+                app.execute('main:showpage' , view);
             }
         };
     }

@@ -886,10 +886,26 @@ a.profilelink:hover img{
     position: relative;
 }
 
+.campus-item .trcode{
+    position: relative;
+    top: 2px;
+    left: 5px;
+}
+
+.campus-item .trcode .popover-title{
+    white-space: nowrap;
+}
+
 .campus-item .banner {
     border-bottom: 1px solid #ddd;
     padding: 10px 15px;
     position: relative;
+}
+
+.campus-item .banner .label-default {
+    position: relative;
+    bottom: 2px;
+    font-size: .8em;
 }
 
 .campus-item .banner-right{

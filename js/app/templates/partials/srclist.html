@@ -4,9 +4,9 @@
 			<span class="banner-right">
 	    	<span><span class="numjoined">{{numJoined}}</span></span>
 	    	{{#if ../noJoinLink}}
-        		<span>joined</span><span class="btnJoin"><a href="{{joinLink}}" class="btn btn-default  btn-xs">cancel</a></span>
-        {{else}}
-	    	<span class="btnJoin"><a href="{{joinLink}}" class="btn btn-default   btn-xs">Join</a></span>
+        		<span>joined</span><span class="btnJoin"><a href="{{joinLink}}" class="btn btn-default  btn-xs" target="_blank"  >cancel</a></span>
+        		{{else}}
+	    	<span class="btnJoin"><a href="{{joinLink}}" class="btn btn-default   btn-xs" target="_blank"  >Join</a></span>
 	    	{{/if}}
 	    </span>
 	</div>

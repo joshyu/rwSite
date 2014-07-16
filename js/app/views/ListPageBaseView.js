@@ -1,41 +1,36 @@
 define([
     'marionette',
     'app',
-    'hbs!templates/profile/layout',
+    'hbs!templates/general/listpagebase',
     'views/PanelHelper'
 ], function(Marionette, app, template,  PanelHelper) {
     'use strict';
 
     return Marionette.Layout.extend({
         template: template,
-        className:"container profilepage",
+        className:"container listpagebase",
+        templateData: {},
         initialize: function(){
-            this.on('show', function(){
+            /*this.on('show', function(){
                 app.execute('navigation:dehighlight');
-            });
+            });*/
 
             Marionette.Layout.prototype.initialize.apply(this, arguments);
         },
         regions: {
-            empdata : '.panel-emprofile .panel-body',
-            srcs:'.panel-src .panel-body',
-            trainings: '.panel-training .panel-body'
+             searchbox : '.panel-body-searchbox',
+             list: '.panel-body-list'
+        },        
+
+        panels: {     
         },
 
-        panels: {
-            empdata: 'EmpItemView',
-            srcs: {
-                class: 'SrcListView',
-                options: {pageId: 'profile'}
-            },
-            trainings: {
-                class: 'TrainingListView',
-                options: {pageId: 'profile'}
-            }
+        serializeData: function () {
+            return  this.templateData || {};
         },
                 
         onRender: function () {
-            PanelHelper.layout(this, 'profile');
+            PanelHelper.layout(this, 'listpage');
         }
     });
 });

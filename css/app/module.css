@@ -1166,3 +1166,18 @@ a.profilelink:hover img{
     max-width: 70%;
     margin-left: 15%
 }
+
+/* list page base */
+.listpagebase > h1{
+    font-size: 2.0em;
+    margin: 20px 5px;
+}
+
+.listpagebase .form-group .btn-group {
+    display:block;
+}
+
+.listpagebase .form-group .btn-group .btn {
+    margin-right: 10px;
+    border-radius: 4px !important;
+}

@@ -45,6 +45,7 @@ define([
         toggleFolder: function  (e) {
             var $folderNode= $(e.target).parents('li:first');
             if($folderNode.hasClass('menu-folder')){
+                e.preventDefault();
                 var $targetNode=  $folderNode.find('>ul');
                 if($folderNode.hasClass('is-open')){
                      $targetNode.slideUp(this.options.speed, function () {
@@ -56,8 +57,6 @@ define([
                      });
                 }
             }
-
-            return false;
         },
 
         clickMenuItem: function(e) {

@@ -26,8 +26,8 @@ define([
         },
 
         serializeData: function () {
-            var data = this.loadSearch({})
-            return  this.templateData || {};
+            var data = {filters: this.loadSearch()} ;
+            return  _.extend(this.templateData || {}, data);
         },
                 
         onRender: function () {

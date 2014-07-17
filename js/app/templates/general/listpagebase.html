@@ -2,35 +2,23 @@
 <section class="panel panel-searchbox">
     <div class="panel-body panel-body-searchbox">
       <form role="form">
-          <div class="form-group">
-            <label for="exampleInputEmail1">Event Category</label>
+
+          {{#each filters}}
+          <section class="form-group clearfix">
+            <h1>{{title}}</h1>
             <div class="btn-group" data-toggle="buttons">
-                <label class="btn  btn-default active">
-                  <input type="radio" name="options" id="option1" checked> Option 1 (preselected)
+                
+                {{#each items}}
+                <label class="btn  btn-default btn-sm {{#unless @index}}active{{/unless}}">
+                  <input type="radio" name="{{../name}}" id="option1" {{#unless @index}}checked{{/unless}}> 
+                  {{#if this.name}}{{name}}{{else}}{{this}}{{/if}}
                 </label>
-                <label class="btn btn-default ">
-                  <input type="radio" name="options" id="option2"> Option 2
-                </label>
-                <label class="btn btn-default ">
-                  <input type="radio" name="options" id="option3"> Option 3
-                </label>
+                {{/each}}
+
             </div>
-          </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-          </div>
-          <div class="form-group">
-            <label for="exampleInputFile">File input</label>
-            <input type="file" id="exampleInputFile">
-            <p class="help-block">Example block-level help text here.</p>
-          </div>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox"> Check me out
-            </label>
-          </div>
-          <button type="submit" class="btn btn-default">Submit</button>
+          </section>
+          {{/each}}
+
       </form>
     </div>
 </section>

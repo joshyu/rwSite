@@ -11,14 +11,14 @@ define([
 
         getTemplateData: function(){
             var opts = {
-               campus_training : app.user.trainingData
+               campus_training : app.preloaded.user.trainingData
             };
 
             if(this.options.pageId == 'profile'){
                 opts.noJoinLink = true;
             }
 
-            opts.curUser = app.user.info.name;
+            opts.curUser = app.preloaded.user.info.name;
             return opts;  
         },
 

@@ -10,7 +10,7 @@ define([
         className:'panel-src-list campus-items',
         getTemplateData: function(){
             var opts = {
-               campus_src : app.user.srcData
+               campus_src : app.preloaded.user.srcData
             };
 
             if(this.options.pageId == 'profile'){

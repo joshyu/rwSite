@@ -55,7 +55,12 @@ require.config({
                 {
                     model : 'user',
                     key: 'user:info',
-                    callback: 'setUserInfo'
+                    cacheKey: 'user',
+                },
+                {
+                    model : 'campus_src',
+                    key: 'campus:src:categoryNames',
+                    cacheKey : 'srcCategoryNames'
                 }
             ]
         }

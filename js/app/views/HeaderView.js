@@ -10,7 +10,7 @@ define([
         className:"brand",
         getTemplateData: function(){
              return  {
-                user : app.user.info
+                user : app.preloaded.user.info
              };
         }
 

@@ -19,6 +19,11 @@ define([
 
             'campus:src:item:info' :{
                 url: "js/data/src_item.json",
+            },
+
+            'campus:src:categoryNames' :{
+                url: "js/data/src_categoryNames.json",
+                type: "list"
             }
         }
     });

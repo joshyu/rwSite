@@ -1,0 +1,16 @@
+{
+    "data" : [
+        {
+            "id": 1,
+            "name" : "General"
+        },
+        {
+            "id": 2,
+            "name" : "Sports"
+        },
+        {
+            "id": 3,
+            "name" : "Travels"
+        }
+    ]        
+}

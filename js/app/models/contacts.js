@@ -86,7 +86,7 @@ define([
                 item= data[itemId];
             }else{
                 //get the user info of current signed in user.
-                var _email = app.user.info.email;
+                var _email = app.preloaded.user.info.email;
                 item = _.find(data, function(item){
                     return item.email === _email;
                 });

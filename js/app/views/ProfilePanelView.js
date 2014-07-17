@@ -15,7 +15,7 @@ define([
 
         getTemplateData: function(){
              return  {
-                user : app.user
+                user : app.preloaded.user
              };
         }
     });

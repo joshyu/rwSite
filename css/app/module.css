@@ -1181,3 +1181,9 @@ a.profilelink:hover img{
     margin-right: 10px;
     border-radius: 4px !important;
 }
+
+.listpagebase .form-group h1 {
+    font-size: 1.2em;
+    font-weight: bolder;
+    margin-top: 0px;
+}

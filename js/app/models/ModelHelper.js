@@ -14,6 +14,13 @@ define(['require',
     var app= require('app');
 
     var mfactory=  {
+        init: function  () {
+            this.reqres = app.reqres;
+            this.request = app.reqres.request.bind(this.reqres);
+            this.setHandler = app.reqres.setHandler.bind(this.reqres);
+            return this;
+        },
+
         get: function  (modelName,forceNew) {
             if(!forceNew && _cache[modelName]){
                 return _cache[modelName];
@@ -31,14 +38,7 @@ define(['require',
             }
             
             return _m;
-        },
-
-        init: function  () {
-            this.reqres = app.reqres;
-            this.request = app.reqres.request.bind(this.reqres);
-            this.setHandler = app.reqres.setHandler.bind(this.reqres);
-            return this;
-        }
+        }        
     };
 
     app.addInitializer(function() {

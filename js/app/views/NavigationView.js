@@ -39,7 +39,6 @@ define([
 
             app.commands.setHandler('navigation:highlight', this.highlight, this);
             app.commands.setHandler('navigation:dehighlight', this.dehighlight, this);
-            //this.highlight();
         },
 
         toggleFolder: function  (e) {
@@ -73,7 +72,17 @@ define([
             }
         },
         highlight: function  (dom) {
-            var $dom= $(dom).parent('li');
+            var $dom = null;
+            if(_.isString(dom)){
+                if( !/^#/.test(dom) ) {
+                    dom = '#' + dom;
+                }
+
+                $dom = this.$el.find('[href="'+ dom +'"]');
+            }else{
+                $dom = $(dom).parent('li');
+            }
+
             if(!$dom.length){
                 $dom = this.$el.find('> li:first');
             }

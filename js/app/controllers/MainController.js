@@ -1,5 +1,5 @@
-define(['app' , 'marionette', 'underscore', 'views/MainView', 'views/ProfileView', 'views/SrcPageView'],
-    function(app, Marionette, _,   MainView, ProfileView, SrcPageView) {
+define(['app' , 'marionette', 'backbone', 'underscore', 'views/MainView', 'views/ProfileView', 'views/SrcPageView'],
+    function(app, Marionette, Backbone,  _,   MainView, ProfileView, SrcPageView) {
         return {
             routes: {},
             pageRouter: {
@@ -32,6 +32,7 @@ define(['app' , 'marionette', 'underscore', 'views/MainView', 'views/ProfileView
                 var parms = [].slice.call(arguments,1);
                 if(!view || !_.isFunction(view)) return false;
 
+                app.execute('navigation:highlight' , Backbone.history.getFragment());
                 app.execute('main:showpage' , view);
             }
         };

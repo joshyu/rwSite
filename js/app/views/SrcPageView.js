@@ -7,28 +7,31 @@ define([
 
     return ListPageBaseView.extend({
         templateData: {
-            title : 'SRC Events',
-            searchCatTitle : 'Event Category'
+            title : 'SRC Events'
+        },
+
+        panels: {
+            list : {
+                class: 'SrcListView',
+                options: {pageId: 'src'}
+            }
         },
 
         loadSearch: function  () {
-        		var filters = [];
+           var evtStates= app.modelHelper.get('campus_src').getLibData('event_state');
 
-        		filters.push({
-        			title : 'Event Category',
-        			name: 'category',
-        			items : app.preloaded.srcCategoryNames
-        		});
-
-        		filters.push({
-        			title : 'Event State',
-        			name: 'status',
-        			items : ['Upcoming', 'Outdated']
-        		});
-
-
-        		return filters;
+           return [
+                {
+                   title : 'Event Category',
+                   name: 'category',
+                   items : app.preloaded.srcCategoryNames
+                },
+                {
+                    title : 'Event State',
+                    name: 'status',
+                    items : evtStates
+                }
+           ];
         }
-
     });
 });

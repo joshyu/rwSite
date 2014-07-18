@@ -1,4 +1,5 @@
 <h1>{{title}}</h1>
+<div class="admin-edit"><a target="_blank" href="#" title="click to edit current resource list"><i class="fa fa-pencil fa-fw"></i> </a></div>
 <section class="panel panel-searchbox">
     <div class="panel-body panel-body-searchbox">
       <form role="form">
@@ -10,15 +11,21 @@
                 
                 {{#each items}}
                 <label class="btn  btn-default btn-sm {{#unless @index}}active{{/unless}}">
-                  <input type="radio" name="{{../name}}" id="option1" {{#unless @index}}checked{{/unless}}> 
+                  <input type="radio" name="{{../name}}" {{#unless @index}}checked{{/unless}} value="{{#if this.name}}{{name}}{{else}}{{this}}{{/if}}"> 
                   {{#if this.name}}{{name}}{{else}}{{this}}{{/if}}
                 </label>
                 {{/each}}
-
             </div>
           </section>
           {{/each}}
 
+          <section class="form-group clearfix">
+            <h1>keywords</h1>
+            <div class="form-controls">                
+                <input type="text" class="form-control inline-control"  size="50" name="keyword" placeholder="Enter keyword" />
+                <button type="submit" class="btn btn-primary btn-sm">Search</button>
+            </div>
+          </section>
       </form>
     </div>
 </section>

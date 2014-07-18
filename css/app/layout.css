@@ -81,11 +81,11 @@ body.pace-done{
 }
 
 #header.notready {
-   -webkit-transform: translate3D(0,-100%,0);
-   -moz-transform:translate3D(0,-100%,0);
-   -ms-transform: translate3D(0,-100%,0);
-   -o-transform: translate3D(0,-100%,0);
-   transform: translate3D(0,-100%,0);
+   -webkit-transform: translate3D(0,-110%,0);
+   -moz-transform:translate3D(0,-110%,0);
+   -ms-transform: translate3D(0,-110%,0);
+   -o-transform: translate3D(0,-110%,0);
+   transform: translate3D(0,-110%,0);
    height: 60px;
 
 }

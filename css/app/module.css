@@ -20,10 +20,6 @@
     text-shadow: 2px 3px 6px #7c7c7c;
 }
 
-.pace-done #splash{
-  /*  opacity: 0; */
-}
-
 #splash .sub{
     position: relative;
     font-size: .6em;
@@ -1168,9 +1164,26 @@ a.profilelink:hover img{
 }
 
 /* list page base */
+.listpagebase {
+    position: relative;
+}
+
+.listpagebase .admin-edit {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
 .listpagebase > h1{
     font-size: 2.0em;
-    margin: 20px 5px;
+    margin: 0 0 20px 5px;
+}
+
+.listpagebase .panel-body-searchbox {
+    padding-bottom: 0;
+}
+
+.listpagebase .form-group {
+    margin-bottom: 20px;
 }
 
 .listpagebase .form-group .btn-group {
@@ -1183,7 +1196,16 @@ a.profilelink:hover img{
 }
 
 .listpagebase .form-group h1 {
-    font-size: 1.2em;
+    font-size: 1em;
     font-weight: bolder;
     margin-top: 0px;
+}
+
+.listpagebase .form-group .inline-control{
+    display: inline-block;
+    width: auto;
+    padding: 1px 8px;
+    vertical-align: middle;
+    height: 30px;
+    margin-right: 10px;
 }

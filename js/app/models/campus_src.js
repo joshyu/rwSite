@@ -9,7 +9,8 @@ define([
         requests: {
             'campus:events:src:updates' : {
                 url: "js/data/events_src_updates.json",
-                type: "list"
+                type: "list",
+                data: {num: 5}
             },
             
              'campus:events:src:userowned' : {
@@ -25,6 +26,10 @@ define([
                 url: "js/data/src_categoryNames.json",
                 type: "list"
             }
+        },
+
+        _lib : {
+            event_state: ['Upcoming', 'Outdated']
         }
     });
 });

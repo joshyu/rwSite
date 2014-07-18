@@ -176,6 +176,10 @@ define([
             return this.cached[key];
         },
 
+        getLibData: function(key){
+            return this._lib && this._lib[key];
+        },
+
         cacheData: function(key, data){
             this.cached[key] = data;
         }

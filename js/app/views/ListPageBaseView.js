@@ -10,17 +10,16 @@ define([
         className:"container listpagebase",
         isAdmin: false,
         regions: {
-             searchbox : '.panel-body-searchbox',
              list: '.panel-body-list'
-        },        
-
-        panels: {
         },
 
         initialize: function(){
-            /*this.on('show', function(){
-                app.execute('navigation:dehighlight');
-            });*/
+            var _hilightedMenuItem = Backbone.history.getFragment();
+            if(_hilightedMenuItem){
+                this.on('show', function(){
+                    app.execute('navigation:highlight' , _hilightedMenuItem);
+                });    
+            }
 
             Marionette.Layout.prototype.initialize.apply(this, arguments);
         },

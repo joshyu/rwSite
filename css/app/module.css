@@ -936,10 +936,6 @@ a.profilelink:hover img{
     padding: 10px;
     border-radius: 0 0 .5em .5em;
     background: #ddd;
-    -webkit-box-shadow: 0px 6px 8px -6px #474646;
-    -moz-box-shadow: 0px 6px 8px -6px #474646;
-    -ms-box-shadow:0px 6px 8px -6px #474646;
-    box-shadow: 0px 6px 8px -6px #474646;
 }
 
 .campus-item .attachments .item{
@@ -1107,6 +1103,7 @@ a.profilelink:hover img{
     margin-left: 10%
 }
 
+
 .profilepage .panel-list{
     margin-top: 40px;
     -webkit-box-shadow: none;
@@ -1143,6 +1140,11 @@ a.profilelink:hover img{
     border: 1px solid #ddd;
     margin-bottom: 20px;
     border-radius: .5em;
+    margin-top: 20px;
+    -webkit-box-shadow: 0px 6px 8px -6px #474646;
+    -moz-box-shadow: 0px 6px 8px -6px #474646;
+    -ms-box-shadow:0px 6px 8px -6px #474646;
+    box-shadow: 0px 6px 8px -6px #474646;
 }
 
 .campus-item .head{
@@ -1152,6 +1154,44 @@ a.profilelink:hover img{
 
 .campus-item .head h4{
     font-size: 1.2em
+}
+
+.campus-item.seemore {
+    text-align: center;
+    border-radius: 0;
+    margin: 20px 0;
+    padding: 4px 0; 
+    background: repeating-linear-gradient( white, #ecefef 5px, #ccc 5px, #ccc 6px );
+}
+
+.campus-item.seemore:active,
+.campus-item.seemore.loading{
+    background: repeating-linear-gradient( white, #CACECE 5px, #ccc 5px, #ccc 6px );
+}
+
+.campus-item.seemore > .link{
+    padding: 4px 12px;
+    text-align: center;
+    display: inline-block;
+    border: 1px solid #DDDCDC;
+    border-radius: 2px 2px 0 0;
+    background: #fff;
+    cursor: pointer;
+    border-bottom-width:0;
+    border-top-width: 0;
+    font-weight: bolder;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+
+.campus-item.seemore:active > .link,
+.campus-item.seemore.loading > .link{
+    background: #ddd;
+    border-color: #aaa;
 }
 
 .campus-items .campus-item .footer{
@@ -1176,6 +1216,10 @@ a.profilelink:hover img{
 .listpagebase > h1{
     font-size: 2.0em;
     margin: 0 0 20px 5px;
+}
+
+.listpagebase .panel-body{
+    padding: 0 15px;
 }
 
 .listpagebase .panel-body-searchbox {

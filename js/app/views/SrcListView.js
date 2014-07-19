@@ -8,27 +8,24 @@ define([
     return ViewBase.extend({
         template : template,
         className:'panel-src-list campus-items',
-/*        getTemplateData: function(){
-            var opts = {
-               campus_src : app.preloaded.user.srcData
-            };
-
-            if(this.options.pageId == 'profile'){
-                opts.noJoinLink = true;
-            } 
-            return opts;  
-        },*/
+        pageNo: 0,
 
         initialize: function(){
+            //debugger;
             var _pageId= this.options.pageId;
             if( _pageId == 'src'){
+                var loadnum = this.options.loadnum;
+                var pageNo = this.options.pageNo || 0;
+
                 this.request =  {
                     model : 'campus_src',
                     key: 'campus:events:src:updates',
                     options: {
-                        num : 10
+                        num : loadnum,
+                        pageNo : pageNo
                     }
                 };
+
             }else if( _pageId == 'profile'){
                 this.templateData = {
                     campus_src : app.preloaded.user.srcData,
@@ -37,6 +34,16 @@ define([
             }
 
             ViewBase.prototype.initialize.apply(this, arguments);
+        },
+
+        loadMore: function (options) {
+            if(options.trigger){
+                $(options.trigger).addClass('loading');
+
+                var loadnum = this.options.loadnum;
+                this.request.options.pageNo = this.pageNo = this.pageNo + 1;
+                this.handleRequests();
+            }
         }
 
     });

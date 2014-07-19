@@ -38,12 +38,14 @@ define([
                 var _panelConf = _panels[key];
                 var viewKey = '';
                 var options = {};
+                var showOptions = {};
 
                 if(typeof _panelConf === 'string'){
                     viewKey = _panelConf;
                 }else if(typeof _panelConf === 'object' && _panelConf.class){
                     viewKey = _panelConf.class;
                     options = _panelConf.options || {};
+                    showOptions = _panelConf.showOptions || {};
                 }
 
 
@@ -52,7 +54,7 @@ define([
                     return false;
                 }
 
-                layoutView[key].show(new _view(options));                
+                layoutView[key].show(new _view(options), showOptions);                
             }
         }
     };

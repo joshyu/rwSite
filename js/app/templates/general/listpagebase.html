@@ -10,7 +10,7 @@
             <div class="btn-group" data-toggle="buttons">
                 
                 {{#each items}}
-                <label class="btn  btn-default btn-sm {{#unless @index}}active{{/unless}}">
+                <label class="btn  btn-default btn-xs {{#unless @index}}active{{/unless}}">
                   <input type="radio" name="{{../name}}" {{#unless @index}}checked{{/unless}} value="{{#if this.name}}{{name}}{{else}}{{this}}{{/if}}"> 
                   {{#if this.name}}{{name}}{{else}}{{this}}{{/if}}
                 </label>

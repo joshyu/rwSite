@@ -17,10 +17,6 @@ define([
                 options: {
                 	pageId: 'src',
                 	loadnum: ListPageBaseView.prototype.loadnum
-                },
-
-                showOptions: {
-                	preventClose : true
                 }
             }
         },

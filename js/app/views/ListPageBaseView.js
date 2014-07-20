@@ -31,7 +31,7 @@ define([
 
     return Marionette.Layout.extend({
         template: template,
-        regionType: _region,
+        /*regionType: _region,*/
         className:"container listpagebase",
         isAdmin: false,
         loadnum: 20,
@@ -69,20 +69,32 @@ define([
             var link = e.target;
 
             this.panels.list.options.pageNo = this.pageNo = this.pageNo + 1;
-            PanelHelper.layout(this);
-            //PanelHelper.update(this, 'list');
+            PanelHelper.append(this, 'list', {highlighted: true});
 
         },
 
+        getFrmData: function  (frm) {
+            if(!frm) return false;
+            var elems = frm.elements;
+            var _obj = {};
+            _.each(elems, function  (elem, i) {
+                var _elemName= elem.name;
+                if(_elemName && !_obj[_elemName]){
+                    _obj[_elemName] = elems[_elemName].value;
+                }
+            });
+
+            return _obj;
+        },
+
+        //TODO: parameter debug, data not passed correctly.
         onSearch: function(e) {
             e.preventDefault();
             var frm= e.target;
-            var data = {formData: this.$(frm).serialize() };
+            var data = this.getFrmData(frm);
 
-            _.extend(this.panels.list.options, {formData: this.$(frm).serialize() });
-
-
-            debugger;
+            _.extend(this.panels.list.options, data);
+            PanelHelper.update(this, 'list');
         }
     });
 });

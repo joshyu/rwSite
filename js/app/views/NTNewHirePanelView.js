@@ -11,10 +11,7 @@ define([
         className:'panel-body',
         request: {
             model: 'contacts',
-            key: 'contacts:newhire',
-            data: {
-                title : 'New Hire'
-            }
+            key: 'contacts:newhire'
         },
 
         templateData: {

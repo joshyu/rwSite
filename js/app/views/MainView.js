@@ -22,14 +22,14 @@ define([
         },
 
         panels: {
-            news: 'News',
-            updates: 'CampusUpdates',
-            survey:'Survey',
-            profile: 'Profile',
-            quicklink: 'Quicklink',
-            ntBirthday: 'NTBirthday',
-            ntNewhire: 'NTNewHire',
-            suggestion: 'Suggestion'
+            news: 'NewsPanelView',
+            updates: 'CampusUpdatesPanelView',
+            survey:'SurveyPanelView',
+            profile: 'ProfilePanelView',
+            quicklink: 'QuicklinkPanelView',
+            ntBirthday: 'NTBirthdayPanelView',
+            ntNewhire: 'NTNewHirePanelView',
+            suggestion: 'SuggestionPanelView'
         },
 
         initialize: function(){
@@ -41,7 +41,7 @@ define([
         },
 
         onRender: function () {
-            PanelHelper.layout(this , 'main');
+            PanelHelper.layout(this);
         }
     });
 });

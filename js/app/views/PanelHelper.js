@@ -14,22 +14,12 @@ define([
 ], function(require) {
     'use strict';
     return {
-
-        _getSuffix: function(pageName){
-            var _suffixes= {
-                'main' : 'PanelView'
-            };
-
-            return  _suffixes[pageName] || "";
-        },
-
         layout: function (layoutView, pageName) {
               var _regions= layoutView.regions,  _panels= layoutView.panels;
               if(!layoutView || !_regions || !_panels){
                 return false;
             }
 
-            var _suffix = this._getSuffix(pageName);
             for(var key in _regions){
                 if(!layoutView[key] || !_panels[key]){
                     continue;
@@ -49,13 +39,17 @@ define([
                 }
 
 
-                var _view = require('views/'+ viewKey + _suffix);
+                var _view = require('views/'+ viewKey);
                 if(!_view || $.type(_view) !== 'function'){
                     return false;
                 }
 
                 layoutView[key].show(new _view(options), showOptions);                
             }
+        },
+
+        show: function (layoutView, key ) {
+
         }
     };
 });

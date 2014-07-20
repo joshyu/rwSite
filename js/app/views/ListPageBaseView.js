@@ -7,17 +7,13 @@ define([
     'use strict';
 
      var _region = Marionette.Region.extend({
-        open: function  (view) {
-            //this.$el.empty().append(view.el);
-            //Marionette.Region.prototype.open.apply(this, arguments);
-
+        open: function(view) {
             if(this.rendered){
                 this.$el.append(view.el);
             }else{
-
                 this.rendered = true;
                 this.$el.empty().append(view.el);
-            }            
+            }
         }
      });
 
@@ -34,7 +30,8 @@ define([
         },
 
         events: {
-            'click .seemore > .link' : 'doSeeMore'
+            'click .seemore > .link' : 'doSeeMore',
+            'submit .frmSearch' : "onSearch"
         },
 
         initialize: function(){
@@ -62,15 +59,19 @@ define([
 
             this.panels.list.options.pageNo = this.pageNo = this.pageNo + 1;
             PanelHelper.layout(this, 'listpage');
+            //PanelHelper.update(this, 'list');
 
-            /*var listview = this.getRegion('list').currentView;
-            if(listview){
-                var $seemoreCon = $(link).parent('.seemore');
+        },
 
-                listview.loadMore({
-                    trigger: $seemoreCon
-                });
-            }*/
+        onSearch: function(e) {
+            e.preventDefault();
+            var frm= e.target;
+            var data = {formData: this.$(frm).serialize() };
+
+            _.extend(this.panels.list.options, {formData: this.$(frm).serialize() });
+
+
+            debugger;
         }
     });
 });

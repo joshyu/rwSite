@@ -56,7 +56,6 @@ define([
                 var dfd= $.Deferred();
 
                 var handler = request.dataHandler;                  
-                var _reqData = request.data || {};
                 var options = request.options;
                 var reqOptFunc = request.getOptions;
                 
@@ -75,7 +74,6 @@ define([
                         data= _model[handler].call(_model, data);
                     }
 
-                    data= _.extend(data, _reqData);
                     var _id = request.id ? (modelName + '-'+ request.id) : modelName;
                     dfd.resolve({id: _id , data: data});
                 });

@@ -15,13 +15,15 @@ define([
             if( _pageId == 'src'){
                 var loadnum = this.options.loadnum;
                 var pageNo = this.options.pageNo || 0;
+                var _reqData = this.options.data;
 
                 this.request =  {
                     model : 'campus_src',
                     key: 'campus:events:src:updates',
                     options: {
                         num : loadnum,
-                        pageNo : pageNo
+                        pageNo : pageNo,
+                        data: _reqData
                     }
                 };
 

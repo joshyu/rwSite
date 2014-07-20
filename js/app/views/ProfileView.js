@@ -35,7 +35,7 @@ define([
         },
                 
         onRender: function () {
-            PanelHelper.layout(this, 'profile');
+            PanelHelper.layout(this);
         }
     });
 });

@@ -76,7 +76,7 @@ body {
    transition: all 1s;
 }
 
-body.pace-done{
+body.loaded{
   overflow-y: auto;
 }
 

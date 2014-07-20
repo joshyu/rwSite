@@ -10,10 +10,21 @@ define([
         open: function(view) {
             if(this.rendered){
                 this.$el.append(view.el);
+                this.highlight(view.el);
             }else{
                 this.rendered = true;
                 this.$el.empty().append(view.el);
             }
+        },
+
+        highlight: function(el){
+            if(!el) return false;
+            var $el = $(el);
+
+            $el.addClass('highlighted');
+            setTimeout(function(){
+                $el.removeClass('highlighted');
+            },500);
         }
      });
 
@@ -51,14 +62,14 @@ define([
         },
                 
         onRender: function () {
-            PanelHelper.layout(this, 'listpage');
+            PanelHelper.layout(this);
         },
 
         doSeeMore: function (e) {
             var link = e.target;
 
             this.panels.list.options.pageNo = this.pageNo = this.pageNo + 1;
-            PanelHelper.layout(this, 'listpage');
+            PanelHelper.layout(this);
             //PanelHelper.update(this, 'list');
 
         },

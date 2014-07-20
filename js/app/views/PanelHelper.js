@@ -48,7 +48,11 @@ define([
             }
         },
 
-        show: function (layoutView, key ) {
+         append: function (layoutView, key ) {
+            //this.show
+        },
+
+        show: function(layoutView, key){
 
         }
     };

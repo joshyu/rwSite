@@ -7,11 +7,10 @@ define([
     'use strict';
     return ViewBase.extend({
         template : template,
-        className:'panel-src-list campus-items',
+        className:'panel-src-list campus-items row',
         pageNo: 0,
 
         initialize: function(){
-            //debugger;
             var _pageId= this.options.pageId;
             if( _pageId == 'src'){
                 var loadnum = this.options.loadnum;

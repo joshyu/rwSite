@@ -10,6 +10,10 @@ define(['backbone','marionette', 'app', 'pace'],
                 });
 
                 pace.on('hide', function(){
+                    if(! $('body').hasClass('loaded')){
+                        $('body').addClass('loaded');    
+                    }
+                                        
                     app.vent.trigger('app:pace:done');
                 });
 
@@ -18,16 +22,14 @@ define(['backbone','marionette', 'app', 'pace'],
                      pace.restart(); 
                  });
 
-                pace.on('restart', function(){
-                    $('body').removeClass('pace-done');
-                });
-
                 pace.start({restartOnPushState: false});
                 return dfd.promise();
             },
 
             restart: function(){
-                 pace.restart();
+                if(!pace.running){
+                    pace.restart();
+                }
             }
         };
 

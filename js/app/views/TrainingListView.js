@@ -7,7 +7,7 @@ define([
     'use strict';
     return ViewBase.extend({
         template : template,
-        className:'panel-src-list campus-items',
+        className:'panel-src-list campus-items row',
 
         getTemplateData: function(){
             var opts = {

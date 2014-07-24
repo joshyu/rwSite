@@ -8,10 +8,12 @@
           <section class="form-group clearfix">
             <h1>{{title}}</h1>
             <div class="btn-group" data-toggle="buttons">
-                
+                <label class="btn  btn-default btn-sm active">
+                  <input type="radio" name="{{name}}" checked value="">  {{../searchfilters_default_title}}                  
+                </label>
                 {{#each items}}
-                <label class="btn  btn-default btn-xs {{#unless @index}}active{{/unless}}">
-                  <input type="radio" name="{{../name}}" {{#unless @index}}checked{{/unless}} value="{{#if this.name}}{{name}}{{else}}{{this}}{{/if}}"> 
+                <label class="btn  btn-default btn-sm ">
+                  <input type="radio" name="{{../name}}"  value="{{#if this.name}}{{name}}{{else}}{{this}}{{/if}}"> 
                   {{#if this.name}}{{name}}{{else}}{{this}}{{/if}}
                 </label>
                 {{/each}}
@@ -23,7 +25,7 @@
             <h1>keywords</h1>
             <div class="form-controls">                
                 <input type="text" class="form-control inline-control"  size="50" name="keyword" placeholder="Enter keyword" />
-                <button type="submit" class="btn btn-primary btn-sm ">Search</button>
+                <button type="submit" class="btn btn-primary btn-sm btnSubmit " data-search-text="Searching  ...">Search</button>
             </div>
           </section>
       </form>

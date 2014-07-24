@@ -7,13 +7,15 @@ define(['backbone','marionette', 'app', 'pace'],
 
                 pace.on('start', function(){
                     dfd.resolve(pace);
+                      pace.off('start', arguments.callee);
                 });
 
                 pace.on('hide', function(){
                     if(! $('body').hasClass('loaded')){
                         $('body').addClass('loaded');    
                     }
-                                        
+
+                    pace.off('hide', arguments.callee);                                        
                     app.vent.trigger('app:pace:done');
                 });
 

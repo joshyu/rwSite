@@ -12,19 +12,17 @@ define([
 
         initialize: function(){
             var _pageId= this.options.pageId;
+            this.pageNo = 0;
+            this.options.pageNo  = this.options.pageNo || this.pageNo;
+
             if( _pageId == 'src'){
-                var loadnum = this.options.loadnum;
-                var pageNo = this.options.pageNo || 0;
-                var _reqData = this.options.data;
+                var options = this.options;
+                delete options.pageId;
 
                 this.request =  {
                     model : 'campus_src',
                     key: 'campus:events:src:updates',
-                    options: {
-                        num : loadnum,
-                        pageNo : pageNo,
-                        data: _reqData
-                    }
+                    options : options
                 };
 
             }else if( _pageId == 'profile'){
@@ -35,17 +33,6 @@ define([
             }
 
             ViewBase.prototype.initialize.apply(this, arguments);
-        },
-
-        loadMore: function (options) {
-            if(options.trigger){
-                $(options.trigger).addClass('loading');
-
-                var loadnum = this.options.loadnum;
-                this.request.options.pageNo = this.pageNo = this.pageNo + 1;
-                this.handleRequests();
-            }
         }
-
     });
 });

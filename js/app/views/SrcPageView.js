@@ -8,15 +8,16 @@ define([
     return ListPageBaseView.extend({
         templateData: {
             title : 'SRC Events',
-            loadnum : ListPageBaseView.prototype.loadnum
+            loadnum : ListPageBaseView.prototype.loadnum,
+            searchfilters_default_title : "All"
         },
 
         panels: {
             list : {
                 class: 'SrcListView',
                 options: {
-                	pageId: 'src',
-                	loadnum: ListPageBaseView.prototype.loadnum
+                        pageId: 'src',
+                        num : ListPageBaseView.prototype.loadnum
                 }
             }
         },

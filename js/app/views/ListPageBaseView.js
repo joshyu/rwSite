@@ -2,42 +2,22 @@ define([
     'marionette',
     'app',
     'hbs!templates/general/listpagebase',
-    'views/PanelHelper'
-], function(Marionette, app, template,  PanelHelper) {
+    'views/PanelHelper',
+    'views/RegionTypes'
+], function(Marionette, app, template,  PanelHelper, RegionTypes) {
     'use strict';
-
-     var _region = Marionette.Region.extend({
-        open: function(view) {
-            if(this.rendered){
-                this.$el.append(view.el);
-                this.highlight(view.el);
-            }else{
-                this.rendered = true;
-                this.$el.empty().append(view.el);
-            }
-        },
-
-        highlight: function(el){
-            if(!el) return false;
-            var $el = $(el);
-
-            $el.addClass('highlighted');
-            setTimeout(function(){
-                $el.removeClass('highlighted');
-            },500);
-        }
-     });
-
 
     return Marionette.Layout.extend({
         template: template,
-        /*regionType: _region,*/
         className:"container listpagebase",
         isAdmin: false,
         loadnum: 20,
         pageNo: 0,
         regions: {
-            list:  '.panel-body-list'        
+            list: {
+                selector: '.panel-body-list' ,
+                regionType:  RegionTypes.ListPageListRegion
+            }
         },
 
         events: {
@@ -70,7 +50,6 @@ define([
 
             this.panels.list.options.pageNo = this.pageNo = this.pageNo + 1;
             PanelHelper.append(this, 'list', {highlighted: true});
-
         },
 
         getFrmData: function  (frm) {
@@ -87,13 +66,19 @@ define([
             return _obj;
         },
 
-        //TODO: parameter debug, data not passed correctly.
         onSearch: function(e) {
             e.preventDefault();
             var frm= e.target;
             var data = this.getFrmData(frm);
-
+            var $btnSubmit= $(frm).find('.btnSubmit');
+             this.panels.list.options.pageNo = this.pageNo = 0;
             _.extend(this.panels.list.options, data);
+
+            $btnSubmit.button('search').prop('disabled', true);
+            app.pace.instance.on('hide', function(){
+                $btnSubmit.button('reset').prop('disabled', false);
+            });
+
             PanelHelper.update(this, 'list');
         }
     });

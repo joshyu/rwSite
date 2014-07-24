@@ -30,27 +30,7 @@ define([
                 return false;
             }
 
-            _.extend(showOptions || {}, {preventClose: true});
-            _.extend(layoutView[key], {
-                open: function(view) {
-                    this.$el.append(view.el);
-                    if(showOptions.highlighted){
-                        this.highlight(view.el);    
-                    }                    
-                },
-
-                highlight: function(el){
-                    if(!el) return false;
-                    var $el = $(el);
-
-                    $el.addClass('highlighted');
-                    setTimeout(function(){
-                        $el.removeClass('highlighted');
-                    },500);
-                }
-            });
-
-            
+            _.extend(showOptions || {}, { appendit:  true, preventClose: true});
             this.show(layoutView, key, showOptions);
         },
 
@@ -72,7 +52,6 @@ define([
                 options = _panelConf.options || {};
                 showOptions = _.extend(showOptions, _panelConf.showOptions);
             }
-
 
             var _view = require('views/'+ viewKey);
             if(!_view || $.type(_view) !== 'function'){

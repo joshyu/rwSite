@@ -6,13 +6,15 @@ define([
     'views/RegionTypes'
 ], function(Marionette, app, template,  PanelHelper, RegionTypes) {
     'use strict';
+    var ListPageBaseView;
 
-    return Marionette.Layout.extend({
+    return ListPageBaseView = Marionette.Layout.extend({
         template: template,
         className:"container listpagebase",
         isAdmin: false,
         loadnum: 20,
         pageNo: 0,
+
         regions: {
             list: {
                 selector: '.panel-body-list' ,
@@ -23,6 +25,11 @@ define([
         events: {
             'click .seemore > .link' : 'doSeeMore',
             'submit .frmSearch' : "onSearch"
+        },
+
+        templateData: {
+            searchfilters_default_title : "All",
+            itemMode : true //show list style or item.
         },
 
         initialize: function(){
@@ -36,9 +43,11 @@ define([
             Marionette.Layout.prototype.initialize.apply(this, arguments);
         },
 
-        serializeData: function () {
+        serializeData: function (){
             var data = {filters: this.loadSearch()} ;
-            return  _.extend(this.templateData || {}, data);
+            data["loadnum"] = this.loadnum;
+            var parentTemplateData = ListPageBaseView.prototype.templateData;
+            return  _.extend(parentTemplateData, this.templateData || {}, data);
         },
                 
         onRender: function () {

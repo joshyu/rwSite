@@ -32,7 +32,24 @@
     </div>
 </section>
 <section class="panel panel-list">
-    <div class="panel-body panel-body-list"></div>
+    
+      {{#if itemMode}}
+        <div class="panel-body panel-body-list"></div>
+      {{else}}
+        <table class="table table-hover panel-body-list">
+          {{#if tableColumns}}
+          <thead>
+            <tr>
+              <th>#</th>
+              {{#each tableColumns}}
+              <th>{{this}}</th>
+              {{/each}}
+            </tr>
+          </thead>
+          {{/if}}
+        </table>
+      {{/if}}
+    
     <div class="campus-item seemore">
       <div class="link">
         see {{loadnum}} more items

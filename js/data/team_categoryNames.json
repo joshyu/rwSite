@@ -1,0 +1,24 @@
+{
+    "data" : [
+        {
+            "id": 1,
+            "name" : "Software"
+        },
+        {
+            "id": 2,
+            "name" : "Test"
+        },
+        {
+            "id": 3,
+            "name" : "PM"
+        },
+        {
+            "id": 4,
+            "name" : "CM"
+        },
+        {
+            "id": 5,
+            "name" : "Localization"
+        }
+    ]        
+}

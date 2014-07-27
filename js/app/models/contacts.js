@@ -27,6 +27,11 @@ define([
             'contacts:birthday:recently' : {
                 dep : 'contacts:fulllist',
                 parseData : 'fetchRecentBirthday'
+            },
+
+            'contacts:teamCategoryNames' : {
+                url: "js/data/team_categoryNames.json",
+                type: "list"
             }
         },
 

@@ -15,7 +15,7 @@ define([
             this.pageNo = 0;
             this.options.pageNo  = this.options.pageNo || this.pageNo;
 
-            if( _pageId == 'src'){
+            if( _pageId == 'listpage'){
                 var options = this.options;
                 delete options.pageId;
 

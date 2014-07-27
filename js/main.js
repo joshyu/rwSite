@@ -61,6 +61,11 @@ require.config({
                     model : 'campus_src',
                     key: 'campus:src:categoryNames',
                     cacheKey : 'srcCategoryNames'
+                },
+                {
+                    model : 'contacts',
+                    key: 'contacts:teamCategoryNames',
+                    cacheKey : 'teamCategoryNames'
                 }
             ]
         }

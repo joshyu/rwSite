@@ -47,18 +47,19 @@ define([
             var data = {filters: this.loadSearch()} ;
             data["loadnum"] = this.loadnum;
             var parentTemplateData = ListPageBaseView.prototype.templateData;
-            return  _.extend(parentTemplateData, this.templateData || {}, data);
+            return  _.extend({}, parentTemplateData, this.templateData || {}, data);
         },
                 
         onRender: function () {
-            PanelHelper.layout(this);
+            var _itemMode = this.templateData.itemMode;
+            PanelHelper.layout(this, {itemMode : _itemMode});
         },
 
         doSeeMore: function (e) {
             var link = e.target;
-
+            var _itemMode = this.templateData.itemMode;
             this.panels.list.options.pageNo = this.pageNo = this.pageNo + 1;
-            PanelHelper.append(this, 'list', {highlighted: true});
+            PanelHelper.append(this, 'list', {highlighted: true, itemMode: _itemMode});
         },
 
         getFrmData: function  (frm) {

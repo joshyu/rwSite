@@ -143,24 +143,27 @@ define(['marionette', 'underscore', 'app', 'views/HeaderView', 'views/FooterView
                 open: function(view) {
                     if(!view) return false;
                     if(view.showOptions.appendit){
-                        //append.
                         this.$el.append(view.el);
                         if( view.showOptions.highlighted ){
-                            this.highlight( view.el );    
-                        } 
+                            this.highlight(view.el );
+                        }
                     }else{
-                        //replace current view.
                         var $_el = this.$el;
-                        $_el.slideUp('slow', function(){
-                            $_el.empty().append(view.el);
-                        }).delay(500).slideDown('slow');                      
-                    }                  
+                        var $container = view.showOptions.itemMode ? $_el : $_el.parent();
+                        $container.slideUp('slow', function(){
+                            if(view.showOptions.itemMode){
+                                $_el.empty().append(view.el);    
+                            }else{
+                                $_el.find('tbody').remove();
+                                $_el.append(view.el);
+                            }
+                        }).delay(500).slideDown('slow');
+                    }
                 },
 
                 highlight: function(el){
                     if(!el) return false;
                     var $el = $(el);
-
                     $el.addClass('highlighted');
                     setTimeout(function(){
                         $el.removeClass('highlighted');

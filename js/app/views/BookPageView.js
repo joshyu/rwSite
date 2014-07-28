@@ -19,6 +19,9 @@ define([
               class: 'BookListView',
               options: {
                 num : ListPageBaseView.prototype.loadnum
+              },
+              showOptions: {
+                 itemMode : false
               }
             }
         },

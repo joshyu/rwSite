@@ -20,8 +20,7 @@ define([
             this.triggerMethod('before:render', this);
             data = _.extend(this.myTemplData(), data);
             //this.$el.replaceWith(this.template(data));
-            this.$el.append(this.template(data));
-
+            this.$el.html(this.template(data));
             this.triggerMethod("render", this);
         },
 

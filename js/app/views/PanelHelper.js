@@ -15,14 +15,14 @@ define([
 ], function(require) {
     'use strict';
     return {
-        layout: function (layoutView, pageName) {
+        layout: function (layoutView, showOptions) {
               var _regions= layoutView.regions,  _panels= layoutView.panels;
               if(!layoutView || !_regions || !_panels){
                 return false;
             }
 
             for(var key in _regions){
-                this.show(layoutView, key);             
+                this.show(layoutView, key, showOptions);             
             }
         },
 
@@ -44,7 +44,7 @@ define([
             var _panelConf = _panels[key];
             var viewKey = '';
             var options = {};
-            var showOptions = showOptions || {};
+            showOptions = showOptions || {};
 
             if(typeof _panelConf === 'string'){
                 viewKey = _panelConf;

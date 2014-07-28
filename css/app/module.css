@@ -1223,6 +1223,14 @@ a.profilelink:hover img{
 
 .panel-list .panel-body .campus-items{
     padding:0 15px;
+}
+
+.panel-list table.panel-body-list {
+    table-layout: fixed;
+}
+
+.panel-list .panel-body .campus-items,
+.panel-list .panel-body-list tbody > tr{   
     -webkit-transition: background 1s;
     -moz-transition: background 1s;
     -ms-transition: background 1s;
@@ -1230,7 +1238,8 @@ a.profilelink:hover img{
     transition: background 1s;
 }
 
-.panel-list .panel-body .campus-items.highlighted {
+.panel-list .panel-body .campus-items.highlighted,
+.panel-list .panel-body-list tbody.highlighted > tr {
     background: #FCF19F;
 }
 

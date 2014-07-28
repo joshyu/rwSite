@@ -1251,6 +1251,16 @@ a.profilelink:hover img{
 .panel-list table.panel-body-list >tbody tr{
     cursor: pointer;
 }
+
+.panel-list table.panel-body-list >tbody tr td {
+    vertical-align: middle;
+}
+
+.panel-list table.panel-body-list >tbody img {
+    width: 50%;
+}
+
+
 .panel-list table.panel-body-list >tbody+tbody {
     border-top-width: 0;
 }
@@ -1282,7 +1292,7 @@ a.profilelink:hover img{
 }
 
 .listpagebase .form-group .btn-group .btn {
-    margin-right: 10px;
+    margin: 3px;
     border-radius: 4px !important;
 }
 

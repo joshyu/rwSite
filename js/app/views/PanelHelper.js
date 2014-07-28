@@ -13,7 +13,8 @@ define([
     'views/BookListView',
     'views/SurveyListView',
     'views/TrainingListView',
-    'views/TrainingPageListView'
+    'views/TrainingPageListView',
+    'views/ContactListView'
 ], function(require) {
     'use strict';
     return {

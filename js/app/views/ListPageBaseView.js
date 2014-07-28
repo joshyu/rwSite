@@ -14,6 +14,7 @@ define([
         isAdmin: false,
         loadnum: 20,
         pageNo: 0,
+        noAjax: false,
 
         regions: {
             list: {
@@ -89,9 +90,17 @@ define([
             _.extend(this.panels.list.options, data);
 
             $btnSubmit.button('search').prop('disabled', true);
-            app.pace.instance.on('hide', function(){
-                $btnSubmit.button('reset').prop('disabled', false);
-            });
+
+            if(this.noAjax){
+                setTimeout(function() {
+                    $btnSubmit.button('reset').prop('disabled', false);
+                }, 500);
+            }else{
+                app.pace.instance.on('hide', function(){
+                    $btnSubmit.button('reset').prop('disabled', false);
+                });    
+            }
+            
 
             PanelHelper.update(this, 'list');
         }

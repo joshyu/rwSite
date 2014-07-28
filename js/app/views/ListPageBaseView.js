@@ -49,6 +49,10 @@ define([
             var parentTemplateData = ListPageBaseView.prototype.templateData;
             return  _.extend({}, parentTemplateData, this.templateData || {}, data);
         },
+
+        loadSearch: function () {
+            return [];
+        },
                 
         onRender: function () {
             var _itemMode = this.templateData.itemMode;

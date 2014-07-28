@@ -1,5 +1,6 @@
 <h1>{{title}}</h1>
 <div class="admin-edit"><a target="_blank" href="#" title="click to edit current resource list"><i class="fa fa-pencil fa-fw"></i> </a></div>
+{{#unless noSearchBox}}
 <section class="panel panel-searchbox">
     <div class="panel-body panel-body-searchbox">
       <form role="form" class="frmSearch">
@@ -31,6 +32,7 @@
       </form>
     </div>
 </section>
+{{/unless}}
 <section class="panel panel-list">
     
       {{#if itemMode}}
@@ -41,8 +43,9 @@
             {{#if caption}}
             <caption>
               <div class="title">{{caption}}</div>
-              <div class="sub"><span class="glyphicon glyphicon-info-sign"></span> 
-                click the "Title" to see the detail of the training session.</div>
+              {{#if tip}}
+              <div class="sub"><span class="glyphicon glyphicon-info-sign"></span> {{tip}} </div>
+              {{/if}}
             </caption>
             {{/if}}
             {{#if tableColumns}}

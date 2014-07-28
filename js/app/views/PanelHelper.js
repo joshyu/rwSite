@@ -11,6 +11,7 @@ define([
     'views/EmpItemView',
     'views/SrcListView',
     'views/BookListView',
+    'views/SurveyListView',
     'views/TrainingListView',
     'views/TrainingPageListView'
 ], function(require) {

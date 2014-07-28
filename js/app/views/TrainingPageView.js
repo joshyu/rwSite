@@ -9,6 +9,7 @@ define([
         templateData: {
             title : 'Training Center',
             caption: "Training plan for 2014",
+            tip : 'click each line of items to see the detail of the training session.',
             itemMode : false,  //itemMode is false, then we will show the results as table list.
             tableColumns : [
             	'Title' , 'Trainer' , 'Date', 'Duration', 'Difficulty', 'Category', 'State'

@@ -16,14 +16,6 @@ define([
             getOptions: 'getRequestOption'
         },
 
-        _renderData: function(data){
-            this.triggerMethod('before:render', this);
-            data = _.extend(this.myTemplData(), data);
-            //this.$el.replaceWith(this.template(data));
-            this.$el.html(this.template(data));
-            this.triggerMethod("render", this);
-        },
-
         getRequestOption: function(){
             this.options.pageNo = this.options.pageNo || this.pageNo;
             return this.options;

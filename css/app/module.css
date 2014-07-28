@@ -1229,6 +1229,32 @@ a.profilelink:hover img{
     table-layout: fixed;
 }
 
+.panel-list table.panel-body-list caption{
+    padding: 20px 0 20px 5px;
+    text-align: left;
+}
+
+.panel-list table.panel-body-list caption .title{
+    font-weight: bold;
+    font-size: 1.4em;
+}
+
+.panel-list table.panel-body-list caption .sub {
+    margin: 10px 0px;
+    color: #bbb;
+    font-size: .9em;
+}
+
+.panel-list table.panel-body-list a {
+    color: inherit;
+}
+.panel-list table.panel-body-list >tbody tr{
+    cursor: pointer;
+}
+.panel-list table.panel-body-list >tbody+tbody {
+    border-top-width: 0;
+}
+
 .panel-list .panel-body .campus-items,
 .panel-list .panel-body-list tbody > tr{   
     -webkit-transition: background 1s;

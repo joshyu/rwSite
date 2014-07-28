@@ -1,12 +1,13 @@
-define(['app' , 'marionette', 'backbone', 'underscore', 'views/MainView', 'views/ProfileView', 'views/SrcPageView', 'views/BookPageView'],
-    function(app, Marionette, Backbone,  _,   MainView, ProfileView, SrcPageView, BookPageView) {
+define(['app' , 'marionette', 'backbone', 'underscore', 'views/MainView', 'views/ProfileView', 'views/SrcPageView', 'views/BookPageView', 'views/TrainingPageView'],
+    function(app, Marionette, Backbone,  _,   MainView, ProfileView, SrcPageView, BookPageView, TrainingPageView) {
         return {
             routes: {},
             pageRouter: {
                 "" :  MainView ,
                 "profile" : ProfileView,
                 "campus/src" : SrcPageView,
-                "campus/books" : BookPageView
+                "campus/books" : BookPageView,
+                "campus/trainings" : TrainingPageView
             },
 
             init: function() {

@@ -18,7 +18,8 @@
                      "title":" attach1",
                      "link":" http://link/to/attach/1"
                  }
-            ] 
+            ],
+            "available" : true
         },
         {
             "id": 2,
@@ -38,7 +39,8 @@
                      "title":" attach1",
                      "link":" http://link/to/attach/1"
                  }
-            ] 
+            ],
+            "available" : true
         },
         {
             "id": 3,
@@ -58,7 +60,8 @@
                      "title":" attach1",
                      "link":" http://link/to/attach/1"
                  }
-            ] 
+            ],
+            "available" : true
         },
         {
             "id": 4,
@@ -78,7 +81,9 @@
                      "title":" attach1",
                      "link":" http://link/to/attach/1"
                  }
-            ] 
+            ],
+
+            "available" : false
         }
     ]
 }

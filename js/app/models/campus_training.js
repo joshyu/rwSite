@@ -22,6 +22,10 @@ define([
             'campus:training:item:info' : {
                 url: "js/data/training_item.json"
             }
+        },
+
+        _lib : {
+            training_states: ['available', 'closed']
         }
     });
 });

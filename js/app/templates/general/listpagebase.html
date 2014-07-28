@@ -38,6 +38,13 @@
       {{else}}
         <div class="panel-body">
           <table class="table table-hover panel-body-list">
+            {{#if caption}}
+            <caption>
+              <div class="title">{{caption}}</div>
+              <div class="sub"><span class="glyphicon glyphicon-info-sign"></span> 
+                click the "Title" to see the detail of the training session.</div>
+            </caption>
+            {{/if}}
             {{#if tableColumns}}
             <thead>
               <tr>

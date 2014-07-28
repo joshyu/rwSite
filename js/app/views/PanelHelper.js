@@ -11,7 +11,8 @@ define([
     'views/EmpItemView',
     'views/SrcListView',
     'views/BookListView',
-    'views/TrainingListView'
+    'views/TrainingListView',
+    'views/TrainingPageListView'
 ], function(require) {
     'use strict';
     return {

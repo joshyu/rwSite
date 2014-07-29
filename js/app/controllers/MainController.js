@@ -1,6 +1,6 @@
 define(['app' , 'marionette', 'backbone', 'underscore', 
-      'views/MainView', 'views/ProfileView', 'views/SrcPageView', 'views/BookPageView', 'views/TrainingPageView', 'views/SurveyPageView', 'views/ContactPageView', 'views/OfficeLayoutPageView','views/ProjectManPageView'],
-    function(app, Marionette, Backbone,  _,   MainView, ProfileView, SrcPageView, BookPageView, TrainingPageView, SurveyPageView, ContactPageView, OfficeLayoutPageView, ProjectManPageView) {
+      'views/MainView', 'views/ProfileView', 'views/SrcPageView', 'views/BookPageView', 'views/TrainingPageView', 'views/SurveyPageView', 'views/ContactPageView', 'views/OfficeLayoutPageView','views/ProjectManPageView', 'views/OrgChartPageView'],
+    function(app, Marionette, Backbone,  _,   MainView, ProfileView, SrcPageView, BookPageView, TrainingPageView, SurveyPageView, ContactPageView, OfficeLayoutPageView, ProjectManPageView, OrgChartPageView) {
         return {
             routes: {},
             pageRouter: {
@@ -12,7 +12,8 @@ define(['app' , 'marionette', 'backbone', 'underscore',
                 "campus/surveys" : SurveyPageView,
                 "campus/employees" : ContactPageView,
                 "campus/officeLayout" : OfficeLayoutPageView,
-                "campus/projects" : ProjectManPageView
+                "campus/projects" : ProjectManPageView,
+                "campus/orgchart" : OrgChartPageView
             },
 
             init: function() {

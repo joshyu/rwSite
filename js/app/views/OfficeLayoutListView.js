@@ -8,14 +8,14 @@ define([
     'use strict';
     return ViewBase.extend({
         template : template,
-        className:'panel-officelayout-list',
+        className:'panel-body-list-inner',
         request : {
             model : 'campus_office',
             key: 'campus:office:layout'
         },
 
         onRender: function(){
-            this.$('.office-image-container').zoom();
+            this.$('.office-image-container').zoom({ on:'click' });
         }
     });
 });

@@ -956,6 +956,20 @@ a.profilelink:hover img{
     top: 2px;
 }
 
+.pmimageitem .item-description{
+    background: #ccc;
+    margin-top: 15px;
+    padding: 15px 10px 5px;
+}
+
+.pmimageitem .item-image{
+    text-align: center;
+}
+
+.pmimageitem .item-image img{
+    display: inline-block;
+}
+
 /*contact modal */
 .contact_modal  .modal-header{
     border-bottom: 0;
@@ -1217,7 +1231,7 @@ a.profilelink:hover img{
     margin: 0 0 20px 5px;
 }
 
-.cplp-officelayout .panel-list{
+.cplp-nolist .panel-list{
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     -ms-box-shadow: none;
@@ -1226,6 +1240,13 @@ a.profilelink:hover img{
     border-width: 0;
     margin-top: 20px;
     margin-left: -15px;
+}
+.cplp-nolist .pageTip{
+    position: relative;
+    top: -10px;
+    left: 6px;
+    color: #bbb;
+    display: inline-block;
 }
 
 .panel-list .panel-body{
@@ -1240,16 +1261,62 @@ a.profilelink:hover img{
     table-layout: fixed;
 }
 
-.panel-list .panel-officelayout-list{
+.panel-list .panel-body-list-inner{
     padding: 10px;
 }
 
-.panel-list .panel-officelayout-list .office-image-container{
+.panel-list .panel-body-list-inner .pm-images{
+    width: 90%;
+}
+
+.pm-images .pm-image-desc {
+    position: absolute;
+    bottom: -50%;
+    left: 15px;
+    right: 15px;
+    background: rgba(0,0,0,0.8);
+    color: #ccc;
+    padding: 10px;
+    opacity: 0;
+    -webkit-transition: all 0.6s ease;
+    -moz-transition: all 0.6s ease;
+    -ms-transition: all 0.6s ease;
+    -o-transition: all 0.6s ease;
+    transition: all 0.6s ease;
+}
+
+.pm-image:hover .pm-image-desc{
+    bottom: 0;
+    opacity: 1;
+}
+
+.panel-list .panel-body-list-inner .pm-image{
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.panel-list .panel-body-list-inner .pm-images img{
+    height: 200px;
+    width: 100%;
+    
+    border: 1px solid #D6D6D6;
+    -webkit-box-shadow:0px 1px 10px #BBB;
+    -moz-box-shadow:0px 1px 10px #BBB;
+    -ms-box-shadow:0px 1px 10px #BBB;
+    box-shadow:0px 1px 10px #BBB;
+    cursor: pointer;
+}
+
+.panel-list .panel-body-list-inner .pm-images img:hover{
+
+}
+
+.panel-list .panel-body-list-inner .office-image-container{
     margin: 20px 0px;
     width: 70%;
 }
 
-.panel-list .panel-officelayout-list .office-image-container img{
+.panel-list .panel-body-list-inner .office-image-container img{
     width: 100%;
 }
 

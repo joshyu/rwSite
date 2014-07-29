@@ -10,6 +10,7 @@ define([
         },
 
         _renderData: function(data){
+            this._templateData= data;
             this.triggerMethod('before:render', this);
             data = _.extend(this.myTemplData(), data);
             this.$el.html(this.template(data));

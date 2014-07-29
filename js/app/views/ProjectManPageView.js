@@ -8,15 +8,15 @@ define([
     return ListPageBaseView.extend({
         className:"container campuslistpage cplp-nolist",
         templateData: {
-            title : 'Office Layout',
-            pageTip : 'click on the image to enlarge it.',
+            title : 'Project Management',
+            pageTip : 'hover on the image to see its description, click to enlarge it.',
             noMoreButton : true,
             noSearchBox : true
         },
 
         panels: {
             list : {
-                class: 'OfficeLayoutListView'
+                class: 'ProjectManListView'
             }
         }
     });

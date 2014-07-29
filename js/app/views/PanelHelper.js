@@ -15,7 +15,8 @@ define([
     'views/TrainingListView',
     'views/TrainingPageListView',
     'views/ContactListView',
-    'views/OfficeLayoutListView'
+    'views/OfficeLayoutListView',
+    'views/ProjectManListView'
 ], function(require) {
     'use strict';
     return {

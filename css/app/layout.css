@@ -1,6 +1,6 @@
 body {
      /*background: url('../../images/mainbg.jpg');*/
-     background: #F1F1F1;
+ /*     background: #F1F1F1; */
      overflow: hidden;
      overflow-x: hidden;
 }
@@ -60,12 +60,7 @@ body {
     top: -40px;
     padding-top: 60px;
     min-height: 762px;
-    background: #eee;
-    border-radius: 0px 0px 0px 6px;
     background: #fff;
-    border-bottom-left-radius:6px;
-    border: 1px solid #ddd;
-    border-width: 0px 0px 1px 0px;
 }
 
 /*transition state */

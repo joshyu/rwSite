@@ -1203,18 +1203,29 @@ a.profilelink:hover img{
 }
 
 /* list page base */
-.listpagebase {
+.campuslistpage {
     position: relative;
 }
 
-.listpagebase .admin-edit {
+.campuslistpage .admin-edit {
     position: absolute;
     right: 0;
     top: 0;
 }
-.listpagebase > h1{
+.campuslistpage > h1{
     font-size: 2.0em;
     margin: 0 0 20px 5px;
+}
+
+.cplp-officelayout .panel-list{
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -ms-box-shadow: none;
+    -o-box-shadow: none;
+    box-shadow: none;
+    border-width: 0;
+    margin-top: 20px;
+    margin-left: -15px;
 }
 
 .panel-list .panel-body{
@@ -1229,6 +1240,19 @@ a.profilelink:hover img{
     table-layout: fixed;
 }
 
+.panel-list .panel-officelayout-list{
+    padding: 10px;
+}
+
+.panel-list .panel-officelayout-list .office-image-container{
+    margin: 20px 0px;
+    width: 70%;
+}
+
+.panel-list .panel-officelayout-list .office-image-container img{
+    width: 100%;
+}
+
 .panel-list table.panel-body-list caption{
     padding: 20px 0 20px 5px;
     text-align: left;
@@ -1240,7 +1264,7 @@ a.profilelink:hover img{
 }
 
 .panel-list table.panel-body-list caption .sub {
-    margin: 10px 0px;
+    margin: 5px 0px;
     color: #bbb;
     font-size: .9em;
 }
@@ -1279,30 +1303,30 @@ a.profilelink:hover img{
     background: #FCF19F;
 }
 
-.listpagebase .panel-body-searchbox {
+.campuslistpage .panel-body-searchbox {
     padding-bottom: 0;
 }
 
-.listpagebase .form-group {
+.campuslistpage .form-group {
     margin-bottom: 20px;
 }
 
-.listpagebase .form-group .btn-group {
+.campuslistpage .form-group .btn-group {
     display:block;
 }
 
-.listpagebase .form-group .btn-group .btn {
+.campuslistpage .form-group .btn-group .btn {
     margin: 3px;
     border-radius: 4px !important;
 }
 
-.listpagebase .form-group h1 {
+.campuslistpage .form-group h1 {
     font-size: 1em;
     font-weight: bolder;
     margin-top: 0px;
 }
 
-.listpagebase .form-group .inline-control{
+.campuslistpage .form-group .inline-control{
     display: inline-block;
     width: auto;
     padding: 1px 8px;

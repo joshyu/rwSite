@@ -7,6 +7,7 @@ define(['require',
             'models/campus_src',
             'models/campus_training',
             'models/campus_survey',
+            'models/campus_office',
             'models/contacts',
             'models/suggestion'
             ],  function (require) {

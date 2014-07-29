@@ -10,7 +10,7 @@ define([
 
     return ListPageBaseView = Marionette.Layout.extend({
         template: template,
-        className:"container listpagebase",
+        className:"container campuslistpage",
         isAdmin: false,
         loadnum: 20,
         pageNo: 0,

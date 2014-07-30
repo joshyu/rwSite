@@ -1095,14 +1095,23 @@ a.profilelink:hover img{
 
 .empitem_modal  .modal-content,
 .panel-emprofile {
-      background: #ffffff;
-         background: -moz-linear-gradient(left,  #ffffff 0%, #f7f7f7 44%, #dbdbdb 47%, #ffffff 100%);
+    background: rgba(255,252,255,1);
+    background: -moz-linear-gradient(left, rgba(255,252,255,1) 0%, rgba(245,245,245,1) 38%, rgba(245,245,245,1) 48%, rgba(235,235,235,1) 49%, rgba(254,254,254,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(255,252,255,1)), color-stop(38%, rgba(245,245,245,1)), color-stop(48%, rgba(245,245,245,1)), color-stop(49%, rgba(235,235,235,1)), color-stop(100%, rgba(254,254,254,1)));
+    background: -webkit-linear-gradient(left, rgba(255,252,255,1) 0%, rgba(245,245,245,1) 38%, rgba(245,245,245,1) 48%, rgba(235,235,235,1) 49%, rgba(254,254,254,1) 100%);
+    background: -o-linear-gradient(left, rgba(255,252,255,1) 0%, rgba(245,245,245,1) 38%, rgba(245,245,245,1) 48%, rgba(235,235,235,1) 49%, rgba(254,254,254,1) 100%);
+    background: -ms-linear-gradient(left, rgba(255,252,255,1) 0%, rgba(245,245,245,1) 38%, rgba(245,245,245,1) 48%, rgba(235,235,235,1) 49%, rgba(254,254,254,1) 100%);
+    background: linear-gradient(to right, rgba(255,252,255,1) 0%, rgba(245,245,245,1) 38%, rgba(245,245,245,1) 48%, rgba(235,235,235,1) 49%, rgba(254,254,254,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffcff', endColorstr='#fefefe', GradientType=1 );
+
+     /* background: #ffffff;
+          background: -moz-linear-gradient(left,  #ffffff 0%, #f7f7f7 44%, #dbdbdb 47%, #ffffff 100%);
          background: -webkit-gradient(linear, left top, right top, color-stop(0%,#ffffff), color-stop(44%,#f7f7f7), color-stop(47%,#dbdbdb), color-stop(100%,#ffffff));
          background: -webkit-linear-gradient(left,  #ffffff 0%,#f7f7f7 44%,#dbdbdb 47%,#ffffff 100%);
          background: -o-linear-gradient(left,  #ffffff 0%,#f7f7f7 44%,#dbdbdb 47%,#ffffff 100%);
          background: -ms-linear-gradient(left,  #ffffff 0%,#f7f7f7 44%,#dbdbdb 47%,#ffffff 100%);
          background: linear-gradient(to right,  #ffffff 0%,#f7f7f7 44%,#dbdbdb 47%,#ffffff 100%);
-         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=1 ); 
+         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=1 );  */
 }
 .panel-emprofile  .panel-body {
     padding: 0;

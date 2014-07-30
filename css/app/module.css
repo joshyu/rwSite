@@ -986,7 +986,7 @@ a.profilelink:hover img{
     transition: opacity linear .5s;
 }
 
-.contact_modal_body.fadeout{
+.fadeout{
     opacity: 0;
 }
 
@@ -1258,11 +1258,11 @@ a.profilelink:hover img{
 
 .cplp-nolist .oc-banner .btn-group.btn-breadcrumb .btn:hover{
     background: none;
-    -webkit-box-shadow: 0px 1px 8px #CACACA;
-    -moz-box-shadow: 0px 1px 8px #CACACA;
-    -ms-box-shadow: 0px 1px 8px #CACACA;
-    -o-box-shadow: 0px 1px 8px #CACACA;
-    box-shadow: 0px 1px 8px #CACACA; 
+    -webkit-box-shadow: 0px 8px 11px -7px #CACACA;
+    -moz-box-shadow: 0px 8px 11px -7px #CACACA;
+    -ms-box-shadow: 0px 8px 11px -7px #CACACA;
+    -o-box-shadow: 0px 8px 11px -7px #CACACA;
+    box-shadow: 0px 8px 11px -7px #CACACA; 
 }
 
 .cplp-nolist .oc-banner .btn-group.btn-breadcrumb .btn:not(:first-child) {

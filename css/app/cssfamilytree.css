@@ -2,6 +2,14 @@
    license MIT
 */
 
+.tree {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
 .tree ul {
     padding-top: 20px; position: relative;
     
@@ -120,6 +128,17 @@ right connector from last child*/
     -o-box-shadow: 2px 3px 9px #C3C1C1;
     box-shadow: 2px 3px 9px #C3C1C1;
 }
+
+.tree li > div:active {
+    background: #E0E0E0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -ms-box-shadow: none;
+    -o-box-shadow: none;
+    box-shadow: none;
+}
+
+
 /*Connector styles on hover*/
 .tree li >div:hover+ul li::after, 
 .tree li >div:hover+ul li::before, 

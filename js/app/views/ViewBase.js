@@ -10,7 +10,10 @@ define([
         },
 
         _renderData: function(data){
-            this._templateData= data;
+            if(!this._templateData){
+                this._templateData= data;
+            }
+            
             data = _.extend(this.myTemplData(), data);
             this._renderHTML(this.template(data));
         },

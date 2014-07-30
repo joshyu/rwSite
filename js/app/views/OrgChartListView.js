@@ -21,10 +21,18 @@ define([
             e.preventDefault();
             var item = e.currentTarget;
             var itemIndex = $(item).data('item-index');
-            if(itemIndex == void 0 || itemIndex < 0) return false;
+
+            if(itemIndex == void 0 || itemIndex < 0){
+                if( $(item).hasClass('btn-home')){
+                    itemIndex = 0;
+
+                }else{
+                    return false;
+                }
+            }
+
             var itemData = this._roots[itemIndex];
             this._roots.splice(itemIndex);
-
             this.chartview.trigger('banner:root:changed', itemData);            
         },
 
@@ -60,6 +68,7 @@ define([
 
         bindEvents: function(){
             this.on('banner:root:changed', function(data){
+                this.root = data;
                 this.drawtree(data);
             },this);
         },
@@ -67,27 +76,43 @@ define([
         drawtree: function(root, binit){
             if(!root) return false;
 
-/*            if(root != this.root){
-                _RootBanner.push(this.root);
-                this.root = root;
-            }*/
-
             if(binit){
                 _RootBanner.reset();
             }
 
             var _bannerRoots= _RootBanner.getRoots();
 
-            this._renderData({
-                root : root,
-                bannerRoots: _bannerRoots
-            });
+            if(this.rendered){
+                var that = this;
+                this.$el.fadeOut('slow', function(){
+                    that._renderData({
+                        root : root,
+                        bannerRoots : _bannerRoots
+                    });
+
+                    $(this).fadeIn('slow');
+                    
+                })
+            }else{
+                this._renderData({
+                    root : root,
+                    bannerRoots: _bannerRoots
+                });
+
+                this.rendered = true;
+            }
+
+            
         },
 
         changeChartRoot: function(e){
             var item = e.currentTarget;
             var itemId= $(item).data('item-id');
             var itemData= this.contacts[itemId];
+
+            if(!itemData.reportees || !itemData.reportees.length){
+                return false; //real leaf, cannot take root.
+            }
             
             if(this.root){
                _RootBanner.push(this.root);

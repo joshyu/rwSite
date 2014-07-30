@@ -1,1 +1,77 @@
-org chart.
+<div class="oc-banner container">
+    <div  class="btn-group btn-breadcrumb">
+        <a href="#" class="btn btn-default btn-home"><i class="fa fa-home"></i></a>
+       {{#each bannerRoots}}
+        <a href="#" class="btn btn-default" data-item-index="{{@index}}">{{name}}</a>
+       {{/each}}
+
+    </div>
+</div>
+<div class="tree container">
+    <ul>
+        {{#with root}}
+        <li class="item-{{id}}">
+            <div class="item-inner" data-item-id="{{id}}">
+                <div class="photo"><img src="{{photo}}" /></div>
+                <div class="name">{{name}}</div>
+                <div class="title">{{title}}</div>
+            </div>
+            {{#if reportees}}
+            <ul>
+                {{#each reportees}}
+                <li class="item-{{id}} item-leaf">
+                    <div class="item-inner" data-item-id="{{id}}">
+                        <div class="photo"><img src="{{photo}}" /></div>
+                        <div class="name">{{name}}</div>
+                        <div class="title">{{title}}</div>
+                    </div>
+                </li>
+                {{/each}}
+            </ul>
+            {{/if}}
+        </li>
+        {{/with}}
+    </ul>
+</div>
+
+
+<!-- We will create a family tree using just CSS(3)
+The markup will be simple nested lists
+<div class="tree">
+    <ul>
+        <li>
+            <a href="#">Parent</a>
+            <ul>
+                <li>
+                    <a href="#">Child</a>
+                    <ul>
+                        <li>
+                            <a href="#">Grand Child</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Child</a>
+                    <ul>
+                        <li><a href="#">Grand Child</a></li>
+                        <li>
+                            <a href="#">Grand Child</a>
+                            <ul>
+                                <li>
+                                    <a href="#">Great Grand Child</a>
+                                </li>
+                                <li>
+                                    <a href="#">Great Grand Child</a>
+                                </li>
+                                <li>
+                                    <a href="#">Great Grand Child</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Grand Child</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div> -->

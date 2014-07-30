@@ -9,6 +9,7 @@ define([
         className:"container campuslistpage cplp-nolist",
         templateData: {
             title : 'Organization Chart',
+            pageTip : 'expand the reportee list by clicking on the leaf.',
             noMoreButton : true,
             noSearchBox : true
         },

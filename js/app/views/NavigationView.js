@@ -68,7 +68,7 @@ define([
 
         dehighlight: function(){
             if(this.lastHighlightedDom){
-                this.lastHighlightedDom.removeClass('active').parents('li:first').removeClass('active');
+                this.lastHighlightedDom.removeClass('active').parents('li:first,li.menu-folder:first').removeClass('active');
             }
         },
         highlight: function  (dom) {
@@ -88,7 +88,7 @@ define([
             }
 
             this.dehighlight();
-            $dom.addClass('active').parents('li:first').addClass('active');
+            $dom.addClass('active').parents('li:first, li.menu-folder:first').addClass('active');
             this.lastHighlightedDom = $dom;
         }
 

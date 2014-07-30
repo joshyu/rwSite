@@ -11,9 +11,13 @@ define([
 
         _renderData: function(data){
             this._templateData= data;
-            this.triggerMethod('before:render', this);
             data = _.extend(this.myTemplData(), data);
-            this.$el.html(this.template(data));
+            this._renderHTML(this.template(data));
+        },
+
+        _renderHTML: function(html){
+            this.triggerMethod('before:render', this);            
+            this.$el.html(html || "");
             this.triggerMethod("render", this);
         },
 

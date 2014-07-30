@@ -1249,6 +1249,26 @@ a.profilelink:hover img{
     display: inline-block;
 }
 
+.cplp-nolist .oc-banner {
+    padding: 20px 0;
+}
+.cplp-nolist .oc-banner .btn-group.btn-breadcrumb .btn{
+    margin-right: 5px;
+}
+
+.cplp-nolist .oc-banner .btn-group.btn-breadcrumb .btn:hover{
+    background: none;
+    -webkit-box-shadow: 0px 1px 8px #CACACA;
+    -moz-box-shadow: 0px 1px 8px #CACACA;
+    -ms-box-shadow: 0px 1px 8px #CACACA;
+    -o-box-shadow: 0px 1px 8px #CACACA;
+    box-shadow: 0px 1px 8px #CACACA; 
+}
+
+.cplp-nolist .oc-banner .btn-group.btn-breadcrumb .btn:not(:first-child) {
+    border-radius: 0% 30% 30% 0% !important;
+}
+
 .panel-list .panel-body{
     padding: 0 15px;
 }

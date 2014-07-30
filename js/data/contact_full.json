@@ -1,18 +1,5 @@
 {
     "data" : [
-           {
-            "id": 5,
-            "name" : "Jerry Xun",
-            "chinesename" : "荀志锋",
-            "email" : "jxun@ra.rockwell.com",
-            "project" : "CCW",
-            "photo" : "images/defaultavatar.png",
-            "lead" : "",
-            "manager" : "",
-            "team" : "Development",
-            "ext" : "22233",
-            "birthday" : "1979/7/3"
-        },
         {
             "id": 1,
             "name" : "Josh Yu",
@@ -67,7 +54,64 @@
             "team" : "Development",
             "ext" : "22233",
             "birthday" : "1979/8/10",
-            "intro" : "this is Josh Yu, glad to join in this company.  I  am willing to learn from you and share all I knew with you. Thanks you. "
+            "intro" : "this is Josh Yu, glad to join in this company.  I  am willing to learn from you and share all I knew with you. Thanks you. " ,
+            "title" : "Team Lead"
+        },
+        {
+            "id": 5,
+            "name" : "Jerry Xun",
+            "chinesename" : "荀志锋",
+            "email" : "jxun@ra.rockwell.com",
+            "project" : "CCW",
+            "photo" : "images/defaultavatar.png",
+            "lead" : "",
+            "manager" : "James Fu",
+            "team" : "Development",
+            "ext" : "22233",
+            "birthday" : "1978/4/3",
+            "title" : "Manager (Software)"
+        },
+        {
+            "id": 6,
+            "name" : "James Fu",
+            "chinesename" : "James Fu",
+            "email" : "xxx@ra.rockwell.com",
+            "project" : "",
+            "photo" : "images/james.jpg",
+            "lead" : "",
+            "manager" : "Kevin Song",
+            "team" : "Development",
+            "ext" : "22233",
+            "birthday" : "1978/12/3",
+            "title" : "Software Engineering Manager"
+        },
+        {
+            "id": 7,
+            "name" : "Steven Li",
+            "chinesename" : "Steven Li",
+            "email" : "xxx@ra.rockwell.com",
+            "project" : "",
+            "photo" : "images/steven.jpg",
+            "lead" : "",
+            "manager" : "Kevin Song",
+            "team" : "CM",
+            "ext" : "22233",
+            "birthday" : "1978/5/3",
+            "title" : "Software Manager"
+        },
+        {
+            "id": 8,
+            "name" : "Kevin Song",
+            "chinesename" : "Kevin Song",
+            "email" : "xxx@ra.rockwell.com",
+            "project" : "",
+            "photo" : "images/kevin.jpg",
+            "lead" : "",
+            "manager" : "",
+            "team" : "",
+            "ext" : "22233",
+            "birthday" : "1978/2/3",
+            "title" : "Campus Manager"
         }
-    ]        
+    ]
 }

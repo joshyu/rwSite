@@ -111,12 +111,7 @@ define([
                 _relations.manager = data[item.managerId];
              }
 
-             if(item.reportees){
-                _relations.reportees = _.map(item.reportees, function(id){
-                    return data[id];
-                });
-             }
-
+             _relations.reportees = item.reportees;
              return _relations;
         },
         _parseRelationship: function(data){
@@ -125,6 +120,7 @@ define([
             }
 
             var _data= {};
+            var _roots = [];
 
             $.each(data, function(i,item){
                 var name = item.name;
@@ -136,10 +132,12 @@ define([
                  if(managerItem){
                     item.managerId = managerItem.id;
                      if(managerItem.reportees){
-                        managerItem.reportees.push(item.id);
+                        managerItem.reportees.push(item);
                      }else{
-                        managerItem.reportees = [item.id];
+                        managerItem.reportees = [item];
                      }
+                 }else{
+                    _roots.push(item);
                  }
              });
 
@@ -148,6 +146,7 @@ define([
                 _data[item.id] = item;
             });
 
+            _data.roots = _roots;
              return _data;
         }
     });

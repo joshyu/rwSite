@@ -41,11 +41,12 @@ define([
            if(this.rendered){
                  this.$el.on('webkitTransitionEnd transitionend MSTransitionEnd msTransitionEnd oTransitionEnd' , function(){
                         var $this= $(this);
-                        $this.off('webkitTransitionEnd transitionend MSTransitionEnd msTransitionEnd oTransitionEnd');
                         if($this.hasClass(FADEOUT_CLS)){
                             that._renderData(data);
                             $this.removeClass(FADEOUT_CLS);
                         }
+
+                        $this.off('webkitTransitionEnd transitionend MSTransitionEnd msTransitionEnd oTransitionEnd');
                  });
 
                  this.$el.addClass(FADEOUT_CLS);

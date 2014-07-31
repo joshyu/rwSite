@@ -980,10 +980,11 @@ a.profilelink:hover img{
 }
 
 .contact_modal_body {
-    -webkit-transition: opacity linear .5s;
-    -moz-transition: opacity linear .5s;
-    -o-transition: opacity linear .5s;
-    transition: opacity linear .5s;
+    -webkit-transition: opacity  .5s ease-out .1s;
+    -moz-transition: opacity  .5s ease-out .1s;
+    -o-transition: opacity  .5s ease-out .1s;
+    transition: opacity  .5s ease-out .1s;
+    opacity: 1;
 }
 
 .fadeout{
@@ -1254,6 +1255,7 @@ a.profilelink:hover img{
 }
 .cplp-nolist .oc-banner .btn-group.btn-breadcrumb .btn{
     margin-right: 5px;
+    font-size: 11px;
 }
 
 .cplp-nolist .oc-banner .btn-group.btn-breadcrumb .btn:hover{

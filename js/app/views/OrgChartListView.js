@@ -37,7 +37,9 @@ define([
         },
 
         push: function(newRoot){
-            this._roots.push(newRoot);
+            if(!_.contains(this._roots, newRoot)){
+                this._roots.push(newRoot);    
+            }            
         },
 
         getRoots: function(){
@@ -114,7 +116,7 @@ define([
                 return false; //real leaf, cannot take root.
             }
             
-            if(this.root){
+            if(this.root !== itemData){
                _RootBanner.push(this.root);
             }
 

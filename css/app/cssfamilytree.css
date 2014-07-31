@@ -8,6 +8,10 @@
     -ms-user-select: none;
     -o-user-select: none;
     user-select: none;
+    display: flex;
+    display: -ms-flexbox;
+    justify-content: center;
+    -ms-flex-pack: center;
 }
 
 .tree ul {
@@ -98,6 +102,9 @@ right connector from last child*/
     transition: all 0.5s;
     -webkit-transition: all 0.5s;
     -moz-transition: all 0.5s;
+
+    width: 120px;
+    height: 150px;
 }
 
 .tree li >div .photo img{

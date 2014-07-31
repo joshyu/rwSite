@@ -43,7 +43,10 @@ define([
                         var $this= $(this);
                         if($this.hasClass(FADEOUT_CLS)){
                             that._renderData(data);
-                            $this.removeClass(FADEOUT_CLS);
+
+                            setTimeout(function(){
+                                $this.removeClass(FADEOUT_CLS);    
+                            },0);                            
                         }
 
                         $this.off('webkitTransitionEnd transitionend MSTransitionEnd msTransitionEnd oTransitionEnd');

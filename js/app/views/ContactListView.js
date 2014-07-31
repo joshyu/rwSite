@@ -16,6 +16,11 @@ define([
             getOptions: 'getRequestOption'
         },
 
+        renderData: function (data) {
+            delete data.contacts.roots; //we don't need the roots data here.
+            this._renderData(data);
+        },
+
         getRequestOption: function(){
             this.options.pageNo = this.options.pageNo || this.pageNo;
             return this.options;

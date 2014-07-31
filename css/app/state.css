@@ -175,3 +175,33 @@
   border-width: 11px;
   margin-left: -11px;
 }
+
+/*lync states */
+.lync-status{
+    border: 1px solid #ACACAC;
+}
+
+/*'available offline away inacall busy donotdisturb' */
+.lync-status.available{
+   background: green
+}
+
+.lync-status.offline{
+   background: gray;
+}
+
+.lync-status.away{
+  background: yellow;
+}
+
+.lync-status.inacall{
+  background: red;
+}
+
+.lync-status.busy{
+  background: red;
+}
+
+.lync-status.donotdisturb{
+   background: crimson;
+}

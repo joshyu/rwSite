@@ -69,6 +69,11 @@ require.config({
                     cacheKey : 'teamCategoryNames'
                 }
             ]
+        },
+
+        'controllers/MainController' : {
+            pluginBasePath : 'views/plugins',
+            plugins : [ 'lync' ]
         }
     }
 });

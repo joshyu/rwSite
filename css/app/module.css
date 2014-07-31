@@ -993,9 +993,29 @@ a.profilelink:hover img{
 
 .contact_modal_body .image{
     text-align: center;
+    position: relative;
 }
 .contact_modal_body .image img{
     width: 120px;
+}
+
+.contact_modal_body .image .lync-status-container{
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    display: none;
+}
+
+.contact_modal_body .image  .lync-status{
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    margin-left: 5px;
+    position: relative;
+    top: 2px;
+}
+
+.contact_modal_body .image  .lync-status:before{
 }
 
 .contact_modal_body .name{
@@ -1105,6 +1125,11 @@ a.profilelink:hover img{
     background: linear-gradient(to right, rgba(255,252,255,1) 0%, rgba(245,245,245,1) 38%, rgba(245,245,245,1) 48%, rgba(235,235,235,1) 49%, rgba(254,254,254,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffcff', endColorstr='#fefefe', GradientType=1 );
 }
+
+.panel-emprofile  .panel-head{
+    position: relative;
+}
+
 .panel-emprofile  .panel-body {
     padding: 0;
     padding-top: 20px;

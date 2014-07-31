@@ -1,8 +1,9 @@
 define([
+    'app',
     'marionette',
     'views/ViewBase',
     'hbs!templates/partials/empitem'
-], function(Marionette, ViewBase, template) {
+], function(app, Marionette, ViewBase, template) {
     'use strict';
     return ViewBase.extend({
         template: template,
@@ -26,6 +27,9 @@ define([
 
         onRender: function(){
             this.$el.find('a.profilelink > img').tooltip();
+            if(app.plugins.lync){
+                app.plugins.lync.bind(this);
+            }
         },
 
         clickAvatar: function(e){

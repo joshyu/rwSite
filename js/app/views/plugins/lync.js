@@ -6,6 +6,10 @@ define({
         return this;
     },
 
+    isEnabled: function  () {
+        return !! this.instance;
+    },
+
     bind: function(view){
         //check all of the names to bind lync icon.
         if(!this.instance || !view || !view.$el) return false;

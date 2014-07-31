@@ -999,6 +999,11 @@ a.profilelink:hover img{
     width: 120px;
 }
 
+
+.contact_modal_body .image .returnhome{
+    margin-top: 10px;
+}
+
 .contact_modal_body .image .lync-status-container{
     width: 100%;
     text-align: center;

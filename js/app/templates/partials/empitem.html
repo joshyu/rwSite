@@ -1,10 +1,16 @@
 <div class="col-md-6 userdata">
     <div class="col-md-5 image">
         <img src="{{contacts.photo}}" class="img-circle img-thumbnail">
+
+        {{#if lyncEnabled}}
         <div class="lync-status-container">
           <label>Lync state:</label>
           <div class="lync-status" data-email="{{contacts.email}}"></div>
-        </div>        
+        </div>
+        {{/if}}
+        {{#unless isme}}
+        <div class="returnhome"><button class="btn btn-default btn-xs">return my profile</button></div>
+        {{/unless}}
     </div>
     <div class="col-md-7 info">
         <p class="name">{{contacts.name}}

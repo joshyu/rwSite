@@ -31,7 +31,7 @@ define([
             }
 
             if(this.getTemplateData && _.isFunction(this.getTemplateData)){
-                 data = this.getTemplateData();
+                 data = _.extend(data, this.getTemplateData());
             }
             
             return  data;

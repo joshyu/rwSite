@@ -23,8 +23,10 @@ define([
         },
 
         renderData: function (data) {
-            delete data.contacts.roots; //we don't need the roots data here.
-            this._renderData(data);
+            //var _data = 
+            //delete data.contacts.roots; //we don't need the roots data here.
+
+            this._renderData(data.contacts);
         },
 
         onRender: function(){

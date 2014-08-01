@@ -1272,7 +1272,7 @@ a.profilelink:hover img{
     margin-top: 20px;
     margin-left: -15px;
 }
-.cplp-nolist .pageTip{
+.campuslistpage .pageTip{
     position: relative;
     top: -10px;
     left: 6px;
@@ -1312,6 +1312,10 @@ a.profilelink:hover img{
 .panel-list table.panel-body-list {
     table-layout: fixed;
     width: 100%
+}
+
+.panel-list table.panel-body-list .label-newbook{
+    margin-left: 5px;
 }
 
 .panel-list table.panel-body-list thead .th_index{

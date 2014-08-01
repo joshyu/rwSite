@@ -26,6 +26,10 @@ define([
         commands: {
             'campus:events:training:markdone' : {
                 url: "js/data/postsuccess.json.aspx"
+            },
+
+            'campus:events:training:checktrcode' : {
+                url: "js/data/postsuccess.json.aspx"
             }
         },
 

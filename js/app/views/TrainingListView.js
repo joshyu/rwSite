@@ -3,7 +3,8 @@ define([
     'app',
     'views/ViewBase',
     'hbs!templates/partials/traininglist',
-], function(Marionette, app, ViewBase,  template) {
+    'bootbox'
+], function(Marionette, app, ViewBase, template, bootbox) {
     'use strict';
     return ViewBase.extend({
         template : template,
@@ -35,7 +36,13 @@ define([
         markdone: function(e){
             e.preventDefault();
             
-            var trcode = prompt("please input training code");
+            bootbox.prompt('please input training code:', function  (res) {
+                if( res !== null ){
+                    debugger;
+                }
+            });
+
+
             if(!trcode) return false;
 
             debugger;

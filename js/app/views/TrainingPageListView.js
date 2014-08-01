@@ -22,6 +22,10 @@ define([
         },
 
         viewTrainingItem: function(e){
+            if(e.target.nodeName.toLowerCase() == 'a'){
+                return true;
+            }
+
             var domTrigger= e.currentTarget;
             var itemId= Marionette.$(domTrigger).data('item-id');
             e.preventDefault();

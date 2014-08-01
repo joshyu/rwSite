@@ -11,12 +11,10 @@ define([
             var _commands = new Backbone.Wreqr.Commands();
             var _reqres = new Backbone.Wreqr.RequestResponse();
 
-
             this._bindHandlers(this.requests, _reqres, this, '_fetchByType');
             this._bindHandlers(this.commands, _commands, this, '_executeByType');
             this.request =_reqres.request.bind(_reqres);
             this.execute =_commands.execute.bind(_commands);
-            //this.service = SPService.
         },
 
         requests: {},
@@ -94,7 +92,7 @@ define([
             return function(args){
                 var dfd= $.Deferred();
                 if(_cachedKey && _cached[_cachedKey]){
-                    dfd.resolve(_cached[_cachedKey]);
+                    dfd.resolve(_.clone(_cached[_cachedKey]));
                 }else{
                     var def = null;
                     if(opts.dep){

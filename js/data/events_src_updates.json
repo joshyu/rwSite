@@ -19,7 +19,9 @@
                      "title":" attach2",
                      "link":" http://link/to/attach/2"
                  }
-            ]
+            ],
+
+            "available" : true
         },
         {
             "id": 1,
@@ -40,7 +42,8 @@
                      "title":" attach2",
                      "link":" http://link/to/attach/2"
                  }
-            ]
+            ],
+            "available" : true
         },
         {
             "id": 1,
@@ -61,7 +64,8 @@
                      "title":" attach2",
                      "link":" http://link/to/attach/2"
                  }
-            ]
+            ],
+            "available" : true
         },
         {
             "id": 1,
@@ -82,7 +86,8 @@
                      "title":" attach2",
                      "link":" http://link/to/attach/2"
                  }
-            ]
+            ],
+            "available" : true
         },
         {
             "id": 1,
@@ -103,7 +108,8 @@
                      "title":" attach2",
                      "link":" http://link/to/attach/2"
                  }
-            ]
+            ],
+            "available" : false
         }
     ]
 }

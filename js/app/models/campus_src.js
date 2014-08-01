@@ -29,7 +29,7 @@ define([
         },
 
         _lib : {
-            event_state: ['Upcoming', 'Outdated']
+            event_state: ['available', 'closed']
         }
     });
 });

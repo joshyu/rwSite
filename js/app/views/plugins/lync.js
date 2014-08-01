@@ -1,4 +1,5 @@
 define({
+    statuses : 'available offline away inacall busy donotdisturb',
     init: function (app) {
         this.app = app;
         this.instance = this.initCtrl();
@@ -41,9 +42,6 @@ define({
             }else{
                 this._cachedListeningUsers[usermail] = status;
             }
-            
-        }else{
-           
         }
     },
 
@@ -93,8 +91,6 @@ define({
         lyncDom.removeClass(this.statuses).addClass(presenceClass);
         this._cachedListeningUsers[usermail] = status;
     },
-
-    statuses : 'available offline away inacall busy donotdisturb',
 
     getLyncPresenceString: function (status) {
         switch (status) {

@@ -7,8 +7,7 @@ define([
 
     return ListPageBaseView.extend({
         templateData: {
-            title : 'Survey List',
-            noSearchBox : true
+            title : 'Survey List'
         },
 
         panels: {
@@ -18,6 +17,24 @@ define([
                     num : ListPageBaseView.prototype.loadnum
                 }
             }
+        },
+
+        loadSearch: function  () {
+           var evtStates= app.modelHelper.get('campus_survey').getLibData('event_state');
+
+           return [
+                {
+                   title : 'Sort By',
+                   noAll : true,
+                   name: 'order',
+                   items : ['Newest' , 'Popular']
+                },
+                {
+                    title : 'Event State',
+                    name: 'status',
+                    items : evtStates
+                }
+           ];
         }
     });
 });

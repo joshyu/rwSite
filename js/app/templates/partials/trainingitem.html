@@ -6,8 +6,12 @@
     <span class="glyphicon glyphicon-globe"></span> <b>{{campus_training.room}}</b> <span class="splitter"> | </span>
     <span>Difficulty:</span> {{campus_training.Rank}}
     <span class="banner-right">
-        <span><span class="numjoined">{{campus_training.numJoined}}</span></span>
+         <span class="numjoined label label-primary">{{campus_training.numJoined}}</span>
+        {{#if campus_training.available}}
         <span class="btnJoin"><a href="{{campus_training.joinLink}}" class="btn btn-default btn-xs">register</a></span>
+        {{else}}
+        <span class="text-muted"> closed </span>
+        {{/if}}
     </span>
 </div>
 <div class="content bodycontent">

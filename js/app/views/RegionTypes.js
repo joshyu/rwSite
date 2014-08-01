@@ -132,6 +132,7 @@ define(['marionette', 'underscore', 'app', 'views/HeaderView', 'views/FooterView
                   }
         });
 
+        //Region Type for campus list page ( match #/campus/src,training,survey,books, etc.)
         var _LPLRegion = Marionette.Region.extend({
                 show: function(view, options){
                     if(!view) return false;

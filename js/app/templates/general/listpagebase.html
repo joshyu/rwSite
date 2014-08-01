@@ -11,12 +11,15 @@
           <section class="form-group clearfix">
             <h1>{{title}}</h1>
             <div class="btn-group" data-toggle="buttons">
-                <label class="btn  btn-default btn-sm active">
-                  <input type="radio" name="{{name}}" checked value="">  {{../searchfilters_default_title}}                  
+                {{#unless noAll}}
+                <label class="btn  btn-default btn-sm active">                 
+                   <input type="radio" name="{{name}}" checked value="">  {{../../searchfilters_default_title}}
                 </label>
+                {{/unless}}
+
                 {{#each items}}
-                <label class="btn  btn-default btn-sm ">
-                  <input type="radio" name="{{../name}}"  value="{{#if this.name}}{{name}}{{else}}{{this}}{{/if}}"> 
+                <label class="btn  btn-default btn-sm  {{#if ../noAll}}{{#unless @index}}active{{/unless}}{{/if}}">
+                  <input type="radio" name="{{../name}}"  value="{{#if this.name}}{{name}}{{else}}{{this}}{{/if}}" {{#if ../noAll}}{{#unless @index}}checked{{/unless}}{{/if}} /> 
                   {{#if this.name}}{{name}}{{else}}{{this}}{{/if}}
                 </label>
                 {{/each}}

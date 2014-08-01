@@ -2,8 +2,12 @@
     <span class="glyphicon glyphicon-user"></span> <b>{{campus_survey.author}}</b> <span class="splitter"> | </span>
     <span class="glyphicon glyphicon-calendar"></span> {{campus_survey.pubdate}}
     <span class="banner-right">
-        <span><span class="numjoined">{{campus_survey.numJoined}}</span></span>
-        <span class="btnJoin"><a href="{{campus_training.joinLink}}" class="btn btn-default  btn-xs">voted</a></span>
+        <span class="numjoined label label-danger">{{campus_survey.numJoined}}</span>
+        {{#if campus_survey.available}}
+        <span class="btnJoin"><a href="{{campus_training.joinLink}}" class="btn btn-default  btn-xs">vote</a></span>
+        {{else}}
+         <span class="text-muted"> closed </span>
+        {{/if}}
     </span>
 </div>
 <div class="content bodycontent">

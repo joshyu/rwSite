@@ -20,6 +20,10 @@ define([
             'campus:survey:item:info' : {
                 url: 'js/data/survey_item.json'
             }
+        },
+
+        _lib : {
+            event_state: ['available', 'closed']
         }
     });
 });

@@ -907,21 +907,24 @@ a.profilelink:hover img{
 .campus-item .banner-right{
     position: absolute;
     right: 20px;
-    top: 5px;
+    top: 10px;
 }
 
 .campus-item .banner-right .numjoined {
-    color: red;
-    font-weight: bolder;
-    font-size: 1.5em;
-    top: .1em;
+    top: .15em;
     position: relative;
-    font-style: italic;
-    margin-right: 5px;
+    font-size: 1.2em;
+    padding-bottom:.2em;
+}
+
+.campus-item .banner-right .text-muted{
+    margin-left: 5px;
+    position: relative;
+    top: 2px;
 }
 
 .campus-item .btnJoin{
-    margin-left: 10px;
+   /*  margin-left: 10px; */
 }
 
 .campus-item .splitter {
@@ -1297,9 +1300,9 @@ a.profilelink:hover img{
     box-shadow: 0px 8px 11px -7px #CACACA; 
 }
 
-.cplp-nolist .oc-banner .btn-group.btn-breadcrumb .btn:not(:first-child) {
+/* .cplp-nolist .oc-banner .btn-group.btn-breadcrumb .btn:not(:first-child) {
     border-radius: 0% 30% 30% 0% !important;
-}
+} */
 
 .panel-list .panel-body{
     padding: 0 15px;
@@ -1406,6 +1409,10 @@ a.profilelink:hover img{
 }
 .panel-list table.panel-body-list >tbody tr{
     cursor: pointer;
+}
+
+.panel-list table.panel-body-list >tbody tr.highlight{
+    background:  #ddd;
 }
 
 .panel-list table.panel-body-list >tbody tr td {

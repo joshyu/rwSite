@@ -17,5 +17,6 @@
              "title":" attach2",
              "link":" http://link/to/attach/2"
          }
-    ]
+    ],
+    "available" : true
 }

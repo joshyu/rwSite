@@ -1004,14 +1004,14 @@ a.profilelink:hover img{
     margin-top: 10px;
 }
 
-.contact_modal_body .image .lync-status-container{
+.lync-status-container{
     width: 100%;
     text-align: center;
     margin-top: 10px;
     display: none;
 }
 
-.contact_modal_body .image  .lync-status{
+.lync-status{
     width: 14px;
     height: 14px;
     display: inline-block;
@@ -1311,6 +1311,15 @@ a.profilelink:hover img{
 
 .panel-list table.panel-body-list {
     table-layout: fixed;
+    width: 100%
+}
+
+.panel-list table.panel-body-list thead .th_index{
+    width: 5%;
+}
+
+.panel-body-list .lync-status-container{
+    text-align: left;
 }
 
 .panel-list .panel-body-list-inner{

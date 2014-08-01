@@ -1,6 +1,13 @@
 {{#each contacts}}
 <tr>
-  <td><img src="{{photo}}" alt="" class="img-circle img-thumbnail"  data-toggle="tooltip" data-placement="bottom" title=""></td>
+  <td width=10%>
+      {{#if ../lyncEnabled}}
+        <div class="lync-status-container">
+          <div class="lync-status" data-email="{{email}}"></div>
+        </div>
+       {{/if}}      
+  </td>
+  <td><img src="{{photo}}" alt="" class="img-circle img-thumbnail"/></td>
   <td>{{name}}</td>
   <td>{{chinesename}}</td>
   <td>{{ext}}</td>

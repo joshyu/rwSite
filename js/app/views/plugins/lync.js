@@ -91,7 +91,6 @@ define({
 
         var presenceClass = this.getLyncPresenceString(status);
         lyncDom.removeClass(this.statuses).addClass(presenceClass);
-        console.log(status,presenceClass)
         this._cachedListeningUsers[usermail] = status;
     },
 

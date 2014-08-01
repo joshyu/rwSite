@@ -11,7 +11,7 @@ define([
             title : 'Contact List',
             itemMode : false,  //itemMode is false, then we will show the results as table list.
             tableColumns : [
-            	'English Name' , 'Chinese Name' , 'Extension Number', 'Team', 'Manager']
+            	'', 'English Name' , 'Chinese Name' , 'Extension Number', 'Team', 'Manager']
         },
 
         panels: {

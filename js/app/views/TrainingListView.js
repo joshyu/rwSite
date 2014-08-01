@@ -9,10 +9,16 @@ define([
         template : template,
         className:'panel-src-list campus-items row',
 
+        events: {
+            'click .btn-markdone' : 'markdone'
+        },
+
         getTemplateData: function(){
             var opts = {
                campus_training : app.preloaded.user.trainingData
             };
+
+            this._templateData = opts.campus_training;
 
             if(this.options.pageId == 'profile'){
                 opts.noJoinLink = true;
@@ -24,6 +30,30 @@ define([
 
         onRender: function(){
             this.$el.find('.trcode-link').popover();
+        },
+
+        markdone: function(e){
+            e.preventDefault();
+            
+            var trcode = prompt("please input training code");
+            if(!trcode) return false;
+
+            debugger;
+
+            var item= e.target;
+            var itemId = $(item).data('item-id');
+            var data = {formData: {id : itemId , trcode : trcode } };
+
+            app.modelHelper.get('campus_training').execute('campus:events:training:markdone',{data: data, success: function(status){
+                 if(status){
+                    var $grp = $(item).parents('.btn-group:first');
+                    $grp.fadeOut('slow', function(){
+                        var $urlDom = $grp.children().first().html('open').css('opacity', 0);
+                        $grp.replaceWith($urlDom[0]);
+                        $urlDom.animate({opacity:1}, 'slow');
+                    });
+                 }
+            }});
         }
     });
 });

@@ -23,6 +23,11 @@ define([
                 url: "js/data/training_item.json"
             }
         },
+        commands: {
+            'campus:events:training:markdone' : {
+                url: "js/data/postsuccess.json.aspx"
+            }
+        },
 
         _lib : {
             training_states: ['available', 'closed']

@@ -923,6 +923,17 @@ a.profilelink:hover img{
     top: 2px;
 }
 
+.campus-item .banner-right .dropdown-menu-xs {
+    min-width: inherit;
+    font-size: 12px;
+    left: auto;
+    right: 0;
+}
+
+.campus-item .banner-right .dropdown-menu-xs>li>a{
+
+}
+
 .campus-item .btnJoin{
    /*  margin-left: 10px; */
 }

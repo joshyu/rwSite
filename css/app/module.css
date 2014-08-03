@@ -926,12 +926,16 @@ a.profilelink:hover img{
 .campus-item .banner-right .dropdown-menu-xs {
     min-width: inherit;
     font-size: 12px;
-    left: auto;
-    right: 0;
+    left: 0;
+    width: 100%;
 }
 
 .campus-item .banner-right .dropdown-menu-xs>li>a{
+    padding: 2px 12px;
+}
 
+.campus-item .btn{
+    padding:1px 12px;
 }
 
 .campus-item .btnJoin{

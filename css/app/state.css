@@ -205,3 +205,11 @@
 .lync-status.donotdisturb{
    background: crimson;
 }
+
+/*bootbox */
+.bootbox {
+  font-size:12px;
+}
+.bootbox *  {
+  font-size: 1em;
+}

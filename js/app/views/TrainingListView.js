@@ -39,7 +39,7 @@ define([
             bootbox.prompt('please input training code:', function  (trcode) {
                 if( trcode !== null ){
                     var data = {formData: {trcode : trcode}}
-                    app.modelHelper.get('campus_training').execute('campus:events:training:checktrcode',{data: data}, success: function (stat) {
+                    app.modelHelper.get('campus_training').execute('campus:events:training:checktrcode',{data: data, success: function (stat){
                         if(stat){
                             bootbox.confirm("Training code is correct. Are you sure to mark it done ?", function (res) {
                                 if(res){
@@ -60,7 +60,7 @@ define([
                                 }
                             })
                         }
-                    })
+                    }})
                 }
             });            
         }

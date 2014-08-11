@@ -1,0 +1,20 @@
+    {{#if subs.length}}
+    <li class="menu menu-folder menu-{{id}} is-open">
+          <a href="#"><i class="fa fa-lg fa-fw {{#if icon}}{{icon}}{{else}}fa-folder-open{{/if}}"></i>
+              {{#if parentid}}
+                    {{title}}
+              {{else}}
+                    <span class="menu-item-parent">{{title}}</span> 
+              {{/if}}
+              <!--<b class="collapse-sign"><em class="fa fa-minus-square-o"></em></b> -->
+          </a>
+          <ul>
+              {{#each subs}}
+                  {{> menuitem}}
+              {{/each}}
+          </ul>    
+    {{else}}
+    <li class="menu menu-leaf menu-{{id}}">
+            <a {{#if isExternalLink}}class="external" target="_blank"{{else}}class="internal"{{/if}}  href="{{link}}"><i class="fa fa-fw fa-lg {{#if icon}}{{icon}}{{else}}fa-file-text{{/if}}"></i> {{title}}</a>
+    {{/if}}
+</li>

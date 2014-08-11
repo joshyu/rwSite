@@ -1,0 +1,24 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Josh Yu  -- FTVP (Rockwell Automation Dalian Campus)
+
+# THANKS
+    Zeno Jia
+    Horace Hong
+    Owen Liu
+    Tweety Rang 
+
+# Special Thanks to 
+    Owen Liu
+    for his kindly help on machine and platform setup
+
+# TECHNOLOGY COLOPHON
+
+    jQuery
+    Lodash
+    Backbone
+    Backbone.Marionette
+    BootStrap

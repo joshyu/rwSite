@@ -1,0 +1,31 @@
+<div class="pull-right edit-link"><a target="_blank" href="#"><i class="fa fa-pencil fa-fw"></i> </a></div>
+<div class="panel-head">
+    <h1 data-title="{{title}}">{{title}} </h1>
+</div>
+<div class="panel-body">
+   <div class="row">
+       <div class="carousel slide carousel-fade" data-ride="carousel">
+              <ol class="carousel-indicators">
+                    {{#each news}}
+                    <li data-target=".panel-news .carousel" data-slide-to="{{@index}}" class="{{#unless @index}}active{{/unless}}"></li>
+                    {{/each}}
+              </ol>
+              <!-- Carousel items -->
+              <div class="carousel-inner">
+                    {{#each news}}
+                    <div class="item row news-{{id}}  {{#unless @index}}active{{/unless}}">
+                        <div class="col-md-3 panel-body-pic"><img src="{{imageUrl}}" class="img-responsive"></div>
+                        <div class="col-md-9 panel-body-content">
+                              <h4 class="article-title">{{title}}</h4>
+                              <p class="publisher">created by {{author}} at {{pubdate}}</p>
+                              <p>{{{content}}}</p>
+                        </div>
+                    </div>
+                    {{/each}}
+              </div>
+              <!-- Carousel nav -->
+             <!-- <a class="carousel-control left" href="#carousel" data-slide="prev">&lsaquo;</a>
+             <a class="carousel-control right " href="#carousel" data-slide="next">&rsaquo;</a> -->
+      </div>
+  </div> 
+</div>

@@ -1,0 +1,46 @@
+<div class="panel-notify-sub-heading">{{title}}</div>
+<div class="panel-notify-sub-list panel-notify-sub-hire-information">
+    <div class="carousel slide" data-ride="carousel">
+        <!-- Bottom Carousel Indicators -->
+        <ol class="carousel-indicators">
+        {{#each contacts}}
+          <li data-target=".panel-notify-hire .carousel" data-slide-to="{{@index}}" class="{{#unless @index}}active{{/unless}}"></li>
+        {{/each}}
+        </ol>
+        
+        <!-- Carousel Slides / Quotes -->
+        <div class="carousel-inner"> 
+        {{#each contacts}}
+          <!-- Quote  {{@index}} -->
+          <div class="item hire-{{id}}  {{#unless @index}}active{{/unless}}">
+            <blockquote>
+              <div class="row">
+                <div class="col-sm-3 text-center avatar">
+                    <a href="#employees/{{id}}" data-employee-id="{{id}}" class="profilelink">
+                        <img class="img-circle  img-thumbnail" src="{{image}}">
+                    </a>
+                </div>
+                <div class="col-sm-9 intro">
+                  <p class="statement">{{intro}}</p>
+                  <p class="small"><span class="name site-role label label-primary">{{name}}</span><span class="team">{{team}}</span><span class="title">{{title}}</span></p>
+                </div>
+              </div>
+            </blockquote>
+          </div>
+          {{/each}}
+        </div>
+        
+        <!-- Carousel Buttons Next/Prev -->
+        <a data-slide="prev" href="#quote-carousel" class="left carousel-control"><i class="fa fa-chevron-left"></i></a>
+        <a data-slide="next" href="#quote-carousel" class="right carousel-control"><i class="fa fa-chevron-right"></i></a>
+      </div>
+
+      <!-- <div class="avatar"><a href="#" class="pull-left profilelink"><img src="http://placehold.it/80x80" alt="..." class="img-circle img-thumbnail"></a></div>
+                                                            <div class="intro">
+                                                                <i class="fa fa-quote-left fa-2x pull-left "></i>
+                                                                        ...tomorrow we will run faster, stretch out our arms farther...
+                                                                        And then one fine morning— So we beat on, boats against the
+                                                                        current, borne back ceaselessly into the past.
+                                                            
+                                                            </div>   -->                                                      
+</div>

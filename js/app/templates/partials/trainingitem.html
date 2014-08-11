@@ -1,0 +1,28 @@
+<div class="banner">
+    <span class="label label-default">{{campus_training.category}}</span><span class="splitter">&nbsp;</span>
+    <span class="glyphicon glyphicon-user"></span> <b>{{campus_training.author}}</b> <span class="splitter"> | </span>
+    <span class="glyphicon glyphicon-calendar"></span> {{campus_training.date}} <span class="splitter">&nbsp;</span> {{campus_training.timespan}} 
+    <br/><br/>
+    <span class="glyphicon glyphicon-globe"></span> <b>{{campus_training.room}}</b> <span class="splitter"> | </span>
+    <span>Difficulty:</span> {{campus_training.Rank}}
+    <span class="banner-right">
+         <span class="numjoined label label-primary">{{campus_training.numJoined}}</span>
+        {{#if campus_training.available}}
+        <span class="btnJoin"><a href="{{campus_training.joinLink}}" class="btn btn-default btn-xs">register</a></span>
+        {{else}}
+        <span class="text-muted"> closed </span>
+        {{/if}}
+    </span>
+</div>
+<div class="content bodycontent">
+   <p>{{{campus_training.content}}}</p>
+</div>
+
+{{#if campus_training.attachments.length}}
+<div class="attachments">
+    <span class="glyphicon glyphicon-paperclip"></span> 
+    {{#each campus_training.attachments}}
+        <span class="attach_{{@index}} item"><a target="_blank" href="{{link}}">{{title}}</a></span> <span class="splitter"></span>
+    {{/each}}
+</div>
+{{/if}}

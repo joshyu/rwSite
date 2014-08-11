@@ -1,0 +1,11 @@
+<div class="pull-right edit-link"><a target="_blank" href="#"><i class="fa fa-pencil "></i>  </a></div>
+<div class="panel-head">
+    <h1>{{title}}</h1>
+</div>
+<div class="panel-body">
+     <div class="list-group linklist">
+        {{#each links}}
+          <a href="{{link}}" target="_blank" class="list-group-item item-{{id}} ">{{title}}</a>
+        {{/each}}
+      </div>
+</div>

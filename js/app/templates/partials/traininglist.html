@@ -1,0 +1,55 @@
+{{#each campus_training}}
+<div class="campus-item">
+	<div class="head">
+    <h4>{{title}}
+        {{#ifCond ../curUser author}}
+        <span class="trcode"><a class="trcode-link" href="javascript:;" data-toggle="popover" data-placement="top"  title="view training code" data-content="{{trainingcode}}"><i class="fa fa-key"></i></a></span>
+        {{/ifCond}}
+    </h4>
+		<span class="banner-right">
+      <span class="numjoined label label-primary">{{numJoined}}</span>
+      {{#if available}}
+          {{#if ../../noJoinLink}}
+              
+              {{#ifCond ../../../curUser author}}
+                  <span class="btnJoin"><a href="{{joinLink}}" class="btn btn-default btn-xs" target="_blank"  > open </a></span>
+              {{else}}
+                  <div class="btn-group">
+                    <a href="{{joinLink}}" target="_blank" class="btn btn-default btn-xs">Unregister</a>
+                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                      <span class="caret"></span>
+                      <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-xs" role="menu">
+                      <li><a href="#" class="btn-markdone" data-item-id="{{id}}">Mark Done</a></li>
+                    </ul>
+                  </div>
+              {{/ifCond}}            
+          {{else}}
+              <span class="btnJoin"><a href="{{joinLink}}" class="btn btn-default btn-xs" target="_blank"  >register </a></span>
+          {{/if}}
+      {{else}}
+          <span class="text-muted">closed</span>
+      {{/if}}  
+    </span>
+	</div>
+	<div class="banner">
+    <span class="label label-default">{{category}}</span><span class="splitter">&nbsp;</span>
+    <span class="glyphicon glyphicon-user"></span> <b>{{author}}</b> <span class="splitter"> | </span>
+    <span class="glyphicon glyphicon-calendar"></span> {{date}} <span class="splitter"> </span> {{timespan}} <span class="splitter"> | </span>
+    <span class="glyphicon glyphicon-globe"></span> <b>{{room}}</b> <span class="splitter"> | </span>
+    <span>Difficulty:</span> {{Rank}}
+	</div>
+	<div class="content bodycontent">
+	   <p>{{{content}}}</p>
+	</div>
+	{{#if attachments.length}}
+	<div class="attachments">
+	    <span class="glyphicon glyphicon-paperclip"></span> 
+	    {{#each attachments}}
+	        <span class="attach_{{@index}} item"><a target="_blank" href="{{link}}">{{title}}</a></span> <span class="splitter"></span>
+	    {{/each}}
+	</div>
+	{{/if}}
+</div>
+{{/each}}

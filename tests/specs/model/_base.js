@@ -3,7 +3,9 @@ define([
     'models/ModelHelper',
     './userSpec',
     './srcSpec',
-    './bookSpec'
+    './bookSpec',
+    './qlinkSpec',
+    './navigationSpec'
 ], function(app) {
     'use strict';
     var specs = [].slice.call(arguments, 2);

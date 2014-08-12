@@ -75,5 +75,21 @@ define({
             },
             fields: ['*', 'Category/Title']
         }
-    }
+    },
+    qlinks: {
+        items: {
+            url: {
+                site: "campus",
+                title: "quicklinks"
+            }
+        }
+    },
+    navigation: {
+        items: {
+            url: {
+                site: "campus",
+                title: "sidemenu"
+            }
+        }
+    },
 });

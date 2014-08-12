@@ -6,10 +6,16 @@ define([
 ], function (app, Backbone,  _,  ModelBase) {
     'use strict';
     return ModelBase.extend({
+         _service: 'qlinks',
         requests:{
             'links:quicklinks' : {
-                url: "js/data/qlinks.jso",
-                type: 'list'
+                url: "items",
+                type: 'list',
+                returnFields: {
+                    'Id': 'id',
+                    'LinkUrl': 'link',
+                    'Title': 'title'
+                }
             }
         }        
     });

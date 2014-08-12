@@ -6,12 +6,19 @@ define([
 ], function (app, Backbone,  _,  ModelBase) {
     'use strict';
     return ModelBase.extend({
+        _service: 'navigation',
         requests:{
             'navigation:fetch:list' :  {
                 type: 'list',
-                url: 'js/data/navigation.jso', 
+                url: 'items', 
                 cached: true,
-                parseData: '_reformatDataAsTree'
+                parseData: '_reformatDataAsTree',
+                returnFields: {
+                    'Id': 'id',
+                    'Title': 'title',
+                    'ParentId': 'parentid',
+                    'Link': 'link'
+                }
             }
         },
 

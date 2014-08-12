@@ -144,10 +144,6 @@ define([
                 this.options = _.extend({}, this.options, options);
             },
 
-            getServiceKey: function() {
-                return _service;
-            },
-
             _fetchlist: function(options) {
                 return this._fetchitem(options).then(function(data) {
                     return data.results;
@@ -175,36 +171,6 @@ define([
                 });
             }
         };
-    };
-
-    var _SPUser = _SPService.user = {
-        fetchCurrentUser: function() {
-            return this._fetchitem('currentUser').then(function(userdata) {
-                userdata.LoginName = userdata.LoginName.split('|')[1];
-                return userdata;
-            });
-        },
-
-        fetchMyRole: function(userId) {
-            return this._fetchlist({
-                serviceKey: 'currentUserRoles',
-                data: {
-                    "id": userId
-                }
-            }).then(function(roles) {
-                return _.pluck(roles, 'Title');
-            });
-        }
-    };
-
-    var _SPList = _SPService.list = {
-        init: function(opts) {
-
-        }
-    };
-
-    var _SPItem = _SPService.item = {
-
     };
 
     return _SPService;

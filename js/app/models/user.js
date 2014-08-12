@@ -25,11 +25,12 @@ define([
                 cached: true,
                 returnFields: {
                     'Id': 'id',
-                    'LoginName': 'loginName',
+                    'LoginName': 'account',
                     'Title': 'name',
                     'Email': 'email',
                     'IsSiteAdmin': 'isadmin'
-                }
+                },
+                parseData: 'handleUserInfo'
             },
 
             'user:info:role': {
@@ -48,6 +49,7 @@ define([
 
             'user:role': {
                 url: 'currentUserRoles',
+                cached: true,
                 type: 'list',
                 returnFields: "Title"
             }
@@ -55,6 +57,11 @@ define([
 
         handleUserAllRelatedData: function(data) {
             return _.object(['info','srcData'], data);
+        },
+
+        handleUserInfo: function(data){
+            data.account = data.account.split("|")[1] ;
+            return data;
         }
     });
 });

@@ -206,6 +206,8 @@ define([
                     _item = item[fields];
                 } else {
                     _.each(fields, function(value, key) {
+                        if(!value) return;
+
                         k = key.indexOf("/");
                         if (k === -1) {
                             _item[value] = item[key];
@@ -279,6 +281,35 @@ define([
 
         cacheData: function(key, data) {
             this.cached[key] = data;
+        },
+
+        //shared methods by the models to handle the attachment list.
+        handleAttachments: function(data, noImageUrl) {
+            return _.map(data, function(item) {
+                var attaches = item.attachments; // item.attachments.results;
+                if (attaches) {
+                    attaches = item.attachments = attaches.results;
+
+                    if (attaches.length > 0 && !noImageUrl) {
+                        var k = attaches.length,
+                            _attach;
+
+                        while (k-- >= 0 && (_attach = attaches[k])) {
+                            if (/(jpg|gif|png)$/.test(_attach.FileName)) {
+                                item.imageUrl = _attach.ServerRelativeUrl;
+                                attaches.splice(k, 1);
+                                break;
+                            }
+                        }
+                    }
+
+                    if (attaches.length === 0) {
+                        delete item.attachments;
+                    }
+                }
+
+                return item;
+            });
         }
     });
 });

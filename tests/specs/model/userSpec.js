@@ -1,7 +1,5 @@
 define(function() {
     'use strict';
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
-
     return function(app) {
         describe('user model services', function() {
             var model = app.modelHelper.get('user');

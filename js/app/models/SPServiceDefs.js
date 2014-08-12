@@ -33,7 +33,10 @@ define({
         categoryNames: {
             url: {
                 site: "campus",
-                title: "SrcCategory"
+                title: "SrcCategory",
+                conditions: {
+                    expand: 'AttachmentFiles'
+                }
 
             },
             fields: ['Id', 'Title']
@@ -44,10 +47,10 @@ define({
                 title: 'Src',
                 conditions: {
                     orderby: 'Id desc',
-                    expand: 'Category'
+                    expand: 'Category,AttachmentFiles,Author'
                 }
             },
-            fields: ['*', 'Category/Title']
+            fields: ['*', 'Category/Title','Author/Title']
         },
         item: {
             url: {
@@ -61,9 +64,16 @@ define({
         }
     },
 
-    list: {
-        contacts: {
-
+    book: {
+        items: {
+            url: {
+                site: "campus",
+                title: "books",
+                conditions: {
+                    expand: 'Category'
+                }
+            },
+            fields: ['*', 'Category/Title']
         }
     }
 });

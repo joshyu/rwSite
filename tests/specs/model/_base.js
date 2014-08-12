@@ -2,7 +2,8 @@ define([
     'app',
     'models/ModelHelper',
     './userSpec',
-    './srcSpec'
+    './srcSpec',
+    './bookSpec'
 ], function(app) {
     'use strict';
     var specs = [].slice.call(arguments, 2);

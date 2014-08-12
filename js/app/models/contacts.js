@@ -8,7 +8,7 @@ define([
     return ModelBase.extend({
         requests: {
             'contacts:contactInfo' : {
-                dep : 'contacts:fulllist',
+                deps : 'contacts:fulllist',
                 parseData: 'fetchContactInfo'
             },
 
@@ -25,7 +25,7 @@ define([
             },
 
             'contacts:birthday:recently' : {
-                dep : 'contacts:fulllist',
+                deps : 'contacts:fulllist',
                 parseData : 'fetchRecentBirthday'
             },
 

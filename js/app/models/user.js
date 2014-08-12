@@ -1,51 +1,60 @@
 define([
     'app',
     'backbone',
+    'underscore',
     'models/ModelBase',
-], function(app, Backbone, ModelBase) {
+], function(app, Backbone, _, ModelBase) {
     'use strict';
 
     return ModelBase.extend({
+        _service: 'user',
+
         requests: {
-            'user:info': 'fetchUserInfo'
+            'user:all:related': {
+                cached: true,
+                deps: [
+                    'user:info:role',
+                    'campus_src/campus:events:src:userowned',
+                    /*'campus_training/campus:events:training:userowned'*/
+                ],
+                parseData: 'handleUserAllRelatedData'
+            },
+
+            'user:info': {
+                url: 'currentUser',
+                cached: true,
+                returnFields: {
+                    'Id': 'id',
+                    'LoginName': 'loginName',
+                    'Title': 'name',
+                    'Email': 'email',
+                    'IsSiteAdmin': 'isadmin'
+                }
+            },
+
+            'user:info:role': {
+                deps: "user:info",
+                cached: true,
+                chain: {
+                    key: "user:role",
+                    attrName: "roles",
+                    data: function(depData) {
+                        return {
+                            id : depData.id
+                        };
+                    }
+                }
+            },
+
+            'user:role': {
+                url: 'currentUserRoles',
+                type: 'list',
+                returnFields: "Title"
+            }
         },
 
-        _service: 'user',
-        fetchUserInfo: function() {
-            // fetch user info, role, campus updates.
-            var key = 'user:info';
-            var dfd = $.Deferred();
-            var that = this;
-            var service = this.service;
-            var _data = this.getCached(key);
-
-            if (_data) {
-                dfd.resolve(_data);
-            } else {
-                var dfduser = service.fetchCurrentUser().then(function(userdata) {
-                    return service.fetchMyRole(userdata.Id).then(function(roles) {
-                        userdata.roles = roles;
-                        return userdata;
-                    });
-                });
-
-                var dfdCampusSrcUpdates = null; // app.modelHelper.get('campus_src').request('campus:events:src:userowned');
-                var dfdCampusTrainingUpdates = null; //app.modelHelper.get('campus_training').request('campus:events:training:userowned');
-
-                $.when(dfduser, dfdCampusSrcUpdates, dfdCampusTrainingUpdates).done(function(user, srcData, trainingData) {
-                    //debugger;
-                    _data = {
-                        info: user,
-                        srcData: srcData,
-                        trainingData: trainingData
-                    };
-
-                    that.cacheData(key, _data);
-                    dfd.resolve(_data);
-                });
-            }
-
-            return dfd.promise();
+        handleUserAllRelatedData: function(data) {
+            return _.object(['info','srcData'], data);
         }
     });
 });

@@ -11,6 +11,10 @@ define({
         KeysWithCompatibilityIssue: ["inlinecount", "skip"]
     },
     base: {
+        removedConditions: {
+            item: ['orderby', 'top','skip'], 
+            list: []
+        }
 
     },
     user: {
@@ -40,6 +44,16 @@ define({
                 title: 'Src',
                 conditions: {
                     orderby: 'Id desc',
+                    expand: 'Category'
+                }
+            },
+            fields: ['*', 'Category/Title']
+        },
+        item: {
+            url: {
+                site: 'campus',
+                title: 'Src',
+                conditions: {
                     expand: 'Category'
                 }
             },

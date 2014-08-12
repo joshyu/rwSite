@@ -34,18 +34,21 @@ define([
             
             //TODO: will be updated later.
              'campus:events:src:userowned' : {
-                url : "items",
-                type: "list",
-                data: {num: 5}
+                deps: 'campus:events:src:updates'
             },
 
             'campus:src:item:info' :{
-                //url: "js/data/src_item.jso",
-                url : "items"
+                url : "item",
+                returnFields : {
+                    "Id" : "id",
+                    "Title" : "title",
+                    "Category/Title" : "category"
+                }
             },
 
             'campus:src:categoryNames' :{
                 url : 'categoryNames',
+                cached: true,
                 type: "list" 
             }
         },

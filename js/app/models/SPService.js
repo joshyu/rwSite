@@ -64,24 +64,24 @@ define([
             if (_.isString(options)) {
                 return this._getServiceConf(_service, options);
             } else if (_.isObject(options) && options.serviceKey) {
-                return _.extend(this._getServiceConf(_service, options.serviceKey), options );
+                return _.extend(this._getServiceConf(_service, options.serviceKey), options);
             }
         },
 
-        _parseConditionList: function(conds){
+        _parseConditionList: function(conds) {
             var condKeyNeedMapped = _SPDefined.conditions.keysNeedMapped;
             var compatList = _SPDefined.conditions.KeysWithCompatibilityIssue;
             var useNewAPI = true;
-            _.each(conds, function(value, key){
-                 var _newKey= condKeyNeedMapped[key] ;
-                 if(_newKey){
-                     conds[_newKey] = value;
-                     delete conds[key];
-                 }
+            _.each(conds, function(value, key) {
+                var _newKey = condKeyNeedMapped[key];
+                if (_newKey) {
+                    conds[_newKey] = value;
+                    delete conds[key];
+                }
 
-                 if(_.contains(compatList, _newKey || key)){
-                     useNewAPI = false;
-                 }
+                if (_.contains(compatList, _newKey || key)) {
+                    useNewAPI = false;
+                }
             });
 
             return useNewAPI;
@@ -90,42 +90,48 @@ define([
         regenerateUrl: function(options) {
             if (!options || !options.url) return false;
             var url = options.url;
-            var urlParams= "";
+            var urlParams = "";
             if (!url) return false;
-            var _conditions = _.extend({}, url.conditions, options.data); 
-            var _useNewAPI =  this._parseConditionList(_conditions);
+            var _conditions = _.extend({}, url.conditions, options.data);
+            var _useNewAPI = this._parseConditionList(_conditions);
 
             //manually update.
-            if(_conditions.inlinecount){
-                _conditions = {top : 0, inlinecount : _conditions.inlinecount};
-
+            if (_conditions.inlinecount) {
+                _conditions = {
+                    top: 0,
+                    inlinecount: _conditions.inlinecount
+                };
                 options.fields = [];
             }
 
             if (_.isObject(url) && url.site) {
-                url.apibase = _useNewAPI ? _SPDefined.api.listRelativePath : _SPDefined.api.listRelativePath_old ; 
-                url = "/" + url.site + url.apibase.replace('$listTitle$', url.title).replace('$id$',  _conditions.id || "");
+                url.apibase = _useNewAPI ? _SPDefined.api.listRelativePath : _SPDefined.api.listRelativePath_old;
+                url = "/" + url.site + url.apibase.replace('$listTitle$', url.title).replace('$id$', _conditions.id || "");
+                delete _conditions.id;
             }
 
-            urlParams += _.map(_conditions, function(condValue, condKey){
+            //append the '@' variable pairs.
+            urlParams += _.map(url.match(/\@[\w]+/g), function(paramKey) {
+                var _key = paramKey.substr(1);
+                if (_conditions[_key]) {
+                    var _param = paramKey + "=" + _conditions[_key] + "&";
+                    delete _conditions[_key];
+                }
+
+                return _param || "";
+            }).join('');
+
+            urlParams += _.map(_conditions, function(condValue, condKey) {
                 return "$" + condKey + "=" + condValue + "&";
             }).join("");
-
-            
-            if (options.urlParameters) {
-                var _urlParms = url.match(/\@[\w]+/g);
-                urlParams += _.map(_urlParms, function(paramKey) {
-                    return paramKey + "=" + (options.urlParameters[paramKey.substr(1)] || "") + "&";
-                }).join('');
-            }
 
             var _fields = options.fields;
             if (_fields && _fields.length) {
                 urlParams += "$select=" + _fields.join(',')
             }
 
-            if(urlParams.length > 0){
-                 url += "?";
+            if (urlParams.length > 0) {
+                url += "?";
             }
 
             return url + urlParams;
@@ -134,16 +140,15 @@ define([
 
     var _SPBase = _SPService.base = function(_service) {
         return {
-            init: function( options) {
+            init: function(options) {
                 this.options = _.extend({}, this.options, options);
             },
 
-            getServiceKey : function(){
+            getServiceKey: function() {
                 return _service;
             },
 
             _fetchlist: function(options) {
-                options.asList = true;
                 return this._fetchitem(options).then(function(data) {
                     return data.results;
                 });
@@ -183,7 +188,7 @@ define([
         fetchMyRole: function(userId) {
             return this._fetchlist({
                 serviceKey: 'currentUserRoles',
-                urlParameters: {
+                data: {
                     "id": userId
                 }
             }).then(function(roles) {

@@ -21,6 +21,13 @@ define(function() {
                 });
             });
 
+            it("fetch campus src item info", function(done){
+                model.request('campus:src:item:info', {id : 2}).done(function(item){
+                    expect(item).toBeDefined();
+                    done();
+                });
+            });
+
              it("fetch campus src item count", function(done) {
                 model.request('campus:events:src:count').done(function(item) {
                     expect(item).toBeDefined();

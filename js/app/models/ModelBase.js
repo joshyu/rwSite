@@ -11,6 +11,7 @@ define([
             var _commands = new Backbone.Wreqr.Commands();
             var _reqres = new Backbone.Wreqr.RequestResponse();
             this.service = SPService.utils.locateService(this);
+            this.cached = {};
 
             this._bindHandlers(this.requests, _reqres, this, '_fetchByType');
             this._bindHandlers(this.commands, _commands, this, '_executeByType');
@@ -18,9 +19,9 @@ define([
             this.execute = _commands.execute.bind(_commands);
         },
 
-        requests: {},
-        commands: {},
-        cached: {},
+        requests: null,
+        commands: null,
+        cached: null,
 
         _bindHandlers: function(_keys, _cols, context, funcNameByType) {
             var key = null;
@@ -152,9 +153,17 @@ define([
                         var _parseData = opts.parseData,
                             _context = opts.context;
                         var options = opts.deps ? args : {};
-
+                        var hasAttachments = false;
+                        
                         if (opts.returnFields && _context.filterReturnFields) {
+                            hasAttachments = _.isObject(opts.returnFields) && 'AttachmentFiles' in opts.returnFields;
                             data = _context.filterReturnFields(data, opts.returnFields);
+                        }
+
+                        //if attachment files are found in returned values, 
+                        //then handle the attachments and extract image url.
+                        if(hasAttachments && _context.handleAttachments){
+                            data = _context.handleAttachments(data);
                         }
 
                         if (_.isFunction(_context[_parseData])) {
@@ -194,9 +203,11 @@ define([
 
         filterReturnFields: function(data, fields) {
             if (!data || !fields) return data;
+            var isItem = false;
 
             if (!_.isArray(data)) {
                 data = [data];
+                isItem = true;
             }
 
             var _item, k;
@@ -221,7 +232,7 @@ define([
                 return _item;
             });
 
-            if (data.length == 1) {
+            if (data.length == 1 && isItem) {
                 data = data[0];
             }
             return data;

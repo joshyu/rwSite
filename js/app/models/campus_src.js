@@ -25,8 +25,7 @@ define([
                     "AttachmentFiles": "attachments",
                     "EventDate": "pubdate",
                     "JoinLink": "joinLink"
-                },
-                parseData: 'handleAttachments'
+                }
             },
 
             'campus:events:src:count': {
@@ -61,8 +60,7 @@ define([
                     "Attachments": "",
                     "AttachmentFiles": "attachments",
                     "Title": "title"
-                },
-                parseData: 'handleAttachments'
+                }
             }
         },
 

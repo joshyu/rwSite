@@ -84,6 +84,19 @@ define({
             }
         }
     },
+    news: {
+        items: {
+            url: {
+                site: 'campus',
+                title: 'News',
+                conditions: {
+                    orderby: 'Id desc',
+                    expand: 'AttachmentFiles,Author0'
+                }
+            },
+            fields: ['*', 'Author0/Title']
+        }
+    },
     navigation: {
         items: {
             url: {
@@ -92,4 +105,28 @@ define({
             }
         }
     },
+    contacts: {
+        items: {
+            url: {
+                site: 'campus',
+                title: 'contacts',
+                conditions: {
+                    expand: 'FullName,Team0'
+                }
+            },
+            fields: ['*', 'FullName/Title' ,'Team0/Title']
+        },
+        newhires: {
+            url: {
+                site: 'campus',
+                title: 'NewHires'
+            }
+        },
+        teams: {
+            url: {
+                site: 'campus',
+                title: 'teams'
+            }
+        }
+    }
 });

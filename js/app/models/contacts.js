@@ -6,6 +6,7 @@ define([
 ], function (app, Backbone, _, ModelBase) {
     'use strict';
     return ModelBase.extend({
+        _service: 'contacts',
         requests: {
             'contacts:contactInfo' : {
                 deps : 'contacts:fulllist',
@@ -13,15 +14,38 @@ define([
             },
 
             'contacts:fulllist' : {
-                url: 'js/data/contact_full.jso',
+                url: "items",
                 type: 'list',
                 cached: true,
+                data: {
+                    num: 9999 //in order to retrieve the full list not the first 100 items.
+                },
                 parseData: '_parseRelationship',
+                 returnFields: {
+                    "Id": "id",
+                    "FullName/Id" : "nameRecordId",
+                    "FullName/Title": "name",
+                    "FullName/Chinese_x0020_Name": "chinesename",
+                    "E_x002d_mail_x0020_Address":"email",
+                    "Project": "project",
+                    "Photo/Url" : "photo",
+                    "Lead": "supervisor",
+                    "Manager": "manager",
+                    "Team0/Title": "team",
+                    "Ext_x0020_Number": "ext",
+                    "Birthday" : "birthday"
+                }
             },
 
             'contacts:newhire' : {
-                url: 'js/data/contact_newhire.jso',
-                type: 'list'
+                url : "newhires",
+                type: "list",
+                returnFields: {
+                    "Id": "id",
+                    "Introduction": "intro",
+                    "FullNameId": "nameRecordId"
+                },
+                parseData: '_fetchNewHireFullData'
             },
 
             'contacts:birthday:recently' : {
@@ -30,8 +54,12 @@ define([
             },
 
             'contacts:teamCategoryNames' : {
-                url: "js/data/team_categoryNames.jso",
-                type: "list"
+                url: "teams",
+                type: "list",
+                returnFields: {
+                    "Id": "id",
+                    "Title": "name"
+                }
             }
         },
 
@@ -52,7 +80,8 @@ define([
                 var d1 = new Date(item.birthday).setFullYear(year);
                 var pass = d> d1 && (d - d1)  < dayminiutes;
                 if(pass){
-                    item.birthday = item.birthday.replace(/\/?\b\w{4}\b\/?/,'');
+                    d1 = new Date(item.birthday);
+                    item.birthday = (d1.getMonth()+1) + "/" + d1.getDate();
                 }
 
                 return pass;
@@ -128,13 +157,13 @@ define([
             });
 
             $.each(data, function(i, item){
-                 var managerItem = data[ _data[item.manager] ];
-                 if(managerItem){
-                    item.managerId = managerItem.id;
-                     if(managerItem.reportees){
-                        managerItem.reportees.push(item);
+                 var supervisorItem = data[ _data[ item.supervisor ]];
+                 if(supervisorItem){
+                    item.managerId = supervisorItem.nameRecordId;
+                     if(supervisorItem.reportees){
+                        supervisorItem.reportees.push(item);
                      }else{
-                        managerItem.reportees = [item];
+                        supervisorItem.reportees = [ item ];
                      }
                  }else{
                     _roots.push(item);
@@ -143,11 +172,19 @@ define([
 
             _data = {};
             $.each(data, function(i,item){
-                _data[item.id] = item;
+                _data[item.nameRecordId] = item;
             });
 
             _data.roots = _roots;
              return _data;
+        },
+
+        _fetchNewHireFullData: function(newhires){
+            var emplist = this.getCached('contacts:fulllist');
+            return _.map(newhires, function(emp){
+                var empData = emp.nameRecordId && emplist && emplist[emp.nameRecordId];
+                return _.extend(emp, empData);
+            });
         }
     });
 });

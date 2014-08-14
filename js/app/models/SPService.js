@@ -92,6 +92,15 @@ define([
             var url = options.url;
             var urlParams = "";
             if (!url) return false;
+
+            //parse filter parameter.
+            var _filters = url.filters || "";
+            if(options.data.filters){
+                _filters = (_filters ? (_filters + " and "): "") + options.data.filters;
+                delete options.data.filters;
+            }
+
+
             var _conditions = _.extend({}, url.conditions, options.data);
             var _useNewAPI = this._parseConditionList(_conditions);
 
@@ -120,6 +129,10 @@ define([
 
                 return _param || "";
             }).join('');
+
+            if(_filters){
+                urlParams += "$filter=" + _filters + "&";
+            }
 
             urlParams += _.map(_conditions, function(condValue, condKey) {
                 return "$" + condKey + "=" + condValue + "&";
@@ -151,10 +164,16 @@ define([
             },
 
             _fetchitem: function(options) {
+                var url = "";
                 options = _SPUtils.parseOptions(_service, options);
-                var url = _SPUtils.regenerateUrl(options);
-                if (!url) return false;
 
+                if(options.listProperties){
+                    url = "/" + options.url.site + _SPDefined.api.listRelativePathProperties.replace('$listTitle$', options.url.title).replace('$prop$', options.listProperties);
+                }else{
+                    url = _SPUtils.regenerateUrl(options);    
+                }
+                
+                if (!url) return false;
                 return $.ajax({
                     url: url,
                     method: "GET",

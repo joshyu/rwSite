@@ -22,7 +22,7 @@ define(function() {
             });
 
             it("fetch campus src item info", function(done){
-                model.request('campus:src:item:info', {id : 2}).done(function(item){
+                model.request('campus:src:item:info', {id : 1}).done(function(item){
                     expect(item).toBeDefined();
                     done();
                 });

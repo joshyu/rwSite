@@ -6,10 +6,24 @@ define([
 ], function (app, Backbone,  _,  ModelBase) {
     'use strict';
     return ModelBase.extend({
+        _service: 'survey',
         requests: {
             'campus:survey:newest' : {
-                url: "js/data/survey_newest.jso",
-                type: 'list'
+                url: "items",
+                type: 'list',
+                data:{
+                    orderby: 'Id desc'
+                },
+                returnFields: {
+                    "Id": "id",
+                    "Title": "title",
+                    "Author/Title":"author",
+                    "Content" : "content",
+                    "Created": "pubdate",
+                    "link": "votelink",
+                    "available":"available",
+                    "numVoted":"numVoted"
+                }
             },
 
             'campus:survey:popular' : {

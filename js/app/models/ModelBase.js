@@ -92,32 +92,32 @@ define([
             if (_.isString(deps)) {
                 return this.request(deps);
             }
-            
-            if(_.isArray(deps)){
-                if(deps.length == 1){
+
+            if (_.isArray(deps)) {
+                if (deps.length == 1) {
                     return this.request(deps[0]);
                 }
 
-                var _dfds= [];
-                var _dfd= null;
-                _.each(deps, _.bind(function (dep,index){
+                var _dfds = [];
+                var _dfd = null;
+                _.each(deps, _.bind(function(dep, index) {
                     _dfd = null;
                     dep = dep.split("/");
-                    if(dep.length == 1){
+                    if (dep.length == 1) {
                         _dfd = this.request(dep[0]);
-                    }else{
+                    } else {
                         var _model = app.modelHelper.get(dep[0]);
-                        if(_model){
+                        if (_model) {
                             _dfd = _model.request(dep[1]);
                         }
                     }
 
-                    if(_dfd){
-                        _dfds.push(_dfd);    
-                    }                    
-                },this));
+                    if (_dfd) {
+                        _dfds.push(_dfd);
+                    }
+                }, this));
 
-                return $.when.apply($, _dfds).then(function (){
+                return $.when.apply($, _dfds).then(function() {
                     return [].slice.call(arguments);
                 });
             }
@@ -140,6 +140,8 @@ define([
                         var _opts = {
                             serviceKey: opts.url,
                             data: _.extend(opts.data || {}, args),
+                            filters: opts.filters,
+                            listProperties: opts.listProperties
                         };
 
                         if (opts.returnFields) {
@@ -154,7 +156,7 @@ define([
                             _context = opts.context;
                         var options = opts.deps ? args : {};
                         var hasAttachments = false;
-                        
+
                         if (opts.returnFields && _context.filterReturnFields) {
                             hasAttachments = _.isObject(opts.returnFields) && 'AttachmentFiles' in opts.returnFields;
                             data = _context.filterReturnFields(data, opts.returnFields);
@@ -162,32 +164,36 @@ define([
 
                         //if attachment files are found in returned values, 
                         //then handle the attachments and extract image url.
-                        if(hasAttachments && _context.handleAttachments){
-                            data = _context.handleAttachments(data);
+                        if (hasAttachments && _context.handleAttachments) {
+                            if (_.isArray(data)) {
+                                data = _.map(data, _context.handleAttachments, _context);
+                            } else {
+                                data = _context.handleAttachments(data);
+                            }
                         }
 
                         if (_.isFunction(_context[_parseData])) {
                             data = _context[_parseData](data, options);
                         }
 
-                        var _chain= opts.chain;
-                        if(_chain && _chain.key){
-                            if( _.isFunction(_chain.data) ){
+                        var _chain = opts.chain;
+                        if (_chain && _chain.key) {
+                            if (_.isFunction(_chain.data)) {
                                 _chain.data = _chain.data(data);
                             }
-                            
-                            return that.request(_chain.key, _chain.data).then(function(_data){
-                                if(_chain.attrName){
+
+                            return that.request(_chain.key, _chain.data).then(function(_data) {
+                                if (_chain.attrName) {
                                     data[_chain.attrName] = _data;
                                 }
 
-                                if(_cachedKey){
+                                if (_cachedKey) {
                                     _cached[_cachedKey] = data;
                                 }
 
                                 return data;
                             });
-                        }else{
+                        } else {
                             if (_cachedKey) {
                                 _cached[_cachedKey] = data;
                             }
@@ -217,7 +223,7 @@ define([
                     _item = item[fields];
                 } else {
                     _.each(fields, function(value, key) {
-                        if(!value) return;
+                        if (!value) return;
 
                         k = key.indexOf("/");
                         if (k === -1) {
@@ -295,32 +301,30 @@ define([
         },
 
         //shared methods by the models to handle the attachment list.
-        handleAttachments: function(data, noImageUrl) {
-            return _.map(data, function(item) {
-                var attaches = item.attachments; // item.attachments.results;
-                if (attaches) {
-                    attaches = item.attachments = attaches.results;
+        handleAttachments: function(item) {
+            var attaches = item.attachments; // item.attachments.results;
+            if (attaches) {
+                item.attachments = attaches = attaches.results;
 
-                    if (attaches.length > 0 && !noImageUrl) {
-                        var k = attaches.length,
-                            _attach;
+                if (attaches.length > 0) {
+                    var k = attaches.length,
+                        _attach;
 
-                        while (k-- >= 0 && (_attach = attaches[k])) {
-                            if (/(jpg|gif|png)$/.test(_attach.FileName)) {
-                                item.imageUrl = _attach.ServerRelativeUrl;
-                                attaches.splice(k, 1);
-                                break;
-                            }
+                    while (k-- >= 0 && (_attach = attaches[k])) {
+                        if (/(jpg|gif|png)$/.test(_attach.FileName)) {
+                            item.imageUrl = _attach.ServerRelativeUrl;
+                            attaches.splice(k, 1);
+                            break;
                         }
-                    }
-
-                    if (attaches.length === 0) {
-                        delete item.attachments;
                     }
                 }
 
-                return item;
-            });
+                if (attaches.length === 0) {
+                    delete item.attachments;
+                }
+            }
+
+            return item;
         }
     });
 });

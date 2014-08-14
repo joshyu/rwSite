@@ -13,8 +13,7 @@ define([
                 url: "items",
                 data: {
                     num: 5,
-                    orderby: 'NewsDate desc',
-                    filter:'Visible eq 1'  //sharepoint will check the field with 1/0.
+                    orderby: 'NewsDate desc'
                 },
                 returnFields: {
                     "Id": "id",

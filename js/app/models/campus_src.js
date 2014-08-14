@@ -30,11 +30,8 @@ define([
 
             'campus:events:src:count': {
                 url: "items",
-                data: {
-                    inlinecount: "allpages"
-                },
-
-                returnFields: "__count"
+                listProperties: "ItemCount",
+                returnFields: "ItemCount"
             },
 
             //TODO: will be updated later.
@@ -47,7 +44,13 @@ define([
                 returnFields: {
                     "Id": "id",
                     "Title": "title",
-                    "Category/Title": "category"
+                    "Category/Title": "category",
+                    "Author/Title":"author",
+                    "Attachments": "",
+                    "content" : "content",
+                    "AttachmentFiles": "attachments",
+                    "EventDate": "pubdate",
+                    "JoinLink": "joinLink"
                 }
             },
 

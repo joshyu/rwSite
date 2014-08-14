@@ -7,7 +7,9 @@ define([
     './qlinkSpec',
     './navigationSpec',
     './newsSpec',
-    './contactsSpec'
+    './contactsSpec',
+    './officeSpec',
+    './surveySpec'
 ], function(app) {
     'use strict';
     var specs = [].slice.call(arguments, 2);

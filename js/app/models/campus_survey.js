@@ -27,12 +27,36 @@ define([
             },
 
             'campus:survey:popular' : {
-                url:'js/data/survey_popular.jso',
-                type: 'list'
+                url: "items",
+                type: 'list',
+                data:{
+                    orderby: 'numVoted desc'
+                },
+                returnFields: {
+                    "Id": "id",
+                    "Title": "title",
+                    "Author/Title":"author",
+                    "Content" : "content",
+                    "Created": "pubdate",
+                    "link": "votelink",
+                    "available":"available",
+                    "numVoted":"numVoted"
+                }
             },
 
             'campus:survey:item:info' : {
-                url: 'js/data/survey_item.jso'
+                //url: 'js/data/survey_item.jso'
+                url: "items",
+                returnFields: {
+                    "Id": "id",
+                    "Title": "title",
+                    "Author/Title":"author",
+                    "Content" : "content",
+                    "Created": "pubdate",
+                    "link": "votelink",
+                    "available":"available",
+                    "numVoted":"numVoted"
+                }
             }
         },
 

@@ -24,7 +24,8 @@ define([
                     "content" : "content",
                     "AttachmentFiles": "attachments",
                     "EventDate": "pubdate",
-                    "JoinLink": "joinLink"
+                    "JoinLink": "joinLink",
+                    "available" : "available"
                 }
             },
 
@@ -40,7 +41,7 @@ define([
             },
 
             'campus:src:item:info': {
-                url: "item",
+                url: "items",
                 returnFields: {
                     "Id": "id",
                     "Title": "title",
@@ -50,7 +51,8 @@ define([
                     "content" : "content",
                     "AttachmentFiles": "attachments",
                     "EventDate": "pubdate",
-                    "JoinLink": "joinLink"
+                    "JoinLink": "joinLink",
+                    "available" : "available"
                 }
             },
 

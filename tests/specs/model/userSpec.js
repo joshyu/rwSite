@@ -17,7 +17,7 @@ define(function() {
                 });
             });
 
-            it("test user chain: information with role", function(done){
+            it("test user information with role", function(done){
                 model.request("user:info:role").done(function(userData){
                     expect(userData).toBeDefined();
                     expect(userData.roles).toBeDefined();

@@ -6,17 +6,31 @@ define([
 ], function (app, Backbone,  _,  ModelBase) {
     'use strict';
     return ModelBase.extend({
-        defaults: {
-            title: 'Training Center',
-        },
+        _service: 'training',
         requests: {
             'campus:events:training:updates' : {
-                url: "js/data/events_training_updates.jso",
-                type: 'list'
+                url:'items',
+                type: 'list',
+                returnFields: {
+                    "Id": "id",
+                    "Title": "title",
+                    "Category/Title": "category",
+                    "Teacher/Title":"author",
+                    "Attachments": "",
+                    "content" : "content",
+                    "AttachmentFiles": "attachments",
+                    "EventDate": "pubdate",
+                    "JoinLink": "joinLink",
+                    "timespan": "timespan",
+                    "TrainingCode": "trainingcode",
+                    "TrainingRoom": "room",
+                    "Rank": "Rank",
+                    "numJoined": "numJoined",
+                    "available" : "available"
+                },
             },
             'campus:events:training:userowned' : {
-                url: "js/data/events_training_updates.jso",
-                type: 'list'
+                deps: 'campus:events:training:updates'
             },
 
             'campus:training:item:info' : {

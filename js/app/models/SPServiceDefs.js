@@ -9,10 +9,12 @@ define({
             "num": "top"
         },
 
-        KeysWithCompatibilityIssue: ["inlinecount", "skip"]
+        KeysWithCompatibilityIssue: ["inlinecount", "skip"],
+        keysItemPermitted: ["expand"]
     },
     base: {
     },
+
     user: {
         currentUser: {
             url: '/_api/Web/currentUser',
@@ -20,7 +22,7 @@ define({
         },
 
         currentUserRoles: {
-            url: '/_api/Web/GetUserById(@id)/Groups',
+            url: '/_api/Web/GetUserById($id$)/Groups',
             fields: ['Id', 'Title']
         }
     },
@@ -46,15 +48,6 @@ define({
                     expand: 'Category,AttachmentFiles,Author'
                 }
             }
-        },
-        item: {
-            url: {
-                site: 'campus',
-                title: 'Src',
-                conditions: {
-                    expand: 'Category,AttachmentFiles,Author'
-                }
-            }
         }
     },
 
@@ -62,7 +55,7 @@ define({
         items: {
             url: {
                 site: "campus",
-                title: "books",
+                title: "Books",
                 conditions: {
                     expand: 'Category'
                 }
@@ -77,8 +70,7 @@ define({
                 title: "SurveyList",
                 conditions: {
                     expand: 'Author'
-                },
-                filters: 'available eq 1' //sharepoint will check the field with 1/0.
+                }
             }
         }
     },
@@ -108,7 +100,7 @@ define({
         items: {
             url: {
                 site: "campus",
-                title: "sidemenu"
+                title: "Sidemenu"
             }
         }
     },
@@ -125,7 +117,7 @@ define({
         products: {
             url: {
                 site: "campus",
-                title: "products",
+                title: "Products",
                 conditions: {
                     expand: 'File'
                 }
@@ -136,7 +128,7 @@ define({
         items: {
             url: {
                 site: 'campus',
-                title: 'contacts',
+                title: 'Contacts',
                 conditions: {
                     expand: 'FullName,Team0'
                 }
@@ -152,7 +144,18 @@ define({
         teams: {
             url: {
                 site: 'campus',
-                title: 'teams'
+                title: 'Teams'
+            }
+        }
+    },
+    training: {
+        items: {
+            url: {
+                site: 'campus',
+                title: 'TrainingList',
+                conditions: {
+                    expand: 'Category,Teacher,AttachmentFiles'
+                }
             }
         }
     }

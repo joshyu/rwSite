@@ -68,14 +68,21 @@ define([
             }
         },
 
-        _parseConditionList: function(conds) {
+        _parseConditionList: function(conds, asList) {
             var condKeyNeedMapped = _SPDefined.conditions.keysNeedMapped;
             var compatList = _SPDefined.conditions.KeysWithCompatibilityIssue;
+            var keysItemPermitted = _SPDefined.conditions.keysItemPermitted;
             var useNewAPI = true;
+
             _.each(conds, function(value, key) {
                 var _newKey = condKeyNeedMapped[key];
                 if (_newKey) {
                     conds[_newKey] = value;
+                    delete conds[key];
+                }
+
+                //if the result is not a list, we will remove those forbidden conditions.
+                if(!asList && !_.contains(keysItemPermitted, _newKey || key)){
                     delete conds[key];
                 }
 
@@ -94,15 +101,24 @@ define([
             if (!url) return false;
 
             //parse filter parameter.
-            var _filters = url.filters || "";
-            if(options.data.filters){
-                _filters = (_filters ? (_filters + " and "): "") + options.data.filters;
-                delete options.data.filters;
+            //if the result is item not list, need not filter.
+            var _filters = "";
+            if(options.asList){
+                _filters = url.filters || "";
+
+                if(options.data.filters){
+                    _filters = (_filters ? (_filters + " and "): "") + options.data.filters;
+                    delete options.data.filters;
+                }
             }
 
+            if(options.data.id){
+                var _itemId = options.data.id;
+                delete options.data.id;
+            }
 
             var _conditions = _.extend({}, url.conditions, options.data);
-            var _useNewAPI = this._parseConditionList(_conditions);
+            var _useNewAPI = this._parseConditionList(_conditions, options.asList);
 
             //manually update.
             if (_conditions.inlinecount) {
@@ -115,20 +131,11 @@ define([
 
             if (_.isObject(url) && url.site) {
                 url.apibase = _useNewAPI ? _SPDefined.api.listRelativePath : _SPDefined.api.listRelativePath_old;
-                url = "/" + url.site + url.apibase.replace('$listTitle$', url.title).replace('$id$', _conditions.id || "");
+                url = "/" + url.site + url.apibase.replace('$listTitle$', url.title).replace('$id$', _itemId || "");
                 delete _conditions.id;
+            }else if(_.isString(url)){
+                url = url.replace('$id$', _itemId);
             }
-
-            //append the '@' variable pairs.
-            urlParams += _.map(url.match(/\@[\w]+/g), function(paramKey) {
-                var _key = paramKey.substr(1);
-                if (_conditions[_key]) {
-                    var _param = paramKey + "=" + _conditions[_key] + "&";
-                    delete _conditions[_key];
-                }
-
-                return _param || "";
-            }).join('');
 
             if(_filters){
                 urlParams += "$filter=" + _filters + "&";
@@ -140,7 +147,7 @@ define([
 
             var _fields = options.fields;
             if (_fields && _fields.length) {
-                urlParams += "$select=" + _fields.join(',')
+                urlParams += "$select=" + ( _.isArray(_fields) ? _fields.join(',') : _fields );
             }
 
             if (urlParams.length > 0) {
@@ -158,13 +165,14 @@ define([
             },
 
             _fetchlist: function(options) {
-                return this._fetchitem(options).then(function(data) {
+                return this._fetchitem(options,true).then(function(data) {
                     return data.results;
                 });
             },
 
-            _fetchitem: function(options) {
+            _fetchitem: function(options, asList) {
                 var url = "";
+                options.asList = asList || false;
                 options = _SPUtils.parseOptions(_service, options);
 
                 if(options.listProperties){

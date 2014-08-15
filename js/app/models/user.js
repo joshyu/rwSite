@@ -15,7 +15,7 @@ define([
                 deps: [
                     'user:info:role',
                     'campus_src/campus:events:src:userowned',
-                    /*'campus_training/campus:events:training:userowned'*/
+                    'campus_training/campus:events:training:userowned'
                 ],
                 parseData: 'handleUserAllRelatedData'
             },
@@ -34,6 +34,26 @@ define([
             },
 
             'user:info:role': {
+                url: 'currentUser',
+                cached: true,
+                returnFields: {
+                    'Id': 'id',
+                    'LoginName': 'account',
+                    'Title': 'name',
+                    'Email': 'email',
+                    'IsSiteAdmin': 'isadmin',
+                    'Groups/Title': 'roles'
+                },
+
+                data: {
+                    expand: 'Groups'
+                },
+                parseData: "handleUserInfo"
+                /*
+                chain sample: 
+                the functionality is left, but we don't use it now,
+                because we have better solution : $expand=Groups.
+
                 deps: "user:info",
                 cached: true,
                 chain: {
@@ -44,7 +64,7 @@ define([
                             id : depData.id
                         };
                     }
-                }
+                }*/
             },
 
             'user:role': {
@@ -56,7 +76,7 @@ define([
         },
 
         handleUserAllRelatedData: function(data) {
-            return _.object(['info','srcData'], data);
+            return _.object(['info','srcData', 'trainingData'], data);
         },
 
         handleUserInfo: function(data){

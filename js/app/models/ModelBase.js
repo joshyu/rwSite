@@ -140,12 +140,15 @@ define([
                         var _opts = {
                             serviceKey: opts.url,
                             data: _.extend(opts.data || {}, args),
-                            filters: opts.filters,
-                            listProperties: opts.listProperties
+                            filters: opts.filters
                         };
 
-                        if (opts.returnFields) {
-                            _opts.fields = _.keys(opts.returnFields);
+                        if (opts.listProperties) {
+                            _opts.listProperties = opts.listProperties;
+                        }
+
+                        if ( opts.returnFields ) {
+                            _opts.fields = _.isObject(opts.returnFields) ?  _.keys(opts.returnFields) : opts.returnFields;
                         }
 
                         def = this.service['_fetch' + (opts.type || 'item')](_opts);
@@ -230,7 +233,16 @@ define([
                             _item[value] = item[key];
                         } else {
                             //parse lookup field value.
-                            _item[value] = item[key.substr(0, k)][key.substr(k + 1)];
+                            var k1 = key.substr(0,k), k2= key.substr(k+1);
+                            var __item = item[k1];
+
+                            if(__item.results && _.isArray(__item.results)){
+                                _item[value] = _.map(__item.results, function(iit){
+                                    return  iit[k2];
+                                });
+                            }else{
+                                _item[value] = __item[k2];  
+                            }
                         }
                     });
                 }
@@ -242,50 +254,6 @@ define([
                 data = data[0];
             }
             return data;
-        },
-
-        _fetchitem: function(opts) {
-            var dfd = $.Deferred();
-
-            if (!opts || !opts.url) {
-                dfd.reject(false);
-            } else {
-                var options = {
-                    url: opts.url,
-                    type: 'GET',
-                    dataType: 'json',
-                    data: opts.data,
-                    success: function(data) {
-                        dfd.resolve(data);
-                    }
-                };
-
-                Backbone.ajax(options);
-            }
-
-            return dfd.promise();
-        },
-
-        _fetchlist: function(opts) {
-            var dfd = $.Deferred();
-
-            if (!opts || !opts.url) {
-                dfd.reject(false);
-            } else {
-                var options = {
-                    url: opts.url,
-                    type: 'GET',
-                    dataType: 'json',
-                    data: opts.data,
-                    success: function(data) {
-                        dfd.resolve(data.data);
-                    }
-                };
-
-                Backbone.ajax(options);
-            }
-
-            return dfd.promise();
         },
 
         getCached: function(key) {

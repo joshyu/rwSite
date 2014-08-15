@@ -9,7 +9,8 @@ define([
     './newsSpec',
     './contactsSpec',
     './officeSpec',
-    './surveySpec'
+    './surveySpec',
+    './trainingSpec'
 ], function(app) {
     'use strict';
     var specs = [].slice.call(arguments, 2);

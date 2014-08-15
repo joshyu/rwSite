@@ -13,6 +13,14 @@ define(function() {
                 });
             });
 
+            it("fetch campus userowned items", function(done) {
+                model.request('campus:events:src:userowned').done(function(items) {
+                    expect(items).toBeDefined();
+                    expect(items.length).toBeGreaterThan(0);
+                    done();
+                });
+            });
+
             it("fetch campus src items", function(done) {
                 model.request('campus:events:src:updates').done(function(items) {
                     expect(items).toBeDefined();

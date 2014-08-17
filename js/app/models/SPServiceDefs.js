@@ -2,8 +2,16 @@ define({
     api: {
         listRelativePath: '/_api/Web/lists/getbytitle(\'$listTitle$\')/items($id$)',
         listRelativePathProperties: '/_api/Web/lists/getbytitle(\'$listTitle$\')/$prop$',
-        listRelativePath_old: '/_vti_bin/ListData.svc/$listTitle$($id$)'
+        listRelativePath_old: '/_vti_bin/ListData.svc/$listTitle$($id$)',
+        contextInfo: '/_api/contextinfo/'
     },
+
+    postMethods: {
+        'update' : "MERGE",
+        'delete'  : "DELETE",
+        'create'  : ""
+    },
+
     conditions: {
         keysNeedMapped: {
             "num": "top"
@@ -156,6 +164,15 @@ define({
                 conditions: {
                     expand: 'Category,Teacher,AttachmentFiles'
                 }
+            }
+        }
+    },
+    suggestion: {
+        items: {
+            url: {
+                site: 'campus',
+                title: 'SuggestionList',
+                name: 'SuggestionList'
             }
         }
     }

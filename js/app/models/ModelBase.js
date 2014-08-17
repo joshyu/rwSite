@@ -2,8 +2,9 @@ define([
     'app',
     'backbone',
     'underscore',
-    'models/SPService'
-], function(app, Backbone, _, SPService) {
+    'models/SPService',
+    './SPServiceDefs'
+], function(app, Backbone, _, SPService, _SPDefined) {
     'use strict';
 
     return Backbone.Model.extend({
@@ -48,12 +49,22 @@ define([
 
         _executeByType: function(opts) { /* define */
             return function(args) { /*invoke */
-                return this['_post']({
-                    url: opts.url,
-                    data: _.extend(opts.data || {}, args.data),
-                    success: args.success,
-                    fail: args.fail,
-                });
+                var type= opts.type;
+                if(!(type in _SPDefined.postMethods)){
+                    type = 'update';
+                }
+
+                opts.serviceKey = opts.url;
+                delete opts.url;
+
+                //args : {filters: {}, data: {}}
+                var _opts = _.extend({}, opts, args);
+                var _meth = this.service[type];
+                if(!_meth){
+                    _meth = this.service['_postData'];
+                }
+
+                return _meth.call(this.service, _opts).then(args.success, args.error);
             };
         },
 
@@ -154,7 +165,7 @@ define([
                         def = this.service['_fetch' + (opts.type || 'item')](_opts);
                     }
 
-                    dfd = def.then(function(data) {
+                    dfd = $.when(def).then(function(data){
                         var _parseData = opts.parseData,
                             _context = opts.context;
                         var options = opts.deps ? args : {};

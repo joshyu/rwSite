@@ -25,7 +25,8 @@ define([
                     "AttachmentFiles": "attachments",
                     "EventDate": "pubdate",
                     "JoinLink": "joinLink",
-                    "available" : "available"
+                    "available" : "available",
+                    'numJoined': 'numJoined'
                 }
             },
 
@@ -52,7 +53,8 @@ define([
                     "AttachmentFiles": "attachments",
                     "EventDate": "pubdate",
                     "JoinLink": "joinLink",
-                    "available" : "available"
+                    "available" : "available",
+                    'numJoined': 'numJoined'
                 }
             },
 

@@ -68,6 +68,39 @@ define([
             }
         },
 
+        getListItemType: function(linkname){
+            return "SP.Data." + linkname.charAt(0).toUpperCase() + linkname.slice(1) + "ListItem";
+        },
+
+        getContextInfo: function(){
+            if(this.lastContextInfo){
+                return this.lastContextInfo;
+            }else{
+                return  $.ajax({
+                    url:  _SPDefined.api.contextInfo,
+                    method: "POST",
+                    headers: { "Accept": "application/json; odata=verbose" }
+                }).then(function(data){
+                    return data.d.GetContextWebInformation.FormDigestValue;
+                });
+            }
+        },
+
+        setContextInfo: function(value){
+            this.lastContextInfo = value;
+        },
+
+        getPostHeader: function(type){
+            var _headers= {};
+            var _meth = _SPDefined.postMethods[type];
+            if(_meth){
+                _headers['X-HTTP-Method'] = _meth;
+                _headers['If-Match'] = '*';
+            }
+
+            return _headers;
+        },
+
         _parseConditionList: function(conds, asList) {
             var condKeyNeedMapped = _SPDefined.conditions.keysNeedMapped;
             var compatList = _SPDefined.conditions.KeysWithCompatibilityIssue;
@@ -94,11 +127,39 @@ define([
             return useNewAPI;
         },
 
-        regenerateUrl: function(options) {
+        regeneratePOSTUrl: function(options){
+            if (!options || !options.url) return false;
+            var url = options.url;
+            if (!url) return false;
+
+            if(options.id){
+                var _itemId = options.id;
+                delete options.id;
+            }
+
+            if (_.isObject(url) && url.site) {
+                url = "/" + url.site +  _SPDefined.api.listRelativePath.replace('$listTitle$', url.title).replace('$id$', _itemId || "");
+            }else if(_.isString(url)){
+                url = url.replace('$id$', _itemId);
+            }
+
+            return url; 
+        },
+
+        regenerateGETUrl: function(options) {
             if (!options || !options.url) return false;
             var url = options.url;
             var urlParams = "";
             if (!url) return false;
+
+            if(options.listProperties){
+                if(_.isObject(url) && url.site){
+                    return  "/" + url.site + _SPDefined.api.listRelativePathProperties.replace('$listTitle$', url.title).replace('$prop$', options.listProperties);    
+                }else{
+                    return url + "/" + options.listProperties;
+                }
+            }
+
 
             //parse filter parameter.
             //if the result is item not list, need not filter.
@@ -161,10 +222,12 @@ define([
     var _SPBase = _SPService.base = function(_service) {
         return {
             init: function(options) {
-                this.options = _.extend({}, this.options, options);
+                //this.options = _.extend({}, this.options, options);
+                this.options = options;
             },
 
             _fetchlist: function(options) {
+                _.extend(options, this.options);
                 return this._fetchitem(options,true).then(function(data) {
                     return data.results;
                 });
@@ -173,15 +236,11 @@ define([
             _fetchitem: function(options, asList) {
                 var url = "";
                 options.asList = asList || false;
-                options = _SPUtils.parseOptions(_service, options);
 
-                if(options.listProperties){
-                    url = "/" + options.url.site + _SPDefined.api.listRelativePathProperties.replace('$listTitle$', options.url.title).replace('$prop$', options.listProperties);
-                }else{
-                    url = _SPUtils.regenerateUrl(options);    
-                }
-                
+                options = _SPUtils.parseOptions(_service, options);
+                url = _SPUtils.regenerateGETUrl(options);
                 if (!url) return false;
+
                 return $.ajax({
                     url: url,
                     method: "GET",
@@ -195,6 +254,32 @@ define([
                     }
 
                     return data;
+                });
+            },
+
+            _postData: function(options){
+                _.extend(options, this.options);
+                options = _SPUtils.parseOptions(_service, options);
+                var  itemType=  _SPUtils.getListItemType(options.listname || options.url.name);
+                var url = _SPUtils.regeneratePOSTUrl(options);
+                var data = _.extend({}, options.data, {"__metadata": { "type": itemType }});
+
+                return $.when(_SPUtils.getContextInfo()).then(function(reqDigest){
+                    var __header= {
+                        "Accept": "application/json;odata=verbose",
+                        "X-RequestDigest": reqDigest
+                    };
+
+                    return $.ajax({
+                        url: url,
+                        type: "POST",
+                        contentType: "application/json;odata=verbose",
+                        data: JSON.stringify(data),
+                        headers:  _.extend(__header, _SPUtils.getPostHeader(options.type))
+                    }).then(function(data,txt, xhr){
+                        _SPUtils.setContextInfo(xhr.getResponseHeader('X-RequestDigest'));
+                        return data && (data.d || data);
+                    });
                 });
             }
         };

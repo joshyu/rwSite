@@ -93,9 +93,9 @@
         }
 
 //============================================================
-// Servicehelper.init({web:'/spData', list:'announce'})
+// Servicehelper.init({web:'/temp', list:'announce'})
 
-        getListItems('/spData', 'announce',  function  (data) {
+        getListItems('/temp', 'announce',  function  (data) {
              if(!data || !data.length) return false;
               var strTemplate= $('#t_item').html();
 
@@ -116,7 +116,7 @@
                        return false;
                    }
 
-                   updateListItem('/spData', 'announce', _id, {"Title": title},function (data) {
+                   updateListItem('/temp', 'announce', _id, {"Title": title},function (data) {
                        alert("update OK!"); 
                        _itemNode.find('.item-title-d > span:first').html(title);
 

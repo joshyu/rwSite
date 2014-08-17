@@ -20,6 +20,15 @@ define(function() {
                     done();
                 });
             });
+
+            it("fetch training item", function(done) {
+                model.request('campus:training:item:info', {id: 1}).done(function(item) {
+                    expect(item).toBeDefined();
+                    expect(item).toBeTruthy();
+                    done();
+                });
+            });
+
         });
     }
 });

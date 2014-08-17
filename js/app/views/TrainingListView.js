@@ -35,16 +35,17 @@ define([
 
         markdone: function(e){
             e.preventDefault();
+            var item= e.target;
+            var itemId = $(item).data('item-id');
 
             bootbox.prompt('please input training code:', function  (trcode) {
                 if( trcode !== null ){
-                    var data = {formData: {trcode : trcode}}
+                    var data = {formData: {id: itemId, trcode : trcode}}
                     app.modelHelper.get('campus_training').execute('campus:events:training:checktrcode',{data: data, success: function (stat){
                         if(stat){
                             bootbox.confirm("Training code is correct. Are you sure to mark it done ?", function (res) {
                                 if(res){
-                                    var item= e.target;
-                                    var itemId = $(item).data('item-id');
+                                    
                                     var data = {formData: {id : itemId , trcode : trcode } };
 
                                     app.modelHelper.get('campus_training').execute('campus:events:training:markdone',{data: data, success: function(status){

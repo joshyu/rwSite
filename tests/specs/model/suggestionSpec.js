@@ -18,7 +18,6 @@ define(function() {
                     done();
                 }
 
-                //posted.error = function(err){};
                 model.execute('suggestion:post', posted);
             });
         });

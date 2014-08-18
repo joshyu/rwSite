@@ -9,7 +9,6 @@ define([
         _service: 'suggestion',
         commands: {
             'suggestion:post' : {
-                //url: "js/data/postsuccess.jso.aspx"
                 url: 'items',
                 type: 'create'
             }

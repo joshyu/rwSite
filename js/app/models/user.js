@@ -15,7 +15,8 @@ define([
                 deps: [
                     'user:info:role',
                     'campus_src/campus:events:src:userowned',
-                    'campus_training/campus:events:training:userowned'
+                    'campus_training/campus:events:training:userowned',
+                    'contacts/contacts:fulllist'
                 ],
                 parseData: 'handleUserAllRelatedData'
             },
@@ -76,6 +77,11 @@ define([
         },
 
         handleUserAllRelatedData: function(data) {
+            var contacts= data.pop();
+            var userInfo= data[0];
+            userInfo.related = _.find(contacts, function(_contact){ return _contact.email == userInfo.email});
+            userInfo.image = userInfo.related.photo;
+
             return _.object(['info','srcData', 'trainingData'], data);
         },
 

@@ -54,7 +54,7 @@ define([
                     type = 'update';
                 }
 
-                opts.serviceKey = opts.url;
+                opts.serviceKey = opts.serviceKey || opts.url;
                 delete opts.url;
 
                 //args : {filters: {}, data: {}}

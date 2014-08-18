@@ -260,7 +260,7 @@ define([
             _postData: function(options){
                 _.extend(options, this.options);
                 options = _SPUtils.parseOptions(_service, options);
-                var  itemType=  _SPUtils.getListItemType(options.listname || options.url.name);
+                var  itemType=  _SPUtils.getListItemType(options.listname || options.url.name || options.url.title);
                 var url = _SPUtils.regeneratePOSTUrl(options);
                 var data = _.extend({}, options.data, {"__metadata": { "type": itemType }});
 

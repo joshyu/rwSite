@@ -30,10 +30,13 @@ define(function() {
                 model.request('user:all:related').done(function(userData){
                     expect(userData).toBeDefined();
                     expect(userData.info).toBeDefined();
+                    expect(userData.info.roles).toBeDefined();
+                    expect(userData.info.roles.length).toBeGreaterThan(0);
                     expect(userData.srcData).toBeDefined();
+                    expect(userData.trainingData).toBeDefined();
                     done();
                 });
-            })
+            });
         });
     }
 });

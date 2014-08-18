@@ -14,36 +14,72 @@ define(function() {
                 });
             });
 
-            it("fetch new hire list", function(done){
-                model.request('contacts:newhire').done(function(items){
+            it("fetch new hire list", function(done) {
+                model.request('contacts:newhire').done(function(items) {
                     expect(items).toBeDefined();
                     expect(items.length).toBeGreaterThan(0);
                     done();
                 });
             });
 
-            it("fetch contact information", function(done){
-                model.request('contacts:contactInfo', {id: 202}).done(function(item){
+            it("fetch contact information", function(done) {
+                model.request('contacts:contactInfo', {
+                    id: 202
+                }).done(function(item) {
                     expect(item).toBeDefined();
                     expect(item.relations).toBeDefined();
                     done();
                 });
             });
 
-            it("fetch recent birthday list", function(done){
-                model.request('contacts:birthday:recently').done(function(items){
+            it("fetch recent birthday list", function(done) {
+                model.request('contacts:birthday:recently').done(function(items) {
                     expect(items).toBeDefined();
                     done();
                 });
             });
 
-            it('fetch team category list', function(done){
-                model.request('contacts:teamCategoryNames').done(function(items){
+            it('fetch team category list', function(done) {
+                model.request('contacts:teamCategoryNames').done(function(items) {
                     expect(items).toBeDefined();
                     done();
                 });
-            })
-            
+            });
+
+            xit('update contact photo link', function(done) {
+                model.request('contacts:fulllist').done(function(items) {
+                    var _dfds = [];
+                    var dfd = null;
+                    var j=0, i=0;
+                    _.each(items, function(_item) {                        
+                        var img = _item.photo && _item.photo.replace('http://apcndaeslweb/employeepic', 'http://apcndae-dzn493x/campus/employeepic');
+                        if(!img) return;
+
+                        var data = {Photo:{Url: img }};
+                        var posted = {
+                            id : _item.id,
+                            data: data
+                        };
+
+                        posted.success = function(data) {
+                            j++;
+                            if(i == j){
+                                
+                            }else{
+                                                             
+                            }
+                        }
+
+                        model.execute( 'contacts:updatelink' , posted);
+                        i++;
+                    });
+
+                    expect(1).toBeDefined();
+                    done();                    
+                });
+                
+            });
+
         });
     }
 });

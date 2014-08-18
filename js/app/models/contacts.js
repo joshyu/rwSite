@@ -7,6 +7,12 @@ define([
     'use strict';
     return ModelBase.extend({
         _service: 'contacts',
+        commands:{
+            'contacts:updatelink': {
+                url: 'items',
+                type: 'update'
+            }
+        },
         requests: {
             'contacts:contactInfo' : {
                 deps : 'contacts:fulllist',

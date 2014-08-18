@@ -137,6 +137,7 @@ define({
             url: {
                 site: 'campus',
                 title: 'Contacts',
+                name: 'EmpNameRecords',
                 conditions: {
                     expand: 'FullName,Team0'
                 }

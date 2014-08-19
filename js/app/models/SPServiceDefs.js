@@ -26,12 +26,10 @@ define({
     user: {
         currentUser: {
             url: '/_api/Web/currentUser',
-            fields: ['id', 'LoginName', 'Title', 'Email', 'IsSiteAdmin']
         },
 
         currentUserRoles: {
             url: '/_api/Web/GetUserById($id$)/Groups',
-            fields: ['Id', 'Title']
         }
     },
 
@@ -39,22 +37,13 @@ define({
         categoryNames: {
             url: {
                 site: "campus",
-                title: "SrcCategory",
-                conditions: {
-                    expand: 'AttachmentFiles'
-                }
-
-            },
-            fields: ['Id', 'Title']
+                title: "SrcCategory"
+            }
         },
         items: {
             url: {
                 site: 'campus',
-                title: 'Src',
-                conditions: {
-                    orderby: 'Id desc',
-                    expand: 'Category,AttachmentFiles,Author'
-                }
+                title: 'Src'
             }
         }
     },
@@ -63,22 +52,15 @@ define({
         items: {
             url: {
                 site: "campus",
-                title: "Books",
-                conditions: {
-                    expand: 'Category'
-                }
-            },
-            fields: ['*', 'Category/Title']
+                title: "Books"
+            }
         }
     },
     survey: {
         items: {
             url: {
                 site: "campus",
-                title: "SurveyList",
-                conditions: {
-                    expand: 'Author'
-                }
+                title: "SurveyList"
             }
         }
     },
@@ -96,12 +78,10 @@ define({
                 site: 'campus',
                 title: 'News',
                 conditions: {
-                    orderby: 'Id desc',
-                    expand: 'AttachmentFiles,Author0'
+                    orderby: 'Id desc'
                 },
                 filters: 'Visible eq 1' //sharepoint will check the field with 1/0.
-            },
-            fields: ['*', 'Author0/Title']
+            }
         }
     },
     navigation: {
@@ -116,19 +96,13 @@ define({
         layout: {
             url: {
                 site: "campus",
-                title: "OfficeLayout",
-                conditions: {
-                    expand: 'File'
-                }
+                title: "OfficeLayout"
             }
         },
         products: {
             url: {
                 site: "campus",
-                title: "Products",
-                conditions: {
-                    expand: 'File'
-                }
+                title: "Products"
             }
         }
     },
@@ -137,12 +111,8 @@ define({
             url: {
                 site: 'campus',
                 title: 'Contacts',
-                name: 'EmpNameRecords',
-                conditions: {
-                    expand: 'FullName,Team0'
-                }
-            },
-            fields: ['*', 'FullName/Title', 'Team0/Title']
+                name: 'EmpNameRecords'
+            }
         },
         newhires: {
             url: {
@@ -161,10 +131,7 @@ define({
         items: {
             url: {
                 site: 'campus',
-                title: 'TrainingList',
-                conditions: {
-                    expand: 'Category,Teacher,AttachmentFiles'
-                }
+                title: 'TrainingList'
             }
         }
     },

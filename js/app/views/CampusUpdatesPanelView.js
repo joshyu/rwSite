@@ -25,11 +25,13 @@ define([
         requests: [
             {
                 model: 'campus_src',
-                key: 'campus:events:src:updates'
+                key: 'campus:events:src:updates:short',
+                options: {num:5}
             },
             {
                 model: 'campus_training',
-                key: 'campus:events:training:updates'
+                key: 'campus:events:training:updates:short',
+                options: {num:5}
             }
         ],
 

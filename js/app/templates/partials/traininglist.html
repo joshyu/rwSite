@@ -36,7 +36,7 @@
 	<div class="banner">
     <span class="label label-default">{{category}}</span><span class="splitter">&nbsp;</span>
     <span class="glyphicon glyphicon-user"></span> <b>{{author}}</b> <span class="splitter"> | </span>
-    <span class="glyphicon glyphicon-calendar"></span> {{date}} <span class="splitter"> </span> {{timespan}} <span class="splitter"> | </span>
+    <span class="glyphicon glyphicon-calendar"></span> {{formatDate pubdate}} <span class="splitter"> </span> {{timespan}} <span class="splitter"> | </span>
     <span class="glyphicon glyphicon-globe"></span> <b>{{room}}</b> <span class="splitter"> | </span>
     <span>Difficulty:</span> {{Rank}}
 	</div>
@@ -47,7 +47,7 @@
 	<div class="attachments">
 	    <span class="glyphicon glyphicon-paperclip"></span> 
 	    {{#each attachments}}
-	        <span class="attach_{{@index}} item"><a target="_blank" href="{{link}}">{{title}}</a></span> <span class="splitter"></span>
+	        <span class="attach_{{@index}} item"><a target="_blank" href="{{ServerRelativeUrl}}">{{FileName}}</a></span> <span class="splitter"></span>
 	    {{/each}}
 	</div>
 	{{/if}}

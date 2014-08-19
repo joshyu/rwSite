@@ -79,7 +79,7 @@ define([
         handleUserAllRelatedData: function(data) {
             var contacts= data.pop();
             var userInfo= data[0];
-            userInfo.related = _.find(contacts, function(_contact){ return _contact.email == userInfo.email});
+            userInfo.related = _.find(contacts.relations, function(_contact){ return _contact.email == userInfo.email});
             userInfo.image = userInfo.related.photo;
 
             return _.object(['info','srcData', 'trainingData'], data);

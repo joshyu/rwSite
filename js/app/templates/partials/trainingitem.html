@@ -1,7 +1,7 @@
 <div class="banner">
     <span class="label label-default">{{campus_training.category}}</span><span class="splitter">&nbsp;</span>
     <span class="glyphicon glyphicon-user"></span> <b>{{campus_training.author}}</b> <span class="splitter"> | </span>
-    <span class="glyphicon glyphicon-calendar"></span> {{campus_training.date}} <span class="splitter">&nbsp;</span> {{campus_training.timespan}} 
+    <span class="glyphicon glyphicon-calendar"></span> {{formatDate campus_training.pubdate}} <span class="splitter">&nbsp;</span> {{campus_training.timespan}} 
     <br/><br/>
     <span class="glyphicon glyphicon-globe"></span> <b>{{campus_training.room}}</b> <span class="splitter"> | </span>
     <span>Difficulty:</span> {{campus_training.Rank}}
@@ -22,7 +22,7 @@
 <div class="attachments">
     <span class="glyphicon glyphicon-paperclip"></span> 
     {{#each campus_training.attachments}}
-        <span class="attach_{{@index}} item"><a target="_blank" href="{{link}}">{{title}}</a></span> <span class="splitter"></span>
+        <span class="attach_{{@index}} item"><a target="_blank" href="{{ServerRelativeUrl}}">{{FileName}}</a></span> <span class="splitter"></span>
     {{/each}}
 </div>
 {{/if}}

@@ -56,7 +56,7 @@ require.config({
             requests: [
                 {
                     model : 'user',
-                    key: 'user:info',
+                    key: 'user:all:related',
                     cacheKey: 'user',
                 },
                 {

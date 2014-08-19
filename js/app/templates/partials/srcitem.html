@@ -1,7 +1,7 @@
 <div class="banner">
     <span class="label label-default">{{campus_src.category}}</span><span class="splitter"></span>
     <span class="glyphicon glyphicon-user"></span> <b>{{campus_src.author}}</b> <span class="splitter"> | </span>
-    <span class="glyphicon glyphicon-calendar"></span> {{campus_src.pubdate}}
+    <span class="glyphicon glyphicon-calendar"></span> {{formatDate campus_src.pubdate}}
     <span class="banner-right">
         <span>
             <span class="numjoined label label-primary">{{campus_src.numJoined}}</span>
@@ -23,7 +23,7 @@
 <div class="attachments">
     <span class="glyphicon glyphicon-paperclip"></span> 
     {{#each campus_src.attachments}}
-        <span class="attach_{{@index}} item"><a target="_blank" href="{{link}}">{{title}}</a></span> <span class="splitter"></span>
+        <span class="attach_{{@index}} item"><a target="_blank" href="{{ServerRelativeUrl}}">{{FileName}}</a></span> <span class="splitter"></span>
     {{/each}}
 </div>
 {{/if}}

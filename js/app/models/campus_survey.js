@@ -11,8 +11,9 @@ define([
             'campus:survey:newest' : {
                 url: "items",
                 type: 'list',
-                data:{
-                    orderby: 'Id desc'
+                queryParameters:{
+                    orderby: 'Id desc',
+                    expand: 'Author'
                 },
                 returnFields: {
                     "Id": "id",
@@ -22,6 +23,20 @@ define([
                     "Created": "pubdate",
                     "link": "votelink",
                     "available":"available",
+                    "numVoted":"numVoted"
+                }
+            },
+
+            'campus:survey:newest:short' : {
+                url: "items",
+                type: 'list',
+                queryParameters:{
+                    orderby: 'Id desc'
+                },
+                returnFields: {
+                    "Id": "id",
+                    "Title": "title",
+                    "Created": "pubdate",
                     "numVoted":"numVoted"
                 }
             },
@@ -29,8 +44,9 @@ define([
             'campus:survey:popular' : {
                 url: "items",
                 type: 'list',
-                data:{
-                    orderby: 'numVoted desc'
+                queryParameters:{
+                    orderby: 'numVoted desc',
+                    expand: 'Author'
                 },
                 returnFields: {
                     "Id": "id",
@@ -44,8 +60,20 @@ define([
                 }
             },
 
+            'campus:survey:popular:short' : {
+                url: "items",
+                type: 'list',
+                queryParameters:{
+                    orderby: 'numVoted desc'
+                },
+                returnFields: {
+                    "Id": "id",
+                    "Title": "title",
+                    "numVoted":"numVoted"
+                }
+            },
+
             'campus:survey:item:info' : {
-                //url: 'js/data/survey_item.jso'
                 url: "items",
                 returnFields: {
                     "Id": "id",
@@ -56,6 +84,9 @@ define([
                     "link": "votelink",
                     "available":"available",
                     "numVoted":"numVoted"
+                },
+                queryParameters:{
+                    expand: 'Author'
                 }
             }
         },

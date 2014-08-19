@@ -602,6 +602,12 @@ sidebar nav list
     font-size: 10px;
     margin: 0;
     padding: 3px 15px 3px 8px;
+    background: #bbb;
+    opacity: .4;
+}
+
+.panel-notify-sub-list  .controls .carousel-control:hover{
+    opacity: 1;
 }
 
 .panel-notify-sub-list a.profilelink:hover{
@@ -681,7 +687,7 @@ a.profilelink:hover img{
     font-weight: bolder;
 }
 
-.panel-notify-sub-hire-information  .intro .title{
+.panel-notify-sub-hire-information  .intro .project{
     margin-left: 10px;
 }
 
@@ -1015,6 +1021,7 @@ a.profilelink:hover img{
 }
 .contact_modal_body .image img{
     width: 120px;
+    height: 120px;
 }
 
 
@@ -1261,8 +1268,8 @@ a.profilelink:hover img{
 }
 
 .campus-items .campus-item .item-image img{
-    max-width: 70%;
-    margin-left: 15%
+    /* max-width: 70%;
+    margin-left: 15% */
 }
 
 /* list page base */
@@ -1434,8 +1441,25 @@ a.profilelink:hover img{
     vertical-align: middle;
 }
 
-.panel-list table.panel-body-list >tbody img {
-    width: 50%;
+/*
+http://www.mademyday.de/css-height-equals-width-with-pure-css.html
+*/
+.panel-list table.panel-body-list  .contact-img-box{
+    position: relative;
+    width: 50%;     /* desired width */
+}
+
+.panel-list table.panel-body-list  .contact-img-box:before{
+    content: "";
+    display: block;
+    padding-top: 100%;  /* initial ratio of 1:1*/
+}
+
+.panel-list table.panel-body-list  .contact-img-box  img {
+    position:  absolute;
+    top: 0;
+    width:100%;
+    height: 100%;
 }
 
 

@@ -12,6 +12,13 @@ define(function() {
                     done();
                 });
             });
+             it("fetch newest training short list", function(done) {
+                model.request('campus:events:training:updates:short').done(function(items) {
+                    expect(items).toBeDefined();
+                    expect(items.length).toBeGreaterThan(0);
+                    done();
+                });
+            });
 
             it("fetch userowned training list", function(done) {
                 model.request('campus:events:training:userowned').done(function(items) {

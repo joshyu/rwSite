@@ -13,14 +13,24 @@
               <!-- Carousel items -->
               <div class="carousel-inner">
                     {{#each news}}
+                    {{#if imageUrl}}
                     <div class="item row news-{{id}}  {{#unless @index}}active{{/unless}}">
                         <div class="col-md-3 panel-body-pic"><img src="{{imageUrl}}" class="img-responsive"></div>
                         <div class="col-md-9 panel-body-content">
                               <h4 class="article-title">{{title}}</h4>
-                              <p class="publisher">created by {{author}} at {{pubdate}}</p>
+                              <p class="publisher">created by {{author}} at {{formatDate pubdate}}</p>
                               <p>{{{content}}}</p>
                         </div>
                     </div>
+                    {{else}}
+                    <div class="item news-{{id}}  {{#unless @index}}active{{/unless}}">
+                        <div class="panel-body-content">
+                              <h4 class="article-title">{{title}}</h4>
+                              <p class="publisher">created by {{author}} at {{formatDate pubdate}}</p>
+                              <p>{{{content}}}</p>
+                        </div>
+                    </div>
+                    {{/if}}
                     {{/each}}
               </div>
               <!-- Carousel nav -->

@@ -16,7 +16,7 @@ define([
             this.hilightTrigger();
             var $domTrigger= $(this.options.domTrigger);
             this.$el.on('hidden.bs.modal', function(){
-                this.remove();
+                //this.remove();
                 $domTrigger.removeClass('highlight');
             });
         },

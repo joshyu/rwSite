@@ -12,7 +12,8 @@ define([
         request: {
             model: 'campus_src',
             key: 'campus:src:item:info',
-            getOptions: 'getRequestOption'
+            getOptions: 'getRequestOption',
+            dataHandler: 'handleItemEventImage'
         },
 
         templateData: {

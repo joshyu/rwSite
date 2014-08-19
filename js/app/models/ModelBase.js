@@ -150,9 +150,12 @@ define([
                     } else if (opts.url) {
                         var _opts = {
                             serviceKey: opts.url,
-                            data: _.extend(opts.data || {}, args),
-                            filters: opts.filters
+                            data: _.extend(opts.data || {}, args)
                         };
+
+                        if(opts.queryParameters){
+                            _opts.queryParameters = opts.queryParameters;
+                        }
 
                         if (opts.listProperties) {
                             _opts.listProperties = opts.listProperties;
@@ -179,10 +182,12 @@ define([
                         //if attachment files are found in returned values, 
                         //then handle the attachments and extract image url.
                         if (hasAttachments && _context.handleAttachments) {
+                            var _handleAttachment = _.partial(_context.handleAttachments, opts.noHandleAttachedImage);
+
                             if (_.isArray(data)) {
-                                data = _.map(data, _context.handleAttachments, _context);
+                                data = _.map(data, _handleAttachment , _context);
                             } else {
-                                data = _context.handleAttachments(data);
+                                data = _handleAttachment.call(_context, data);
                             }
                         }
 
@@ -280,12 +285,12 @@ define([
         },
 
         //shared methods by the models to handle the attachment list.
-        handleAttachments: function(item) {
+        handleAttachments: function(noHandleAttachedImage, item) {
             var attaches = item.attachments; // item.attachments.results;
             if (attaches) {
                 item.attachments = attaches = attaches.results;
 
-                if (attaches.length > 0) {
+                if (attaches.length > 0 && !noHandleAttachedImage) {
                     var k = attaches.length,
                         _attach;
 

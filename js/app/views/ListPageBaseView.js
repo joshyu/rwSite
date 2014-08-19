@@ -33,6 +33,14 @@ define([
             itemMode : true //show list style or item.
         },
 
+        //empty, placeholder.
+        panels: {
+            list : {
+                class: '',
+                options: {}
+            }
+        },
+
         initialize: function(){
             var _hilightedMenuItem = Backbone.history.getFragment();
             if(_hilightedMenuItem){
@@ -99,8 +107,7 @@ define([
                 app.pace.instance.on('hide', function(){
                     $btnSubmit.button('reset').prop('disabled', false);
                 });    
-            }
-            
+            }           
 
             PanelHelper.update(this, 'list');
         }

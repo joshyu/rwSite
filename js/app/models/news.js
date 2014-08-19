@@ -12,8 +12,11 @@ define([
                 type: "list",
                 url: "items",
                 data: {
-                    num: 5,
-                    orderby: 'NewsDate desc'
+                    num: 5
+                },
+                queryParameters: {
+                    orderby: 'NewsDate desc',
+                    expand: 'AttachmentFiles,Author0'
                 },
                 returnFields: {
                     "Id": "id",

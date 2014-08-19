@@ -11,8 +11,9 @@ define([
             'campus:book:updates' : {
                 url: 'items',
                 type: "list",
-                data: {
-                    orderby: 'BuyDate desc'
+                queryParameters: {
+                    orderby: 'BuyDate desc',
+                    expand: 'Category'
                 },
                 
                 returnFields : {

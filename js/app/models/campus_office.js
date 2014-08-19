@@ -15,6 +15,9 @@ define([
                     "Id": "id",
                     "Title": "title",
                     "File/ServerRelativeUrl":"image"
+                },
+                queryParameters: {
+                    expand: 'File'
                 }
             },
 
@@ -26,6 +29,9 @@ define([
                     "Title": "title",
                     "Description": "description",
                     "File/ServerRelativeUrl":"image"
+                },
+                queryParameters: {
+                    expand: 'File'
                 }
             }
 

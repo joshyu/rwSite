@@ -62,9 +62,9 @@ define([
             if (!options) return false;
 
             if (_.isString(options)) {
-                return this._getServiceConf(_service, options);
+                return _.cloneDeep(this._getServiceConf(_service, options));
             } else if (_.isObject(options) && options.serviceKey) {
-                return _.extend(this._getServiceConf(_service, options.serviceKey), options);
+                return _.extend({}, this._getServiceConf(_service, options.serviceKey), options);
             }
         },
 
@@ -167,9 +167,9 @@ define([
             if(options.asList){
                 _filters = url.filters || "";
 
-                if(options.data.filters){
-                    _filters = (_filters ? (_filters + " and "): "") + options.data.filters;
-                    delete options.data.filters;
+                if(options.queryParameters && options.queryParameters.filters){
+                    _filters = (_filters ? (_filters + " and "): "") + options.queryParameters.filters;
+                    delete options.queryParameters.filters;
                 }
             }
 
@@ -178,10 +178,11 @@ define([
                 delete options.data.id;
             }
 
-            var _conditions = _.extend({}, url.conditions, options.data);
+            var _conditions = _.extend({}, url.conditions, options.data, options.queryParameters);
             var _useNewAPI = this._parseConditionList(_conditions, options.asList);
 
             //manually update.
+            //can be deprecated due to we use the property to get the size.
             if (_conditions.inlinecount) {
                 _conditions = {
                     top: 0,

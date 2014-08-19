@@ -27,10 +27,52 @@ define([
                     "Rank": "Rank",
                     "numJoined": "numJoined",
                     "available" : "available"
+                },
+                queryParameters: {
+                    expand: 'Category,Teacher,AttachmentFiles',
+                    orderby: 'Created desc'
+                },
+                noHandleAttachedImage: true
+            },
+
+             'campus:events:training:updates:short' : {
+                url:'items',
+                type: 'list',
+                returnFields: {
+                    "Id": "id",
+                    "Title": "title",
+                    "EventDate": "pubdate"
+                },
+                queryParameters: {
+                    orderby: 'Created desc'
                 }
             },
             'campus:events:training:userowned' : {
-                deps: 'campus:events:training:updates'
+                url:'items',
+                type: 'list',
+                returnFields: {
+                    "Id": "id",
+                    "Title": "title",
+                    "Category/Title": "category",
+                    "Teacher/Title":"author",
+                    "Attachments": "",
+                    "content" : "content",
+                    "AttachmentFiles": "attachments",
+                    "EventDate": "pubdate",
+                    "JoinLink": "joinLink",
+                    "timespan": "timespan",
+                    "TrainingCode": "trainingcode",
+                    "TrainingRoom": "room",
+                    "Rank": "Rank",
+                    "numJoined": "numJoined",
+                    "available" : "available"
+                },
+                queryParameters: {
+                    expand: 'Category,Teacher,AttachmentFiles',
+                    orderby: 'Created desc',
+                    filters: "available eq 1"
+                },
+                noHandleAttachedImage: true
             },
 
             'campus:training:item:info' : {
@@ -51,7 +93,11 @@ define([
                     "Rank": "Rank",
                     "numJoined": "numJoined",
                     "available" : "available"
-                }
+                },
+                queryParameters: {
+                    expand: 'Category,Teacher,AttachmentFiles'
+                },
+                noHandleAttachedImage: true
             }
         },
         commands: {

@@ -40,6 +40,9 @@ define([
                     "Team0/Title": "team",
                     "Ext_x0020_Number": "ext",
                     "Birthday" : "birthday"
+                },
+                queryParameters: {
+                    expand: 'FullName,Team0'
                 }
             },
 
@@ -64,9 +67,37 @@ define([
                 type: "list",
                 returnFields: {
                     "Id": "id",
-                    "Title": "name"
+                    "Title": "title"
                 }
             }
+        },
+
+        filterContacts: function(data, options){
+            var num = options.num || 20;
+            var pageNo = options.pageNo || 0;
+            var category = options.category;
+            var keyword = options.keyword;
+            var start_char = options.start_char;
+
+            var _data = _.filter(data.raw, function(item,id){
+                var pass= true;
+                if(keyword){
+                    var searchstr = [ item.name.toLowerCase() , item.email.toLowerCase() ].join('^^');
+                    pass = pass && searchstr.indexOf(keyword) >=0;
+                }
+
+                if(start_char){
+                    pass = pass && item.name.toLowerCase().indexOf(start_char) == 0;
+                }
+
+                if(category){
+                    pass = pass && item.team == category;
+                }
+
+                return pass;
+            });
+
+            return _data.slice(num*pageNo, num*(pageNo+1));
         },
 
         //fetch whose birthday is in this month.
@@ -78,7 +109,7 @@ define([
             d = Date.parse(year + '/'+ month +'/' + days);
             var dayminiutes = 1000*3600*24 * days;
 
-            data=  _.filter(data, function(item){
+            data=  _.filter(data.raw, function(item){
                 if(!item.birthday){
                     return false;
                 }
@@ -122,6 +153,8 @@ define([
         fetchContactInfo: function(data, options){
             var itemId = options.id;
             var item = null;
+            data= data.relations;
+
             if(itemId){
                 item= data[itemId];
             }else{
@@ -181,12 +214,18 @@ define([
                 _data[item.nameRecordId] = item;
             });
 
-            _data.roots = _roots;
-             return _data;
+            return {
+                raw: data, 
+                relations: _data,
+                roots: _roots
+            };
+
+            //_data.roots = _roots;
+            // return _data;
         },
 
         _fetchNewHireFullData: function(newhires){
-            var emplist = this.getCached('contacts:fulllist');
+            var emplist = this.getCached('contacts:fulllist').relations;
             return _.map(newhires, function(emp){
                 var empData = emp.nameRecordId && emplist && emplist[emp.nameRecordId];
                 return _.extend(emp, empData);

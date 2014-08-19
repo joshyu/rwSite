@@ -11,22 +11,35 @@ define([
             'campus:events:src:updates': {
                 url: "items",
                 type: "list",
-                data: {
-                    num: 5,
-                    orderby: 'Created desc'
-                },
                 returnFields: {
                     "Id": "id",
                     "Title": "title",
                     "Category/Title": "category",
-                    "Author/Title":"author",
+                    "Author/Title": "author",
                     "Attachments": "",
-                    "content" : "content",
+                    "content": "content",
                     "AttachmentFiles": "attachments",
                     "EventDate": "pubdate",
                     "JoinLink": "joinLink",
-                    "available" : "available",
+                    "available": "available",
                     'numJoined': 'numJoined'
+                },
+                queryParameters: {
+                    expand: 'Category,AttachmentFiles,Author',
+                    orderby: 'Created desc'
+                }
+            },
+
+            'campus:events:src:updates:short': {
+                url: "items",
+                type: "list",
+                returnFields: {
+                    "Id": "id",
+                    "Title": "title",
+                    "EventDate": "pubdate"
+                },
+                queryParameters: {
+                    orderby: 'Created desc'
                 }
             },
 
@@ -38,7 +51,26 @@ define([
 
             //TODO: will be updated later.
             'campus:events:src:userowned': {
-                deps: 'campus:events:src:updates'
+                url: "items",
+                type: "list",
+                returnFields: {
+                    "Id": "id",
+                    "Title": "title",
+                    "Category/Title": "category",
+                    "Author/Title": "author",
+                    "Attachments": "",
+                    "content": "content",
+                    "AttachmentFiles": "attachments",
+                    "EventDate": "pubdate",
+                    "JoinLink": "joinLink",
+                    "available": "available",
+                    'numJoined': 'numJoined'
+                },
+                queryParameters: {
+                    expand: 'Category,AttachmentFiles,Author',
+                    orderby: 'Created desc',
+                    filters: "available eq 1"
+                }
             },
 
             'campus:src:item:info': {
@@ -47,14 +79,17 @@ define([
                     "Id": "id",
                     "Title": "title",
                     "Category/Title": "category",
-                    "Author/Title":"author",
+                    "Author/Title": "author",
                     "Attachments": "",
-                    "content" : "content",
+                    "content": "content",
                     "AttachmentFiles": "attachments",
                     "EventDate": "pubdate",
                     "JoinLink": "joinLink",
-                    "available" : "available",
+                    "available": "available",
                     'numJoined': 'numJoined'
+                },
+                queryParameters: {
+                    expand: 'Category,AttachmentFiles,Author'
                 }
             },
 
@@ -67,8 +102,28 @@ define([
                     "Attachments": "",
                     "AttachmentFiles": "attachments",
                     "Title": "title"
+                },
+
+                queryParameters: {
+                    expand: 'AttachmentFiles'
                 }
             }
+        },
+
+        handleEventImage: function(data){
+            if(!_.isArray(data)){
+                return this.handleItemEventImage(data);
+            }
+
+            return _.map(data, this.handleItemEventImage, this);
+        },
+
+        handleItemEventImage: function(item){
+            if(!item.imageUrl){
+                item.imageUrl = _.find( app.preloaded.srcCategoryNames  , {title: item.category}).imageUrl;
+            }
+
+            return item;
         },
 
         _lib: {

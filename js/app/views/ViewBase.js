@@ -75,11 +75,16 @@ define([
                     }                    
                 }
 
-                $.when(_model.request( _reqKey, options|| {})).done(function(data){
+                options = options || {};
+                if(request.returnFields){
+                    options.returnFields = request.returnFields;    
+                }
+
+                $.when(_model.request( _reqKey, options)).done(function(data){
                     if($.isFunction(handler)){
-                        data= handler.call(_model, data);
+                        data= handler.call(_model, data, options);
                     }else if(typeof handler === 'string' && $.isFunction(_model[handler])){
-                        data= _model[handler].call(_model, data);
+                        data= _model[handler].call(_model, data, options);
                     }
 
                     var _id = request.id ? (modelName + '-'+ request.id) : modelName;

@@ -7,7 +7,7 @@
         <div class="list-group list-group-survey shadow-bottom-m">
           <div class="list-group-item title"><span class="title-icon glyphicon glyphicon-list"></span>{{subtitle_new}}</div>
           {{#each campus_survey-new}}
-          <a data-item-id="{{id}}" href="#campus/surveys/{{id}}" class="list-group-item item-{{id}}">{{title}}</a>
+          <a data-item-id="{{id}}" href="#campus/surveys/{{id}}" class="list-group-item item-{{id}}"><span class="">{{title}}</span><span class='pull-right date'>{{formatDate pubdate}}</span></a>
           {{/each}}
         </div>
       </div>
@@ -15,7 +15,7 @@
             <div class="list-group list-group-survey  shadow-bottom-m">
                 <div class="list-group-item title"><span class="title-icon glyphicon glyphicon-list"></span> {{subtitle_popular}}</div>
                 {{#each campus_survey-popular}}
-                <a data-item-id="{{id}}"  href="#campus/surveys/{{id}}" class="list-group-item item-{{id}}">{{title}}</a>
+                <a data-item-id="{{id}}"  href="#campus/surveys/{{id}}" class="list-group-item item-{{id}}"><span class="">{{title}}</span><span class='pull-right date'><b>{{numVoted}}</b> votes</span></a>
                 {{/each}}
           </div>
       </div>

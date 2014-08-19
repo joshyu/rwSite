@@ -16,12 +16,12 @@ define([
             {
                 id: 'new',
                 model: 'campus_survey',
-                key: 'campus:survey:newest'
+                key: 'campus:survey:newest:short'
             },
             {
                 id: 'popular',
                 model: 'campus_survey',
-                key: 'campus:survey:popular'
+                key: 'campus:survey:popular:short'
             }
         ],
 

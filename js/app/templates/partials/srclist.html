@@ -1,3 +1,4 @@
+{{#if campus_src.length}}
 {{#each campus_src}}
 <div class="campus-item">
 	<div class="head"><h4>{{title}}</h4>
@@ -35,3 +36,8 @@
 	{{/if}}
 </div>
 {{/each}}
+{{else}}
+<div class="campus-item noresult">
+no results.
+</div>
+{{/if}}

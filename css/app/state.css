@@ -217,4 +217,6 @@
 .noresult{
    text-align: center;
    font-weight: bolder;
+   padding:10px 0;
+   background: #DCEEFC;
 }

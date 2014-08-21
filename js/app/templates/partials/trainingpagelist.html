@@ -1,3 +1,4 @@
+{{#if campus_training.length}}
 {{#each campus_training}}
 <tr data-item-id="{{id}}">
   <td>{{id}}</td>
@@ -14,3 +15,8 @@
   {{/if}}
 </tr>
 {{/each}}
+{{else}}
+<tr class="noresult">
+  <td colspan="7">no results.</td>
+</tr>
+{{/if}}

@@ -108,7 +108,7 @@ define([
                 _filterContacts.cachedData = _data;
             }
 
-            if( Math.ceil(_data.length / num) == pageNo + 1 ){
+            if(_data.length ==0 ||  Math.ceil(_data.length / num) == pageNo + 1 ){
                 this.trigger('noNextUrl');
             }
 

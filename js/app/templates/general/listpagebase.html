@@ -12,13 +12,13 @@
             <h1>{{title}}</h1>
             <div class="btn-group" data-toggle="buttons">
                 {{#unless noAll}}
-                <label class="btn  btn-default btn-sm active">                 
+                <label class="btn  btn-default btn-sm active btn-default-choice">                 
                    <input type="radio" name="{{name}}" checked value="">  {{../../searchfilters_default_title}}
                 </label>
                 {{/unless}}
 
                 {{#each items}}
-                <label class="btn  btn-default btn-sm  {{#if ../noAll}}{{#unless @index}}active{{/unless}}{{/if}}">
+                <label class="btn  btn-default btn-sm  {{#if ../noAll}}{{#unless @index}}active btn-default-choice {{/unless}}{{/if}}">
                   <input type="radio" name="{{../name}}"  value="{{id}}" {{#if ../noAll}}{{#unless @index}}checked{{/unless}}{{/if}} />{{title}}
                 </label>
                 {{/each}}
@@ -31,6 +31,7 @@
             <div class="form-controls">                
                 <input type="text" class="form-control inline-control"  size="50" name="keyword" placeholder="Enter keyword" />
                 <button type="submit" class="btn btn-primary btn-sm btnSubmit " data-search-text="Searching  ...">Search</button>
+                 <button type="reset" class="btn btn-default btn-sm btnReset ">Reset</button>
             </div>
           </section>
       </form>

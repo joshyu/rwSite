@@ -25,12 +25,14 @@ define([
 
         events: {
             'click .seemore > .link' : 'doSeeMore',
-            'submit .frmSearch' : "onSearch"
+            'submit .frmSearch' : "onSearch",
+            'reset .frmSearch' : 'onReset'
         },
 
         templateData: {
             searchfilters_default_title : "All",
-            itemMode : true //show list style or item.
+            itemMode : true, //show list style or item.
+            preventClose: true
         },
 
         //empty, placeholder.
@@ -65,9 +67,8 @@ define([
             var data = {filters: this.loadSearch()} ;
             data["loadnum"] = this.loadnum;
             var parentTemplateData = ListPageBaseView.prototype.templateData;
-            this.templateData =  _.extend(parentTemplateData, this.templateData, data);
+            this.templateData =  _.extend({}, parentTemplateData, this.templateData, data);
             return this.templateData;
-            //return  _.extend({}, parentTemplateData, this.templateData || {}, data);
         },
 
         loadSearch: function () {
@@ -98,6 +99,10 @@ define([
             });
 
             return _obj;
+        },
+
+        onReset: function(e){
+            this.$('.btn-default-choice').button('toggle');
         },
 
         onSearch: function(e) {

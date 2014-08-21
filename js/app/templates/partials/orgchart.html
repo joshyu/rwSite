@@ -11,10 +11,9 @@
     <ul>
         {{#with root}}
         <li class="item-{{id}}">
-            <div class="item-inner" data-item-id="{{id}}">
+            <div class="item-inner" data-item-id="{{nameRecordId}}">
                 <div class="photo"><img src="{{photo}}" /></div>
                 <div class="name">{{name}}</div>
-                <div class="title">{{title}}</div>
             </div>
             {{#if reportees}}
             <ul>

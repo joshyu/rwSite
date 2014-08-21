@@ -36,6 +36,16 @@ define([
             return false;
         },
 
+         bindDomEvents: function(modelName, model){
+            if(modelName == 'campus_training'){
+                model.on('noNextUrl', function(){
+                    if(this.containerLayer){
+                        this.containerLayer.trigger('removeSeeMoreButton'); 
+                    } 
+                },this);
+            }
+        },
+
         getRequestOption: function(){
             this.options.pageNo = this.options.pageNo || this.pageNo;
             return this.options;

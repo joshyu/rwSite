@@ -110,7 +110,7 @@ define([
         changeChartRoot: function(e){
             var item = e.currentTarget;
             var itemId= $(item).data('item-id');
-            var itemData= this.contacts[itemId];
+            var itemData= this.contacts.relations[itemId];
 
             if(!itemData.reportees || !itemData.reportees.length){
                 return false; //real leaf, cannot take root.

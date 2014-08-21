@@ -26,13 +26,22 @@ define([
                 {
                    title : 'Sort By',
                    noAll : true,
-                   name: 'order',
-                   items : ['Newest' , 'Popular']
+                   name: 'orderby',
+                   items : [
+                        {
+                            id: 'Id desc',
+                            title: 'Newest'
+                        },
+                        {
+                            id: 'numVoted desc',
+                            title: 'Popular'
+                        }
+                   ]
                 },
                 {
                     title : 'Event State',
-                    name: 'status',
-                    items : evtStates
+                    name: evtStates.name, 
+                    items : evtStates.states
                 }
            ];
         }

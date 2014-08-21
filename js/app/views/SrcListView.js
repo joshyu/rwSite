@@ -18,7 +18,6 @@ define([
             if( _pageId == 'listpage'){
                 var options = this.options;
                 delete options.pageId;
-                //options.filters = this.parseFilter(options);
 
                 this.request =  {
                     model : 'campus_src',
@@ -38,6 +37,16 @@ define([
             }
 
             ViewBase.prototype.initialize.apply(this, arguments);
+        },
+
+        bindDomEvents: function(modelName, model){
+            if(modelName == 'campus_src'){
+                model.on('noNextUrl', function(){
+                    if(this.containerLayer){
+                        this.containerLayer.trigger('removeSeeMoreButton'); 
+                    } 
+                },this);
+            }
         },
 
         handleEventImage: function(srcList){

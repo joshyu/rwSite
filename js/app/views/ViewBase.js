@@ -38,6 +38,7 @@ define([
         },
 
         bindEvents: function(){ return; },
+        bindDomEvents: function(){return;},
         initialize: function () {
             this.bindEvents();
            if(!this.handleRequests()){
@@ -60,6 +61,8 @@ define([
             _.each(reqs, _.bind(function (request,index){
                 var modelName = request.model;
                 var _model =  app.modelHelper.get(modelName);
+                that.bindDomEvents(modelName, _model);    
+
                 var _reqKey = request.key;
                 var dfd= $.Deferred();
 

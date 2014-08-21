@@ -68,35 +68,6 @@ define([
             };
         },
 
-        _post: function(opts) {
-            var data = opts.data || {};
-
-            if (!opts || !opts.url) {
-                opts.fail && opts.fail();
-                return false;
-
-            } else {
-                var options = {
-                    url: opts.url,
-                    type: 'POST',
-                    dataType: 'json',
-                    data: data.formData || ''
-                };
-
-                Backbone.ajax(options).done(function(status) {
-                    if (opts.success) {
-                        opts.success(status.status || status);
-                    }
-                }).fail(function(err) {
-                    if (opts.fail) {
-                        opts.fail(err);
-                    }
-                });
-            }
-
-            return true;
-        },
-
         _parseDependencies: function(deps) {
             if (!deps) return false;
 
@@ -142,7 +113,8 @@ define([
                 var dfd = $.Deferred();
                 var that = this;
                 if (_cachedKey && _cached[_cachedKey]) {
-                    dfd.resolve(_.cloneDeep(_cached[_cachedKey]));
+                    //dfd.resolve(_.cloneDeep(_cached[_cachedKey]));
+                    dfd.resolve(_cached[_cachedKey]);
                 } else {
                     var def = null;
                     if (opts.deps) {
@@ -150,12 +122,9 @@ define([
                     } else if (opts.url) {
                         var _opts = {
                             serviceKey: opts.url,
-                            data: _.extend(opts.data || {}, args)
+                            queryParameters:  _.clone(opts.queryParameters || {} ),
+                            data :  _.extend({}, opts.data , args)
                         };
-
-                        if(opts.queryParameters){
-                            _opts.queryParameters = opts.queryParameters;
-                        }
 
                         if (opts.listProperties) {
                             _opts.listProperties = opts.listProperties;
@@ -282,6 +251,24 @@ define([
 
         cacheData: function(key, data) {
             this.cached[key] = data;
+        },
+
+        //this skiptoken is used to as url parameter to composite next url.
+        setNextSkipToken: function(nextUrl, trigger){
+            if(!nextUrl){
+                this._nextSkipToken = "";
+                
+                if(trigger){
+                    this.trigger('noNextUrl');    
+                }                
+            }else{
+                var _mats= nextUrl.match(/%24skiptoken=([^&]*)/);
+                this._nextSkipToken = _mats && decodeURIComponent(_mats[1]);
+            }
+        },
+
+        getNextSkipToken: function(){
+            return this._nextSkipToken;
         },
 
         //shared methods by the models to handle the attachment list.

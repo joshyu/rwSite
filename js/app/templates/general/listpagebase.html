@@ -19,8 +19,7 @@
 
                 {{#each items}}
                 <label class="btn  btn-default btn-sm  {{#if ../noAll}}{{#unless @index}}active{{/unless}}{{/if}}">
-                  <input type="radio" name="{{../name}}"  value="{{#if this.title}}{{title}}{{else}}{{this}}{{/if}}" {{#if ../noAll}}{{#unless @index}}checked{{/unless}}{{/if}} /> 
-                  {{#if this.title}}{{title}}{{else}}{{this}}{{/if}}
+                  <input type="radio" name="{{../name}}"  value="{{id}}" {{#if ../noAll}}{{#unless @index}}checked{{/unless}}{{/if}} />{{title}}
                 </label>
                 {{/each}}
             </div>

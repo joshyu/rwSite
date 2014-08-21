@@ -26,13 +26,13 @@ define([
            return [
                 {
                    title : 'Event Category',
-                   name: 'category',
+                   name: 'Category/Id',
                    items : app.preloaded.srcCategoryNames
                 },
                 {
                     title : 'Event State',
-                    name: 'status',
-                    items : evtStates
+                    name: evtStates.name, 
+                    items : evtStates.states
                 }
            ];
         }

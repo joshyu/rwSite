@@ -15,7 +15,9 @@
 }
 
 .tree ul {
-    padding-top: 20px; position: relative;
+    padding-top: 20px; 
+    position: relative;
+    padding-left: 0;
     
     transition: all 0.5s;
     -webkit-transition: all 0.5s;
@@ -103,8 +105,8 @@ right connector from last child*/
     -webkit-transition: all 0.5s;
     -moz-transition: all 0.5s;
 
-    width: 120px;
-    height: 150px;
+    width: 90px;
+    height: 130px;
 }
 
 .tree li >div .photo img{

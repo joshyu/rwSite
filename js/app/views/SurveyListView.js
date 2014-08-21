@@ -18,6 +18,16 @@ define([
         getRequestOption: function(){
             this.options.pageNo = this.options.pageNo || this.pageNo;
             return this.options;
+        },
+
+         bindDomEvents: function(modelName, model){
+            if(modelName == 'campus_survey'){
+                model.on('noNextUrl', function(){
+                    if(this.containerLayer){
+                        this.containerLayer.trigger('removeSeeMoreButton'); 
+                    } 
+                },this);
+            }
         }
     });
 });

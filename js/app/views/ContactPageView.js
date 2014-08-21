@@ -28,16 +28,19 @@ define([
 
         loadSearch: function(){
           var chars='abcdefghijklmnopqrstuvwxyz';
+          var charItems = _.map(chars.match(/\w/g), function(ch){
+                                return { id: ch,title: ch };
+                                 });
            return [
                 {
                    title : 'Book Category',
-                   name: 'category',
+                   name: 'teamId',
                    items : app.preloaded.teamCategoryNames
                 },
                 {
                   title : 'Filter By Alphabet',
                   name: 'start_char',
-                  items : chars.match(/\w/g)
+                  items : charItems
                 }
            ];
         }

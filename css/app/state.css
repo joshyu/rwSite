@@ -213,3 +213,8 @@
 .bootbox *  {
   font-size: 1em;
 }
+
+.noresult{
+   text-align: center;
+   font-weight: bolder;
+}

@@ -26,7 +26,7 @@ define([
                 },
                 queryParameters: {
                     expand: 'Category,AttachmentFiles,Author',
-                    orderby: 'Created desc'
+                    orderby: 'EventDate desc'
                 }
             },
 
@@ -39,7 +39,7 @@ define([
                     "EventDate": "pubdate"
                 },
                 queryParameters: {
-                    orderby: 'Created desc'
+                    orderby: 'EventDate desc'
                 }
             },
 
@@ -68,7 +68,7 @@ define([
                 },
                 queryParameters: {
                     expand: 'Category,AttachmentFiles,Author',
-                    orderby: 'Created desc',
+                    orderby: 'EventDate desc',
                     filters: "available eq 1"
                 }
             },
@@ -127,7 +127,19 @@ define([
         },
 
         _lib: {
-            event_state: ['available', 'closed']
+            event_state : {
+                name: 'available',
+                states: [
+                    {
+                        id: 1,
+                        title: 'available'
+                    },
+                    {
+                        id: 0,
+                        title: 'closed'
+                    }
+                ]
+            }
         }
     });
 });

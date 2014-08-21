@@ -65,6 +65,7 @@ define([
                 return false;
             }
 
+            layoutView[key].parentLayer = layoutView;
             layoutView[key].show(new _view(options), showOptions);
         },
 

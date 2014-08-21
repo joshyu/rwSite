@@ -92,7 +92,19 @@ define([
         },
 
         _lib : {
-            event_state: ['available', 'closed']
+            event_state: {
+                name: 'available',
+                states: [
+                    {
+                        id: 1,
+                        title: 'available'
+                    },
+                    {
+                        id: 0,
+                        title: 'closed'
+                    }
+                ]
+            }
         }
     });
 });

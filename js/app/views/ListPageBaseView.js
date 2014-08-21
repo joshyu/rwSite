@@ -12,7 +12,7 @@ define([
         template: template,
         className:"container campuslistpage",
         isAdmin: false,
-        loadnum: 20,
+        loadnum: 3,
         pageNo: 0,
         noAjax: false,
 
@@ -34,12 +34,12 @@ define([
         },
 
         //empty, placeholder.
-        panels: {
+/*        panels: {
             list : {
                 class: '',
                 options: {}
             }
-        },
+        },*/
 
         initialize: function(){
             var _hilightedMenuItem = Backbone.history.getFragment();
@@ -49,14 +49,25 @@ define([
                 });    
             }
 
+            this.on('removeSeeMoreButton', this.removeSeeMoreButton, this);
             Marionette.Layout.prototype.initialize.apply(this, arguments);
+        },
+
+        removeSeeMoreButton: function(){
+            this.$el.find(".seemore").hide();
+        },
+
+        resetSeeMoreButton: function(){
+           this.$el.find(".seemore").show(); 
         },
 
         serializeData: function (){
             var data = {filters: this.loadSearch()} ;
             data["loadnum"] = this.loadnum;
             var parentTemplateData = ListPageBaseView.prototype.templateData;
-            return  _.extend({}, parentTemplateData, this.templateData || {}, data);
+            this.templateData =  _.extend(parentTemplateData, this.templateData, data);
+            return this.templateData;
+            //return  _.extend({}, parentTemplateData, this.templateData || {}, data);
         },
 
         loadSearch: function () {
@@ -95,9 +106,9 @@ define([
             var data = this.getFrmData(frm);
             var $btnSubmit= $(frm).find('.btnSubmit');
              this.panels.list.options.pageNo = this.pageNo = 0;
-            _.extend(this.panels.list.options, data);
-
+             this.panels.list.options.filters = data;
             $btnSubmit.button('search').prop('disabled', true);
+            this.resetSeeMoreButton();
 
             if(this.noAjax){
                 setTimeout(function() {
@@ -107,9 +118,10 @@ define([
                 app.pace.instance.on('hide', function(){
                     $btnSubmit.button('reset').prop('disabled', false);
                 });    
-            }           
+            }
 
-            PanelHelper.update(this, 'list');
+            var _itemMode = this.templateData.itemMode;
+            PanelHelper.update(this, 'list', {itemMode : _itemMode});
         }
     });
 });

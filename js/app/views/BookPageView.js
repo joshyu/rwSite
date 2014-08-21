@@ -38,7 +38,7 @@ define([
            return [
                 {
                    title : 'Book Category',
-                   name: 'category',
+                   name: 'Category/Id',
                    items : app.preloaded.teamCategoryNames
                 }
            ];

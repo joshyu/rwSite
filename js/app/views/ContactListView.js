@@ -23,9 +23,14 @@ define([
             }
         },
 
-        renderData: function (data) {
-            //delete data.contacts.roots; //we don't need the roots data here.
-            this._renderData(data);
+         bindDomEvents: function(modelName, model){
+            if(modelName == 'contacts'){
+                model.on('noNextUrl', function(){
+                    if(this.containerLayer){
+                        this.containerLayer.trigger('removeSeeMoreButton'); 
+                    } 
+                },this);
+            }
         },
 
         onRender: function(){

@@ -27,6 +27,16 @@ define([
             this._renderData(data);
         },
 
+         bindDomEvents: function(modelName, model){
+            if(modelName == 'campus_book'){
+                model.on('noNextUrl', function(){
+                    if(this.containerLayer){
+                        this.containerLayer.trigger('removeSeeMoreButton'); 
+                    } 
+                },this);
+            }
+        },
+
         isUnderThresHold: function(threshold_new){
             var d = new Date();
             var year = d.getFullYear();

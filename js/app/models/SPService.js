@@ -61,39 +61,74 @@ define([
         parseOptions: function(_service, options) {
             if (!options) return false;
 
-            if (_.isString(options)) {
-                return _.cloneDeep(this._getServiceConf(_service, options));
-            } else if (_.isObject(options) && options.serviceKey) {
-                return _.extend({}, this._getServiceConf(_service, options.serviceKey), options);
+            //handle the user filter (during search.)
+            if (options.data) {
+                var _userFilters = options.data.filters;
+                if (_userFilters) {
+                    if (_userFilters.orderby) {
+                        options.queryParameters.orderby = _userFilters.orderby;
+                        delete _userFilters.orderby;
+                    }
+
+                    var _usrfilter = this.parseUserFilters(_userFilters);
+                    if (_usrfilter) {
+                        if (!options.queryParameters.filters) {
+                            options.queryParameters.filters = _usrfilter;
+                        } else {
+                            options.queryParameters.filters += " and " + _usrfilter;
+                        }
+                    }
+
+                    delete options.data.filters;
+                }
+
+                if ('num' in options.data) {
+                    //try to use sharepoint returned __next value to paginate.
+                    var num = Number(options.data.num) || 0;
+                    var pageNo = Number(options.data.pageNo) || 0;
+                    delete options.data.pageNo;
+
+                    if (pageNo == 0) {
+                        options.model.setNextSkipToken(null,false);
+                    } else {
+                        if (num > 0) {
+                            options.queryParameters.skiptoken = options.model.getNextSkipToken();
+                        }
+                    }
+                }
             }
+
+            return _.extend({}, this._getServiceConf(_service, options.serviceKey), options);
         },
 
-        getListItemType: function(linkname){
+        getListItemType: function(linkname) {
             return "SP.Data." + linkname.charAt(0).toUpperCase() + linkname.slice(1) + "ListItem";
         },
 
-        getContextInfo: function(){
-            if(this.lastContextInfo){
+        getContextInfo: function() {
+            if (this.lastContextInfo) {
                 return this.lastContextInfo;
-            }else{
-                return  $.ajax({
-                    url:  _SPDefined.api.contextInfo,
+            } else {
+                return $.ajax({
+                    url: _SPDefined.api.contextInfo,
                     method: "POST",
-                    headers: { "Accept": "application/json; odata=verbose" }
-                }).then(function(data){
+                    headers: {
+                        "Accept": "application/json; odata=verbose"
+                    }
+                }).then(function(data) {
                     return data.d.GetContextWebInformation.FormDigestValue;
                 });
             }
         },
 
-        setContextInfo: function(value){
+        setContextInfo: function(value) {
             this.lastContextInfo = value;
         },
 
-        getPostHeader: function(type){
-            var _headers= {};
+        getPostHeader: function(type) {
+            var _headers = {};
             var _meth = _SPDefined.postMethods[type];
-            if(_meth){
+            if (_meth) {
                 _headers['X-HTTP-Method'] = _meth;
                 _headers['If-Match'] = '*';
             }
@@ -115,7 +150,7 @@ define([
                 }
 
                 //if the result is not a list, we will remove those forbidden conditions.
-                if(!asList && !_.contains(keysItemPermitted, _newKey || key)){
+                if (!asList && !_.contains(keysItemPermitted, _newKey || key)) {
                     delete conds[key];
                 }
 
@@ -127,23 +162,23 @@ define([
             return useNewAPI;
         },
 
-        regeneratePOSTUrl: function(options){
+        regeneratePOSTUrl: function(options) {
             if (!options || !options.url) return false;
             var url = options.url;
             if (!url) return false;
 
-            if(options.id){
+            if (options.id) {
                 var _itemId = options.id;
                 delete options.id;
             }
 
             if (_.isObject(url) && url.site) {
-                url = "/" + url.site +  _SPDefined.api.listRelativePath.replace('$listTitle$', url.title).replace('$id$', _itemId || "");
-            }else if(_.isString(url)){
+                url = "/" + url.site + _SPDefined.api.listRelativePath.replace('$listTitle$', url.title).replace('$id$', _itemId || "");
+            } else if (_.isString(url)) {
                 url = url.replace('$id$', _itemId);
             }
 
-            return url; 
+            return url;
         },
 
         regenerateGETUrl: function(options) {
@@ -152,28 +187,27 @@ define([
             var urlParams = "";
             if (!url) return false;
 
-            if(options.listProperties){
-                if(_.isObject(url) && url.site){
-                    return  "/" + url.site + _SPDefined.api.listRelativePathProperties.replace('$listTitle$', url.title).replace('$prop$', options.listProperties);    
-                }else{
+            if (options.listProperties) {
+                if (_.isObject(url) && url.site) {
+                    return "/" + url.site + _SPDefined.api.listRelativePathProperties.replace('$listTitle$', url.title).replace('$prop$', options.listProperties);
+                } else {
                     return url + "/" + options.listProperties;
                 }
             }
 
-
             //parse filter parameter.
             //if the result is item not list, need not filter.
             var _filters = "";
-            if(options.asList){
+            if (options.asList) {
                 _filters = url.filters || "";
 
-                if(options.queryParameters && options.queryParameters.filters){
-                    _filters = (_filters ? (_filters + " and "): "") + options.queryParameters.filters;
+                if (options.queryParameters && options.queryParameters.filters) {
+                    _filters = (_filters ? (_filters + " and ") : "") + options.queryParameters.filters;
                     delete options.queryParameters.filters;
                 }
             }
 
-            if(options.data.id){
+            if (options.data.id) {
                 var _itemId = options.data.id;
                 delete options.data.id;
             }
@@ -195,12 +229,17 @@ define([
                 url.apibase = _useNewAPI ? _SPDefined.api.listRelativePath : _SPDefined.api.listRelativePath_old;
                 url = "/" + url.site + url.apibase.replace('$listTitle$', url.title).replace('$id$', _itemId || "");
                 delete _conditions.id;
-            }else if(_.isString(url)){
+            } else if (_.isString(url)) {
                 url = url.replace('$id$', _itemId);
             }
 
-            if(_filters){
+            if (_filters) {
                 urlParams += "$filter=" + _filters + "&";
+            }
+
+            if (_conditions.skiptoken) {
+                urlParams += encodeURIComponent('$skiptoken') + "=" + encodeURIComponent(_conditions.skiptoken) + "&";
+                delete _conditions.skiptoken;
             }
 
             urlParams += _.map(_conditions, function(condValue, condKey) {
@@ -209,7 +248,7 @@ define([
 
             var _fields = options.fields;
             if (_fields && _fields.length) {
-                urlParams += "$select=" + ( _.isArray(_fields) ? _fields.join(',') : _fields );
+                urlParams += "$select=" + (_.isArray(_fields) ? _fields.join(',') : _fields);
             }
 
             if (urlParams.length > 0) {
@@ -217,6 +256,29 @@ define([
             }
 
             return url + urlParams;
+        },
+
+        parseUserFilters: function(filterDefs) {
+            if (!filterDefs) return false;
+            var _filters = [];
+
+            var _keyword = filterDefs.keyword.trim();
+            if (_keyword) {
+                _filters.push(
+                    _.map(_keyword.toLowerCase().split(/\s+/g), function(kw) {
+                        return "substringof(\'" + kw + "\',Title)";
+                    }).join(" and ")
+                );
+
+                delete filterDefs.keyword;
+            }
+
+            _.each(filterDefs, function(val, key) {
+                if (!val) return;
+                _filters.push(key + " eq \'" + val + "\'");
+            });
+
+            return _filters.join(" and ");
         }
     };
 
@@ -228,8 +290,15 @@ define([
             },
 
             _fetchlist: function(options) {
-                _.extend(options, this.options);
-                return this._fetchitem(options,true).then(function(data) {
+                var _model = this.options.model;
+                
+                return this._fetchitem(options, true).then(function(data) {
+                    if (data.__next) {
+                        _model.setNextSkipToken(data.__next);
+                    }else{
+                        _model.setNextSkipToken(null, true);
+                    }
+
                     return data.results;
                 });
             },
@@ -237,6 +306,7 @@ define([
             _fetchitem: function(options, asList) {
                 var url = "";
                 options.asList = asList || false;
+                _.extend(options, this.options);
 
                 options = _SPUtils.parseOptions(_service, options);
                 url = _SPUtils.regenerateGETUrl(options);
@@ -258,15 +328,19 @@ define([
                 });
             },
 
-            _postData: function(options){
+            _postData: function(options) {
                 _.extend(options, this.options);
                 options = _SPUtils.parseOptions(_service, options);
-                var  itemType=  _SPUtils.getListItemType(options.listname || options.url.name || options.url.title);
+                var itemType = _SPUtils.getListItemType(options.listname || options.url.name || options.url.title);
                 var url = _SPUtils.regeneratePOSTUrl(options);
-                var data = _.extend({}, options.data, {"__metadata": { "type": itemType }});
+                var data = _.extend({}, options.data, {
+                    "__metadata": {
+                        "type": itemType
+                    }
+                });
 
-                return $.when(_SPUtils.getContextInfo()).then(function(reqDigest){
-                    var __header= {
+                return $.when(_SPUtils.getContextInfo()).then(function(reqDigest) {
+                    var __header = {
                         "Accept": "application/json;odata=verbose",
                         "X-RequestDigest": reqDigest
                     };
@@ -276,8 +350,8 @@ define([
                         type: "POST",
                         contentType: "application/json;odata=verbose",
                         data: JSON.stringify(data),
-                        headers:  _.extend(__header, _SPUtils.getPostHeader(options.type))
-                    }).then(function(data,txt, xhr){
+                        headers: _.extend(__header, _SPUtils.getPostHeader(options.type))
+                    }).then(function(data, txt, xhr) {
                         _SPUtils.setContextInfo(xhr.getResponseHeader('X-RequestDigest'));
                         return data && (data.d || data);
                     });

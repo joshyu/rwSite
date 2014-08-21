@@ -5,7 +5,7 @@ define(function() {
         describe('campus suggestion model ', function() {
             var model = app.modelHelper.get('suggestion');
 
-            it("post suggestion message", function(done) {
+            xit("post suggestion message", function(done) {
                 var data= {
                    receiver : 'campus_manager',
                    Title: 'test',

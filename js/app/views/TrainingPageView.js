@@ -12,7 +12,7 @@ define([
             tip : 'click each line of items to see the detail of the training session.',
             itemMode : false,  //itemMode is false, then we will show the results as table list.
             tableColumns : [
-            	'Title' , 'Trainer' , 'Date', 'Duration', 'Difficulty', 'Category', 'State'
+            	'Title' , 'Trainer' , 'Date', 'Difficulty', 'Category', 'State'
             ]
         },
 
@@ -35,13 +35,13 @@ define([
            return [
                 {
                    title : 'Training Category',
-                   name: 'category',
+                   name: 'Category/Id',
                    items : app.preloaded.teamCategoryNames
                 },
                 {
                     title : 'Training State',
-                    name: 'status',
-                    items : trStates
+                    name: trStates.name, 
+                    items : trStates.states
                 }
            ];
         }

@@ -138,6 +138,7 @@ define(['marionette', 'underscore', 'app', 'views/HeaderView', 'views/FooterView
                     if(!view) return false;
 
                     view.showOptions = options;
+                    view.containerLayer = this.parentLayer;
                     Marionette.Region.prototype.show.apply(this, arguments);
                 },
 

@@ -38,6 +38,7 @@ define([
                     "Lead": "supervisor",
                     "Manager": "manager",
                     "Team0/Title": "team",
+                    "Team0/Id":"teamId",
                     "Ext_x0020_Number": "ext",
                     "Birthday" : "birthday"
                 },
@@ -72,30 +73,44 @@ define([
             }
         },
 
-        filterContacts: function(data, options){
+        filterContacts: function _filterContacts(data, options){
             var num = options.num || 20;
             var pageNo = options.pageNo || 0;
-            var category = options.category;
-            var keyword = options.keyword;
-            var start_char = options.start_char;
+            var _filters = options.filters;
+            var teamId = _filters && _filters.teamId ;
+            var keyword = _filters && _filters.keyword;
+            var start_char = _filters && _filters.start_char;
+            var _data = null;
 
-            var _data = _.filter(data.raw, function(item,id){
-                var pass= true;
-                if(keyword){
-                    var searchstr = [ item.name.toLowerCase() , item.email.toLowerCase() ].join('^^');
-                    pass = pass && searchstr.indexOf(keyword) >=0;
-                }
+            var cachedKey = [teamId, keyword, start_char].join('$$');
+            if(_filterContacts.cachedKey == cachedKey){
+                _data = _filterContacts.cachedData;
+            }else{
+                _data = _.filter(data.raw, function(item,id){
+                    var pass= true;
+                    if(keyword){
+                        var searchstr = [ item.name.toLowerCase() , item.email.toLowerCase() ].join('^^');
+                        pass = pass && searchstr.indexOf(keyword.toLowerCase()) >=0;
+                    }
 
-                if(start_char){
-                    pass = pass && item.name.toLowerCase().indexOf(start_char) == 0;
-                }
+                    if(start_char){
+                        pass = pass && item.name.toLowerCase().indexOf(start_char) == 0;
+                    }
 
-                if(category){
-                    pass = pass && item.team == category;
-                }
+                    if(teamId){
+                        pass = pass && item.teamId == teamId;
+                    }
 
-                return pass;
-            });
+                    return pass;
+                });
+
+                _filterContacts.cachedKey = cachedKey;
+                _filterContacts.cachedData = _data;
+            }
+
+            if( Math.ceil(_data.length / num) == pageNo + 1 ){
+                this.trigger('noNextUrl');
+            }
 
             return _data.slice(num*pageNo, num*(pageNo+1));
         },
@@ -182,6 +197,7 @@ define([
              _relations.reportees = item.reportees;
              return _relations;
         },
+
         _parseRelationship: function(data){
              if(!data || !$.isArray(data)){
                 return false;
@@ -219,9 +235,6 @@ define([
                 relations: _data,
                 roots: _roots
             };
-
-            //_data.roots = _roots;
-            // return _data;
         },
 
         _fetchNewHireFullData: function(newhires){

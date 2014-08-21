@@ -30,7 +30,7 @@ define([
                 },
                 queryParameters: {
                     expand: 'Category,Teacher,AttachmentFiles',
-                    orderby: 'Created desc'
+                    orderby: 'EventDate desc'
                 },
                 noHandleAttachedImage: true
             },
@@ -44,7 +44,7 @@ define([
                     "EventDate": "pubdate"
                 },
                 queryParameters: {
-                    orderby: 'Created desc'
+                    orderby: 'EventDate desc'
                 }
             },
             'campus:events:training:userowned' : {
@@ -69,7 +69,7 @@ define([
                 },
                 queryParameters: {
                     expand: 'Category,Teacher,AttachmentFiles',
-                    orderby: 'Created desc',
+                    orderby: 'EventDate desc',
                     filters: "available eq 1"
                 },
                 noHandleAttachedImage: true
@@ -116,7 +116,19 @@ define([
         },
 
         _lib : {
-            training_states: ['available', 'closed']
+            training_states: {
+                name: 'available',
+                states: [
+                    {
+                        id: 1,
+                        title: 'available'
+                    },
+                    {
+                        id: 0,
+                        title: 'closed'
+                    }
+                ]
+            }
         }
     });
 });

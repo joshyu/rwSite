@@ -1,10 +1,10 @@
 <div class="banner">
     <span class="glyphicon glyphicon-user"></span> <b>{{campus_survey.author}}</b> <span class="splitter"> | </span>
-    <span class="glyphicon glyphicon-calendar"></span> {{campus_survey.pubdate}}
+    <span class="glyphicon glyphicon-calendar"></span> {{formatDate campus_survey.pubdate}}
     <span class="banner-right">
         <span class="numjoined label label-danger">{{campus_survey.numJoined}}</span>
         {{#if campus_survey.available}}
-        <span class="btnJoin"><a href="{{campus_training.joinLink}}" class="btn btn-default  btn-xs">vote</a></span>
+        <span class="btnJoin"><a href="{{campus_survey.votelink}}" class="btn btn-default  btn-xs">vote</a></span>
         {{else}}
          <span class="text-muted"> closed </span>
         {{/if}}

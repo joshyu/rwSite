@@ -46,14 +46,24 @@ define([
             var $butSubmit = this.$('.btnsubmit');
             $butSubmit.button('loading');
             var frm= e.target;
-            var data = {formData: this.$(frm).serialize() };
+            var data = {};
+
+            _.each(['receiver', 'subject', 'content'], function(name){
+                data[name] = frm[name].value;
+            });
+
+            data.Title = data.subject;
+            delete data.subject;
+
+            var posted = {data : data};
             var that = this;
-            app.modelHelper.get('suggestion').execute('suggestion:post',{data: data, success: function(status){
+            posted.success = function(data){
                  that.showSuccessMsg('Post Message Successfully.');
                  $butSubmit.button('reset');
                  frm.reset();
-            }});
-
+            }
+            
+            app.modelHelper.get('suggestion').execute('suggestion:post', posted);
             return false;
         }
     });

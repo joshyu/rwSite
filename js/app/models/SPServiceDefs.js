@@ -2,7 +2,6 @@ define({
     api: {
         listRelativePath: '/_api/Web/lists/getbytitle(\'$listTitle$\')/items($id$)',
         listRelativePathProperties: '/_api/Web/lists/getbytitle(\'$listTitle$\')/$prop$',
-        listRelativePath_old: '/_vti_bin/ListData.svc/$listTitle$($id$)',
         contextInfo: '/_api/contextinfo/'
     },
 
@@ -17,7 +16,6 @@ define({
             "num": "top"
         },
 
-        KeysWithCompatibilityIssue: ["inlinecount", "skip"],
         keysItemPermitted: ["expand"]
     },
     base: {

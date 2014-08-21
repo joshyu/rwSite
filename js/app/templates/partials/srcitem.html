@@ -7,15 +7,15 @@
             <span class="numjoined label label-primary">{{campus_src.numJoined}}</span>
         </span>
         {{#if campus_src.available}}
-        <span class="btnJoin"><a href="{{campus_src.joinLink}}" class="btn btn-default btn-xs">Join</a></span>
+        <span class="btnJoin"><a href="{{campus_src.joinLink}}" target="_blank" class="btn btn-default btn-xs">Join</a></span>
         {{else}}
          <span class="text-muted"> closed </span>
         {{/if}}
     </span>
 </div>
 <div class="content clearfix">
-   <div class="col-md-2 item-image"><img src="{{campus_src.imageUrl}}" class="img-responsive"></div>
-    <div class="col-md-10 item-content bodycontent">
+   <div class="col-md-3 item-image"><img src="{{campus_src.imageUrl}}" class="img-responsive"></div>
+    <div class="col-md-9 item-content bodycontent">
           <p>{{{campus_src.content}}}</p>
     </div>
 </div>

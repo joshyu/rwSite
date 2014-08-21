@@ -12,7 +12,7 @@ define([
         template: template,
         className:"container campuslistpage",
         isAdmin: false,
-        loadnum: 3,
+        loadnum: 20,
         pageNo: 0,
         noAjax: false,
 

@@ -51,7 +51,8 @@ define([
             var viewKey = '';
             var options = {};
             showOptions = showOptions || {};
-            showOptions.preventClose = showOptions.preventClose || layoutView.templateData.preventClose;
+            showOptions.preventClose = showOptions.preventClose || 
+                                                    (layoutView.templateData && layoutView.templateData.preventClose);
 
             if(typeof _panelConf === 'string'){
                 viewKey = _panelConf;

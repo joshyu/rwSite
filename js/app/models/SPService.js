@@ -138,9 +138,7 @@ define([
 
         _parseConditionList: function(conds, asList) {
             var condKeyNeedMapped = _SPDefined.conditions.keysNeedMapped;
-            var compatList = _SPDefined.conditions.KeysWithCompatibilityIssue;
             var keysItemPermitted = _SPDefined.conditions.keysItemPermitted;
-            var useNewAPI = true;
 
             _.each(conds, function(value, key) {
                 var _newKey = condKeyNeedMapped[key];
@@ -153,13 +151,7 @@ define([
                 if (!asList && !_.contains(keysItemPermitted, _newKey || key)) {
                     delete conds[key];
                 }
-
-                if (_.contains(compatList, _newKey || key)) {
-                    useNewAPI = false;
-                }
             });
-
-            return useNewAPI;
         },
 
         regeneratePOSTUrl: function(options) {
@@ -213,21 +205,13 @@ define([
             }
 
             var _conditions = _.extend({}, url.conditions, options.data, options.queryParameters);
-            var _useNewAPI = this._parseConditionList(_conditions, options.asList);
-
-            //manually update.
-            //can be deprecated due to we use the property to get the size.
-            if (_conditions.inlinecount) {
-                _conditions = {
-                    top: 0,
-                    inlinecount: _conditions.inlinecount
-                };
-                options.fields = [];
-            }
+            this._parseConditionList(_conditions, options.asList);
 
             if (_.isObject(url) && url.site) {
-                url.apibase = _useNewAPI ? _SPDefined.api.listRelativePath : _SPDefined.api.listRelativePath_old;
-                url = "/" + url.site + url.apibase.replace('$listTitle$', url.title).replace('$id$', _itemId || "");
+                url = "/" + url.site + _SPDefined.api.listRelativePath
+                                                    .replace('$listTitle$', url.title)
+                                                    .replace('$id$', _itemId || "");
+
                 delete _conditions.id;
             } else if (_.isString(url)) {
                 url = url.replace('$id$', _itemId);
@@ -238,7 +222,9 @@ define([
             }
 
             if (_conditions.skiptoken) {
-                urlParams += encodeURIComponent('$skiptoken') + "=" + encodeURIComponent(_conditions.skiptoken) + "&";
+                urlParams += encodeURIComponent('$skiptoken') + 
+                                "=" + encodeURIComponent(_conditions.skiptoken) + "&";
+
                 delete _conditions.skiptoken;
             }
 

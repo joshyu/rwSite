@@ -15,17 +15,17 @@ define([
                     "Id": "id",
                     "Title": "title",
                     "Category/Title": "category",
-                    "Author/Title": "author",
+                    "contact/Title": "author",
                     "Attachments": "",
                     "content": "content",
                     "AttachmentFiles": "attachments",
                     "EventDate": "pubdate",
                     "JoinLink": "joinLink",
-                    "available": "available",
-                    'numJoined': 'numJoined'
+                    "joinLinkTitle":"joinLinkTitle",
+                    "available": "available"
                 },
                 queryParameters: {
-                    expand: 'Category,AttachmentFiles,Author',
+                    expand: 'Category,AttachmentFiles,contact',
                     orderby: 'EventDate desc'
                 }
             },
@@ -49,29 +49,36 @@ define([
                 returnFields: "ItemCount"
             },
 
-            //TODO: will be updated later.
-            'campus:events:src:userowned': {
-                url: "items",
-                type: "list",
+            //fetch those available and not outdated src events.
+            'campus:events:src:fresh': {
+                url: 'items',
+                type: 'list',
+                getQueryParameters: function(){
+                    var _params = {
+                        expand: 'Category,AttachmentFiles,contact',
+                        orderby: 'EventDate desc'
+                    };
+
+                    _params.filters = "available eq 1 and EventDate gt datetime'"+ new Date().toISOString()  +"'";
+                    return _params;
+                },
                 returnFields: {
                     "Id": "id",
                     "Title": "title",
                     "Category/Title": "category",
-                    "Author/Title": "author",
+                    "contact/Title": "author",
+                    "contact/Id" : "authorId",
                     "Attachments": "",
                     "content": "content",
                     "AttachmentFiles": "attachments",
                     "EventDate": "pubdate",
                     "JoinLink": "joinLink",
-                    "available": "available",
-                    'numJoined': 'numJoined'
-                },
-                queryParameters: {
-                    expand: 'Category,AttachmentFiles,Author',
-                    orderby: 'EventDate desc',
-                    filters: "available eq 1"
+                    "joinLinkTitle":"joinLinkTitle",
+                    "available": "available"
                 }
             },
+
+            'campus:events:src:userowned': 'getUserOwnedSrc',
 
             'campus:src:item:info': {
                 url: "items",
@@ -79,17 +86,17 @@ define([
                     "Id": "id",
                     "Title": "title",
                     "Category/Title": "category",
-                    "Author/Title": "author",
+                    "contact/Title": "author",
                     "Attachments": "",
                     "content": "content",
                     "AttachmentFiles": "attachments",
                     "EventDate": "pubdate",
                     "JoinLink": "joinLink",
-                    "available": "available",
-                    'numJoined': 'numJoined'
+                    "joinLinkTitle":"joinLinkTitle",
+                    "available": "available"
                 },
                 queryParameters: {
-                    expand: 'Category,AttachmentFiles,Author'
+                    expand: 'Category,AttachmentFiles,contact'
                 }
             },
 
@@ -108,6 +115,14 @@ define([
                     expand: 'AttachmentFiles'
                 }
             }
+        },
+
+        getUserOwnedSrc: function(data){
+            var namedId = data.nameId;
+            var that = this;
+            return this.request('campus:events:src:fresh').then(function(items) {
+                return that.filterUserJoinedItem(items, namedId);
+            });
         },
 
         handleEventImage: function(data){

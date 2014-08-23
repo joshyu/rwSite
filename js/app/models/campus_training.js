@@ -16,16 +16,17 @@ define([
                     "Title": "title",
                     "Category/Title": "category",
                     "Teacher/Title":"author",
+                    "Teacher/Id":"authorId",
                     "Attachments": "",
                     "content" : "content",
                     "AttachmentFiles": "attachments",
                     "EventDate": "pubdate",
                     "JoinLink": "joinLink",
+                    "joinLinkTitle":"joinLinkTitle",
                     "timespan": "timespan",
                     "TrainingCode": "trainingcode",
                     "TrainingRoom": "room",
                     "Rank": "Rank",
-                    "numJoined": "numJoined",
                     "available" : "available"
                 },
                 queryParameters: {
@@ -47,33 +48,41 @@ define([
                     orderby: 'EventDate desc'
                 }
             },
-            'campus:events:training:userowned' : {
-                url:'items',
+
+             //fetch those available and not outdated src events.
+            'campus:events:training:fresh': {
+                url: 'items',
                 type: 'list',
+                getQueryParameters: function(){
+                    var _params = {
+                        expand: 'Category,Teacher,AttachmentFiles',
+                        orderby: 'EventDate desc'
+                    };
+
+                    _params.filters = "available eq 1 and EventDate gt datetime'"+ new Date().toISOString()  +"'";
+                    return _params;
+                },
                 returnFields: {
                     "Id": "id",
                     "Title": "title",
                     "Category/Title": "category",
                     "Teacher/Title":"author",
+                    "Teacher/Id":"authorId",
                     "Attachments": "",
                     "content" : "content",
                     "AttachmentFiles": "attachments",
                     "EventDate": "pubdate",
                     "JoinLink": "joinLink",
+                    "joinLinkTitle":"joinLinkTitle",
                     "timespan": "timespan",
                     "TrainingCode": "trainingcode",
                     "TrainingRoom": "room",
                     "Rank": "Rank",
-                    "numJoined": "numJoined",
                     "available" : "available"
-                },
-                queryParameters: {
-                    expand: 'Category,Teacher,AttachmentFiles',
-                    orderby: 'EventDate desc',
-                    filters: "available eq 1"
-                },
-                noHandleAttachedImage: true
+                }
             },
+
+            'campus:events:training:userowned' : 'getUserOwnedTraining',
 
             'campus:training:item:info' : {
                 url:'items',
@@ -87,31 +96,44 @@ define([
                     "AttachmentFiles": "attachments",
                     "EventDate": "pubdate",
                     "JoinLink": "joinLink",
+                    "joinLinkTitle":"joinLinkTitle",
                     "timespan": "timespan",
                     "TrainingCode": "trainingcode",
                     "TrainingRoom": "room",
                     "Rank": "Rank",
-                    "numJoined": "numJoined",
                     "available" : "available"
                 },
                 queryParameters: {
                     expand: 'Category,Teacher,AttachmentFiles'
                 },
                 noHandleAttachedImage: true
+            },
+
+            'campus:events:training:donelist' : {
+                url : "donelist",
+                type: 'list',
+                returnFields: 'trainingId',
+                getQueryParameters: function(data){
+                    var _params = {};
+                    var nameId = data.nameId;
+                    if(nameId){
+                        _params.filters = "nameId eq \'"+ nameId +"\'";
+                    }
+
+                    delete data.nameId;
+                    return _params;
+                }
             }
         },
         commands: {
-            //TODO:
             'campus:events:training:markdone' : {
-                //url: "js/data/postsuccess.jso.aspx"
-                url : "items",
-                type: 'update' //update, delete, create. by default it is update.
+                url : "donelist",
+                type: 'create' //update, delete, create. by default it is update.
             },
 
             //deprecated.
             'campus:events:training:checktrcode' : {
                 url : "items",
-                //type: 'update' //update, delete, create. by default it is update.
             }
         },
 
@@ -129,6 +151,14 @@ define([
                     }
                 ]
             }
+        },
+
+        getUserOwnedTraining: function(data){
+            var namedId = data.nameId;
+            var that = this;
+            return this.request('campus:events:training:fresh').then(function(items) {
+                return that.filterUserJoinedItem(items, namedId); 
+            });
         }
     });
 });

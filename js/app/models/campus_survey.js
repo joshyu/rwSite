@@ -22,8 +22,8 @@ define([
                     "Content" : "content",
                     "Created": "pubdate",
                     "link": "votelink",
-                    "available":"available",
-                    "numVoted":"numVoted"
+                    "joinLinkTitle":"joinLinkTitle",
+                    "available":"available"
                 }
             },
 
@@ -36,8 +36,7 @@ define([
                 returnFields: {
                     "Id": "id",
                     "Title": "title",
-                    "Created": "pubdate",
-                    "numVoted":"numVoted"
+                    "Created": "pubdate"
                 }
             },
 
@@ -55,8 +54,8 @@ define([
                     "Content" : "content",
                     "Created": "pubdate",
                     "link": "votelink",
-                    "available":"available",
-                    "numVoted":"numVoted"
+                    "joinLinkTitle":"joinLinkTitle",
+                    "available":"available"
                 }
             },
 
@@ -68,8 +67,7 @@ define([
                 },
                 returnFields: {
                     "Id": "id",
-                    "Title": "title",
-                    "numVoted":"numVoted"
+                    "Title": "title"
                 }
             },
 
@@ -82,8 +80,8 @@ define([
                     "Content" : "content",
                     "Created": "pubdate",
                     "link": "votelink",
-                    "available":"available",
-                    "numVoted":"numVoted"
+                    "joinLinkTitle":"joinLinkTitle",
+                    "available":"available"
                 },
                 queryParameters:{
                     expand: 'Author'

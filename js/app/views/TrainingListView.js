@@ -25,44 +25,73 @@ define([
                 opts.noJoinLink = true;
             }
 
-            opts.curUser = app.preloaded.user.info.name;
+            this.joinLinkTitles =  _.pluck(opts.campus_training, 'joinLinkTitle');
+            opts.curUserId = app.preloaded.user.info.related.nameRecordId;
+            var _trainingDoneList = app.preloaded.user.trainingDoneList;
+
+            _.each(this._templateData , function(item){
+                if( item.id in _trainingDoneList ){
+                    item.done = true;
+                }
+            });
+
             return opts;  
         },
 
         onRender: function(){
             this.$el.find('.trcode-link').popover();
+
+            var that = this;
+            var numNodes = this.$('.numjoined');
+            var model = app.modelHelper.get('campus_training');
+            if(this.joinLinkTitles){
+                _.each(this.joinLinkTitles, function(title, i){
+                    $.when(model.requestJoinNum(title)).done(function(num){
+                         numNodes.eq(i).html(num).addClass('label-primary');
+                    });
+                });
+            }
         },
 
         markdone: function(e){
             e.preventDefault();
             var item= e.target;
+            var lstId = $(item).data('listid');
             var itemId = $(item).data('item-id');
+            var itemData = this._templateData[lstId];
+            var nameId = app.preloaded.user.info.related.nameRecordId;
+            var that = this;
+            var model = app.modelHelper.get('campus_training');
+            if(!itemData) return false;
 
             bootbox.prompt('please input training code:', function  (trcode) {
-                if( trcode !== null ){
-                    var data = {formData: {id: itemId, trcode : trcode}}
-                    app.modelHelper.get('campus_training').execute('campus:events:training:checktrcode',{data: data, success: function (stat){
-                        if(stat){
-                            bootbox.confirm("Training code is correct. Are you sure to mark it done ?", function (res) {
-                                if(res){
-                                    
-                                    var data = {formData: {id : itemId , trcode : trcode } };
+                if( trcode == null ) return false;
 
-                                    app.modelHelper.get('campus_training').execute('campus:events:training:markdone',{data: data, success: function(status){
-                                         if(status){
-                                            var $grp = $(item).parents('.btn-group:first');
-                                            $grp.fadeOut('slow', function(){
-                                                var $urlDom = $grp.children().first().html('open').css('opacity', 0);
-                                                $grp.replaceWith($urlDom[0]);
-                                                $urlDom.animate({opacity:1}, 'slow');
-                                            });
-                                         }
-                                    }});
-                                }
-                            })
-                        }
-                    }})
+                if(itemData.trainingcode !== trcode){
+                    bootbox.alert(" the training code doesn't match. ");
+                    return false;
                 }
+
+                bootbox.confirm("Training code is correct. Are you sure to mark it done ?", function (res) {
+                    if(res){
+                        var data= {
+                           nameId : nameId,
+                           trainingId: itemId
+                        };
+
+                        var posted = {data: data};
+                        posted.success = function(data){
+                            //add to donelist.
+                            app.preloaded.user.trainingDoneList[itemId] = 1;
+                            var $grp = $(item).parents('.btn-group:first');
+                            $grp.fadeOut('slow', function(){
+                                $grp.replaceWith('<span class="text-muted"> attended </span>');
+                            });
+                        }
+
+                        model.execute('campus:events:training:markdone', posted);
+                    }
+                });
             });            
         }
     });

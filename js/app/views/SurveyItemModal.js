@@ -24,6 +24,16 @@ define([
             return {
                 id: itemId
             };
+        },
+
+        handleData: function(data){
+            var joinLinkTitle = data.campus_survey.joinLinkTitle;
+            var that = this;
+            $.when(app.modelHelper.get('campus_survey').requestJoinNum(joinLinkTitle)).done(function(num){
+                 that.$('.modal-dialog .numjoined').html(num).addClass('label-primary');
+            });
+
+            return ModalBase.prototype.handleData.apply(this, arguments);
         }
     });
 });

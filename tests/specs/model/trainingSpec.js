@@ -21,9 +21,8 @@ define(function() {
             });
 
             it("fetch userowned training list", function(done) {
-                model.request('campus:events:training:userowned').done(function(items) {
+                model.request('campus:events:training:userowned', {nameId: 202}).then(function(items) {
                     expect(items).toBeDefined();
-                    expect(items.length).toBeGreaterThan(0);
                     done();
                 });
             });

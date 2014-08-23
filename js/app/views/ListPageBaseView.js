@@ -103,6 +103,8 @@ define([
 
         onReset: function(e){
             this.$('.btn-default-choice').button('toggle');
+            this.$('input').val('');
+            this.onSearch(e);
         },
 
         onSearch: function(e) {

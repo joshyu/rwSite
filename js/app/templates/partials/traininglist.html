@@ -2,28 +2,32 @@
 <div class="campus-item">
 	<div class="head">
     <h4>{{title}}
-        {{#ifCond ../curUser author}}
+        {{#ifCond ../curUserId authorId}}
         <span class="trcode"><a class="trcode-link" href="javascript:;" data-toggle="popover" data-placement="top"  title="view training code" data-content="{{trainingcode}}"><i class="fa fa-key"></i></a></span>
         {{/ifCond}}
     </h4>
 		<span class="banner-right">
-      <span class="numjoined label label-primary">{{numJoined}}</span>
+      <span class="numjoined label"><img src="images/loading.gif"/></span>
       {{#if available}}
           {{#if ../../noJoinLink}}
               
-              {{#ifCond ../../../curUser author}}
+              {{#ifCond ../../../curUserId authorId}}
                   <span class="btnJoin"><a href="{{joinLink}}" class="btn btn-default btn-xs" target="_blank"  > open </a></span>
               {{else}}
-                  <div class="btn-group">
-                    <a href="{{joinLink}}" target="_blank" class="btn btn-default btn-xs">Unregister</a>
-                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                      <span class="caret"></span>
-                      <span class="sr-only">Toggle Dropdown</span>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-xs" role="menu">
-                      <li><a href="#" class="btn-markdone" data-item-id="{{id}}">Mark Done</a></li>
-                    </ul>
-                  </div>
+                  {{#if done}}
+                      <span class="text-muted"> attended </span>
+                  {{else}}
+                      <div class="btn-group">
+                        <a href="{{joinLink}}" target="_blank" class="btn btn-success btn-xs">Unregister</a>
+                        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                          <span class="caret"></span>
+                          <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-xs" role="menu">
+                          <li><a href="#" class="btn-markdone" data-listid= '{{@index}}' data-item-id="{{id}}">Mark Done</a></li>
+                        </ul>
+                      </div>
+                  {{/if}}
               {{/ifCond}}            
           {{else}}
               <span class="btnJoin"><a href="{{joinLink}}" class="btn btn-default btn-xs" target="_blank"  >register </a></span>

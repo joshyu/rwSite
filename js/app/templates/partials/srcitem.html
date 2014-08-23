@@ -4,10 +4,15 @@
     <span class="glyphicon glyphicon-calendar"></span> {{formatDate campus_src.pubdate}}
     <span class="banner-right">
         <span>
-            <span class="numjoined label label-primary">{{campus_src.numJoined}}</span>
+            <span class="numjoined label"><img src="images/loading.gif"/></span>
         </span>
         {{#if campus_src.available}}
-        <span class="btnJoin"><a href="{{campus_src.joinLink}}" target="_blank" class="btn btn-default btn-xs">Join</a></span>
+            {{#if campus_src.joined}}
+            <span class="btnJoin"><a href="{{joinLink}}" class="btn btn-success  btn-xs" target="_blank"  >cancel</a></span>
+            {{else}}
+            <span class="btnJoin"><a href="{{campus_src.joinLink}}" target="_blank" class="btn btn-primary btn-xs">Join</a></span>
+            {{/if}}
+        
         {{else}}
          <span class="text-muted"> closed </span>
         {{/if}}
@@ -23,7 +28,7 @@
 <div class="attachments">
     <span class="glyphicon glyphicon-paperclip"></span> 
     {{#each campus_src.attachments}}
-        <span class="attach_{{@index}} item"><a target="_blank" href="{{ServerRelativeUrl}}">{{FileName}}</a></span> <span class="splitter"></span>
+        <span class="attach_{{@index}} item"><a target="_blank" class="label label-default"  href="{{ServerRelativeUrl}}">{{FileName}}</a></span> <span class="splitter"></span>
     {{/each}}
 </div>
 {{/if}}

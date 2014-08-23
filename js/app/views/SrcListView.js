@@ -34,6 +34,8 @@ define([
                     campus_src : srcList,
                     noJoinLink : true
                 }
+
+                this.joinLinkTitles =  _.pluck(srcList , 'joinLinkTitle');
             }
 
             ViewBase.prototype.initialize.apply(this, arguments);
@@ -58,6 +60,43 @@ define([
                     item.imageUrl = _.find(srcCates , {title: item.category}).imageUrl;
                 }
             });
+        },
+
+        onRender: function(){
+            var that = this;
+            var numNodes = this.$('.numjoined');
+            if(this.joinLinkTitles){
+                _.each(this.joinLinkTitles, function(title, i){
+                    $.when(app.modelHelper.get('campus_src').requestJoinNum(title)).done(function(num){
+                         numNodes.eq(i).html(num).addClass('label-primary');
+                    });
+                });
+            }
+        },
+
+        markitemStates: function(data){
+            if(!data) return false;
+            var userownedIds = app.preloaded.user.srcDataIds;
+            var now = new Date();
+
+            _.each(data, function(item){
+                if(item.id in userownedIds ){
+                    item.joined = true;
+                }
+
+                if( new Date(item.pubdate) < now){
+                    item.outdated = true;
+                }
+            });
+        },
+
+        renderData: function (data) {
+            if(!this.joinLinkTitles && data){
+                this.joinLinkTitles = _.pluck(data.campus_src , 'joinLinkTitle');
+                this.markitemStates( data.campus_src  );
+            }
+
+            this._renderData(data);
         }
     });
 });

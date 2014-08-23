@@ -28,6 +28,24 @@ define([
                     } 
                 },this);
             }
+        },
+
+        onRender: function(){
+            var that = this;
+            var joinLinkTitle = '';
+            var numNodes = this.$('.numjoined');
+            if(this.joinLinkTitles){
+                _.each(this.joinLinkTitles, function(title, i){
+                    $.when(app.modelHelper.get('campus_survey').requestJoinNum(title)).done(function(num){
+                         numNodes.eq(i).html(num).addClass('label-primary');
+                    });
+                });
+            }
+        },
+
+        renderData: function (data) {
+            this.joinLinkTitles = _.pluck(data.campus_survey , 'joinLinkTitle');
+            this._renderData(data);
         }
     });
 });

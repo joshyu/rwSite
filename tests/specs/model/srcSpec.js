@@ -13,10 +13,17 @@ define(function() {
                 });
             });
 
+            it("fetch join link count", function(done) {
+                    $.when(model.requestJoinNum('src_1')).done(function(num){
+                        expect(num).toBeDefined();
+                        expect(num).toBeGreaterThan(0);
+                        done();                                
+                    });
+            });
+
             it("fetch campus userowned items", function(done) {
-                model.request('campus:events:src:userowned').done(function(items) {
+                model.request('campus:events:src:userowned', {nameId: 202}).then(function(items) {
                     expect(items).toBeDefined();
-                    expect(items.length).toBeGreaterThan(0);
                     done();
                 });
             });

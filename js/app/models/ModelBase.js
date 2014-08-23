@@ -113,7 +113,6 @@ define([
                 var dfd = $.Deferred();
                 var that = this;
                 if (_cachedKey && _cached[_cachedKey]) {
-                    //dfd.resolve(_.cloneDeep(_cached[_cachedKey]));
                     dfd.resolve(_cached[_cachedKey]);
                 } else {
                     var def = null;
@@ -125,6 +124,14 @@ define([
                             queryParameters:  _.clone(opts.queryParameters || {} ),
                             data :  _.extend({}, opts.data , args)
                         };
+
+                        if(opts.queryParameters){
+                            _opts.queryParameters = opts.queryParameters;
+                        }else if(opts.getQueryParameters && _.isFunction(opts.getQueryParameters)){
+                            _opts.queryParameters = opts.getQueryParameters(args);
+                        }else{
+                            _opts.queryParameters = {};
+                        }
 
                         if (opts.listProperties) {
                             _opts.listProperties = opts.listProperties;
@@ -296,6 +303,57 @@ define([
             }
 
             return item;
+        },
+
+        requestListProperty: function(site, listTitle, property){
+            if(!site || !listTitle || !property) return false;
+
+            var _options = {
+                url: {
+                    site: site,
+                    title: listTitle
+                },
+
+                listProperties: property
+            };
+
+            return this.service['_fetchitem'](_options).then(function(item){
+                return item && item[property];
+            });
+        },
+
+        requestJoinNum: function(joinLinkTitle){
+            return this.requestListProperty('campus/regcenter', joinLinkTitle, 'ItemCount')
+        },
+
+        filterUserJoinedItem: function(items, namedId){
+            var _dfds= [] , dfd = null;
+            var that = this;
+            var _options = {
+                url: {
+                    site: "campus/regcenter",
+                    title: ''
+                },
+                fields: 'Name/Id',
+                queryParameters: {
+                    expand: 'Name'
+                }
+            };
+
+            var _resIds = [];
+            _.each(items, function(item, i){
+                if(!item.joinLinkTitle) return;
+                _options.url.title = item.joinLinkTitle;
+                _options.queryParameters.filters = 'Name/Id eq ' + namedId;
+                 _dfds.push( that.service['_fetchlist'](_options) );
+            });
+
+            return $.when.apply($, _dfds).then(function(){
+                var data = [].slice.call(arguments);
+                return _.filter(items, function(item,i){
+                    return data[i].length > 0;
+                });                    
+            });
         }
     });
 });

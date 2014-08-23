@@ -98,7 +98,12 @@ define([
                 }
             }
 
-            return _.extend({}, this._getServiceConf(_service, options.serviceKey), options);
+            var  __conf = null;
+            if(options.serviceKey && _.isString(options.serviceKey)){
+                __conf = this._getServiceConf(_service, options.serviceKey);
+            }
+
+            return _.extend({}, __conf , options);
         },
 
         getListItemType: function(linkname) {
@@ -199,7 +204,7 @@ define([
                 }
             }
 
-            if (options.data.id) {
+            if (options.data && options.data.id) {
                 var _itemId = options.data.id;
                 delete options.data.id;
             }

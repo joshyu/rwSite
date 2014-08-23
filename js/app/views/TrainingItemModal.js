@@ -24,6 +24,22 @@ define([
             return {
                 id: itemId
             };
+        },
+
+        handleData: function(data){
+            var joinLinkTitle = data.campus_training.joinLinkTitle;
+            var that = this;
+            $.when(app.modelHelper.get('campus_training').requestJoinNum(joinLinkTitle)).done(function(num){
+                 that.$('.modal-dialog .numjoined').html(num).addClass('label-primary');
+            });
+
+            if(app.preloaded.user.trainingDoneList[data.campus_training.id]){
+                data.campus_training.done = true;
+            }else if( app.preloaded.user.trainingDataIds[data.campus_training.id]){
+                data.campus_training.joined = true;
+            }
+
+            return ModalBase.prototype.handleData.apply(this, arguments);
         }
     });
 });

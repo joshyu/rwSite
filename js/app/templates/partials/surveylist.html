@@ -3,9 +3,9 @@
 <div class="campus-item">
 	<div class="head"><h4>{{title}}</h4>
 			<span class="banner-right">
-	    	 <span class="numjoined label label-primary">{{numVoted}}</span>
+	    	 <span class="numjoined label"><img src="images/loading.gif"/></span>
 	    	{{#if available}}
-	    		<span class="btnJoin"><a href="{{votelink}}" class="btn btn-default   btn-xs" target="_blank"  >Vote</a></span>
+	    		<span class="btnJoin"><a href="{{votelink}}" class="btn btn-primary   btn-xs" target="_blank"  >Vote</a></span>
 	    	{{else}}
 	         	<span class="text-muted"> closed </span>
 	        {{/if}}

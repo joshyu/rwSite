@@ -58,6 +58,7 @@ define([
 
             for(var key in data){
                 data.title= data[key].title;
+                break;
             }
 
             return data;

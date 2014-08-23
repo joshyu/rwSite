@@ -14,7 +14,7 @@
             'underscore': '../vendor/lodash.min',
             'backbone': '../vendor/backbone',
             'marionette': '../vendor/backbone.marionette',
-            'jquery': '../vendor/jquery.min',
+            'jquery': '../vendor/jquery-1.11.1',
             'bootstrap': '../vendor/bootstrap',
             'hbs': "../vendor/hbs",
             'text': "../vendor/text",

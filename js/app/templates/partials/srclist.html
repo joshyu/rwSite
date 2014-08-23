@@ -2,13 +2,21 @@
 {{#each campus_src}}
 <div class="campus-item">
 	<div class="head"><h4>{{title}}</h4>
-			<span class="banner-right">
-	    	 <span class="numjoined label label-primary">{{numJoined}}</span>
+	   <span class="banner-right">
+	    	 <span class="numjoined label"><img src="images/loading.gif"/></span>
 	    	{{#if available}}
 		    	{{#if ../../noJoinLink}}
-	        		<span class="btnJoin"><a href="{{joinLink}}" class="btn btn-default  btn-xs" target="_blank"  >cancel</a></span>
+	        		<span class="btnJoin"><a href="{{joinLink}}" class="btn btn-success  btn-xs" target="_blank"  >cancel</a></span>
 	        		{{else}}
-		    	<span class="btnJoin"><a href="{{joinLink}}" class="btn btn-default   btn-xs" target="_blank"  >Join</a></span>
+		        		{{#if  joined }}
+		        		 <span class="btnJoin"><a href="{{joinLink}}" class="btn btn-success  btn-xs" target="_blank"  >cancel</a></span>
+		        		{{else}}
+		        			{{#if outdated}}
+		        			<span class="btnJoin"><a href="{{joinLink}}" class="btn btn-warning  btn-xs" target="_blank"  > Out of Date </a></span>
+		        			{{else}}
+		        			<span class="btnJoin"><a href="{{joinLink}}" class="btn btn-primary   btn-xs" target="_blank"  >Join</a></span>
+		        			{{/if}}		        		
+		        		{{/if}}
 		    	{{/if}}
 	    	{{else}}
 	    		<span class="text-muted">closed</span>
@@ -30,7 +38,7 @@
 	<div class="attachments">
 	    <span class="glyphicon glyphicon-paperclip"></span> 
 	    {{#each attachments}}
-	        <span class="attach_{{@index}} item"><a class="label label-primary" target="_blank" href="{{ServerRelativeUrl}}">{{FileName}}</a></span> <span class="splitter"></span>
+	        <span class="attach_{{@index}} item"><a class="label label-default" target="_blank" href="{{ServerRelativeUrl}}">{{FileName}}</a></span> <span class="splitter"></span>
 	    {{/each}}
 	</div>
 	{{/if}}

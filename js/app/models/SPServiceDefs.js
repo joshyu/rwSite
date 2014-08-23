@@ -131,6 +131,12 @@ define({
                 site: 'campus',
                 title: 'TrainingList'
             }
+        },
+        donelist: {
+            url: {
+                site: 'campus',
+                title: 'DoneTrainings'
+            }
         }
     },
     suggestion: {

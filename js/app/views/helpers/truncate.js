@@ -1,6 +1,7 @@
 define(['hbs/handlebars'], function (Handlebars) {
     /* refer to https://gist.github.com/TastyToast/5053642 */
     Handlebars.registerHelper ('truncate', function (str, len) {
+        len = len || 20;
         if (str.length > len && str.length > 0) {
             var new_str = str + " ";
             new_str = str.substr (0, len);

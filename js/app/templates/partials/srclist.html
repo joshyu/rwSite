@@ -38,7 +38,7 @@
 	<div class="attachments">
 	    <span class="glyphicon glyphicon-paperclip"></span> 
 	    {{#each attachments}}
-	        <span class="attach_{{@index}} item"><a class="label label-default" target="_blank" href="{{ServerRelativeUrl}}">{{FileName}}</a></span> <span class="splitter"></span>
+	        <span class="attach_{{@index}} item"><a class="label label-default" target="_blank" title="{{FileName}}" href="{{ServerRelativeUrl}}">{{truncate FileName 20}}</a></span> <span class="splitter"></span>
 	    {{/each}}
 	</div>
 	{{/if}}

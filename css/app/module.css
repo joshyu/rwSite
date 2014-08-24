@@ -905,9 +905,14 @@ a.profilelink:hover img{
     left: 5px;
 }
 
+.campus-item .trcode .popover {
+    background: rgba(255, 255, 255, 0.95);
+}
 .campus-item .trcode .popover-title{
     white-space: nowrap;
-    background: #c7c7c7;
+    background: #464545;
+    color: #eee;
+    text-align: center;
 }
 
 .campus-item .trcode .popover-content{
@@ -971,7 +976,8 @@ a.profilelink:hover img{
 }
 
 .splitter {
-    margin:0px 5px;
+    margin:0px 2px;
+    display: inline-block;
 }
 
 .campus-item .content{
@@ -991,6 +997,8 @@ a.profilelink:hover img{
 
 .campus-item .attachments .item{
     margin-left:5px;
+    display: inline-block;
+    margin-bottom: 8px;
 }
 .campus-item .attachments .item .label{
     font-size: 1em;
@@ -1242,7 +1250,7 @@ a.profilelink:hover img{
 
 /* profile src list */
 .campus-items .campus-item {
-    border: 1px solid #ddd;
+    border: 1px solid #C2C2C2;
     border-radius: .5em;
     margin-top: 20px;
     -webkit-box-shadow: 0px 6px 8px -6px #474646;

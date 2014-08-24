@@ -28,7 +28,7 @@
 <div class="attachments">
     <span class="glyphicon glyphicon-paperclip"></span> 
     {{#each campus_src.attachments}}
-        <span class="attach_{{@index}} item"><a target="_blank" class="label label-default"  href="{{ServerRelativeUrl}}">{{FileName}}</a></span> <span class="splitter"></span>
+        <span class="attach_{{@index}} item"><a target="_blank" class="label label-default" title="{{FileName}}" href="{{ServerRelativeUrl}}">{{truncate FileName 20}}</a></span>
     {{/each}}
 </div>
 {{/if}}

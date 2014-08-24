@@ -91,6 +91,7 @@ define([
                     "Title": "title",
                     "Category/Title": "category",
                     "Teacher/Title":"author",
+                    "Teacher/Id":"authorId",
                     "Attachments": "",
                     "content" : "content",
                     "AttachmentFiles": "attachments",
@@ -157,7 +158,16 @@ define([
             var namedId = data.nameId;
             var that = this;
             return this.request('campus:events:training:fresh').then(function(items) {
-                return that.filterUserJoinedItem(items, namedId); 
+                var mytrainings = [];
+                for(var i=items.length-1;i>=0;--i){
+                    if(items[i].authorId === namedId){
+                        mytrainings.unshift.apply(mytrainings, items.splice(i,1));
+                    }
+                }
+
+                return $.when(that.filterUserJoinedItem(items, namedId)).then(function(items){
+                    return mytrainings.concat(items);
+                });
             });
         }
     });

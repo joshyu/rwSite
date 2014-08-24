@@ -39,6 +39,11 @@ define([
                 data.campus_training.joined = true;
             }
 
+            if( new Date(data.campus_training.pubdate) < new Date()){
+                data.campus_training.outdated = true;
+            }
+
+            data.curUserId = app.preloaded.user.info.related.nameRecordId;
             return ModalBase.prototype.handleData.apply(this, arguments);
         }
     });

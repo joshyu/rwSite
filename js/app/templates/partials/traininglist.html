@@ -12,7 +12,7 @@
           {{#if ../../noJoinLink}}
               
               {{#ifCond ../../../curUserId authorId}}
-                  <span class="btnJoin"><a href="{{joinLink}}" class="btn btn-default btn-xs" target="_blank"  > open </a></span>
+                  <span class="btnJoin"><a href="{{joinLink}}" class="btn btn-default btn-xs" target="_blank"  > I am trainer </a></span>
               {{else}}
                   {{#if done}}
                       <span class="text-muted"> attended </span>
@@ -51,7 +51,7 @@
 	<div class="attachments">
 	    <span class="glyphicon glyphicon-paperclip"></span> 
 	    {{#each attachments}}
-	        <span class="attach_{{@index}} item"><a target="_blank" href="{{ServerRelativeUrl}}">{{FileName}}</a></span> <span class="splitter"></span>
+	        <span class="attach_{{@index}} item"><a target="_blank" class="label label-default" title="{{FileName}}" href="{{ServerRelativeUrl}}">{{truncate FileName 20}}</a></span> <span class="splitter"></span>
 	    {{/each}}
 	</div>
 	{{/if}}

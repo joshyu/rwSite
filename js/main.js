@@ -87,7 +87,8 @@ require([
      'controllers/LayoutController',
      'controllers/PaceController',
      'controllers/Preloader',
-     'models/ModelHelper'
+     'models/ModelHelper',
+     'controllers/JobHelper'
 ], function (app, Backbone, Marionette, MainController) {
     
     app.on('start',  function () {

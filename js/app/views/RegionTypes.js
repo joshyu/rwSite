@@ -63,6 +63,8 @@ define(['marionette', 'underscore', 'app', 'views/HeaderView', 'views/FooterView
                     return dfd.promise();
                 },
                 show: function(view){
+                    app.jobHelper.clearTimer('pagelist');
+                    
                     if(!this.currentView){
                         Marionette.Region.prototype.show.apply(this, arguments);
                         return;
@@ -88,7 +90,8 @@ define(['marionette', 'underscore', 'app', 'views/HeaderView', 'views/FooterView
                   bindEvents: function(){
                         var that = this;
                         this.ensureEl();
-                        this.$el.on('webkitTransitionEnd transitionend MSTransitionEnd msTransitionEnd oTransitionEnd' , function(){
+                        this.$el.on('webkitTransitionEnd transitionend MSTransitionEnd msTransitionEnd oTransitionEnd' , 
+                        function(){
                             var view = that.currentView;
                             if($(this).hasClass(_AnimatedClasses.out)){
                                 if(view.close){ view.close(); }

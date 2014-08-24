@@ -66,11 +66,15 @@ define([
             var that = this;
             var numNodes = this.$('.numjoined');
             if(this.joinLinkTitles){
-                _.each(this.joinLinkTitles, function(title, i){
-                    $.when(app.modelHelper.get('campus_src').requestJoinNum(title)).done(function(num){
-                         numNodes.eq(i).html(num).addClass('label-primary');
+                var job = app.jobHelper.get('requestJoinNum','pagelist');
+                 _.each(this.joinLinkTitles, function(title, i){
+                    job.register(numNodes[i], {
+                        title : title,
+                        modelId : "campus_src"
                     });
                 });
+
+                job.trigger();
             }
         },
 

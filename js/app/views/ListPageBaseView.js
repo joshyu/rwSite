@@ -89,16 +89,12 @@ define([
 
         getFrmData: function  (frm) {
             if(!frm) return false;
-            var elems = frm.elements;
-            var _obj = {};
-            _.each(elems, function  (elem, i) {
-                var _elemName= elem.name;
-                if(_elemName && !_obj[_elemName]){
-                    _obj[_elemName] = elems[_elemName].value;
-                }
+            var result = { };
+            $.each($(frm).serializeArray(), function() {
+                result[this.name] = this.value;
             });
 
-            return _obj;
+            return result;
         },
 
         onReset: function(e){

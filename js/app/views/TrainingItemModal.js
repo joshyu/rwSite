@@ -26,12 +26,22 @@ define([
             };
         },
 
-        handleData: function(data){
-            var joinLinkTitle = data.campus_training.joinLinkTitle;
-            var that = this;
-            $.when(app.modelHelper.get('campus_training').requestJoinNum(joinLinkTitle)).done(function(num){
-                 that.$('.modal-dialog .numjoined').html(num).addClass('label-primary');
+        onRender: function(){
+            var job = app.jobHelper.get('requestJoinNum','modal');
+            var dom = this.$('.modal-dialog .numjoined')[0];
+            var _joinLinkTitle = this.joinLinkTitle;
+
+            job.register(dom, {
+                title : _joinLinkTitle,
+                modelId : "campus_training"
             });
+
+            job.trigger();
+            ModalBase.prototype.onRender.apply(this, arguments);
+        },
+
+        handleData: function(data){
+            this.joinLinkTitle = data.campus_training.joinLinkTitle;
 
             if(app.preloaded.user.trainingDoneList[data.campus_training.id]){
                 data.campus_training.done = true;

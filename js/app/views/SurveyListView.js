@@ -34,12 +34,16 @@ define([
             var that = this;
             var joinLinkTitle = '';
             var numNodes = this.$('.numjoined');
-            if(this.joinLinkTitles){
-                _.each(this.joinLinkTitles, function(title, i){
-                    $.when(app.modelHelper.get('campus_survey').requestJoinNum(title)).done(function(num){
-                         numNodes.eq(i).html(num).addClass('label-primary');
+            if(this.joinLinkTitles){                
+                var job = app.jobHelper.get('requestJoinNum', 'pagelist');
+                 _.each(this.joinLinkTitles, function(title, i){
+                    job.register(numNodes[i], {
+                        title : title,
+                        modelId : "campus_survey"
                     });
                 });
+
+                job.trigger();
             }
         },
 

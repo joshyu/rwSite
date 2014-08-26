@@ -186,7 +186,12 @@ define([
 
             if (options.listProperties) {
                 if (_.isObject(url) && url.site) {
-                    return "/" + url.site + _SPDefined.api.listRelativePathProperties.replace('$listTitle$', url.title).replace('$prop$', options.listProperties);
+                    var params = options.data && options.data.listproperties_parms;
+                    var urladded= _.map(params, function(v,k){
+                        return "@"+ k +"='" + v + "'";
+                    }).join("&") || "";
+
+                    return "/" + url.site + _SPDefined.api.listRelativePathProperties.replace('$listTitle$', url.title).replace('$prop$', options.listProperties) + "?" +  urladded;
                 } else {
                     return url + "/" + options.listProperties;
                 }
@@ -275,9 +280,15 @@ define([
 
     var _SPBase = _SPService.base = function(_service) {
         return {
+            utils : _SPUtils,
             init: function(options) {
-                //this.options = _.extend({}, this.options, options);
                 this.options = options;
+            },
+
+            getUrl: function(key){
+                var urls = _SPUtils._getServiceConf(_service, key);
+                if(!urls) return false;
+                return urls.url;
             },
 
             _fetchlist: function(options) {
@@ -301,7 +312,10 @@ define([
 
                 options = _SPUtils.parseOptions(_service, options);
                 url = _SPUtils.regenerateGETUrl(options);
-                if (!url) return false;
+                
+                if($.active == 0 && !options.noPace){
+                    app.pace && app.pace.restart();
+                }
 
                 return $.ajax({
                     url: url,

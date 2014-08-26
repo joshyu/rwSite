@@ -53,6 +53,7 @@ define([
             'campus:events:src:fresh': {
                 url: 'items',
                 type: 'list',
+                noPace: true,
                 getQueryParameters: function(){
                     var _params = {
                         expand: 'Category,AttachmentFiles,contact',
@@ -115,6 +116,12 @@ define([
                     expand: 'AttachmentFiles'
                 }
             }
+        },
+
+        permissionDef: {
+            link: '/campus/Lists/src/AllItems.aspx',
+            perm: 'editListItems',
+            urlKey: 'items'
         },
 
         getUserOwnedSrc: function(data){

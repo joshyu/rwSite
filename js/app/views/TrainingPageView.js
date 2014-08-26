@@ -6,6 +6,7 @@ define([
     'use strict';
 
     return ListPageBaseView.extend({
+       modelId: 'campus_training',
         templateData: {
             title : 'Training Center',
             caption: "Training plan for 2014",
@@ -30,7 +31,7 @@ define([
         },
 
         loadSearch: function  () {
-          var trStates= app.modelHelper.get('campus_training').getLibData('training_states');
+          var trStates= app.modelHelper.get(this.modelId).getLibData('training_states');
 
            return [
                 {

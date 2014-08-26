@@ -243,6 +243,19 @@ define([
                 var empData = emp.nameRecordId && emplist && emplist[emp.nameRecordId];
                 return _.extend(emp, empData);
             });
+        },
+
+        permissionDef: {
+            'contacts': {
+                link: '/campus/Lists/empNameRecords/AllItems.aspx',
+                perm: 'editListItems',
+                urlKey: 'items'
+            },
+            'newhire': {
+                link: '/campus/Lists/NewHires/AllItems.aspx',
+                perm: 'editListItems',
+                urlKey: 'items'
+            },
         }
     });
 });

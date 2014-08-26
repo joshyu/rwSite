@@ -7,6 +7,7 @@ define([
 
     return ListPageBaseView.extend({
         threshold_new : '1', //books within how many months will be regarded as New.
+        modelId: 'campus_book',
         templateData: {
             title : 'Book Library',
             itemMode : false,  //itemMode is false, then we will show the results as table list.

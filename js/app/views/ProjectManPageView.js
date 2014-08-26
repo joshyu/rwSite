@@ -7,6 +7,8 @@ define([
 
     return ListPageBaseView.extend({
         className:"container campuslistpage cplp-nolist",
+        modelId: 'campus_office',
+        permKey: 'projects',
         templateData: {
             title : 'Project Management',
             pageTip : 'hover on the image to see its description, click to enlarge it.',

@@ -29,6 +29,7 @@ define([
                     'user:info:role',
                     'contacts/contacts:fulllist'
                 ],
+                cached: true,
                 parseData: 'handleUserWithRelated'
             },
 
@@ -40,7 +41,8 @@ define([
                     'Title': 'name',
                     'Email': 'email',
                     'IsSiteAdmin': 'isadmin',
-                    'Groups/Title': 'roles'
+                    'Groups/Title': 'roles',
+                    'Groups/Id' : 'roleIds'
                 },
 
                 data: {
@@ -122,6 +124,7 @@ define([
         },
 
         handleUserInfo: function(data){
+            data.raw_account = data.account;
             data.account = data.account.split("|")[1] ;
             return data;
         }

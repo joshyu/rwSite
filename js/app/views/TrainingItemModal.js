@@ -31,7 +31,8 @@ define([
             var dom = this.$('.modal-dialog .numjoined')[0];
             var _joinLinkTitle = this.joinLinkTitle;
 
-            job.register(dom, {
+            job.register({
+                dom: dom,
                 title : _joinLinkTitle,
                 modelId : "campus_training"
             });

@@ -9,7 +9,8 @@ define(['require',
             'models/campus_survey',
             'models/campus_office',
             'models/contacts',
-            'models/suggestion'
+            'models/suggestion',
+            'models/roles'
             ],  function (require) {
     'use strict';
     var _cache= {};

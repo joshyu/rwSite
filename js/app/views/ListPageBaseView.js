@@ -35,14 +35,6 @@ define([
             preventClose: true
         },
 
-        //empty, placeholder.
-/*        panels: {
-            list : {
-                class: '',
-                options: {}
-            }
-        },*/
-
         initialize: function(){
             var _hilightedMenuItem = Backbone.history.getFragment();
             if(_hilightedMenuItem){
@@ -78,6 +70,15 @@ define([
         onRender: function () {
             var _itemMode = this.templateData.itemMode;
             PanelHelper.layout(this, {itemMode : _itemMode});
+
+            var that = this;
+            if(this.modelId){
+                app.modelHelper.get(this.modelId).fetchListPermissionForCurUser(this.permKey).then(function(link) {
+                    if (link) {
+                        that.$el.prepend(app.modelHelper.get('roles').getEditLinkHtml(link));
+                    }
+                });
+            }            
         },
 
         doSeeMore: function (e) {

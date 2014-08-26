@@ -121,6 +121,7 @@ define([
                     } else if (opts.url) {
                         var _opts = {
                             serviceKey: opts.url,
+                            noPace: opts.noPace,
                             queryParameters:  _.clone(opts.queryParameters || {} ),
                             data :  _.extend({}, opts.data , args)
                         };
@@ -305,8 +306,9 @@ define([
             return item;
         },
 
-        requestListProperty: function(site, listTitle, property){
+        requestListProperty: function(site, listTitle, property,options){
             if(!site || !listTitle || !property) return false;
+            var noPace = options && options.noPace;
 
             var _options = {
                 url: {
@@ -314,7 +316,8 @@ define([
                     title: listTitle
                 },
 
-                listProperties: property
+                listProperties: property,
+                noPace : noPace
             };
 
             return this.service['_fetchitem'](_options).then(function(item){
@@ -323,7 +326,9 @@ define([
         },
 
         requestJoinNum: function(joinLinkTitle){
-            return this.requestListProperty('campus/regcenter', joinLinkTitle, 'ItemCount')
+            return this.requestListProperty('campus/regcenter', joinLinkTitle, 'ItemCount', {
+                noPace: true
+            })
         },
 
         filterUserJoinedItem: function(items, namedId){
@@ -335,6 +340,7 @@ define([
                     title: ''
                 },
                 fields: 'Name/Id',
+                noPace: true,
                 queryParameters: {
                     expand: 'Name'
                 }
@@ -354,6 +360,36 @@ define([
                     return data[i].length > 0;
                 });                    
             });
+        },
+
+        fetchListPermissionForCurUser: function(permKey, specifiedUser){
+            var account = specifiedUser || (app.preloaded && app.preloaded.user.info.raw_account );
+            var permDef = this.permissionDef;
+            var dfd= $.Deferred();
+
+            if(permKey && permDef[permKey]){
+                permDef = permDef[permKey];
+            }
+
+            if(!account || !permDef){
+                dfd.reject(false);
+                return dfd;
+            }
+
+            var urlParts = this.service.getUrl(permDef.urlKey);
+            var data = {
+                url: urlParts,
+                listProperties: 'getusereffectivepermissions(@userName)',
+                data: {
+                    listproperties_parms: {
+                        userName: encodeURIComponent(account)
+                    }
+                },
+
+                perms: permDef
+            };
+
+            return app.modelHelper.get('roles').request('roles:list:permission:for:user', data);
         }
     });
 });

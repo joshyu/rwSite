@@ -68,7 +68,8 @@ define([
             if(this.joinLinkTitles){
                 var job = app.jobHelper.get('requestJoinNum','pagelist');
                  _.each(this.joinLinkTitles, function(title, i){
-                    job.register(numNodes[i], {
+                    job.register({
+                        dom: numNodes[i],
                         title : title,
                         modelId : "campus_src"
                     });

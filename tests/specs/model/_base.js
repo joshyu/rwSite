@@ -11,7 +11,8 @@ define([
     './officeSpec',
     './surveySpec',
     './trainingSpec',
-    './suggestionSpec'
+    './suggestionSpec',
+    './rolesSpec'
 ], function(app) {
     'use strict';
     var specs = [].slice.call(arguments, 2);

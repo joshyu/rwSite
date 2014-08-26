@@ -10,11 +10,19 @@ define([
         duration: 1000,
         bind: function(factory,jobId){
             this.factory = factory;
+            this.jobId = jobId;
             this._pool = this._pool ||  factory.getJobPool(jobId);
         },
 
+        //return new derived module.
+        extend: function(options){
+            var newCls =  _.extend({}, this, options);
+            newCls._super = this;
+            return newCls;
+        },
+
         byNamespace: function(namespace){
-            this.namespace= namespace;
+            this.namespace= namespace || this.namespace;
             return this;
         },
 
@@ -25,32 +33,38 @@ define([
             this.runjob();
         },
 
-        trigger: function(){
-            this.run();
+        trigger: function(delay){
+            _.delay(_.bind(this.run, this), Number(delay) || 0);
         },
 
         runjob: function(){},
-        register: function(dom, data, callbacks){
-            var _namespace = this.namespace || "";
+        register: function(data, callbacks){
+            var _namespace = data.namespace ||  this.namespace || "";
 
             this._pool.push({
                 namespace: _namespace,
-                dom: dom,
-                data: data,
+                data: data || {},
                 callbacks: callbacks || {}
             });
+
+            return this;
         },
 
         clear: function(namespace){
             var cleared= false;
+            namespace = namespace || this.namespace;
+
             if(namespace){
-                this._pool = _.reject(this._pool, function(item){
+                var _pool = _.reject(this._pool, function(item){
                     return item.namespace == namespace;
                 });
 
-                if(this._pool.length ===0){
+                if(_pool.length ===0){
                     this.reset();
                     cleared = true;
+                }else{
+                    this._pool.length = 0;
+                    _.extend(this._pool, _pool);
                 }
             }else{
                 this.reset();
@@ -77,41 +91,104 @@ define([
         }
     };
 
-    Jobs.requestJoinNum = _.extend(Jobs.base, {
-        duration: 10000,
-        runjob: function(){
-            var that = this;
-            _.each(this._pool, function(item){
-                if(item.callbacks.onTimerStart){
-                    item.callbacks.onTimerStart(item.dom);
-                }
-
-                $.when(app.modelHelper.get(item.data.modelId).requestJoinNum(item.data.title)).done(function(num){
-                    var onEnd = item.callbacks.onTimerEnd || that.onTimerEnd;
-                    onEnd(item.dom, {num: num});
-                });
-            });            
+    Jobs.dbRequestJob = Jobs.base.extend({
+        duration: 20000,
+        namespace: 'dbRequestJob',
+        prepareDB: function(options){
+            this.modelId = options.modelId;
+            this.dbMethod = options.dbMethod;
+            this.dbReqKey = options.dbReqKey;
         },
 
-        onTimerEnd: function(dom, data){
-            var numNow = Number($(dom).text());
-            if(numNow !== data.num){
-                $(dom).fadeOut(function(){
-                    $(dom).html(data.num);
-                    if(!$(dom).hasClass('label-primary')){
-                        $(dom).addClass('label-primary');
+        getReqParameter: function(item){ return; },
+        runjob: function(){
+            var that = this;
+
+            //debug info.
+            console.log("runJob ["+ that.jobId +"] on:" + (new Date()).toLocaleString());
+
+            _.each(that._pool, function(item){
+                var onStart = item.callbacks.onTimerStart || that.onTimerStart;
+                var _data = item.data;
+                if(onStart){
+                    onStart(_data);
+                }
+
+                var parms = that.getReqParameter(_data);
+                var modelId = _data.modelId || that.modelId;
+                var dbMethod = _data.dbMethod || that.dbMethod;
+                var dbReqKey = _data.dbReqKey || that.dbReqKey;
+                var dbreq= null;
+
+                if(modelId){
+                    dbreq = app.modelHelper.get(modelId);
+                }
+
+                if(dbMethod){
+                    dbreq = dbreq[dbMethod](parms);
+                }else if(dbReqKey){
+                    dbreq = dbreq.request(dbReqKey, parms);
+                }
+
+                $.when( dbreq ).done(function(){
+                    var onEnd = item.callbacks.onTimerEnd || that.onTimerEnd;
+                    var data = [].slice.call(arguments);
+                    onEnd(data, _data);
+                });
+            });
+        }
+    });
+
+    Jobs.requestJoinNum = Jobs.dbRequestJob.extend({
+        dbMethod: 'requestJoinNum',
+        namespace: 'requestJoinNum',
+        getReqParameter: function(item){
+            return item.title; 
+        },
+
+        //hardcoded callback when timer end. 
+        //here we update the join number with the new one.
+        //data: the result set from db
+        //item: the def of the running job item.
+        onTimerEnd: function(data, item){
+            if(!item.dom) return false;
+            var $dom = item.dom && $(item.dom);
+            var newNum = data[0];
+
+            var numNow = Number($dom.text());
+            if(numNow !== newNum){
+                $dom.fadeOut(function(){
+                    $dom.html(newNum);
+                    if(!$dom.hasClass('label-primary')){
+                        $dom.addClass('label-primary');
                     }
 
-                    $(dom).fadeIn('slow');
+                    $dom.fadeIn('slow');
                 });
             }
         }
     });
 
+    Jobs.syncUserRelatedData = Jobs.dbRequestJob.extend({
+        duration: 40000,
+        namespace: 'syncUserRelatedData',
+        onTimerEnd: function(data, item){
+            var _data = data[0];
+            var datacallback = item.DataCallback;
+            var context = item.context;
 
-    var jobFactory= {
+            if(typeof datacallback === 'string' && context && $.isFunction( context[ datacallback ] )){
+                _data= context[ datacallback ](_data);
+                app.preloaded[ item.cacheKey ] = _data;
+            }
+
+        }
+    });
+
+
+    var jobPool= {
         _jobpool: {},
-        duration: 1000,
+        duration: 2000,
         init: function(){
             this.started= false; 
             return this;
@@ -167,6 +244,6 @@ define([
     };
 
     app.addInitializer(function() {
-        app.jobHelper = jobFactory.init();
+        app.jobHelper = jobPool.init();
     });
 });

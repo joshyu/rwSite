@@ -58,6 +58,8 @@ require.config({
                     model : 'user',
                     key: 'user:all:related',
                     cacheKey: 'user',
+                    job: 'syncUserRelatedData',
+                    jobDelay: '5000'
                 },
                 {
                     model : 'campus_src',

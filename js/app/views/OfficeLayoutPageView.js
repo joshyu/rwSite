@@ -7,6 +7,8 @@ define([
 
     return ListPageBaseView.extend({
         className:"container campuslistpage cplp-nolist",
+        modelId: 'campus_office',
+        permKey: 'layout',
         templateData: {
             title : 'Office Layout',
             pageTip : 'click on the image to enlarge it.',

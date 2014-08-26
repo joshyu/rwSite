@@ -9,7 +9,7 @@ define([
         templateData: {
             title : 'Survey List'
         },
-
+        modelId: 'campus_survey',
         panels: {
             list : {
                 class: 'SurveyListView',
@@ -20,7 +20,7 @@ define([
         },
 
         loadSearch: function  () {
-           var evtStates= app.modelHelper.get('campus_survey').getLibData('event_state');
+           var evtStates= app.modelHelper.get(this.modelId).getLibData('event_state');
 
            return [
                 {

@@ -24,6 +24,11 @@ define([
                     "BuyDate" : "pubdate"
                 }
             }
+        },
+        permissionDef: {
+            link: '/campus/Lists/books/AllItems.aspx',
+            perm: 'editListItems',
+            urlKey: 'items'
         }
     });
 });

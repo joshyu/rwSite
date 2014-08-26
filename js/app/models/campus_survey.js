@@ -103,6 +103,12 @@ define([
                     }
                 ]
             }
-        }
+        },
+
+        permissionDef: {
+            link: '/campus/Lists/SurveyList/AllItems.aspx',
+            perm: 'editListItems',
+            urlKey: 'items'
+        },
     });
 });

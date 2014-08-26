@@ -35,6 +35,19 @@ define([
                 }
             }
 
+        },
+
+        permissionDef: {
+            'projects': {
+                link: '/campus/products/Forms/Thumbnails.aspx',
+                perm: 'editListItems',
+                urlKey: 'products'
+            },
+            'layout': {
+                link: '/campus/OfficeLayout/Forms/Thumbnails.aspx',
+                perm: 'editListItems',
+                urlKey: 'layout'
+            }
         }
     });
 });

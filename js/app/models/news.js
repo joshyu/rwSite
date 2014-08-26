@@ -28,6 +28,11 @@ define([
                     "NewsDate": "pubdate"
                 }
             }
-        }      
+        },
+        permissionDef: {
+            link: '/campus/Lists/News/AllItems.aspx',
+            perm: 'editListItems',
+            urlKey: 'items'
+        }
     });
 });

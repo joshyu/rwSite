@@ -17,7 +17,14 @@ define([
         },
 
         onRender: function () {
+            var that = this;
+            
             this.$el.find('.carousel').carousel({interval: 10000});
+            app.modelHelper.get('news').fetchListPermissionForCurUser().then(function(link){
+                if(link){
+                    that.$el.prepend(app.modelHelper.get('roles').getEditLinkHtml(link));
+                }
+            });            
         }
     });
 });

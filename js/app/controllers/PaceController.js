@@ -19,12 +19,30 @@ define(['backbone','marionette', 'app', 'pace'],
                     app.vent.trigger('app:pace:done');
                 });
 
-                //monitor ajax
-                $(document).ajaxStart(function() {
-                     pace.restart(); 
-                 });
+                var ignoreURLs = [ /regcenter.*ItemCount/i ];
+                app.vent.on('pace:restart', function(url){
+                    if(!url) return false;
+                    var ignore = false;
 
-                pace.start({restartOnPushState: false});
+                    _.each(ignoreURLs, function(pattern){
+                        ignore = (_.isString(pattern) && url.indexOf(pattern) !== -1) || 
+                                    (_.isRegExp(pattern) && pattern.test(url));
+
+                        if(ignore) return false;
+                    });
+
+                    if(!ignore && !pace.running){
+                        pace.restart();
+                    }
+                });
+
+                pace.start({
+                    restartOnPushState: false,
+                    restartOnRequestAfter: false,
+                    ajax: {
+                        ignoreURLs: [ /regcenter.*ItemCount/i ]
+                    }
+                 });
                 return dfd.promise();
             },
 

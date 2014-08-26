@@ -17,6 +17,11 @@ define([
                     'Title': 'title'
                 }
             }
-        }        
+        },
+        permissionDef: {
+            link: '/campus/Lists/quicklinks/AllItems.aspx',
+            perm: 'editListItems',
+            urlKey: 'items'
+        }
     });
 });

@@ -59,6 +59,12 @@ define([
             }
 
             return _data.roots;
+        },
+
+        permissionDef: {
+            link: '/campus/Lists/sidemenu/AllItems.aspx',
+            perm: 'editListItems',
+            urlKey: 'items'
         }
     });
 });

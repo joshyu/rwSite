@@ -53,6 +53,7 @@ define([
             'campus:events:training:fresh': {
                 url: 'items',
                 type: 'list',
+                noPace: true,
                 getQueryParameters: function(){
                     var _params = {
                         expand: 'Category,Teacher,AttachmentFiles',
@@ -113,6 +114,7 @@ define([
             'campus:events:training:donelist' : {
                 url : "donelist",
                 type: 'list',
+                noPace: true,
                 returnFields: 'trainingId',
                 getQueryParameters: function(data){
                     var _params = {};
@@ -169,6 +171,11 @@ define([
                     return mytrainings.concat(items);
                 });
             });
+        },
+        permissionDef: {
+            link: '/campus/Lists/TrainingList/AllItems.aspx',
+            perm: 'editListItems',
+            urlKey: 'items'
         }
     });
 });

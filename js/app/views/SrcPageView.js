@@ -10,6 +10,7 @@ define([
             title : 'SRC Events'
         },
 
+        modelId: 'campus_src',
         panels: {
             list : {
                 class: 'SrcListView',
@@ -21,7 +22,7 @@ define([
         },
 
         loadSearch: function  () {
-           var evtStates= app.modelHelper.get('campus_src').getLibData('event_state');
+           var evtStates= app.modelHelper.get(this.modelId).getLibData('event_state');
 
            return [
                 {

@@ -7,6 +7,8 @@ define([
 
     return ListPageBaseView.extend({
         noAjax : true,
+        modelId: 'contacts',
+        permKey: 'contacts',
         templateData: {
             title : 'Contact List',
             itemMode : false,  //itemMode is false, then we will show the results as table list.

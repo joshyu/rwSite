@@ -983,6 +983,7 @@ a.profilelink:hover img{
 .campus-item .content{
     padding:15px;
     background: #FCFCFC;
+    border-radius: 0.6em;
 }
 
 .campus-item .attachments{
@@ -1327,7 +1328,7 @@ a.profilelink:hover img{
     position: relative;
 }
 
-.campuslistpage .admin-edit {
+.campuslistpage .edit-link {
     position: absolute;
     right: 0;
     top: 0;

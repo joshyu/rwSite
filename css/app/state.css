@@ -179,6 +179,7 @@
 /*lync states */
 .lync-status{
     border: 1px solid #ACACAC;
+    border-radius: 30%
 }
 
 /*'available offline away inacall busy donotdisturb' */

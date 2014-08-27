@@ -56,11 +56,6 @@ define(['app','module'],
                 });
 
                 return gdfd.promise();
-            },
-
-            testcall: function(data){
-                debugger;
-                return data;
             }
         };
 

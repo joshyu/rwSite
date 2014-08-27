@@ -131,9 +131,15 @@ define([
                 }
 
                 $.when( dbreq ).done(function(){
-                    var onEnd = item.callbacks.onTimerEnd || that.onTimerEnd;
+                    var context =null;
+                    var onEnd = item.callbacks.onTimerEnd;
+                    if(!onEnd){
+                        onEnd = that.onTimerEnd;
+                        context = that;
+                    }
+
                     var data = [].slice.call(arguments);
-                    onEnd(data, _data);
+                    onEnd.call(context, data, _data);
                 });
             });
         }
@@ -179,9 +185,29 @@ define([
 
             if(typeof datacallback === 'string' && context && $.isFunction( context[ datacallback ] )){
                 _data= context[ datacallback ](_data);
-                app.preloaded[ item.cacheKey ] = _data;
             }
 
+            this.triggerChanges(_data, app.preloaded[ item.cacheKey ]);
+            app.preloaded[ item.cacheKey ] = _data;
+        },
+
+        _dirtyCheckList: [],
+        registerChangeTrigger: function(checker, callback,context){
+            if(checker && callback && _.isFunction(checker) && _.isFunction(callback)){
+                this._dirtyCheckList.push({
+                    checker: checker,
+                    callback: callback,
+                    context: context
+                });       
+            }            
+        },
+
+        triggerChanges: function(data, prevData){
+            _.each(this._dirtyCheckList, function(triggerDef){
+                if(triggerDef.checker.call(triggerDef.context, data, prevData)){
+                    triggerDef.callback.call(triggerDef.context, data);
+                }
+            },this);
         }
     });
 

@@ -80,6 +80,7 @@ define([
             var userInfo= data[0];
             userInfo.related = _.find(contacts.relations, function(_contact){ return _contact.email == userInfo.email});
             userInfo.image = userInfo.related.photo;
+            userInfo.title = userInfo.related.title;
 
             return {
                 info : userInfo

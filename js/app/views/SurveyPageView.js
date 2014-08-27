@@ -24,21 +24,6 @@ define([
 
            return [
                 {
-                   title : 'Sort By',
-                   noAll : true,
-                   name: 'orderby',
-                   items : [
-                        {
-                            id: 'Id desc',
-                            title: 'Newest'
-                        },
-                        {
-                            id: 'numVoted desc',
-                            title: 'Popular'
-                        }
-                   ]
-                },
-                {
                     title : 'Event State',
                     name: evtStates.name, 
                     items : evtStates.states

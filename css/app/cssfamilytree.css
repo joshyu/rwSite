@@ -90,7 +90,7 @@ right connector from last child*/
 .tree li >div{
     cursor: pointer;
     border: 1px solid #ccc;
-    padding: 5px 5px;
+    padding: 5px 0px;
     text-decoration: none;
     color: #666;
     font-family: arial, verdana, tahoma;
@@ -105,32 +105,44 @@ right connector from last child*/
     -webkit-transition: all 0.5s;
     -moz-transition: all 0.5s;
 
-    width: 90px;
-    height: 130px;
+    width: 110px;
+    height: 120px;
+    overflow: hidden;
+    position: relative;
 }
 
 .tree li >div .photo img{
     width: 70px;
     height: 80px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 .tree li >div .name{
     font-weight: bolder;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 .tree li >div .title{
-    width: 100px;
     word-break: break-all;
     font-weight: bolder;
-    color:#084066;
+    color: #fff;
+    font-size: .9em;
+    position: absolute;
+    left: 0;
+    padding: 5px;
+    font-weight: bolder;
+    right: 0;
+    bottom: -90px;
+    background: rgba(168, 168, 168, 0.9);
+
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
 }
 
 /*Time for some hover effects*/
 /*We will apply the hover effect the the lineage of the element also*/
-.tree li > div:hover, .tree li > div:hover+ul li > div {
-    /* background: #c8e4f8; color: #000; border: 1px solid #94a0b4; */
+.tree li > div:hover {
     -webkit-box-shadow: 2px 3px 9px #C3C1C1;
     -moz-box-shadow: 2px 3px 9px #C3C1C1;
     -ms-box-shadow: 2px 3px 9px #C3C1C1;
@@ -138,6 +150,9 @@ right connector from last child*/
     box-shadow: 2px 3px 9px #C3C1C1;
 }
 
+.tree li > div:hover .title{
+    bottom: 0;
+}
 .tree li > div:active {
     background: #E0E0E0;
     -webkit-box-shadow: none;

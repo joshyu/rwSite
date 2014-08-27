@@ -798,10 +798,13 @@ a.profilelink:hover img{
 }
 
 .panel-profile .profile-avatar div {
-    margin: 5px auto 5px auto;
+    margin: 20px auto 5px auto;
 }
 
 .panel-profile .profile-avatar  .site-role {
+    font-weight: bolder;
+    font-size: .9em;
+    margin-top: 10px;
 }
 
 .panel-profile .profile-name {
@@ -1100,8 +1103,12 @@ a.profilelink:hover img{
     margin-left: 10%
 }
 
+.contact_modal_body .title{
+    font-weight: bolder;
+}
+
 .contact_modal_body  .below {
-    margin-top: 20px
+    margin-top: 40px
 }
 
 .contact_modal_body  .below dt {
@@ -1135,7 +1142,7 @@ a.profilelink:hover img{
 }
 
 .contact_modal_body   .userdata {
-    margin-top: 5%
+    margin-top: 4%
 }
 
 /* suggestion box */
@@ -1253,6 +1260,7 @@ a.profilelink:hover img{
 .campus-items .campus-item {
     border: 1px solid #C2C2C2;
     border-radius: .5em;
+    margin: 0 20px;
     margin-top: 20px;
     -webkit-box-shadow: 0px 6px 8px -6px #474646;
     -moz-box-shadow: 0px 6px 8px -6px #474646;
@@ -1357,11 +1365,15 @@ a.profilelink:hover img{
 }
 
 .cplp-nolist .oc-banner {
-    padding: 20px 0;
+    padding: 20px 0 0;
 }
 .cplp-nolist .oc-banner .btn-group.btn-breadcrumb .btn{
     margin-right: 5px;
     font-size: 11px;
+}
+
+.cplp-nolist .oc-banner .btn-group.btn-breadcrumb .btn:active{
+    background: #EEE;
 }
 
 .cplp-nolist .oc-banner .btn-group.btn-breadcrumb .btn:hover{
@@ -1378,7 +1390,7 @@ a.profilelink:hover img{
 } */
 
 .panel-list .panel-body{
-    padding: 0 15px;
+    padding: 0;
     margin-bottom: 20px;
 }
 
@@ -1388,7 +1400,21 @@ a.profilelink:hover img{
 
 .panel-list table.panel-body-list {
     table-layout: fixed;
-    width: 100%
+    width: 100%;
+    border-bottom: 1px solid #ededed;
+
+}
+
+.panel-list table.panel-body-list thead{
+    background: #ffffff;
+    border-top: 1px solid #ededed;
+    background: -moz-linear-gradient(top, #ffffff 0%, #f6f6f6 47%, #ededed 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, #ffffff), color-stop(47%, #f6f6f6), color-stop(100%, #ededed));
+    background: -webkit-linear-gradient(top, #ffffff 0%, #f6f6f6 47%, #ededed 100%);
+    background: -o-linear-gradient(top, #ffffff 0%, #f6f6f6 47%, #ededed 100%);
+    background: -ms-linear-gradient(top, #ffffff 0%, #f6f6f6 47%, #ededed 100%);
+    background: linear-gradient(to bottom, #ffffff 0%, #f6f6f6 47%, #ededed 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed', GradientType=0 );
 }
 
 .panel-list table.panel-body-list .label-newbook{
@@ -1405,6 +1431,10 @@ a.profilelink:hover img{
 
 .panel-list .panel-body-list-inner{
     padding: 10px;
+}
+
+.panel-list .orgchart-list{
+    margin-left:30px;
 }
 
 .panel-list .panel-body-list-inner .pm-images{
@@ -1489,8 +1519,13 @@ a.profilelink:hover img{
     background:  #ddd;
 }
 
+.panel-list table.panel-body-list >thead th{
+    text-align: center;
+}
+
 .panel-list table.panel-body-list >tbody tr td {
     vertical-align: middle;
+    text-align: center;
 }
 
 /*

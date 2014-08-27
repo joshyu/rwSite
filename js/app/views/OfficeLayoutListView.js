@@ -15,7 +15,7 @@ define([
         },
 
         onRender: function(){
-            this.$('.office-image-container').zoom({ on:'click' });
+            this.$('.office-image-container').zoom({ on:'click', magnify: 1.5});
         }
     });
 });

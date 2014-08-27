@@ -50,7 +50,7 @@ define([
 
     return ViewBase.extend({
         template : template,
-        className:'panel-body-list-inner',
+        className:'panel-body-list-inner orgchart-list',
         request : {
             model : 'contacts',
             key: 'contacts:fulllist'

@@ -13,6 +13,14 @@ define([
              return  {
                 user : app.preloaded.user
              };
+        },
+
+        onRender: function(){
+            /*app.jobHelper.get('syncUserRelatedData').registerChangeTrigger(function(data,prevData){
+                return data.srcData.length !== prevData.srcData.length;
+            }, function(data){
+                debugger;
+            }, this);*/
         }
     });
 });

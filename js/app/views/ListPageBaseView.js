@@ -100,7 +100,7 @@ define([
 
         onReset: function(e){
             this.$('.btn-default-choice').button('toggle');
-            this.$('input').val('');
+            this.$('input:text').val('');
             this.onSearch(e);
         },
 
@@ -125,6 +125,7 @@ define([
             }
 
             var _itemMode = this.templateData.itemMode;
+            app.jobHelper.clearTimer('pagelist');
             PanelHelper.update(this, 'list', {itemMode : _itemMode});
         }
     });

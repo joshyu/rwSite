@@ -14,6 +14,7 @@
             <div class="item-inner" data-item-id="{{nameRecordId}}">
                 <div class="photo"><img src="{{photo}}" /></div>
                 <div class="name">{{name}}</div>
+                 {{#if title}}<div class="title">{{title}}</div>{{/if}}
             </div>
             {{#if reportees}}
             <ul>
@@ -22,7 +23,7 @@
                     <div class="item-inner" data-item-id="{{id}}">
                         <div class="photo"><img src="{{photo}}" /></div>
                         <div class="name">{{name}}</div>
-                        <div class="title">{{title}}</div>
+                        {{#if title}}<div class="title">{{title}}</div>{{/if}}
                     </div>
                 </li>
                 {{/each}}

@@ -30,6 +30,7 @@ define([
                  returnFields: {
                     "Id": "id",
                     "FullName/Id" : "nameRecordId",
+                    "title_/Title" : "title",
                     "FullName/Title": "name",
                     "FullName/Chinese_x0020_Name": "chinesename",
                     "E_x002d_mail_x0020_Address":"email",
@@ -43,7 +44,7 @@ define([
                     "Birthday" : "birthday"
                 },
                 queryParameters: {
-                    expand: 'FullName,Team0'
+                    expand: 'FullName,Team0,title_'
                 }
             },
 

@@ -92,7 +92,7 @@ define([
     };
 
     Jobs.dbRequestJob = Jobs.base.extend({
-        duration: 20000,
+        duration: 10000,
         namespace: 'dbRequestJob',
         prepareDB: function(options){
             this.modelId = options.modelId;
@@ -176,7 +176,7 @@ define([
     });
 
     Jobs.syncUserRelatedData = Jobs.dbRequestJob.extend({
-        duration: 40000,
+        duration: 20000,
         namespace: 'syncUserRelatedData',
         onTimerEnd: function(data, item){
             var _data = data[0];

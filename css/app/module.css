@@ -45,7 +45,7 @@
     position: absolute;
     bottom: -5px;
     right: 15px;
-    font-size: 12px;
+    font-size: 1em;
 }
 
 /*footer*/
@@ -81,7 +81,7 @@ sidebar nav list
     padding: 40px 28px 25px 0;
     padding: 0;
     margin: 0;
-    font-size: 12px;
+    font-size: 1em;
     line-height: .5em;
     list-style: none;
     position: relative
@@ -115,7 +115,7 @@ sidebar nav list
     position: absolute;
     right: -21px;
     top:5px;
-    font-size: 20px;
+    font-size: 1.7em;
     color: #fff;
     text-shadow:-1px 0px 9px #8B8B8B;
 }
@@ -134,7 +134,7 @@ sidebar nav list
 
 #sidebar .nav-list li a {
     line-height: normal;
-    font-size: 11px !important;
+    font-size: 0.91em !important;
     padding: 10px 10px 10px 11px;
     color: #707070;
     display: block;
@@ -163,7 +163,7 @@ sidebar nav list
 
 #sidebar .nav-list b {
     float: right;
-    font-size: 12px;
+    font-size: 1em;
     margin-top: -1px
 }
 
@@ -188,7 +188,7 @@ sidebar nav list
 }
 
 #sidebar>.nav-list>li>a>i>em {
-    font-size: 9px;
+    font-size: 0.75em;
     display: block;
     padding: 2px;
     position: absolute;
@@ -247,7 +247,7 @@ sidebar nav list
 }
 
 #sidebar>.nav-list ul li a i {
-    font-size: 12px !important;
+    font-size: 1em !important;
     width: 18px!important;
     text-align: center!important
 }
@@ -273,7 +273,7 @@ sidebar nav list
 
 #sidebar .nav-list ul li>a {
     padding-left: 42px;
-    font-size: 12px;
+    font-size: 1em;
     font-weight: 400;
     outline: 0
 }
@@ -291,7 +291,7 @@ sidebar nav list
 
 #sidebar .nav-list ul ul li a {
     padding: 8px 10px 8px 70px;
-    font-size: 12px
+    font-size: 1em;
 }
 
 #sidebar .nav-list ul ul li a:hover {
@@ -367,7 +367,7 @@ sidebar nav list
     box-shadow: 1px 1px 7px #C5C5C5;
     border-radius: 0px;
     /* font-family: "Helvetica Neue",Helvetica,verdana,Arial,sans-serif; */
-    font-size: 12px;
+    font-size: 1em;
     background: #fff;
 }
 .panel-container .loading {
@@ -425,14 +425,19 @@ sidebar nav list
 }
 
 .panel-container .edit-link{
-    font-size:12px;
+    font-size:1em;
     position: absolute;
     right: 10px;
     top: 5px;
 }
 
+.panel-news {
+    /* height: 257px; */
+}
+
 .panel-news .panel-body{
     margin: auto 15px;    
+    /* height: 160px; */
 }
 .panel-news .panel-body-content ,
 .bodycontent{
@@ -444,7 +449,7 @@ sidebar nav list
 }
 .panel-news .panel-body-content .publisher{
     color: #aaa;
-    font-size: 11px;
+    font-size: 0.91em; 
 }
 
 .panel-news .panel-body  .panel-body-pic img{
@@ -561,7 +566,7 @@ sidebar nav list
     padding:5px 20px;
     border: 1px solid #ddd;
     box-shadow: 0px 5px 12px -5px #333;
-    font-size:11px;
+    font-size:0.91em;
     font-weight: bold;
     position: relative;
     top: -2px;
@@ -597,12 +602,12 @@ sidebar nav list
     position: absolute;
     right: 10px;
     top: 5px;
-    font-size: 10px;
+    font-size: 0.83em;
 }
 
 .panel-notify-sub-list  .controls .carousel-control{
     position: relative;
-    font-size: 10px;
+    font-size: 0.83em;
     margin: 0;
     padding: 3px 15px 3px 8px;
     background: #bbb;
@@ -652,6 +657,7 @@ a.profilelink:hover img{
     border:none;
     padding:0px;
     margin-bottom: 10px;
+    font-size: 1.2em;
 }
 
 .panel-notify-sub-hire-information   a.profilelink img {
@@ -660,17 +666,17 @@ a.profilelink:hover img{
 }
 
 .panel-notify-sub-hire-information  .small{
-    font-size: 10px;
+    font-size: 0.83em;
 }
 
 .panel-notify-sub-hire-information  .intro{
     padding-top:20px;   
-    font-size: 12px;
+    font-size: 1em;
     text-align: left;
 }
 .panel-notify-sub-hire-information  .intro .statement {
     margin-bottom: 20px;
-    font-size: 12px;
+    font-size: 1em;
 }
 
 .panel-notify-sub-hire-information  .intro .statement:before{
@@ -699,7 +705,7 @@ a.profilelink:hover img{
 }
 
 .panel-notify-sub-hire-information {
-    font-size:10px;
+    font-size:0.83em;
 }
 
 .panel-notify-sub-hire-information .carousel .carousel-control{
@@ -742,7 +748,7 @@ a.profilelink:hover img{
 }
 
 .column-right-side  .panel-head h1 {
-    font-size:1.2em;
+    font-size:1.1em;
     display: block;
     margin-left:0px;
     padding:5px 10px;
@@ -775,7 +781,7 @@ a.profilelink:hover img{
 .panel-profile .profile-updates{
     list-style: none;
     padding-left:0;
-    font-size: 11px;
+    font-size: 0.91em;
     text-align: left;
     margin-left:15%;
     color:#999 ;
@@ -783,13 +789,13 @@ a.profilelink:hover img{
 
 .panel-profile .profile-update-item .count {
     color:#fff;
-    font-size:14px;
+    font-size:1.17em;
     margin-right: 10px;
     margin-bottom: 10px;
 }
 
 .panel-profile .profile-update-item .statement {
-    font-size:11px;
+    font-size:0.91em;
 }
 
 .panel-profile .profile-avatar  img{
@@ -808,7 +814,7 @@ a.profilelink:hover img{
 }
 
 .panel-profile .profile-name {
-    font-size: 14px;
+    font-size: 1.17em;
     font-weight: bolder;
 }
 
@@ -854,7 +860,7 @@ a.profilelink:hover img{
 .panel-sugesstion .suggestion-link{
     position: relative;
     top: 5px;
-    font-size: 16px;
+    font-size: 1.33em;
     left:6px;
     font-weight: bolder;
 }
@@ -961,7 +967,7 @@ a.profilelink:hover img{
 
 .campus-item .banner-right .dropdown-menu-xs {
     min-width: inherit;
-    font-size: 12px;
+    font-size: 1em;
     left: 0;
     width: 100%;
 }
@@ -1258,14 +1264,14 @@ a.profilelink:hover img{
 
 /* profile src list */
 .campus-items .campus-item {
-    border: 1px solid #C2C2C2;
+/*     border: 1px solid #C2C2C2; */
     border-radius: .5em;
     margin: 0 20px;
     margin-top: 20px;
-    -webkit-box-shadow: 0px 6px 8px -6px #474646;
-    -moz-box-shadow: 0px 6px 8px -6px #474646;
-    -ms-box-shadow:0px 6px 8px -6px #474646;
-    box-shadow: 0px 6px 8px -6px #474646;
+    -webkit-box-shadow: 0px 2px 11px #B8B8B8;
+    -moz-box-shadow: 0px 2px 11px #B8B8B8;
+    -ms-box-shadow:0px 2px 11px #B8B8B8;
+    box-shadow:0px 2px 11px #B8B8B8;
 }
 
 .campus-item .head{
@@ -1322,11 +1328,12 @@ a.profilelink:hover img{
     padding:0 5px 0;
 }
 .campus-items .campus-item .item-image img{
-    -webkit-box-shadow: 0px 0px 5px #B8B4B4;
-    -moz-box-shadow: 0px 0px 5px #B8B4B4;
-    -ms-box-shadow: 0px 0px 5px #B8B4B4;
-    -o-box-shadow: 0px 0px 5px #B8B4B4;
-    box-shadow: 0px 0px 5px #B8B4B4;
+    -webkit-box-shadow: 1px 1px 10px #B8B6B6;
+    -moz-box-shadow:1px 1px 10px #B8B6B6;
+    -ms-box-shadow: 1px 1px 10px #B8B6B6;
+    -o-box-shadow: 1px 1px 10px #B8B6B6;
+    box-shadow:1px 1px 10px #B8B6B6;
+    padding: 2px;
     width: 100%;
     height: 100px;
 }
@@ -1369,7 +1376,7 @@ a.profilelink:hover img{
 }
 .cplp-nolist .oc-banner .btn-group.btn-breadcrumb .btn{
     margin-right: 5px;
-    font-size: 11px;
+    font-size: 0.91em;
 }
 
 .cplp-nolist .oc-banner .btn-group.btn-breadcrumb .btn:active{
@@ -1392,6 +1399,12 @@ a.profilelink:hover img{
 .panel-list .panel-body{
     padding: 0;
     margin-bottom: 20px;
+}
+
+.profilepage .panel-list .panel-body{
+    margin-bottom: 0;
+    padding-bottom: 20px;
+    background: #f7f5f5;
 }
 
 .panel-list .panel-body .campus-items{

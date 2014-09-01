@@ -18,7 +18,7 @@
                         <div class="col-md-9 panel-body-content">
                               <h4 class="article-title">{{title}}</h4>
                               <p class="publisher">created by {{author}} at {{formatDate pubdate}}</p>
-                              <p>{{{content}}}</p>
+                              <div class="news-content" data-item-index="{{@index}}">{{{content}}}</div>
                         </div>
                     </div>
                     {{else}}
@@ -26,7 +26,7 @@
                         <div class="panel-body-content">
                               <h4 class="article-title">{{title}}</h4>
                               <p class="publisher">created by {{author}} at {{formatDate pubdate}}</p>
-                              <p>{{{content}}}</p>
+                              <div class="news-content" data-item-index="{{@index}}">{{{content}}}</div>
                         </div>
                     </div>
                     {{/if}}

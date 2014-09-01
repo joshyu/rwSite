@@ -121,18 +121,23 @@ define([
                     } else if (opts.url) {
                         var _opts = {
                             serviceKey: opts.url,
-                            noPace: opts.noPace,
-                            queryParameters:  _.clone(opts.queryParameters || {} ),
-                            data :  _.extend({}, opts.data , args)
+                            noPace: opts.noPace
                         };
 
                         if(opts.queryParameters){
-                            _opts.queryParameters = opts.queryParameters;
+                            _opts.queryParameters = _.clone(opts.queryParameters);
                         }else if(opts.getQueryParameters && _.isFunction(opts.getQueryParameters)){
                             _opts.queryParameters = opts.getQueryParameters(args);
                         }else{
                             _opts.queryParameters = {};
                         }
+
+                        if(args && args.queryParameters){
+                            _.extend(_opts.queryParameters, args.queryParameters);
+                            delete args.queryParameters;
+                        }
+
+                        _opts.data = _.extend({}, opts.data, args);
 
                         if (opts.listProperties) {
                             _opts.listProperties = opts.listProperties;

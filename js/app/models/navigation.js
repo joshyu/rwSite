@@ -53,7 +53,7 @@ define([
 
                 if(pid > 0){
                     _data[pid].subs.push(item);
-                }else{
+                }else if(pid == 0){
                     _data.roots.push(item);
                 }
             }

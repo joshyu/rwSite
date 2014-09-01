@@ -13,7 +13,7 @@ define([
         regions: {
             news: '.panel-news',
             updates: '.panel-updates',
-            survey:'.panel-survey',
+            /*survey:'.panel-survey',*/
             profile: '.panel-profile',
             quicklink: '.panel-links',
             ntBirthday: '.panel-notify-birthday',
@@ -24,7 +24,7 @@ define([
         panels: {
             news: 'NewsPanelView',
             updates: 'CampusUpdatesPanelView',
-            survey:'SurveyPanelView',
+            /*survey:'SurveyPanelView',*/
             profile: 'ProfilePanelView',
             quicklink: 'QuicklinkPanelView',
             ntBirthday: 'NTBirthdayPanelView',

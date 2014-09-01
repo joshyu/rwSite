@@ -146,6 +146,9 @@ define({
                 title: 'SuggestionList',
                 name: 'SuggestionList'
             }
+        },
+         mail: {
+            url: '/_api/SP.Utilities.Utility.SendEmail'
         }
     }
 });

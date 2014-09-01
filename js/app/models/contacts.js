@@ -48,16 +48,22 @@ define([
                 }
             },
 
-            'contacts:newhire' : {
+            'contacts:newhire:full' : {
                 url : "newhires",
                 type: "list",
                 returnFields: {
                     "Id": "id",
                     "Introduction": "intro",
-                    "FullNameId": "nameRecordId"
+                    "FullNameId": "nameRecordId",
+                    'OnBoardDate' : 'when'
                 },
-                parseData: '_fetchNewHireFullData'
+                queryParameters: {
+                    orderby: 'OnBoardDate desc'
+                },
+/*                parseData: '_fetchNewHireFullData' */
             },
+
+            'contacts:newhire' : '_fetchNewHire',
 
             'contacts:birthday:recently' : {
                 deps : 'contacts:fulllist',
@@ -213,7 +219,7 @@ define([
             });
 
             $.each(data, function(i, item){
-                 var supervisorItem = data[ _data[ item.supervisor ]];
+                 var supervisorItem = item.supervisor && data[ _data[ item.supervisor ]];
                  if(supervisorItem){
                     item.managerId = supervisorItem.nameRecordId;
                      if(supervisorItem.reportees){
@@ -244,6 +250,29 @@ define([
                 var empData = emp.nameRecordId && emplist && emplist[emp.nameRecordId];
                 return _.extend(emp, empData);
             });
+        },
+
+        _fetchNewHire: function(opts){
+            var month = opts.month || 3;
+            var least = opts.least || 3;
+            var d = new Date();
+            var year = d.getFullYear();
+            var that = this;
+            month = d.getMonth() + 1 - month;
+            return this.request('contacts:newhire:full', {queryParameters: {
+                filters:"OnBoardDate ge datetime'" + new Date(year, month, 1).toISOString() + "'"
+            }}).then(function(data){
+                 if(data.length < least){
+                    var num = least - data.length;
+                    return that.request('contacts:newhire:full', {queryParameters: {
+                        filters:"OnBoardDate lt datetime'" + new Date(year, month, 1).toISOString() + "'"
+                    },num: num}).then(function(data_){
+                            return that._fetchNewHireFullData( data.concat(data_) );
+                    });
+                 }else{
+                    return that._fetchNewHireFullData(data);
+                 }
+            })
         },
 
         permissionDef: {

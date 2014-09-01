@@ -20,6 +20,23 @@ define(function() {
 
                 model.execute('suggestion:post', posted);
             });
+
+            xit("post suggestion by sending mail", function(done){
+                var data= {
+                   receiver : 'campus_manager',
+                   Title: 'test',
+                   content:'test'
+                };
+
+                var posted = {data: data};
+                posted.success = function(data){
+                    debugger;
+                    expect(true).toBeTruthy();
+                    done();
+                }
+
+                pend();
+            });
         });
     }
 });

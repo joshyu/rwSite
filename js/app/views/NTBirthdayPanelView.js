@@ -33,7 +33,7 @@ define([
 
         onRender: function() {
             this.$el.find('.panel-notify-sub-list  .carousel-birthday  a.profilelink img').tooltip();
-            this.$el.find('.carousel').carousel({interval: false});
+            this.$el.find('.carousel').carousel({interval: 5000});
         }
     });
 });

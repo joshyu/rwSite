@@ -15,14 +15,14 @@ define(function() {
             });
 
             it("fetch new hire list", function(done) {
-                model.request('contacts:newhire').done(function(items) {
+                model.request('contacts:newhire',{month:3, least:3}).done(function(items) {
                     expect(items).toBeDefined();
                     expect(items.length).toBeGreaterThan(0);
                     done();
                 });
             });
 
-            it("fetch contact information", function(done) {
+            xit("fetch contact information", function(done) {
                 model.request('contacts:contactInfo', {
                     id: 202
                 }).done(function(item) {
@@ -32,14 +32,14 @@ define(function() {
                 });
             });
 
-            it("fetch recent birthday list", function(done) {
+            xit("fetch recent birthday list", function(done) {
                 model.request('contacts:birthday:recently').done(function(items) {
                     expect(items).toBeDefined();
                     done();
                 });
             });
 
-            it('fetch team category list', function(done) {
+            xit('fetch team category list', function(done) {
                 model.request('contacts:teamCategoryNames').done(function(items) {
                     expect(items).toBeDefined();
                     done();

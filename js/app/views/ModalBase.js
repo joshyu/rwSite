@@ -13,12 +13,20 @@ define([
         
         onRender: function(){
             this.$el.appendTo(document.body);
-            this.hilightTrigger();
-            var $domTrigger= $(this.options.domTrigger);
+
+            var hasDomTrigger = !!this.options.domTrigger;
+            var $domTrigger= hasDomTrigger && $(this.options.domTrigger);
+            if(hasDomTrigger){
+                $domTrigger.addClass('highlight');    
+            }            
+            
             this.$el.on('hidden.bs.modal', function(){
-                $("this").remove();
+                $(this).remove();
                  app.jobHelper.clearTimer("modal");
-                $domTrigger.removeClass('highlight');
+
+                 if(hasDomTrigger){
+                    $domTrigger.removeClass('highlight');
+                 }
             });
         },
 
@@ -40,10 +48,6 @@ define([
                 type:'error',
                 text : txt
              });
-        },
-
-        hilightTrigger :function(){
-            $(this.options.domTrigger).addClass('highlight');
         },
 
         show: function(){

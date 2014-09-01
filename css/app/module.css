@@ -432,16 +432,29 @@ sidebar nav list
 }
 
 .panel-news {
-    /* height: 257px; */
+}
+
+.panel-news .news-content{
+    height: 90px;
+    overflow-y: hidden;
+    pointer-events: none;
+}
+
+.panel-news .news-content p{
+    margin-bottom: 1.4em;
 }
 
 .panel-news .panel-body{
     margin: auto 15px;    
-    /* height: 160px; */
+    height: 200px;
 }
 .panel-news .panel-body-content ,
 .bodycontent{
     font-family: Arial, Helvetica, sans-serif;
+}
+
+.panel-news .panel-body-content {
+    height: 145px;
 }
 
 .panel-news .panel-body-content .article-title{
@@ -450,6 +463,13 @@ sidebar nav list
 .panel-news .panel-body-content .publisher{
     color: #aaa;
     font-size: 0.91em; 
+}
+
+.panel-news .panel-body-content .publisher .viewfull{
+    margin-left: 10px;
+    color: #868686;
+    text-decoration: underline;
+    font-weight: bolder;
 }
 
 .panel-news .panel-body  .panel-body-pic img{
@@ -464,6 +484,10 @@ sidebar nav list
 }
 
 /* panel-news carousel */
+.carousel-fade {
+    height: 155px;
+}
+
 .carousel-fade .carousel-inner .item {
   opacity: 0;
   -webkit-transition: opacity .4s linear;
@@ -475,23 +499,25 @@ sidebar nav list
   opacity: 1;
 }
 
-.carousel-fade .carousel-indicators{
-    bottom: -20px;
+.panel-news .carousel-indicators{
+    bottom: -25px;
     text-align: right;
     left:auto;
     right: 0px;
+    width: auto;
+    margin: 0;
 }
-.carousel-fade .carousel-indicators li {
+.panel-news .carousel-indicators li {
     background: #999;
     box-shadow: 1px 2px 6px #666;
     padding: 4px;
 }
 
-.carousel-fade .carousel-indicators li:hover{
+.panel-news .carousel-indicators li:hover{
     background: #333;
 }
 
-.carousel-fade .carousel-indicators li.active{
+.panel-news .carousel-indicators li.active{
     background: #000;
     width: 13px;
     height: 13px;
@@ -653,6 +679,11 @@ a.profilelink:hover img{
 .panel-notify-sub .panel-body{
     padding:0px 10px 20px;
 }
+
+.panel-notify-sub-hire-information .item{
+    height: 100px;
+}
+
 .panel-notify-sub-hire-information blockquote {
     border:none;
     padding:0px;
@@ -669,6 +700,13 @@ a.profilelink:hover img{
     font-size: 0.83em;
 }
 
+.panel-notify-sub-hire-information .small .viewfull{
+    margin-left: 10px;
+    font-weight: bolder;
+    color: #868686;
+    text-decoration: underline;
+}
+
 .panel-notify-sub-hire-information  .intro{
     padding-top:20px;   
     font-size: 1em;
@@ -677,6 +715,9 @@ a.profilelink:hover img{
 .panel-notify-sub-hire-information  .intro .statement {
     margin-bottom: 20px;
     font-size: 1em;
+    height:54px;
+    overflow-y:hidden;
+    pointer-events:none;
 }
 
 .panel-notify-sub-hire-information  .intro .statement:before{
@@ -879,7 +920,7 @@ a.profilelink:hover img{
 .modal-backdrop.in {
     opacity: .7;
 }
-.modal .modal-content {top:100px;}
+.modal .modal-content {top:50px;}
 .modal .modal-content .noty_inline_layout_container {
     position: absolute;
     top: 0px;
@@ -1027,6 +1068,31 @@ a.profilelink:hover img{
 .campus-item .footer .buttons .icon{
     margin-left: 5px;
     top: 2px;
+}
+
+.newsitem  .modal-header{
+    font-size:.9em;
+    font-weight:bolder;
+}
+
+.newsitem .banner{
+    margin-left: 15px;
+    color: #aaa;
+    text-align: left;
+    margin-top: 5px;
+    border: none;
+    background: none;
+    padding: 0;
+}
+
+.newsitem .modal-body {
+    font-size:1em;
+}
+
+.newsitem .bodycontent {
+    height: auto;
+    max-height:500px;
+    overflow-y:auto;
 }
 
 .pmimageitem .item-description{

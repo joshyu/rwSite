@@ -39,8 +39,6 @@ define([
         },
 
         onRender: function(){
-            this.$el.find('.trcode-link').popover();
-
             var that = this;
             var numNodes = this.$('.numjoined');
             var model = app.modelHelper.get('campus_training');
@@ -55,6 +53,8 @@ define([
 
         markdone: function(e){
             e.preventDefault();
+            return false;
+            //DISABLED.
             var item= e.target;
             var lstId = $(item).data('listid');
             var itemId = $(item).data('item-id');

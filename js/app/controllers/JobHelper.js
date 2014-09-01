@@ -214,7 +214,7 @@ define([
 
     var jobPool= {
         _jobpool: {},
-        duration: 2000,
+        duration: false, //2000,
         init: function(){
             this.started= false; 
             return this;
@@ -253,7 +253,9 @@ define([
             }, this);
 
             var timerFunc = _.bind(this.timer, this);
-            this.timed= setTimeout(timerFunc, this.duration);
+            if(this.duration !== false){
+                this.timed= setTimeout(timerFunc, this.duration);    
+            }            
         },
 
         get: function(jobId, namespace){

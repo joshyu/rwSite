@@ -36,15 +36,15 @@ define([
                     "E_x002d_mail_x0020_Address":"email",
                     "Project": "project",
                     "Photo/Url" : "photo",
-                    "Lead": "supervisor",
-                    "Manager": "manager",
+                    "Supervisor/Title": "supervisor",
+                    "Manager/Title": "manager",
                     "Team0/Title": "team",
                     "Team0/Id":"teamId",
                     "Ext_x0020_Number": "ext",
                     "Birthday" : "birthday"
                 },
                 queryParameters: {
-                    expand: 'FullName,Team0,title_'
+                    expand: 'FullName,Team0,title_,Supervisor,Manager'
                 }
             },
 

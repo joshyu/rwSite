@@ -108,8 +108,8 @@ define({
         items: {
             url: {
                 site: 'campus',
-                title: 'Contacts',
-                name: 'EmpNameRecords'
+                title: 'Contactss',
+                name: 'contactss'
             }
         },
         newhires: {

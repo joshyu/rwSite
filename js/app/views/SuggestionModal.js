@@ -43,6 +43,9 @@ define([
 
         onPostSuggestion: function(e){
             e.preventDefault();
+            alert('send message is disabled during development.');
+            return false;
+            
             if(! this.validateForm()){
                 this.showErrorMsg('Some Fields not provided');
                 return false;
@@ -53,8 +56,8 @@ define([
             var frm= e.target;
             var data = {};
 
-            _.each(['To', 'Subject', 'Body'], function(name){
-                data[name] = frm[name].value;
+            $.each($(frm).serializeArray(), function() {
+                data[this.name] = this.value;
             });
 
             data.To = MailList[data.To];

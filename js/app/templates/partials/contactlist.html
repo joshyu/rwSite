@@ -1,6 +1,6 @@
 {{#if contacts.length}}
 {{#each contacts}}
-<tr>
+<tr data-employee-id="{{id}}">
   <td width=10%>
       {{#if ../lyncEnabled}}
         <div class="lync-status-container">

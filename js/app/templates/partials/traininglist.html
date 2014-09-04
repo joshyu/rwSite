@@ -1,3 +1,4 @@
+{{#if campus_training.length}}
 {{#each campus_training}}
 <div class="campus-item">
 	<div class="head">
@@ -44,3 +45,8 @@
 	{{/if}}
 </div>
 {{/each}}
+{{else}}
+<div class="campus-item noresult">
+no results.
+</div>
+{{/if}}

@@ -58,7 +58,13 @@ define([
                 data.campus_training.joined = true;
             }
 
-            if( new Date(data.campus_training.pubdate) < new Date()){
+            var d= new Date();
+            var year = d.getFullYear();
+            var month = d.getMonth() + 1;
+            var day = d.getDate();
+            d = new Date(year + '/'+ month +'/' + day);
+
+            if( new Date(data.campus_training.pubdate) < d){
                 data.campus_training.outdated = true;
             }
 

@@ -440,8 +440,13 @@ sidebar nav list
     pointer-events: none;
 }
 
+.panel-news .news-content * {
+    line-height: 1.4 !important;
+    margin-bottom: 0;
+}
+
 .panel-news .news-content p{
-    margin-bottom: 1.4em;
+    /* margin-bottom: 1.4em; */
 }
 
 .panel-news .panel-body{
@@ -1492,11 +1497,11 @@ font-size: .8em;
 
 .profilepage .panel-list .panel-task-list {
 /*     margin: 0 20px; */
-    background: inherit;
+/*     background: inherit; */
 }
 
 .profilepage .panel-list .panel-task-list .campus-items{
-    padding: 10px 20px;
+    /* padding: 10px 20px; */
 }
 
 .profilepage .panel-list .panel-task-list .panel-body-list caption{
@@ -1505,6 +1510,7 @@ font-size: .8em;
 
 .profilepage .panel-list .panel-task-list .panel-body-list caption .title{
     font-size: 1em;
+    color: #777;
 }
 
 .profilepage .panel-list .panel-task-list .campus-items .loadingmsg{
@@ -1519,12 +1525,13 @@ font-size: .8em;
 
 .panel-list table.panel-body-list {
     table-layout: fixed;
-    width: 100%;
-    border-bottom: 1px solid #ededed;
-
+    width: 96%;
+    margin: 20px 2%;
+    border: 1px solid #DBD7D7;
 }
 
 .panel-list table.panel-body-list thead{
+    color:#777;
     background: #ffffff;
     border-top: 1px solid #ededed;
     background: -moz-linear-gradient(top, #ffffff 0%, #f6f6f6 47%, #ededed 100%);

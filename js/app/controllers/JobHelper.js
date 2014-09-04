@@ -188,7 +188,7 @@ define([
                 _data= context[ datacallback ](_data);
             }
 
-            this.triggerChanges(_data, app.preloaded[ item.cacheKey ]);
+            //this.triggerChanges(_data, app.preloaded[ item.cacheKey ]);
             app.preloaded[ item.cacheKey ] = _data;
         },
 

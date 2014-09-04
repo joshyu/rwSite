@@ -139,8 +139,8 @@ define([
                 var d1 = new Date(item.birthday).setFullYear(year);
                 var pass = d> d1 && (d - d1)  < dayminiutes;
                 if(pass){
-                    d1 = new Date(item.birthday);
-                    item.birthday = (d1.getMonth()+1) + "/" + d1.getDate();
+                    //d1 = new Date(item.birthday);
+                    //item.birthday = (d1.getMonth()+1) + "/" + d1.getDate();
                 }
 
                 return pass;

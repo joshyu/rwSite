@@ -3,14 +3,15 @@ define([
     'app',
     'views/ViewBase',
     'hbs!templates/partials/tasklist',
-    'bootbox'
-], function(Marionette, app, ViewBase, template, bootbox) {
+    'bootbox',
+    'views/ModalHelper',
+], function(Marionette, app, ViewBase, template, bootbox, ModalHelper) {
     'use strict';
     return ViewBase.extend({
         template : template,
-        className:'campus-items',
+        className:'campus-items row',
         loadingHTML: '<img src="images/loading.gif"><div class="loadingmsg"> This will take some time, please wait and take a cup of coffee.</div>',
-        noItemsHTML: 'no Todo Tasks.',
+        noItemsHTML: '<div class="campus-item noresult">no todo tasks.</div>',
         events: {
             'click .btn-mark' : 'markdone',
             'click tbody > tr' : 'showItemDetail'
@@ -25,7 +26,6 @@ define([
             var that = this;
             var $node = this.$('.count.loading');
             $.when(app.modelHelper.get('user').getUserInCompletedTask()).then(function(data){
-                data = data.src.concat(data.training);
                 that._templateData = data;
 
                 var html = that.template({
@@ -65,6 +65,8 @@ define([
                                 that.$el.html(that.noItemsHTML);    
                             });                            
                         }
+
+                        that._templateData.splice(id,1);
                     });
                 },
                 error: function(){
@@ -78,7 +80,12 @@ define([
             if(e.target.classList.contains('btn-mark')) return false;
 
             var $tr = $(e.currentTarget);
-            debugger;
+            var itemIndex= parseInt($tr.data('item-index'));
+            if(isNaN(itemIndex)) return false;
+            var item = this._templateData && this._templateData[itemIndex];
+            if(!item) return false;
+
+            ModalHelper.get(item.type, {itemId: item.id, domTrigger: $tr[0]}).show();
         }
     });
 });

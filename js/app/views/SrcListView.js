@@ -89,7 +89,11 @@ define([
             if(!data) return false;
             var userownedIds = app.preloaded.user.srcDataIds;
             var userownedData = app.preloaded.user.srcData;
-            var now = new Date();
+            var d= new Date();
+            var year = d.getFullYear();
+            var month = d.getMonth() + 1;
+            var day = d.getDate();
+            d = new Date(year + '/'+ month +'/' + day);
 
             _.each(data, function(item){
 
@@ -99,7 +103,7 @@ define([
                     item.regId = _item.regId;
                 }
 
-                if( new Date(item.pubdate) < now){
+                if( new Date(item.pubdate) < d){
                     item.outdated = true;
                 }
             });
@@ -107,7 +111,6 @@ define([
 
         renderData: function (data) {
             if(!this.joinLinkTitles && data){
-                debugger;
                 this.joinLinkTitles = _.pluck(data.campus_src , 'joinLinkTitle');
                 this.markitemStates( data.campus_src  );
             }

@@ -13,7 +13,7 @@
        </thead>            
         <tbody>
             {{#each list}}
-            <tr>
+            <tr data-item-index="{{@index}}">
               <td>{{@index}}</td>
               <td>{{type}}</td>
               <td>{{title}}</td>
@@ -26,5 +26,5 @@
         </tbody>
   </table>
   {{else}}
-      {{noItemsHTML}}
+      {{{noItemsHTML}}}
   {{/if}}

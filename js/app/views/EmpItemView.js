@@ -19,6 +19,11 @@ define([
             'click .returnhome'  : 'showMyProfile'
         },
 
+        initialize: function(options){
+            this.defaultItemId = options.itemId;
+            ViewBase.prototype.initialize.call(this, arguments);
+        },
+
         getRequestOption: function(){
             var itemId= this.options.itemId;
 
@@ -49,7 +54,7 @@ define([
         },
 
         showMyProfile: function(e) {
-            this.options.itemId = void 0;
+            this.options.itemId = this.defaultItemId;
             this.handleRequests();
         },
 

@@ -59,7 +59,12 @@ define([
                 data.campus_src.joined = true;
             }
 
-            if( new Date(data.campus_src.pubdate) < new Date()){
+            var d= new Date();
+            var year = d.getFullYear();
+            var month = d.getMonth() + 1;
+            var day = d.getDate();
+            d = new Date(year + '/'+ month +'/' + day);
+            if( new Date(data.campus_src.pubdate) < d){
                 data.campus_src.outdated = true;
             }
 

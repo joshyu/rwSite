@@ -71,11 +71,13 @@ define(['marionette', 'underscore', 'app', 'views/HeaderView', 'views/FooterView
                      }
 
                     this.ensureEl();
-                    view.render();                    
                     this.closeview(function() {
                           if (this.currentView && this.currentView !== view) { return; }
-                          this.currentView = view;
+                         
                           this.sleep(this.duration).then( _.bind(function(){
+                                view.render(); 
+                                this.currentView = view;
+
                                 this.openview(view, function(){
                                     if (view.onShow){view.onShow();}
                                     view.trigger("show");
@@ -91,8 +93,10 @@ define(['marionette', 'underscore', 'app', 'views/HeaderView', 'views/FooterView
                         var that = this;
                         this.ensureEl();
                         this.$el.on('webkitTransitionEnd transitionend MSTransitionEnd msTransitionEnd oTransitionEnd' , 
-                        function(){
+                        function(e){
                             var view = that.currentView;
+                            if(e.target !== e.currentTarget) return;
+
                             if($(this).hasClass(_AnimatedClasses.out)){
                                 if(view && view.close){ view.close(); }
                                 that.trigger("view:closed", view);

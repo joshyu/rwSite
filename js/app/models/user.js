@@ -114,11 +114,15 @@ define([
                     user.srcData = data[0] || [];
                     if(user.srcData.length > 0){
                         user.srcDataIds = _.invert(_.pluck( user.srcData,'id'));    
+                    }else{
+                        user.srcDataIds = {};
                     }
                     
                     user.trainingData = data[1] || [];
                     if(user.trainingData.length > 0){
                         user.trainingDataIds = _.invert(_.pluck( user.trainingData, 'id'));    
+                    }else{
+                        user.trainingDataIds = {};
                     }
                     
                     return user;
@@ -165,7 +169,7 @@ define([
             list.src = _.filter(srcData, function(item){
                 var bb =  item.done === null;
                 if(bb){
-                    item.type = 'SRC';
+                    item.type = 'src';
                 }
 
                 return bb;
@@ -180,7 +184,7 @@ define([
                 return bb;
             });
 
-            return list;            
+            return list.src.concat(list.training);
         },
 
         handleUserInfo: function(data){

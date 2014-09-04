@@ -24,7 +24,7 @@ define([
         onRender: function () {
             var that = this;
             this.setViewFullButtons();
-             var _carousl= this.$el.find('.carousel').carousel({interval: 10000});
+             var _carousl= this.$el.find('.carousel').carousel({interval: false}); //10000
             _carousl.on('slid.bs.carousel', function(){
                 that.setViewFullButtons();
             });

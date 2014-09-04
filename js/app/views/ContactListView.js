@@ -3,7 +3,8 @@ define([
     'app',
     'views/ViewBase',
     'hbs!templates/partials/contactlist',
-], function(Marionette, app, ViewBase,  template) {
+    'views/ModalHelper',
+], function(Marionette, app, ViewBase,  template, ModalHelper) {
     'use strict';
     return ViewBase.extend({
         tagName: "tbody",
@@ -15,6 +16,10 @@ define([
             key: 'contacts:fulllist',
             getOptions: 'getRequestOption',
             dataHandler: 'filterContacts'
+        },
+
+        events: {
+            'click tr' : 'viewEmpInfo'
         },
 
         getTemplateData: function () {
@@ -42,6 +47,15 @@ define([
         getRequestOption: function(){
             this.options.pageNo = this.options.pageNo || this.pageNo;
             return this.options;
+        },
+
+        viewEmpInfo: function(e){
+            var domTrigger= e.currentTarget;
+            var empId= $(domTrigger).data('employee-id');
+            if(empId){
+                ModalHelper.get('employee', {itemId: empId, domTrigger: domTrigger}).show();
+            }
+            return false;
         }
     });
 });

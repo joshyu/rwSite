@@ -824,8 +824,12 @@ a.profilelink:hover img{
     padding-left:0;
     font-size: 0.91em;
     text-align: left;
-    margin-left:15%;
     color:#999 ;
+    display: inline-block;
+}
+
+.panel-profile .profile-updates li{
+    white-space: nowrap;
 }
 
 .panel-profile .profile-update-item .count {
@@ -833,6 +837,10 @@ a.profilelink:hover img{
     font-size:1.17em;
     margin-right: 10px;
     margin-bottom: 10px;
+}
+
+.panel-profile .profile-update-item .count.loading{
+    margin-left: 5px;
 }
 
 .panel-profile .profile-update-item .statement {
@@ -979,9 +987,10 @@ a.profilelink:hover img{
 }
 
 .campus-item .banner .label-default {
-    position: relative;
-    bottom: 2px;
-    font-size: .8em;
+/*     position: relative;
+bottom: 2px;
+font-size: .8em;
+ */
 }
 
 .campus-item .banner-right{
@@ -1021,8 +1030,16 @@ a.profilelink:hover img{
     padding:1px 12px;
 }
 
-.campus-item .btnJoin{
-   /*  margin-left: 10px; */
+.profilepage .campus-item .btnJoin {
+    position: relative;
+    top: 1px;
+}
+
+.campus-item .btnJoin.label{
+    font-size: 1em;
+    padding: 5px 12px;
+    vertical-align: middle;
+    display: inline-block;
 }
 
 .splitter {
@@ -1471,6 +1488,29 @@ a.profilelink:hover img{
     margin-bottom: 0;
     padding-bottom: 20px;
     background: #f7f5f5;
+}
+
+.profilepage .panel-list .panel-task-list {
+/*     margin: 0 20px; */
+    background: inherit;
+}
+
+.profilepage .panel-list .panel-task-list .campus-items{
+    padding: 10px 20px;
+}
+
+.profilepage .panel-list .panel-task-list .panel-body-list caption{
+    padding: 5px 0;
+}
+
+.profilepage .panel-list .panel-task-list .panel-body-list caption .title{
+    font-size: 1em;
+}
+
+.profilepage .panel-list .panel-task-list .campus-items .loadingmsg{
+    font-weight: bolder;
+    margin-left: 10px;
+    display: inline-block;
 }
 
 .panel-list .panel-body .campus-items{

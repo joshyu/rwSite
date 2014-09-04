@@ -3,12 +3,17 @@ define([
     'app',
     'views/ViewBase',
     'hbs!templates/partials/srclist',
-], function(Marionette, app, ViewBase,  template) {
+    'bootbox'
+], function(Marionette, app, ViewBase,  template, bootbox) {
     'use strict';
     return ViewBase.extend({
         template : template,
         className:'panel-src-list campus-items row',
         pageNo: 0,
+
+        events: {
+            'click .btn-cancel' : 'cancel'
+        },
 
         initialize: function(){
             var _pageId= this.options.pageId;
@@ -33,8 +38,9 @@ define([
                 this.templateData = {
                     campus_src : srcList,
                     noJoinLink : true
-                }
+                };
 
+                this._templateData = this.templateData;
                 this.joinLinkTitles =  _.pluck(srcList , 'joinLinkTitle');
             }
 
@@ -82,11 +88,15 @@ define([
         markitemStates: function(data){
             if(!data) return false;
             var userownedIds = app.preloaded.user.srcDataIds;
+            var userownedData = app.preloaded.user.srcData;
             var now = new Date();
 
             _.each(data, function(item){
+
                 if(item.id in userownedIds ){
                     item.joined = true;
+                    var _item = userownedData[ userownedIds[item.id] ];
+                    item.regId = _item.regId;
                 }
 
                 if( new Date(item.pubdate) < now){
@@ -97,11 +107,61 @@ define([
 
         renderData: function (data) {
             if(!this.joinLinkTitles && data){
+                debugger;
                 this.joinLinkTitles = _.pluck(data.campus_src , 'joinLinkTitle');
                 this.markitemStates( data.campus_src  );
             }
 
             this._renderData(data);
+        },
+
+        cancel: function(e){
+            e.preventDefault();
+            var $dom= $(e.target);
+            var itemIndex = $dom.data('index');
+            var item = this._templateData && this._templateData['campus_src'][itemIndex];
+            if(!item) return false;
+
+            var regId = item.regId;
+            var joinLinkTitle = item.joinLinkTitle;
+            if(!regId || !joinLinkTitle) return false;
+            var that = this;
+
+             bootbox.confirm("Do you want to cancel current SRC event ?", function (res) {
+                if( !res ) return;
+
+                var posted = {
+                    id : regId,
+                    data: {
+                        linkTitle: joinLinkTitle
+                    }
+                };
+
+                posted.success = function(data){
+                     var $bannerContainer= $dom.parents('.banner-right');
+                     var $numDom= $bannerContainer.find('.numjoined');
+                     var num = parseInt($numDom.text());
+
+                     if(!isNaN(num)){
+                        $bannerContainer.fadeOut('slow', function(){
+                            $numDom.text(num-1);
+                            $dom.parent().replaceWith('<span class="btnJoin label label-primary">Available</span>');
+                            $bannerContainer.fadeIn();
+
+                            var itemId = item.id;                            
+                            var _itemId = app.preloaded.user.srcDataIds[itemId];
+                            delete app.preloaded.user.srcDataIds[itemId];
+                            app.preloaded.user.srcData.splice(_itemId,1);
+                        });
+                     }                     
+                }
+
+                posted.error = function(){
+                    bootbox.alert('fail to cancel the SRC event.');
+                }
+                
+                app.modelHelper.get('campus_src').cancelRegItem(posted);
+            });            
         }
     });
 });

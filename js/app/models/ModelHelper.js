@@ -1,4 +1,5 @@
 define(['require', 
+            'models/ModelBase',
             'models/user' ,
             'models/navigation',
             'models/news',
@@ -27,6 +28,10 @@ define(['require',
         get: function  (modelName,forceNew) {
             if(!forceNew && _cache[modelName]){
                 return _cache[modelName];
+            }
+
+            if(modelName == 'base'){
+                modelName = 'ModelBase';
             }
 
             var _model =  require('models/'+modelName);

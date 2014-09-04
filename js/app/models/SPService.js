@@ -107,7 +107,10 @@ define([
         },
 
         getListItemType: function(linkname) {
-            return "SP.Data." + linkname.charAt(0).toUpperCase() + linkname.slice(1) + "ListItem";
+            if(!linkname) return false;
+
+            var another = linkname.slice(1).replace(/_/g, '_x005f_').replace(/\s/g, '_x0020_');
+            return "SP.Data." + linkname.charAt(0).toUpperCase() + another + "ListItem";
         },
 
         getContextInfo: function() {
@@ -338,11 +341,15 @@ define([
                 options = _SPUtils.parseOptions(_service, options);
                 var itemType = _SPUtils.getListItemType(options.listname || options.url.name || options.url.title);
                 var url = _SPUtils.regeneratePOSTUrl(options);
-                var data = _.extend({}, options.data, {
-                    "__metadata": {
-                        "type": itemType
-                    }
-                });
+                var data = options.data;
+
+                if(itemType){
+                    data = _.extend({}, data, {
+                        "__metadata": {
+                            "type": itemType
+                        }
+                    });
+                }
 
                 return $.when(_SPUtils.getContextInfo()).then(function(reqDigest) {
                     var __header = {

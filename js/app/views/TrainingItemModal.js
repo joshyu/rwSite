@@ -3,7 +3,8 @@ define([
     'app',
     'views/ModalBase',
     'hbs!templates/partials/trainingitem',
-], function(Marionette, app, ModalBase,  template) {
+    'bootbox'
+], function(Marionette, app, ModalBase,  template, bootbox) {
     'use strict';
     return ModalBase.extend({
         bodyTmpl : template,
@@ -13,6 +14,10 @@ define([
             model: 'campus_training',
             key: 'campus:training:item:info',
             getOptions: 'getRequestOption'
+        },
+
+        events: {
+            'click .btn-cancel' : 'cancel'
         },
         
         templateData: {
@@ -42,11 +47,14 @@ define([
         },
 
         handleData: function(data){
+            var userownedIds = app.preloaded.user.trainingDataIds;
+            var userownedData = app.preloaded.user.trainingData;
+
             this.joinLinkTitle = data.campus_training.joinLinkTitle;
 
-            if(app.preloaded.user.trainingDoneList[data.campus_training.id]){
-                data.campus_training.done = true;
-            }else if( app.preloaded.user.trainingDataIds[data.campus_training.id]){
+            if( data.campus_training.id in userownedIds ){
+                var _item = userownedData[ userownedIds[data.campus_training.id] ];
+                data.campus_training.regId = _item.regId;
                 data.campus_training.joined = true;
             }
 
@@ -56,6 +64,55 @@ define([
 
             data.curUserId = app.preloaded.user.info.related.nameRecordId;
             return ModalBase.prototype.handleData.apply(this, arguments);
+        },
+
+        cancel: function(e){
+            e.preventDefault();
+            var $dom= $(e.target);
+            var item = this._templateData.campus_training;
+            if(!item) return false;
+            
+            var regId = item.regId;
+            var itemId = item.id;
+            var joinLinkTitle = item.joinLinkTitle;
+            if(!regId || !joinLinkTitle) return false;
+            var that = this;
+
+             bootbox.confirm("Do you want to unregister current training session?", function (res) {
+                if( !res ) return;
+
+                var posted = {
+                    id : regId,
+                    data: {
+                        linkTitle: joinLinkTitle
+                    }
+                };
+
+                
+                posted.success = function(data){
+                     var $bannerContainer= $dom.parents('.banner-right');
+                     var $numDom= $bannerContainer.find('.numjoined');
+                     var num = parseInt($numDom.text());
+
+                     if(!isNaN(num)){
+                        $bannerContainer.fadeOut('slow', function(){
+                            $numDom.text(num-1);
+                            $dom.parent().replaceWith('<span class="btnJoin label label-primary">Available</span>');
+                            $bannerContainer.fadeIn();
+
+                            var _itemId = app.preloaded.user.trainingDataIds[itemId];
+                            delete app.preloaded.user.trainingDataIds[itemId];
+                            app.preloaded.user.trainingData.splice(_itemId,1);
+                        });
+                     }
+                }
+
+                posted.error = function(){
+                    that.showErrorMsg('fail to cancel the training session.');
+                }
+                
+                app.modelHelper.get('campus_training').cancelRegItem(posted);
+            });            
         }
     });
 });

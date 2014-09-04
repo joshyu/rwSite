@@ -15,7 +15,8 @@ define([
             }
             
             data = _.extend(this.myTemplData(), data);
-            this._renderHTML(this.template(data));
+            var _html = this.template ? this.template(data) : '';
+            this._renderHTML( _html );
         },
 
         _renderHTML: function(html){

@@ -9,6 +9,7 @@ define([
     'views/NTNewHirePanelView',
     'views/SuggestionPanelView',
     'views/EmpItemView',
+    'views/TaskListView',
     'views/SrcListView',
     'views/BookListView',
     'views/SurveyListView',

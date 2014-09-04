@@ -344,7 +344,7 @@ define([
                     site: "campus/regcenter",
                     title: ''
                 },
-                fields: 'Name/Id',
+                fields: 'Name/Id, id, done',
                 noPace: true,
                 queryParameters: {
                     expand: 'Name'
@@ -362,7 +362,13 @@ define([
             return $.when.apply($, _dfds).then(function(){
                 var data = [].slice.call(arguments);
                 return _.filter(items, function(item,i){
-                    return data[i].length > 0;
+                    var bool = data[i].length > 0;
+                    if(bool){
+                        item.regId = data[i][0].Id;
+                        item.done = data[i][0].done;
+                    }
+
+                    return bool;
                 });                    
             });
         },
@@ -395,6 +401,45 @@ define([
             };
 
             return app.modelHelper.get('roles').request('roles:list:permission:for:user', data);
+        },
+        cancelRegItem: function(opts){
+            var data= opts.data;
+            if(!opts.id || !data){
+                opts.error && opts.error();
+                return false;
+            }
+
+            var _options = {
+                id: opts.id,
+                url: {
+                    site: 'campus/regcenter',
+                    title: data.linkTitle
+                },
+                type: 'delete'
+            };
+
+            return this.service['_postData'](_options).then(opts.success, opts.error);
+        },
+
+        markdone: function(opts){
+            var data= opts.data;
+            if(!opts.id || !opts.linkTitle){
+                opts.error && opts.error();
+                return false;
+            }
+
+            var _options = {
+                id: opts.id,
+                listname: opts.linkName,
+                url: {
+                    site: 'campus/regcenter',
+                    title: opts.linkTitle
+                },
+                data: data,
+                type: 'update'
+            };
+
+            return this.service['_postData'](_options).then(opts.success, opts.error);
         }
     });
 });

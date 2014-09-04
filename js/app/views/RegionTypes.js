@@ -94,7 +94,7 @@ define(['marionette', 'underscore', 'app', 'views/HeaderView', 'views/FooterView
                         function(){
                             var view = that.currentView;
                             if($(this).hasClass(_AnimatedClasses.out)){
-                                if(view.close){ view.close(); }
+                                if(view && view.close){ view.close(); }
                                 that.trigger("view:closed", view);
                                 delete that.currentView;
                                 that.trigger('view:out');

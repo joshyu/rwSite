@@ -18,12 +18,16 @@ define([
         },
         regions: {
             empdata : '.panel-emprofile .panel-body',
+            task:'.panel-tasks .panel-body',
             srcs:'.panel-src .panel-body',
             trainings: '.panel-training .panel-body'
         },
 
         panels: {
             empdata: 'EmpItemView',
+            task: {
+                class: 'TaskListView'
+            },
             srcs: {
                 class: 'SrcListView',
                 options: {pageId: 'profile'}

@@ -26,15 +26,16 @@ define([
             return this;
         },
 
-        run: function(){
-            if(!this.shouldRun() || this._pool.length === 0) return;
+        run: function(force){
+            var canRun= force || this.duration !== false;
+            if( !canRun ||   !this.shouldRun() || this._pool.length === 0) return;
             this.lastScan =  this.nextScan || Number(new Date());
             this.nextScan = this.lastScan + this.duration;
             this.runjob();
         },
 
         trigger: function(delay){
-            _.delay(_.bind(this.run, this), Number(delay) || 0);
+            _.delay(_.bind(this.run, this, true), Number(delay) || 0);
         },
 
         runjob: function(){},
@@ -241,7 +242,7 @@ define([
                     this.started = false;
                     clearTimeout(this.timed);
                     this.timed = null;   
-                }                 
+                }
             }
         },
 

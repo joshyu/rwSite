@@ -4,17 +4,20 @@
     <span class="glyphicon glyphicon-calendar"></span> {{formatDate campus_src.pubdate}}
     <span class="banner-right">
         <span>
-            <span class="numjoined label"><img src="images/loading.gif"/></span>
+            <span class="numjoined-container "><a href="{{campus_src.joinLink}}" class="numjoined label" target="_blank"><img src="images/loading.gif"/></a></span>
         </span>
         {{#if campus_src.available}}
             {{#if campus_src.joined}}
-            <span class="btnJoin"><a href="{{joinLink}}" class="btn btn-success  btn-xs" target="_blank"  >cancel</a></span>
+            <span class="btnJoin"><a href="#" class="btn btn-success  btn-xs btn-cancel" >Cancel</a></span>
             {{else}}
-            <span class="btnJoin"><a href="{{campus_src.joinLink}}" target="_blank" class="btn btn-primary btn-xs">Join</a></span>
-            {{/if}}
-        
+                {{#if campus_src.outdated}}
+                <span class="btnJoin label label-warning">Out of Date</span>
+                {{else}}
+                <span class="btnJoin label label-primary">Available</span>
+                {{/if}}
+            {{/if}}        
         {{else}}
-         <span class="text-muted"> closed </span>
+         <span class="btnJoin label label-default">Closed</span>
         {{/if}}
     </span>
 </div>

@@ -94,10 +94,7 @@ define([
                 var _dfds = [], dfd= null;
                 var reqKeys = {
                     'campus_src' : 'campus:events:src:userowned',
-                   'campus_training' : [
-                            'campus:events:training:userowned',
-                            'campus:events:training:donelist'
-                    ]
+                    'campus_training' : 'campus:events:training:userowned'
                 };
 
                 _.each(reqKeys, function(reqKey, modelId){
@@ -114,14 +111,76 @@ define([
 
                 return $.when.apply($, _dfds).then(function(){
                     var data = [].slice.call(arguments);
-                    user.srcData = data[0];
-                    user.srcDataIds = _.invert(_.pluck( data[0],'id'));
-                    user.trainingData = data[1];
-                    user.trainingDataIds = _.invert(_.pluck( data[1], 'id'));
-                    user.trainingDoneList = _.invert(data[2]);
+                    user.srcData = data[0] || [];
+                    if(user.srcData.length > 0){
+                        user.srcDataIds = _.invert(_.pluck( user.srcData,'id'));    
+                    }
+                    
+                    user.trainingData = data[1] || [];
+                    if(user.trainingData.length > 0){
+                        user.trainingDataIds = _.invert(_.pluck( user.trainingData, 'id'));    
+                    }
+                    
                     return user;
                 });
-            })
+            });
+        },
+
+        getUserInCompletedTask: function(){
+            var data= app.preloaded.user.incompletedTasks;
+            if(data) return data;
+
+            var that = this;
+            return this.request('user:info:role:related').then(function(user){
+                var namedId = user.info.related.nameRecordId;
+                var _dfds = [], dfd= null;
+                var reqKeys = {
+                    'campus_src' : 'campus:events:src:user:todolist',
+                    'campus_training' : 'campus:events:training:user:todolist'
+                };
+
+                _.each(reqKeys, function(reqKey, modelId){
+                    if(_.isString(reqKey) ){
+                        _dfds.push( app.modelHelper.get( modelId ).request( reqKey, {nameId : namedId} ) );    
+                    }else if(_.isArray(reqKey)){
+                        var _reqlst= _.map(reqKey, function(_key){
+                            return app.modelHelper.get( modelId ).request( _key, {nameId : namedId} );
+                        });
+
+                        _dfds.push.apply(_dfds, _reqlst);
+                    }
+                });
+
+                return $.when.apply($, _dfds).then(function(){
+                    var data = [].slice.call(arguments);
+                    var srcData = data[0]||[];
+                    var trainingData =  data[1]||[];
+                    return app.preloaded.user.incompletedTasks = that.filterUncompletedTasks( srcData, trainingData );
+                });
+            });
+        },
+
+        filterUncompletedTasks: function(srcData, trainingData){
+            var list = {src: null, training: null};
+            list.src = _.filter(srcData, function(item){
+                var bb =  item.done === null;
+                if(bb){
+                    item.type = 'SRC';
+                }
+
+                return bb;
+            });
+
+            list.training = _.filter(trainingData, function(item){
+                var bb =  item.done === null;
+                if(bb){
+                    item.type = 'training';
+                }
+
+                return bb;
+            });
+
+            return list;            
         },
 
         handleUserInfo: function(data){

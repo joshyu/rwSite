@@ -3,7 +3,8 @@ define([
     'app',
     'views/ModalBase',
     'hbs!templates/partials/srcitem',
-], function(Marionette, app, ModalBase,  template) {
+    'bootbox'
+], function(Marionette, app, ModalBase,  template, bootbox) {
     'use strict';
     return ModalBase.extend({
         bodyTmpl : template,
@@ -14,6 +15,10 @@ define([
             key: 'campus:src:item:info',
             getOptions: 'getRequestOption',
             dataHandler: 'handleItemEventImage'
+        },
+
+        events: {
+            'click .btn-cancel' : 'cancel'
         },
 
         templateData: {
@@ -45,12 +50,69 @@ define([
         handleData: function(data){
             if(!data ) return false;
             this.joinLinkTitle = data.campus_src.joinLinkTitle;
+            var userownedIds = app.preloaded.user.srcDataIds;
+            var userownedData = app.preloaded.user.srcData;
 
-            if( app.preloaded.user.srcDataIds[data.campus_src.id]){
+            if( data.campus_src.id in userownedIds ){
+                var _item = userownedData[ userownedIds[data.campus_src.id] ];
+                data.campus_src.regId = _item.regId;
                 data.campus_src.joined = true;
             }
 
+            if( new Date(data.campus_src.pubdate) < new Date()){
+                data.campus_src.outdated = true;
+            }
+
             return ModalBase.prototype.handleData.apply(this, arguments);
+        },
+
+        cancel: function(e){
+            e.preventDefault();
+            var $dom= $(e.target);
+            var item = this._templateData.campus_src;
+            if(!item) return false;
+            
+            var regId = item.regId;
+            var itemId = item.id;
+            var joinLinkTitle = item.joinLinkTitle;
+            if(!regId || !joinLinkTitle) return false;
+            var that = this;
+
+             bootbox.confirm("Do you want to cancel current SRC event?", function (res) {
+                if( !res ) return;
+
+                var posted = {
+                    id : regId,
+                    data: {
+                        linkTitle: joinLinkTitle
+                    }
+                };
+
+                
+                posted.success = function(data){
+                     var $bannerContainer= $dom.parents('.banner-right');
+                     var $numDom= $bannerContainer.find('.numjoined');
+                     var num = parseInt($numDom.text());
+
+                     if(!isNaN(num)){
+                        $bannerContainer.fadeOut('slow', function(){
+                            $numDom.text(num-1);
+                            $dom.parent().replaceWith('<span class="btnJoin label label-primary">Available</span>');
+                            $bannerContainer.fadeIn();
+
+                            var _itemId = app.preloaded.user.srcDataIds[itemId];
+                            delete app.preloaded.user.srcDataIds[itemId];
+                            app.preloaded.user.srcData.splice(_itemId,1);
+                        });
+                     }
+                }
+
+                posted.error = function(){
+                    that.showErrorMsg('fail to cancel the SRC event.');
+                }
+                
+                app.modelHelper.get('campus_src').cancelRegItem(posted);
+            });            
         }
     });
 });

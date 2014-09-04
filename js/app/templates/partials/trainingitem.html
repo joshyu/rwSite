@@ -6,27 +6,23 @@
     <span class="glyphicon glyphicon-globe"></span> <b>{{campus_training.room}}</b> <span class="splitter"> | </span>
     <span>Difficulty:</span> {{campus_training.Rank}}
     <span class="banner-right">
-         <span class="numjoined label"><img src="images/loading.gif"/></span>
+         <span class="numjoined-container "><a href="{{campus_training.joinLink}}" class="numjoined label" target="_blank"><img src="images/loading.gif"/></a></span>
         {{#if campus_training.available}}
             {{#ifCond ../curUserId campus_training.authorId}}
-                <span class="btnJoin"><a href="{{campus_training.joinLink}}" target="_blank" class="btn btn-default btn-xs">I am trainer</a></span>
+                <span class="btnJoin label label-info"> I am trainer </span>
             {{else}}
-                {{#if campus_training.done}}
-                    <span class="text-muted"> attended </span>
+                {{#if campus_training.joined}}
+                    <span class="btnJoin"><a href="#" class="btn btn-success  btn-xs btn-cancel">Unregister</a></span>
                 {{else}}
-                        {{#if campus_training.joined}}
-                            <span class="btnJoin"><a href="{{campus_training.joinLink}}" target="_blank" class="btn btn-success btn-xs">Unregister</a></span>
-                        {{else}}
-                            {{#if campus_training.outdated}}
-                                <span class="btnJoin"><a href="{{campus_training.joinLink}}" class="btn btn-warning  btn-xs" target="_blank"  > Out of Date </a></span>
-                            {{else}}
-                                <span class="btnJoin"><a href="{{campus_training.joinLink}}" target="_blank" class="btn btn-primary btn-xs">register</a></span>
-                            {{/if}}
-                        {{/if}}
+                    {{#if campus_training.outdated}}
+                        <span class="btnJoin label label-warning">Out of Date</span>
+                    {{else}}
+                        <span class="btnJoin label label-primary">Available</span>
+                    {{/if}}
                 {{/if}}
             {{/ifCond}}
         {{else}}
-        <span class="text-muted"> closed </span>
+        <span class="btnJoin label label-default">Closed</span>
         {{/if}}
     </span>
 </div>

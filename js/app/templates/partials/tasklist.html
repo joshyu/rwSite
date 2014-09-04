@@ -1,0 +1,30 @@
+{{#if list.length}}
+<table class="table table-hover table-striped table-condensed  panel-body-list">            
+      <caption>
+        <div class="title">Confirm the following past events / trainings.</div>    
+      </caption>
+      <thead>
+            <tr>
+              <th class="col-md-1">ID</th>
+              <th class="col-md-1">Type</th>
+              <th class="col-md-7">Title</th>
+              <th class="col-md-3">Attended?</th>
+            </tr>
+       </thead>            
+        <tbody>
+            {{#each list}}
+            <tr>
+              <td>{{@index}}</td>
+              <td>{{type}}</td>
+              <td>{{title}}</td>
+              <td data-item-index="{{@index}}">
+                  <a class='btn btn-success btn-xs btn-mark' href="#" data-val='1'><span class="glyphicon glyphicon-ok"></span> Yes </a>
+                  <a href="#" class="btn btn-danger btn-xs btn-mark"  data-val='0'><span class="glyphicon glyphicon-remove"></span> No </a>
+              </td>
+            </tr>
+            {{/each}}
+        </tbody>
+  </table>
+  {{else}}
+      {{noItemsHTML}}
+  {{/if}}

@@ -71,6 +71,7 @@ define([
 
          renderData: function  (data) {
             data = _.extend(this.myTemplData(), this.handleData(data));
+            this._templateData = data;
             data.itemdata = this.bodyTmpl ? this.bodyTmpl(data) : '';
             this.$el.html(this.template(data));
             this.triggerMethod("render", this);

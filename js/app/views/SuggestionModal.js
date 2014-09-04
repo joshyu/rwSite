@@ -6,6 +6,11 @@ define([
     'bt3wysihtml5'
 ], function(Marionette, app, ModalBase,  template) {
     'use strict';
+    //update this for production use.
+    var MailList = {
+        'campus_manager' : 'hhong@ra.rockwell.com', //ksong@ra.rockwell.com
+        'hr': 'hhong@ra.rockwell.com' //jjwang2@rockwellautomation.com
+    }
     return ModalBase.extend({
         bodyTmpl : template,
         className:'modal fade suggestion_modal',
@@ -48,22 +53,38 @@ define([
             var frm= e.target;
             var data = {};
 
-            _.each(['receiver', 'subject', 'content'], function(name){
+            _.each(['To', 'Subject', 'Body'], function(name){
                 data[name] = frm[name].value;
             });
 
-            data.Title = data.subject;
-            delete data.subject;
+            data.To = MailList[data.To];
+            if(!data.To){
+                $butSubmit.button('reset');
+                return;
+            }
+
+            data = {'properties': {
+                '__metadata': { 'type': 'SP.Utilities.EmailProperties' },
+                'From': 'employee@ra.rockwell.com',
+                'To': { 'results': [ data.To ] },
+                'Subject':  data.Subject,
+                'Body': data.Body
+            }};
 
             var posted = {data : data};
             var that = this;
-            posted.success = function(data){
-                 that.showSuccessMsg('Post Message Successfully.');
+            posted.success = function(){
+                 that.showSuccessMsg('Post message successfully.');
                  $butSubmit.button('reset');
                  frm.reset();
             }
+
+            posted.error = function(){
+                that.showErrorMsg('Fail to post message');
+                $butSubmit.button('reset');
+            }
             
-            app.modelHelper.get('suggestion').execute('suggestion:post', posted);
+            app.modelHelper.get('suggestion').execute('suggestion:send:mail', posted);
             return false;
         }
     });

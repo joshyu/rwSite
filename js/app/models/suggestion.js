@@ -11,6 +11,10 @@ define([
             'suggestion:post' : {
                 url: 'items',
                 type: 'create'
+            },
+
+            'suggestion:send:mail': {
+                url: 'mail'
             }
         }      
     });

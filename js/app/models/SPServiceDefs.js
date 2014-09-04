@@ -149,6 +149,7 @@ define({
         },
          mail: {
             url: '/_api/SP.Utilities.Utility.SendEmail'
+            //url: '/_vti_bin/client.svc/SP.Utilities.Utility.SendEmail'
         }
     }
 });

@@ -79,7 +79,28 @@ define([
                 }
             },
 
+             'campus:events:src:outdated': {
+                url: 'items',
+                type: 'list',
+                noPace: true,
+                getQueryParameters: function(){
+                    var _params = {
+                        orderby: 'EventDate desc'
+                    };
+
+                    _params.filters = "EventDate lt datetime'"+ new Date().toISOString()  +"'";
+                    return _params;
+                },
+                returnFields: {
+                    "Id": "id",
+                    "Title": "title",
+                    "JoinLink": "joinLink",
+                    "joinLinkTitle":"joinLinkTitle"
+                }
+            },
+
             'campus:events:src:userowned': 'getUserOwnedSrc',
+            'campus:events:src:user:todolist' : 'getUserTodoList',
 
             'campus:src:item:info': {
                 url: "items",
@@ -128,6 +149,14 @@ define([
             var namedId = data.nameId;
             var that = this;
             return this.request('campus:events:src:fresh').then(function(items) {
+                return that.filterUserJoinedItem(items, namedId);
+            });
+        },
+
+        getUserTodoList: function(data){
+            var namedId = data.nameId;
+            var that = this;
+            return this.request('campus:events:src:outdated').then(function(items) {
                 return that.filterUserJoinedItem(items, namedId);
             });
         },

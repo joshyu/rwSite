@@ -35,12 +35,12 @@ define([
                                  });
            return [
                 {
-                   title : 'Book Category',
+                   title : 'Teams',
                    name: 'teamId',
                    items : app.preloaded.teamCategoryNames
                 },
                 {
-                  title : 'Filter By Alphabet',
+                  title : 'Filter English Name By Alphabet',
                   name: 'start_char',
                   items : charItems
                 }

@@ -11,7 +11,8 @@ define([
         className:'panel-src-list campus-items row',
 
         events: {
-            'click .btn-markdone' : 'markdone'
+            'click .btn-markdone' : 'markdone',
+            'click .btn-cancel' : 'cancel'
         },
 
         getTemplateData: function(){
@@ -27,13 +28,6 @@ define([
 
             this.joinLinkTitles =  _.pluck(opts.campus_training, 'joinLinkTitle');
             opts.curUserId = app.preloaded.user.info.related.nameRecordId;
-            var _trainingDoneList = app.preloaded.user.trainingDoneList;
-
-            _.each(this._templateData , function(item){
-                if( item.id in _trainingDoneList ){
-                    item.done = true;
-                }
-            });
 
             return opts;  
         },
@@ -51,6 +45,55 @@ define([
             }
         },
 
+        cancel: function(e){
+            e.preventDefault();
+            var $dom= $(e.target);
+            var itemIndex = $dom.data('index');
+            var item = this._templateData[itemIndex];
+            if(!item) return false;
+
+            var regId = item.regId;
+            var joinLinkTitle = item.joinLinkTitle;
+            if(!regId || !joinLinkTitle) return false;
+            var that = this;
+
+             bootbox.confirm("Do you want to unregister current training session?", function (res) {
+                if( !res ) return;
+
+                var posted = {
+                    id : regId,
+                    data: {
+                        linkTitle: joinLinkTitle
+                    }
+                };
+
+                
+                posted.success = function(data){
+                     var $bannerContainer= $dom.parents('.banner-right');
+                     var $numDom= $bannerContainer.find('.numjoined');
+                     var num = parseInt($numDom.text());
+
+                     if(!isNaN(num)){
+                        $bannerContainer.fadeOut('slow', function(){
+                            $numDom.text(num-1);
+                            $dom.parent().replaceWith('<span class="btnJoin label label-primary">Available</span>');
+                            $bannerContainer.fadeIn();
+
+                            var itemId = item.id;                            
+                            var _itemId = app.preloaded.user.trainingDataIds[itemId];
+                            delete app.preloaded.user.trainingDataIds[itemId];
+                            app.preloaded.user.trainingData.splice(_itemId,1);
+                        });
+                     }                     
+                }
+
+                posted.error = function(){
+                    bootbox.alert('Fail to unregister the training session.');
+                }
+                
+                app.modelHelper.get('campus_training').cancelRegItem(posted);
+            });            
+        },
         markdone: function(e){
             e.preventDefault();
             return false;
@@ -82,7 +125,6 @@ define([
                         var posted = {data: data};
                         posted.success = function(data){
                             //add to donelist.
-                            app.preloaded.user.trainingDoneList[itemId] = 1;
                             var $grp = $(item).parents('.btn-group:first');
                             $grp.fadeOut('slow', function(){
                                 $grp.replaceWith('<span class="text-muted"> attended </span>');

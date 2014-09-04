@@ -83,7 +83,28 @@ define([
                 }
             },
 
+            'campus:events:training:outdated': {
+                url: 'items',
+                type: 'list',
+                noPace: true,
+                getQueryParameters: function(){
+                    var _params = {
+                        orderby: 'EventDate desc'
+                    };
+
+                    _params.filters = "EventDate lt datetime'"+ new Date().toISOString()  +"'";
+                    return _params;
+                },
+                returnFields: {
+                    "Id": "id",
+                    "Title": "title",
+                    "JoinLink": "joinLink",
+                    "joinLinkTitle":"joinLinkTitle"
+                }
+            },
+
             'campus:events:training:userowned' : 'getUserOwnedTraining',
+            'campus:events:training:user:todolist' : 'getUserTodoList',
 
             'campus:training:item:info' : {
                 url:'items',
@@ -132,11 +153,6 @@ define([
             'campus:events:training:markdone' : {
                 url : "donelist",
                 type: 'create' //update, delete, create. by default it is update.
-            },
-
-            //deprecated.
-            'campus:events:training:checktrcode' : {
-                url : "items",
             }
         },
 
@@ -172,6 +188,16 @@ define([
                 });
             });
         },
+
+        getUserTodoList: function(data){
+            var namedId = data.nameId;
+            var that = this;
+            
+            return this.request('campus:events:training:outdated').then(function(items) {
+                return that.filterUserJoinedItem(items, namedId);
+            });
+        },
+
         permissionDef: {
             link: '/campus/Lists/TrainingList/AllItems.aspx',
             perm: 'editListItems',

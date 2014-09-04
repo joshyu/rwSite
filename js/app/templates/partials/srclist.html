@@ -3,23 +3,23 @@
 <div class="campus-item">
 	<div class="head"><h4>{{title}}</h4>
 	   <span class="banner-right">
-	    	 <span class="numjoined label"><img src="images/loading.gif"/></span>
+	    	 <span class="numjoined-container "><a href="{{joinLink}}" class="numjoined label" target="_blank"><img src="images/loading.gif"/></a></span>
 	    	{{#if available}}
 		    	{{#if ../../noJoinLink}}
-	        		<span class="btnJoin"><a href="{{joinLink}}" class="btn btn-success  btn-xs" target="_blank"  >cancel</a></span>
+	        		<span class="btnJoin"><a href="#" class="btn btn-success  btn-xs btn-cancel" data-index="{{@index}}">Cancel</a></span>
 	        		{{else}}
 		        		{{#if  joined }}
-		        		 <span class="btnJoin"><a href="{{joinLink}}" class="btn btn-success  btn-xs" target="_blank"  >cancel</a></span>
+		        		 <span class="btnJoin"><a href="#" class="btn btn-success  btn-xs btn-cancel" data-index="{{@index}}">Cancel</a></span>
 		        		{{else}}
 		        			{{#if outdated}}
-		        			<span class="btnJoin"><a href="{{joinLink}}" class="btn btn-warning  btn-xs" target="_blank"  > Out of Date </a></span>
+		        			<span class="btnJoin label label-warning">Out of Date</span>
 		        			{{else}}
-		        			<span class="btnJoin"><a href="{{joinLink}}" class="btn btn-primary   btn-xs" target="_blank"  >Join</a></span>
+		        			<span class="btnJoin label label-primary">Available</span>
 		        			{{/if}}		        		
 		        		{{/if}}
 		    	{{/if}}
 	    	{{else}}
-	    		<span class="text-muted">closed</span>
+	    		<span class="btnJoin label label-default">Closed</span>
 	    	{{/if}}
 	    </span>
 	</div>

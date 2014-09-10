@@ -2,14 +2,14 @@ require.config({
     baseUrl: 'js/app',
     paths: {
         underscore: '../vendor/lodash.min',
-        backbone: '../vendor/backbone',
-        marionette: '../vendor/backbone.marionette',
+        backbone: '../vendor/backbone-min',
+        marionette: '../vendor/backbone.marionette.min',
         jquery: '../vendor/jquery.min',
-        bootstrap: '../vendor/bootstrap',
+        bootstrap: '../vendor/bootstrap.min',
         hbs: "../vendor/hbs",
         text: "../vendor/text",
         handlebars:"../vendor/hbs/handlebars",
-        pace: "../vendor/pace",
+        pace: "../vendor/pace.min",
         bt3wysihtml5: "../vendor/bootstrap3-wysihtml5.all.min",
         noty: "../vendor/jquery.noty.packaged.min",
         zoom: "../vendor/jquery.zoom.min",
@@ -86,11 +86,11 @@ require([
     'backbone',
     'marionette',
      'controllers/MainController',
-     'controllers/LayoutController',
      'controllers/PaceController',
-     'controllers/Preloader',
      'models/ModelHelper',
-     'controllers/JobHelper'
+     'controllers/JobHelper',     
+     'controllers/Preloader',
+     'controllers/LayoutController'     
 ], function (app, Backbone, Marionette, MainController) {
     
     app.on('start',  function () {

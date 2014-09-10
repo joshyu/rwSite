@@ -26,12 +26,18 @@ define([
             return this;
         },
 
-        run: function(force){
-            var canRun= force || this.duration !== false;
-            if( !canRun ||   !this.shouldRun() || this._pool.length === 0) return;
+        run: function(manual){
+            var canRun= false;
+            if(manual){
+                canRun = this._pool.length > 0;
+            }else{
+                canRun = this._pool.length > 0 && this.duration !== false && this.shouldRun();
+            }
+            //var canRun= manual || this.duration !== false;
+            if( !canRun ) return;
             this.lastScan =  this.nextScan || Number(new Date());
             this.nextScan = this.lastScan + this.duration;
-            this.runjob();
+            this.runjob( manual );
         },
 
         trigger: function(delay){
@@ -78,6 +84,7 @@ define([
         reset: function(){
             this._pool.length = 0;
             this._pool = null;
+            this.namespace = '';
             this.lastScan = null;
             this.nextScan = null;
         },
@@ -102,13 +109,17 @@ define([
         },
 
         getReqParameter: function(item){ return; },
-        runjob: function(){
+        runjob: function( manual ){
             var that = this;
 
             //debug info.
             console.log("runJob ["+ that.jobId +"] on:" + (new Date()).toLocaleString());
 
             _.each(that._pool, function(item){
+                //console.log(manual, namespace);
+                //debugger;
+                if(manual && that.namespace !== item.namespace) return;
+
                 var onStart = item.callbacks.onTimerStart || that.onTimerStart;
                 var _data = item.data;
                 if(onStart){
@@ -215,7 +226,7 @@ define([
 
     var jobPool= {
         _jobpool: {},
-        duration: false, //2000,
+        duration: 2000, //false, //
         init: function(){
             this.started= false; 
             return this;
@@ -264,7 +275,11 @@ define([
             _job.bind(this, jobId);
             
             this.startTimer();
-            return _job.byNamespace(namespace);
+            if(namespace){
+                _job.byNamespace(namespace);
+            }
+
+            return _job;
         },
 
         getJobPool: function(jobId){

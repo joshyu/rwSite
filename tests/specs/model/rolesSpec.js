@@ -8,13 +8,13 @@ define(function() {
             it("fetch user permission for list", function(done) {
                 var testcases = {
                     'oliu' : true,
-                    'hhong' : true,
+/*                    'hhong' : true,
                     'sdou1' : false,
-                    'jyu5' : true
+                    'jyu5' : true*/
                 };
 
                 var _dfds = _.map(testcases, function(value, nameId){
-                    return app.modelHelper.get('campus_src').fetchListPermissionForCurUser(null, 'i:0#.w|ra-int\\'+nameId).then(function(res){
+                    return app.modelHelper.get('contacts').fetchListPermissionForCurUser("newhire", 'i:0#.w|ra-int\\'+nameId).then(function(res){
                         return !!res == value;
                     });
                 });

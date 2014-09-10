@@ -167,11 +167,11 @@ define([
                 states: [
                     {
                         id: 1,
-                        title: 'available'
+                        title: 'Available'
                     },
                     {
                         id: 0,
-                        title: 'closed'
+                        title: 'Closed'
                     }
                 ]
             }

@@ -22,7 +22,7 @@ define(function() {
                 });
             });
 
-            xit("fetch contact information", function(done) {
+            it("fetch contact information", function(done) {
                 model.request('contacts:contactInfo', {
                     id: 202
                 }).done(function(item) {
@@ -32,14 +32,14 @@ define(function() {
                 });
             });
 
-            xit("fetch recent birthday list", function(done) {
+            it("fetch recent birthday list", function(done) {
                 model.request('contacts:birthday:recently').done(function(items) {
                     expect(items).toBeDefined();
                     done();
                 });
             });
 
-            xit('fetch team category list', function(done) {
+            it('fetch team category list', function(done) {
                 model.request('contacts:teamCategoryNames').done(function(items) {
                     expect(items).toBeDefined();
                     done();

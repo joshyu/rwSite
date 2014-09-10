@@ -11,7 +11,7 @@ define([
         template : template,
         className:'campus-items row',
         loadingHTML: '<img src="images/loading.gif"><div class="loadingmsg"> This will take some time, please wait and take a cup of coffee.</div>',
-        noItemsHTML: '<div class="campus-item noresult">no todo tasks.</div>',
+        noItemsHTML: '<div class="campus-item noresult">No results.</div>',
         events: {
             'click .btn-mark' : 'markdone',
             'click tbody > tr' : 'showItemDetail'

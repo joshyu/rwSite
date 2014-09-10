@@ -29,7 +29,7 @@ define([
         },
 
         loadSearch: function(){
-          var chars='abcdefghijklmnopqrstuvwxyz';
+          var chars='abcdefghijklmnopqrstuvwxyz'.toUpperCase();
           var charItems = _.map(chars.match(/\w/g), function(ch){
                                 return { id: ch,title: ch };
                                  });

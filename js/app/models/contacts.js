@@ -277,14 +277,14 @@ define([
 
         permissionDef: {
             'contacts': {
-                link: '/campus/Lists/empNameRecords/AllItems.aspx',
+                link: '/campus/Lists/contactss/AllItems.aspx',
                 perm: 'editListItems',
                 urlKey: 'items'
             },
             'newhire': {
                 link: '/campus/Lists/NewHires/AllItems.aspx',
                 perm: 'editListItems',
-                urlKey: 'items'
+                urlKey: 'newhires'
             },
         }
     });

@@ -6,6 +6,7 @@ define([
     'use strict';
 
     return ListPageBaseView.extend({
+        disabled: true,
         templateData: {
             title : 'Survey List'
         },

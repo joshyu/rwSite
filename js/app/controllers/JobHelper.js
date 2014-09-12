@@ -142,7 +142,7 @@ define([
                     dbreq = dbreq.request(dbReqKey, parms);
                 }
 
-                $.when( dbreq ).done(function(){
+                $.when( dbreq ).then(function(){
                     var context =null;
                     var onEnd = item.callbacks.onTimerEnd;
                     if(!onEnd){
@@ -152,6 +152,17 @@ define([
 
                     var data = [].slice.call(arguments);
                     onEnd.call(context, data, _data);
+                }, function(){
+                    var context =null;
+                    var onError = item.callbacks.onTimerError;
+                    if(!onError){
+                        onError = that.onTimerError;
+                        context = that;
+                    }
+
+                    var data = [].slice.call(arguments);
+                    onError.call(context, data, _data);
+
                 });
             });
         }
@@ -168,22 +179,37 @@ define([
         //here we update the join number with the new one.
         //data: the result set from db
         //item: the def of the running job item.
-        onTimerEnd: function(data, item){
+        onTimerEnd: function(data, item, error){
             if(!item.dom) return false;
             var $dom = item.dom && $(item.dom);
             var newNum = data[0];
+            var numNow = false;
 
-            var numNow = Number($dom.text());
+            if($dom.find('img').length == 0){
+                numNow = Number($dom.text());
+            }
+
             if(numNow !== newNum){
                 $dom.fadeOut(function(){
                     $dom.html(newNum);
-                    if(!$dom.hasClass('label-primary')){
-                        $dom.addClass('label-primary');
+                    if(error){
+                        if(!$dom.hasClass('label-danger')){
+                            $dom.addClass('label-danger').attr('title', 'list not found');
+                        }
+                    }else{
+                        if(!$dom.hasClass('label-primary')){
+                            $dom.addClass('label-primary');
+                        }    
                     }
+                    
 
                     $dom.fadeIn('slow');
                 });
             }
+        },
+
+        onTimerError: function(data, item){
+            this.onTimerEnd([0], item,true);
         }
     });
 

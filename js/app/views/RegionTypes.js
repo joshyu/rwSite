@@ -73,11 +73,10 @@ define(['marionette', 'underscore', 'app', 'views/HeaderView', 'views/FooterView
                     this.ensureEl();
                     this.closeview(function() {
                           if (this.currentView && this.currentView !== view) { return; }
-                         
-                          this.sleep(this.duration).then( _.bind(function(){
-                                view.render(); 
+                          
+                          var _onOpen = _.bind(function(){
+                                view.render();                                
                                 this.currentView = view;
-
                                 this.openview(view, function(){
                                     if (view.onShow){view.onShow();}
                                     view.trigger("show");
@@ -85,7 +84,16 @@ define(['marionette', 'underscore', 'app', 'views/HeaderView', 'views/FooterView
                                     if (this.onShow) { this.onShow(view); }
                                     this.trigger("view:show", view);
                               });
-                          },this));                          
+                          },this);
+
+                          var that = this;
+                          _.defer(function(){
+                              if(app.pace.instance.running){
+                                  app.vent.on('app:pace:done', _onOpen);
+                              }else{
+                                 that.sleep(that.duration).then( _onOpen );
+                              }
+                          });                                 
                     });
                   },
 

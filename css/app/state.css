@@ -221,4 +221,47 @@
    padding:10px 0;
    background: #fff;
    color:#777;
+   text-shadow: 1px 1px 7px #8D8D8D;
+}
+
+.view-disabled {
+    text-align: center;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 20% 40%;
+    background: #f3f3f3;
+    font-weight: bolder;
+    border-radius: .25em;
+}
+
+/* label color re-set */
+.btnJoin.label-default {
+    background: none;
+    color:#999;
+}
+
+
+.btnJoin.label-primary {
+    background: none;
+    color: #428bca;
+}
+
+.btnJoin.label-success {
+    background: none;
+    color: #5cb85c;
+}
+
+.btnJoin.label-info {
+    background: none;
+    color:#5bc0de;
+}
+
+.btnJoin.label-warning {
+    background: none;
+    color:#f0ad4e;
+}
+
+.btnJoin.label-danger {
+    background:none;
+    color: #d9534f;
 }

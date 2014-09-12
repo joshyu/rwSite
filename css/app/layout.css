@@ -133,3 +133,6 @@ body.loaded{
   opacity: 1;
 }
 
+.loaded #splash{
+   opacity: 0;
+}

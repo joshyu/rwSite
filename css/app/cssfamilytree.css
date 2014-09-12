@@ -125,15 +125,15 @@ right connector from last child*/
 .tree li >div .title{
     word-break: break-all;
     font-weight: bolder;
-    color: #fff;
-    font-size: .9em;
+    color: #073170;
+    font-size: .8em;
     position: absolute;
     left: 0;
     padding: 5px;
     font-weight: bolder;
     right: 0;
     bottom: -90px;
-    background: rgba(168, 168, 168, 0.9);
+    background: rgba(199, 229, 243, 0.9);
 
     transition: all 0.5s;
     -webkit-transition: all 0.5s;

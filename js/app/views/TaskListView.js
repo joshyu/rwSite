@@ -30,6 +30,7 @@ define([
 
                 var html = that.template({
                     list: data,
+                    emptylist: _.isEmpty(data),
                     noItemsHTML: that.noItemsHTML
                 });
                 that.$el.html(html);
@@ -38,17 +39,21 @@ define([
 
         markdone: function(e){
             e.preventDefault();
-            var $dom= $(e.target);
+            var $dom= $(e.currentTarget);
+            var $tr = $dom.parents('tr:first');
             var that = this;
+            if($tr.data('processing')) return;
+            $tr.data('processing', true);
 
-            var id = parseInt($dom.parent().data('item-index'));
-            if(isNaN(id)) return false;
+            var id = $dom.parent().data('item-index');
+            if(!id) return false;
             var toSetValue= String(!!(Number($dom.data('val')) || 0));
             var item = this._templateData && this._templateData[id];
             if(!item) return false;
             var _linkName = item.joinLink && item.joinLink.split('/').splice(-2,1);
             if(_linkName && _linkName.length > 0) _linkName = _linkName[0];
-            
+
+            $dom.hide().before('<span class="btn"><img src="images/loading.gif"/></span>');
             app.modelHelper.get('base').markdone({
                 id:  item.regId ,
                 linkTitle: item.joinLinkTitle,
@@ -57,7 +62,7 @@ define([
                     done: toSetValue
                 },                
                 success: function(){
-                    var $tr= $dom.parents('tr:first').fadeOut('slow', function(){
+                    $tr.fadeOut('slow', function(){
                         var $tbody = $tr.parent();
                         $tr.remove();
                         if($tbody.find('tr').length === 0){
@@ -66,10 +71,12 @@ define([
                             });                            
                         }
 
-                        that._templateData.splice(id,1);
+                        delete that._templateData[id];
                     });
                 },
                 error: function(){
+                    $dom.show().prev('span').remove();
+                    $tr.removeData('processing');
                     bootbox.alert('Fail to mark current item.');
                 }
             });
@@ -77,11 +84,11 @@ define([
 
         showItemDetail: function(e){
             e.preventDefault();
-            if(e.target.classList.contains('btn-mark')) return false;
+            if(e.target.nodeName.toLowerCase() !== 'td') return false;
 
             var $tr = $(e.currentTarget);
-            var itemIndex= parseInt($tr.data('item-index'));
-            if(isNaN(itemIndex)) return false;
+            var itemIndex= $tr.data('item-index');
+            if(!itemIndex) return false;
             var item = this._templateData && this._templateData[itemIndex];
             if(!item) return false;
 

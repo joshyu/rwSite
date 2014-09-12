@@ -24,7 +24,6 @@ define([
                     "JoinLink": "joinLink",
                     "joinLinkTitle":"joinLinkTitle",
                     "timespan": "timespan",
-                    "TrainingCode": "trainingcode",
                     "TrainingRoom": "room",
                     "Rank": "Rank",
                     "available" : "available"
@@ -76,7 +75,6 @@ define([
                     "JoinLink": "joinLink",
                     "joinLinkTitle":"joinLinkTitle",
                     "timespan": "timespan",
-                    "TrainingCode": "trainingcode",
                     "TrainingRoom": "room",
                     "Rank": "Rank",
                     "available" : "available"
@@ -126,7 +124,6 @@ define([
                     "JoinLink": "joinLink",
                     "joinLinkTitle":"joinLinkTitle",
                     "timespan": "timespan",
-                    "TrainingCode": "trainingcode",
                     "TrainingRoom": "room",
                     "Rank": "Rank",
                     "available" : "available"
@@ -135,30 +132,9 @@ define([
                     expand: 'Category,Teacher,AttachmentFiles'
                 },
                 noHandleAttachedImage: true
-            },
-
-            'campus:events:training:donelist' : {
-                url : "donelist",
-                type: 'list',
-                noPace: true,
-                returnFields: 'trainingId',
-                getQueryParameters: function(data){
-                    var _params = {};
-                    var nameId = data.nameId;
-                    if(nameId){
-                        _params.filters = "nameId eq \'"+ nameId +"\'";
-                    }
-
-                    delete data.nameId;
-                    return _params;
-                }
             }
         },
         commands: {
-            'campus:events:training:markdone' : {
-                url : "donelist",
-                type: 'create' //update, delete, create. by default it is update.
-            }
         },
 
         _lib : {

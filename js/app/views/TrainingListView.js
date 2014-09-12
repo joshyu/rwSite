@@ -11,7 +11,6 @@ define([
         className:'panel-src-list campus-items row',
 
         events: {
-            'click .btn-markdone' : 'markdone',
             'click .btn-cancel' : 'cancel'
         },
 
@@ -89,51 +88,11 @@ define([
 
                 posted.error = function(){
                     bootbox.alert('Fail to unregister the training session.');
+                    $dom.show().prev('img').remove();
                 }
                 
                 app.modelHelper.get('campus_training').cancelRegItem(posted);
-            });            
-        },
-        markdone: function(e){
-            e.preventDefault();
-            return false;
-            //DISABLED.
-            var item= e.target;
-            var lstId = $(item).data('listid');
-            var itemId = $(item).data('item-id');
-            var itemData = this._templateData[lstId];
-            var nameId = app.preloaded.user.info.related.nameRecordId;
-            var that = this;
-            var model = app.modelHelper.get('campus_training');
-            if(!itemData) return false;
-
-            bootbox.prompt('please input training code:', function  (trcode) {
-                if( trcode == null ) return false;
-
-                if(itemData.trainingcode !== trcode){
-                    bootbox.alert(" the training code doesn't match. ");
-                    return false;
-                }
-
-                bootbox.confirm("Training code is correct. Are you sure to mark it done ?", function (res) {
-                    if(res){
-                        var data= {
-                           nameId : nameId,
-                           trainingId: itemId
-                        };
-
-                        var posted = {data: data};
-                        posted.success = function(data){
-                            //add to donelist.
-                            var $grp = $(item).parents('.btn-group:first');
-                            $grp.fadeOut('slow', function(){
-                                $grp.replaceWith('<span class="text-muted"> attended </span>');
-                            });
-                        }
-
-                        model.execute('campus:events:training:markdone', posted);
-                    }
-                });
+                $dom.hide().before('<img src="images/loading.gif"/>');
             });            
         }
     });

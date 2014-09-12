@@ -331,7 +331,7 @@ define([
         },
 
         requestJoinNum: function(joinLinkTitle){
-            return this.requestListProperty('campus/regcenter', joinLinkTitle, 'ItemCount', {
+            return this.requestListProperty('campus', joinLinkTitle, 'ItemCount', {
                 noPace: true
             })
         },
@@ -341,7 +341,7 @@ define([
             var that = this;
             var _options = {
                 url: {
-                    site: "campus/regcenter",
+                    site: "campus",
                     title: ''
                 },
                 fields: 'Name/Id, id, done',
@@ -412,7 +412,7 @@ define([
             var _options = {
                 id: opts.id,
                 url: {
-                    site: 'campus/regcenter',
+                    site: 'campus',
                     title: data.linkTitle
                 },
                 type: 'delete'
@@ -432,7 +432,7 @@ define([
                 id: opts.id,
                 listname: opts.linkName,
                 url: {
-                    site: 'campus/regcenter',
+                    site: 'campus',
                     title: opts.linkTitle
                 },
                 data: data,

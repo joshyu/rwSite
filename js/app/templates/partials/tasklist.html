@@ -1,23 +1,21 @@
-{{#if list.length}}
+{{#unless emptylist}}
 <table class="table table-hover table-striped table-condensed  panel-body-list">            
       <caption>
         <div class="title">Confirm the following past events / trainings.</div>    
       </caption>
       <thead>
             <tr>
-              <th class="col-md-1">ID</th>
               <th class="col-md-1">Type</th>
               <th class="col-md-7">Title</th>
-              <th class="col-md-3">Attended?</th>
+              <th class="col-md-4">Attended?</th>
             </tr>
        </thead>            
         <tbody>
             {{#each list}}
-            <tr data-item-index="{{@index}}">
-              <td>{{@index}}</td>
+            <tr data-item-index="{{@key}}">
               <td>{{type}}</td>
               <td>{{title}}</td>
-              <td data-item-index="{{@index}}">
+              <td data-item-index="{{@key}}">
                   <a class='btn btn-success btn-xs btn-mark' href="#" data-val='1'><span class="glyphicon glyphicon-ok"></span> Yes </a>
                   <a href="#" class="btn btn-danger btn-xs btn-mark"  data-val='0'><span class="glyphicon glyphicon-remove"></span> No </a>
               </td>
@@ -27,4 +25,4 @@
   </table>
   {{else}}
       {{{noItemsHTML}}}
-  {{/if}}
+  {{/unless}}

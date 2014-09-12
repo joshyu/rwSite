@@ -5,31 +5,29 @@ define(['backbone','marionette', 'app', 'pace'],
                 var dfd= Backbone.$.Deferred();
                 this.instance = pace;
 
-                pace.on('start', function(){
+                pace.once('start', function(){
                     dfd.resolve(pace);
-                      pace.off('start', arguments.callee);
                 });
 
                 pace.on('hide', function(){
                     if(! $('body').hasClass('loaded')){
                         $('body').addClass('loaded');    
                     }
-
-                    pace.off('hide', arguments.callee);                                        
+                                      
                     app.vent.trigger('app:pace:done');
                 });
 
-                var ignoreURLs = [ /regcenter.*ItemCount/i ];
+                //var ignoreURLs = [ /regcenter.*ItemCount/i ];
                 app.vent.on('pace:restart', function(url){
                     if(!url) return false;
                     var ignore = false;
 
-                    _.each(ignoreURLs, function(pattern){
+                    /*_.each(ignoreURLs, function(pattern){
                         ignore = (_.isString(pattern) && url.indexOf(pattern) !== -1) || 
                                     (_.isRegExp(pattern) && pattern.test(url));
 
                         if(ignore) return false;
-                    });
+                    });*/
 
                     if(!ignore && !pace.running){
                         pace.restart();
@@ -39,9 +37,9 @@ define(['backbone','marionette', 'app', 'pace'],
                 pace.start({
                     restartOnPushState: false,
                     restartOnRequestAfter: false,
-                    ajax: {
+                    /*ajax: {
                         ignoreURLs: [ /regcenter.*ItemCount/i ]
-                    }
+                    }*/
                  });
                 return dfd.promise();
             },

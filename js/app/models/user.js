@@ -184,7 +184,12 @@ define([
                 return bb;
             });
 
-            return list.src.concat(list.training);
+             var _obj= {};
+             _.each(list.src.concat(list.training), function(item, k){
+                 _obj[ item.type + item.id ] = item;
+             });
+
+             return _obj;
         },
 
         handleUserInfo: function(data){

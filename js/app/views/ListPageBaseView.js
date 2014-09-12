@@ -3,8 +3,9 @@ define([
     'app',
     'hbs!templates/general/listpagebase',
     'views/PanelHelper',
-    'views/RegionTypes'
-], function(Marionette, app, template,  PanelHelper, RegionTypes) {
+    'views/RegionTypes',
+    'hbs/handlebars'
+], function(Marionette, app, template,  PanelHelper, RegionTypes, Handlebars) {
     'use strict';
     var ListPageBaseView;
 
@@ -45,6 +46,20 @@ define([
 
             this.on('removeSeeMoreButton', this.removeSeeMoreButton, this);
             Marionette.Layout.prototype.initialize.apply(this, arguments);
+        },
+
+        getDisabledHTML: function(){
+            return  "<div class='view-disabled'> this view is disabled </div>";
+        },
+
+        render: function(){
+            if( this.disabled ){
+                 var template = Handlebars.compile( this.getDisabledHTML() );
+                 var html = Marionette.Renderer.render(template, {});
+                 this.$el.html(html);
+            }else{
+                Marionette.Layout.prototype.render.apply(this, arguments);
+            }
         },
 
         removeSeeMoreButton: function(){

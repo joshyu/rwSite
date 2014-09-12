@@ -6,6 +6,7 @@ define([
     'use strict';
 
     return ListPageBaseView.extend({
+        disabled: true,
         threshold_new : '1', //books within how many months will be regarded as New.
         modelId: 'campus_book',
         templateData: {

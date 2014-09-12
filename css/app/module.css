@@ -992,10 +992,10 @@ a.profilelink:hover img{
 }
 
 .campus-item .banner .label-default {
-/*     position: relative;
-bottom: 2px;
-font-size: .8em;
- */
+}
+
+.campus-item .banner > .label {
+    font-weight: normal;
 }
 
 .campus-item .banner-right{
@@ -1044,7 +1044,20 @@ font-size: .8em;
     font-size: 1em;
     padding: 5px 12px;
     vertical-align: middle;
-    display: inline-block;
+    display: inline-block;    
+}
+
+.modal-dialog  .btnJoin.label{
+    background: #CFCFCF;
+}
+
+.panel-body-list  .btnJoin.label{
+    background: #F5F4F4;
+}
+
+.panel-body-list  tbody .btnJoin.label{
+    background: none;
+    font-size: .9em;
 }
 
 .splitter {
@@ -1254,7 +1267,7 @@ font-size: .8em;
 }
 
 .suggestion_modal  .modal-content  .content {
-    margin-top: 20px;
+    /* margin-top: 20px; */
 }
 
 .suggestion_modal .modal-body ul.wysihtml5-toolbar>li {
@@ -1272,14 +1285,13 @@ font-size: .8em;
 }
 
 .suggestion_modal .modal-body .footer{
-    position: relative;
     margin-top: 20px;
     position: initial;
 }
 
 .suggestion_modal .modal-body .footer .buttons{
     position: absolute;
-    right: 20px;
+    right: 15px;
     bottom: 10px;
 }
 
@@ -1529,6 +1541,17 @@ font-size: .8em;
     margin: 20px 2%;
     border: 1px solid #DBD7D7;
 }
+.panel-list table.panel-body-list th:last-child {
+    text-align: left;
+}
+
+.panel-list table.panel-body-list td:last-child{
+     text-align: left;
+}
+
+.panel-list table.panel-body-list td:last-child a {
+    font-size: .9em !important;
+}
 
 .panel-list table.panel-body-list thead{
     color:#777;
@@ -1634,9 +1657,6 @@ font-size: .8em;
     font-size: .9em;
 }
 
-.panel-list table.panel-body-list a {
-    color: inherit;
-}
 .panel-list table.panel-body-list >tbody tr{
     cursor: pointer;
 }

@@ -161,9 +161,11 @@ define([
 
                 posted.error = function(){
                     bootbox.alert('fail to cancel the SRC event.');
+                    $dom.show().prev('img').remove();
                 }
                 
                 app.modelHelper.get('campus_src').cancelRegItem(posted);
+                $dom.hide().before('<img src="images/loading.gif"/>');
             });            
         }
     });

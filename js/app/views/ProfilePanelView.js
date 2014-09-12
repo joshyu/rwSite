@@ -20,7 +20,7 @@ define([
         onRender: function(){
             var $node = this.$('.count.loading');
             $.when(app.modelHelper.get('user').getUserInCompletedTask()).then(function(data){
-                $node.html(data.length).removeClass('loading').addClass('badge bg-color-red');
+                $node.html(_.values(data).length).removeClass('loading').addClass('badge bg-color-red');
             });
 
             /*app.jobHelper.get('syncUserRelatedData').registerChangeTrigger(function(data,prevData){

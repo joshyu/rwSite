@@ -83,6 +83,7 @@ define([
             var joinLinkTitle = item.joinLinkTitle;
             if(!regId || !joinLinkTitle) return false;
             var that = this;
+            var $domTrigger = $(this.options.domTrigger);
 
              bootbox.confirm("Do you want to unregister current training session?", function (res) {
                 if( !res ) return;
@@ -93,7 +94,6 @@ define([
                         linkTitle: joinLinkTitle
                     }
                 };
-
                 
                 posted.success = function(data){
                      var $bannerContainer= $dom.parents('.banner-right');
@@ -111,13 +111,17 @@ define([
                             app.preloaded.user.trainingData.splice(_itemId,1);
                         });
                      }
+
+                     $domTrigger.trigger('training:unregistered');
                 }
 
                 posted.error = function(){
                     that.showErrorMsg('fail to cancel the training session.');
+                    $dom.show().prev('img').remove();
                 }
                 
                 app.modelHelper.get('campus_training').cancelRegItem(posted);
+                $dom.hide().before('<img src="images/loading.gif"/>');
             });            
         }
     });

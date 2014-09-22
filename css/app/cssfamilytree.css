@@ -87,6 +87,10 @@ right connector from last child*/
     left: -20px;
 }
 
+.tree li.nochild  > div{
+    cursor: not-allowed;
+}
+
 .tree li >div{
     cursor: pointer;
     border: 1px solid #ccc;
@@ -123,18 +127,23 @@ right connector from last child*/
 }
 
 .tree li >div .title{
-    word-break: break-all;
-    font-weight: bolder;
-    color: #073170;
+    font-weight: normal;
+    color: #FFFFFF;
+    letter-spacing: .1em;
     font-size: .8em;
     position: absolute;
     left: 0;
     padding: 5px;
-    font-weight: bolder;
     right: 0;
     bottom: -90px;
-    background: rgba(199, 229, 243, 0.9);
-
+    background: rgba(147,206,222,1);
+    background: -moz-linear-gradient(top, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(147,206,222,1)), color-stop(41%, rgba(117,189,209,1)), color-stop(100%, rgba(73,165,191,1)));
+    background: -webkit-linear-gradient(top, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);
+    background: -o-linear-gradient(top, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);
+    background: -ms-linear-gradient(top, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);
+    background: linear-gradient(to bottom, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#93cede', endColorstr='#49a5bf', GradientType=0 );
     transition: all 0.5s;
     -webkit-transition: all 0.5s;
     -moz-transition: all 0.5s;

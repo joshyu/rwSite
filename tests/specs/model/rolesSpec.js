@@ -7,7 +7,7 @@ define(function() {
 
             it("fetch user permission for list", function(done) {
                 var testcases = {
-                    'oliu' : true,
+                    'oliu' : false,
 /*                    'hhong' : true,
                     'sdou1' : false,
                     'jyu5' : true*/

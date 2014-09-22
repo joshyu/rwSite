@@ -10,7 +10,7 @@
   </td>
   <td>
     <div class='contact-img-box'> 
-      <img src="{{photo}}" alt="" class="img-circle img-thumbnail"/>
+      <img src="{{#if photo}}{{photo}}{{else}}images/defaultavatar.png{{/if}}" alt="" class="img-circle img-thumbnail"/>
     </div>
   </td>
   <td><b>{{name}}</b></td>

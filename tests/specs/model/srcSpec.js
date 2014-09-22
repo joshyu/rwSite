@@ -14,7 +14,7 @@ define(function() {
             });
 
             it("fetch join link count", function(done) {
-                    $.when(model.requestJoinNum('src_1')).done(function(num){
+                    $.when(model.requestJoinNum('src_familyday')).done(function(num){
                         expect(num).toBeDefined();
                         expect(num).toBeGreaterThan(0);
                         done();                                

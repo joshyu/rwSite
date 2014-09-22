@@ -12,16 +12,17 @@
         {{#with root}}
         <li class="item-{{id}}">
             <div class="item-inner" data-item-id="{{nameRecordId}}">
-                <div class="photo"><img src="{{photo}}" /></div>
+                <div class="photo"><img src="{{#if photo}}{{photo}}{{else}}images/defaultavatar.png{{/if}}" /></div>
                 <div class="name">{{name}}</div>
                  {{#if title}}<div class="title">{{title}}</div>{{/if}}
             </div>
             {{#if reportees}}
             <ul>
                 {{#each reportees}}
-                <li class="item-{{id}} item-leaf">
+                {{debugger this}}
+                <li class="item-{{id}} item-leaf {{#unless reportees}}nochild{{/unless}}">
                     <div class="item-inner" data-item-id="{{id}}">
-                        <div class="photo"><img src="{{photo}}" /></div>
+                        <div class="photo"><img src="{{#if photo}}{{photo}}{{else}}images/defaultavatar.png{{/if}}" /></div>
                         <div class="name">{{name}}</div>
                         {{#if title}}<div class="title">{{title}}</div>{{/if}}
                     </div>

@@ -18,6 +18,12 @@ define([
             this.render();
         },
 
+        serializeData: function(){
+            return {
+                'modal-class' : 'modal-lg'
+            }
+        },
+
         hilightTrigger :function(){
             $(this.options.domTrigger).addClass('highlight');
         },

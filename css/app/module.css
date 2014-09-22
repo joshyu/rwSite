@@ -625,8 +625,14 @@ sidebar nav list
 }
 
 .panel-notify-birthday .carousel-inner{
-    padding-bottom: 40px;
+    padding-bottom: 10px;
     top: 10px;
+}
+
+.panel-notify-birthday .carousel-inner .col-md-4  .label{
+    font-weight: normal;
+    margin-top:10px;
+    display: inline-block;
 }
 
 .panel-notify-sub-list  .controls {
@@ -697,8 +703,8 @@ a.profilelink:hover img{
 }
 
 .panel-notify-sub-hire-information   a.profilelink img {
-     margin:2px;
-     width: 85%;
+  /*   margin:2px;
+     width: 85%;  */
 }
 
 .panel-notify-sub-hire-information  .small{
@@ -769,6 +775,13 @@ a.profilelink:hover img{
     position: absolute;
     text-align: right;
     left:auto;
+}
+
+.panel-notify-sub-hire-information .contact-img-box{
+    width:90%;
+    height: 90%;
+    margin-left:5%;
+    margin-top:5%;
 }
 
 .panel-notify-sub-list .carousel .carousel-indicators li{
@@ -1150,7 +1163,7 @@ a.profilelink:hover img{
 }
 
 .contact_modal  .modal-dialog {
-    width:800px;
+   /* width:800px; */
 }
 
 .contact_modal_body {
@@ -1428,11 +1441,6 @@ a.profilelink:hover img{
     padding:0 5px 0;
 }
 .campus-items .campus-item .item-image img{
-    -webkit-box-shadow: 1px 1px 10px #B8B6B6;
-    -moz-box-shadow:1px 1px 10px #B8B6B6;
-    -ms-box-shadow: 1px 1px 10px #B8B6B6;
-    -o-box-shadow: 1px 1px 10px #B8B6B6;
-    box-shadow:1px 1px 10px #B8B6B6;
     padding: 2px;
     width: 100%;
     height: 100px;
@@ -1674,27 +1682,10 @@ a.profilelink:hover img{
     text-align: center;
 }
 
-/*
-http://www.mademyday.de/css-height-equals-width-with-pure-css.html
-*/
+
 .panel-list table.panel-body-list  .contact-img-box{
-    position: relative;
     width: 50%;     /* desired width */
 }
-
-.panel-list table.panel-body-list  .contact-img-box:before{
-    content: "";
-    display: block;
-    padding-top: 100%;  /* initial ratio of 1:1*/
-}
-
-.panel-list table.panel-body-list  .contact-img-box  img {
-    position:  absolute;
-    top: 0;
-    width:100%;
-    height: 100%;
-}
-
 
 .panel-list table.panel-body-list >tbody+tbody {
     border-top-width: 0;

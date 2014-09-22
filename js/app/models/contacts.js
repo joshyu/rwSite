@@ -84,9 +84,9 @@ define([
             var num = options.num || 20;
             var pageNo = options.pageNo || 0;
             var _filters = options.filters;
-            var teamId = _filters && _filters.teamId ;
-            var keyword = _filters && _filters.keyword;
-            var start_char = _filters && _filters.start_char;
+            var teamId = _filters && _filters.teamId;
+            var keyword = _filters && _filters.keyword.toLowerCase();
+            var start_char = _filters && _filters.start_char.toLowerCase();
             var _data = null;
 
             var cachedKey = [teamId, keyword, start_char].join('$$');
@@ -97,7 +97,7 @@ define([
                     var pass= true;
                     if(keyword){
                         var searchstr = [ item.name.toLowerCase() , item.email.toLowerCase() ].join('^^');
-                        pass = pass && searchstr.indexOf(keyword.toLowerCase()) >=0;
+                        pass = pass && searchstr.indexOf(keyword) >=0;
                     }
 
                     if(start_char){
@@ -137,7 +137,7 @@ define([
                 }
 
                 var d1 = new Date(item.birthday).setFullYear(year);
-                var pass = d> d1 && (d - d1)  < dayminiutes;
+                var pass = d>= d1 && (d - d1)  < dayminiutes;
                 if(pass){
                     //d1 = new Date(item.birthday);
                     //item.birthday = (d1.getMonth()+1) + "/" + d1.getDate();
@@ -277,7 +277,7 @@ define([
 
         permissionDef: {
             'contacts': {
-                link: '/campus/Lists/contactss/AllItems.aspx',
+                link: '/campus/Lists/contacts/AllItems.aspx',
                 perm: 'editListItems',
                 urlKey: 'items'
             },

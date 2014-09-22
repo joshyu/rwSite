@@ -59,7 +59,13 @@ define([
                         orderby: 'EventDate desc'
                     };
 
-                    _params.filters = "available eq 1 and EventDate gt datetime'"+ new Date().toISOString()  +"'";
+                    var d= new Date();
+                    var year = d.getFullYear();
+                    var month = d.getMonth() + 1;
+                    var day = d.getDate();
+                    d = new Date(year + '/'+ month +'/' + day);
+
+                    _params.filters = "available eq 1 and EventDate ge datetime'"+ d.toISOString()  +"'";
                     return _params;
                 },
                 returnFields: {

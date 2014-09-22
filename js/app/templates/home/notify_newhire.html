@@ -2,11 +2,13 @@
 <div class="panel-notify-sub-list panel-notify-sub-hire-information">
     <div class="carousel slide" data-ride="carousel">
         <!-- Bottom Carousel Indicators -->
-        <ol class="carousel-indicators">
-        {{#each contacts}}
-          <li data-target=".panel-notify-hire .carousel" data-slide-to="{{@index}}" class="{{#unless @index}}active{{/unless}}"></li>
-        {{/each}}
-        </ol>
+        {{#ifCond contacts.length '>' 1}}
+          <ol class="carousel-indicators">
+          {{#each contacts}}
+            <li data-target=".panel-notify-hire .carousel" data-slide-to="{{@index}}" class="{{#unless @index}}active{{/unless}}"></li>
+          {{/each}}
+          </ol>
+        {{/ifCond}}
         
         <!-- Carousel Slides / Quotes -->
         <div class="carousel-inner"> 
@@ -16,9 +18,11 @@
             <blockquote>
               <div class="row">
                 <div class="col-sm-3 text-center avatar">
-                    <a href="#employees/{{id}}" data-employee-id="{{id}}" class="profilelink">
-                        <img class="img-circle  img-thumbnail" src="{{photo}}">
-                    </a>
+                    <div class="contact-img-box">
+                        <a href="#employees/{{id}}" data-employee-id="{{id}}" class="profilelink">
+                            <img class="img-circle  img-thumbnail" src="{{photo}}">
+                        </a>
+                    </div>
                 </div>
                 <div class="col-sm-9 intro">
                   <p class="statement" data-item-index="{{@index}}">{{{intro}}}</p>

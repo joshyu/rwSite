@@ -19,10 +19,9 @@
                 <div class="item  {{#unless @index}}active{{/unless}}">
                     {{#each this}}
                             <div class="col-md-4">
-                                <a href="#employees/{{id}}" data-employee-id="{{id}}" class="profilelink"><img src="{{photo}}" alt="" class="img-circle img-thumbnail"  data-toggle="tooltip" data-placement="bottom" title="{{name}}({{formatDate birthday}})">
-                                
+                                <a href="#employees/{{id}}" data-employee-id="{{id}}" class="profilelink"><img src="{{photo}}" alt="" class="img-circle img-thumbnail">                                
                                 </a>
-
+                                <div class="label label-default">{{formatDate birthday}}</div>
                             </div>
                     {{/each}}
                 </div>

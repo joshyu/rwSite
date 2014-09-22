@@ -1,6 +1,6 @@
 <div class="col-md-6 userdata">
     <div class="col-md-5 image">
-        <img src="{{contacts.photo}}" class="img-circle img-thumbnail">
+        <img src="{{#if contacts.photo}}{{contacts.photo}}{{else}}images/defaultavatar.png{{/if}}" class="img-circle img-thumbnail">
 
         {{#if lyncEnabled}}
         <div class="lync-status-container">
@@ -47,7 +47,7 @@
           <ul class="items   list-inline">
                 {{#each contacts.relations.reportees}}
                     <li><a href="#profile/{{id}}" class="profilelink" data-contactId="{{nameRecordId}}">
-                        <img src="{{photo}}" alt="" class="img-thumbnail img-circle" data-toggle="tooltip" data-placement="bottom" title="{{name}}"/>
+                        <img src="{{#if photo}}{{photo}}{{else}}images/defaultavatar.png{{/if}}" alt="" class="img-thumbnail img-circle" data-toggle="tooltip" data-placement="bottom" title="{{name}}"/>
                         </a>
                     </li>
                 {{/each}}

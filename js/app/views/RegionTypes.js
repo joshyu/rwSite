@@ -75,12 +75,12 @@ define(['marionette', 'underscore', 'app', 'views/HeaderView', 'views/FooterView
                           if (this.currentView && this.currentView !== view) { return; }
                           
                           var _onOpen = _.bind(function(){
-                                view.render();                                
+                                view.render();
                                 this.currentView = view;
                                 this.openview(view, function(){
                                     if (view.onShow){view.onShow();}
                                     view.trigger("show");
-                             
+
                                     if (this.onShow) { this.onShow(view); }
                                     this.trigger("view:show", view);
                               });

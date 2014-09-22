@@ -234,13 +234,17 @@ define([
                             var k1 = key.substr(0,k), k2= key.substr(k+1);
                             var __item = item[k1];
 
-                            if(__item.results && _.isArray(__item.results)){
-                                _item[value] = _.map(__item.results, function(iit){
-                                    return  iit[k2];
-                                });
+                            if(__item){
+                                if(__item.results && _.isArray(__item.results)){
+                                    _item[value] = _.map(__item.results, function(iit){
+                                        return  iit[k2];
+                                    });
+                                }else{
+                                    _item[value] = __item[k2];  
+                                }
                             }else{
-                                _item[value] = __item[k2];  
-                            }
+                                _item[value] = null;
+                            }                            
                         }
                     });
                 }
@@ -337,6 +341,8 @@ define([
         },
 
         filterUserJoinedItem: function(items, namedId){
+            if(items.length === 0) return [];
+
             var _dfds= [] , dfd = null;
             var that = this;
             var _options = {
@@ -359,8 +365,33 @@ define([
                  _dfds.push( that.service['_fetchlist'](_options) );
             });
 
-            return $.when.apply($, _dfds).then(function(){
-                var data = [].slice.call(arguments);
+
+            var remaining =  _dfds.length;
+            var values = [];
+            dfd = $.Deferred();
+            var _dfdIterator = function(id){
+                return function(res){
+                    if(res){
+                        if($.isFunction(res.promise)){
+                            values[id] = [];
+                        }else if($.isArray(res)){
+                            values[id] = res;
+                        }
+                    }else{
+                        values[id] = [];
+                    }
+
+                    if ( !(--remaining) ) {
+                        dfd.resolve(values);
+                    }
+                }
+            }
+
+            for(var i=0,n=_dfds.length;i<n;++i){
+                _dfds[i].always(_dfdIterator(i));
+            }
+
+            return dfd.then(function(data){
                 return _.filter(items, function(item,i){
                     var bool = data[i].length > 0;
                     if(bool){
@@ -369,7 +400,7 @@ define([
                     }
 
                     return bool;
-                });                    
+                });
             });
         },
 

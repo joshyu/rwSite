@@ -161,8 +161,7 @@ define([
                     }
 
                     var data = [].slice.call(arguments);
-                    onError.call(context, data, _data);
-
+                    onError && onError.call(context, data, _data);
                 });
             });
         }
@@ -252,7 +251,7 @@ define([
 
     var jobPool= {
         _jobpool: {},
-        duration: 2000, //false, //
+        duration: false, //2000
         init: function(){
             this.started= false; 
             return this;

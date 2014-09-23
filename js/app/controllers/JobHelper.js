@@ -251,7 +251,7 @@ define([
 
     var jobPool= {
         _jobpool: {},
-        duration: false, //2000
+        duration: 2000,
         init: function(){
             this.started= false; 
             return this;

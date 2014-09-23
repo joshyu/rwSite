@@ -3,7 +3,8 @@ define([
     'backbone',
     'underscore',
     'models/ModelBase',
-], function(app, Backbone, _, ModelBase) {
+    'module'
+], function(app, Backbone, _, ModelBase, module) {
     'use strict';
 
     return ModelBase.extend({
@@ -78,6 +79,12 @@ define([
         handleUserWithRelated: function(data) {
             var contacts= data.pop();
             var userInfo= data[0];
+
+            if(!userInfo.email){
+                var _conf = module.config();
+                userInfo.email = _conf.sysmails[userInfo.account] || _conf.admin_mail;
+            }
+
             userInfo.related = _.find(contacts.relations, function(_contact){ return _contact.email == userInfo.email});
             userInfo.image = userInfo.related.photo;
             userInfo.title = userInfo.related.title;

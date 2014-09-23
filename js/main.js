@@ -77,6 +77,14 @@ require.config({
         'controllers/MainController' : {
             pluginBasePath : 'views/plugins',
             plugins : [ 'lync' ]
+        },
+        
+        'models/user' : {
+            sysmails: {
+                'SHAREPOINT\\system' : 'bdong@ra.rockwell.com'
+            },
+
+            admin_mail: 'bdong@ra.rockwell.com'  //in order not to display error, show the mail address of farm administrator.
         }
     }
 });

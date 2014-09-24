@@ -1471,6 +1471,12 @@ a.profilelink:hover img{
     margin-top: 20px;
     margin-left: -15px;
 }
+
+.cplp-nolist .noresult {
+    text-align: left;
+    margin-left: 15px;
+}
+
 .campuslistpage .pageTip{
     position: relative;
     top: -10px;
@@ -1596,6 +1602,12 @@ a.profilelink:hover img{
 
 .panel-list .panel-body-list-inner .pm-images{
     width: 90%;
+    margin-left: 0;
+}
+
+.panel-list .panel-body-list-inner .pm-images.noresult{
+    text-align: left;
+    margin-left: 15px;
 }
 
 .pm-images .pm-image-desc {

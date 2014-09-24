@@ -1,6 +1,6 @@
-{{#if author}}
-<div class="banner">created by {{author}} at {{formatDate pubdate}}</div>
-{{/if}}
+
+<div class="banner">created {{#if author}} by {{author}} {{/if}} at {{formatDate pubdate}}</div>
+
 <div class="content bodycontent">
    <p>{{{content}}}</p>
 </div>

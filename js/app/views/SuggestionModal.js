@@ -8,9 +8,10 @@ define([
     'use strict';
     //update this for production use.
     var MailList = {
-        'campus_manager' : 'hhong@ra.rockwell.com', //ksong@ra.rockwell.com
-        'hr': 'hhong@ra.rockwell.com' //jjwang2@rockwellautomation.com
+        'campus_manager' : 'ksong@ra.rockwell.com',
+        'hr': 'jjwang2@ra.rockwell.com'
     }
+
     return ModalBase.extend({
         bodyTmpl : template,
         className:'modal fade suggestion_modal',
@@ -43,8 +44,6 @@ define([
 
         onPostSuggestion: function(e){
             e.preventDefault();
-            alert('send message is disabled during development.');
-            return false;
             
             if(! this.validateForm()){
                 this.showErrorMsg('Some Fields not provided');

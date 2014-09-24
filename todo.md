@@ -35,3 +35,10 @@ reglinkadmin
 regContributors add item to register link
 registerlink_personal
 registerlink_family
+
+software_siteadmin
+localization_siteadmin
+test_siteadmin
+cm_siteadmin
+pm_siteadmin
+IT_siteadmin

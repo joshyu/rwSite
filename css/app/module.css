@@ -46,6 +46,7 @@
     bottom: -5px;
     right: 15px;
     font-size: 1em;
+    font-weight: bolder;
 }
 
 /*footer*/
@@ -381,8 +382,12 @@ sidebar nav list
     border:none;
 }
 
+.list-group-src {
+    margin:auto 15px;
+}
+
 .list-group-src .title{
-    background: #E8F5FE;
+    background: #f8f8f8;
 }
 
 .list-group-src  .list-group-item .date,
@@ -392,7 +397,7 @@ sidebar nav list
 }
 
 .list-group-training .title{
-    background: #E8F5FE;
+    background: #f8f8f8;
 }
 
 .list-group-survey .title{
@@ -406,13 +411,13 @@ sidebar nav list
 
 .list-group-survey .list-group-item.highlight,
 .list-group-survey .list-group-item:active{
-    background: #F6F6AD;
+    background: #eeeeee;
     box-shadow: 6px 0px 8px -6px #000;
 }
 
 .list-group-src .list-group-item:hover,
 .list-group-training .list-group-item:hover{
-    background: #E8F5FE;
+    background: #f1f1f1;
     box-shadow: 6px 0px 12px -8px #333;
 }
 
@@ -420,8 +425,32 @@ sidebar nav list
 .list-group-src .list-group-item:active,
 .list-group-training .list-group-item.highlight,
 .list-group-training .list-group-item:active{
-    background: #BBDFF8;
+    background: #E4E4E4;
     box-shadow: 6px 0px 8px -6px #000;
+}
+
+.list-group-src .banner-right{
+    position: absolute;
+    right: 1em;
+    top: 0;
+    line-height: 3em;
+}
+
+.list-group-src .list-group-item .labelc{
+    margin-right: 10px;
+    padding-bottom: 3px 5px;
+}
+
+.list-group-src .list-group-item .labelc,
+.list-group-src .banner-right .label {
+    color: #FFFFFF;
+    font-size: 0.91em;
+    font-weight: 500;
+    font-family: arial;
+    padding: .5em .6em;
+    text-shadow:1px 1px 3px #5A5A5A;
+    cursor: pointer;
+    border-radius: .3em;
 }
 
 .panel-container .edit-link{
@@ -561,14 +590,12 @@ sidebar nav list
 }
 
 .panel-container .list-group .title{
-    color:#0D3149;
-    font-weight: bold;
-  
+    font-weight: bold;  
     box-shadow: inset  0px -5px 11px -9px #000;
 }
 
 .panel-container .list-group .title-icon {
-    padding-right: 5px;
+    padding-right: 15px;
 }
 
  .panel-notify {
@@ -590,8 +617,7 @@ sidebar nav list
 }
 
  .panel-notify-sub-heading{
-
-     background: url('../../images/titlebg.png'); 
+    background: url('../../images/titlebg.png'); 
     color:#666;
     display: inline;
     padding:5px 20px;
@@ -600,8 +626,8 @@ sidebar nav list
     font-size:0.91em;
     font-weight: bold;
     position: relative;
+    font-family: arial;
     top: -2px;
-
 }
 
  .panel-notify-sub-list {
@@ -615,8 +641,9 @@ sidebar nav list
  }
 
  .panel-notify-sub-list.empty-list .alert{
-    background-color: #F3F3F3;
-    border-color: #D8D8D8;
+/*     background-color: #F3F3F3;
+    border-color: #D8D8D8; */
+    border-width: 0;
     color: #797A7A;
  }
 
@@ -740,6 +767,7 @@ a.profilelink:hover img{
 
 .panel-notify-sub-hire-information  .intro .label{
     font-size: inherit;
+    font-weight: normal;
 }
 
 .panel-notify-sub-hire-information  .intro .team {
@@ -853,8 +881,9 @@ a.profilelink:hover img{
 .panel-profile .profile-update-item .count {
     color:#fff;
     font-size:1.17em;
-    margin-right: 10px;
-    margin-bottom: 10px;
+    font-weight: normal;
+    margin-right: 6px;
+    margin-bottom: 8px;
 }
 
 .panel-profile .profile-update-item .count.loading{
@@ -863,6 +892,7 @@ a.profilelink:hover img{
 
 .panel-profile .profile-update-item .statement {
     font-size:0.91em;
+    font-family: arial;
 }
 
 .panel-profile .profile-avatar  img{
@@ -875,13 +905,13 @@ a.profilelink:hover img{
 }
 
 .panel-profile .profile-avatar  .site-role {
-    font-weight: bolder;
-    font-size: .9em;
+    font-size: .95em;
     margin-top: 10px;
+    color:#868686;
 }
 
 .panel-profile .profile-name {
-    font-size: 1.17em;
+    font-size: 1.5em;
     font-weight: bolder;
 }
 
@@ -955,7 +985,8 @@ a.profilelink:hover img{
 
 /*campus modal dialog */
 .campus_modal  .modal-title {
-    font-size: 1.3em
+    font-size: 1.3em;
+    font-weight: bolder;
 }
 .campus_modal .modal-body {padding:0px;}
 .campus_modal .modal-body a:hover{
@@ -965,6 +996,17 @@ a.profilelink:hover img{
 .campus_modal .campus-item .content{
     border-radius:6px;
 }
+
+.campus_modal .campus-item .content img.newspic{
+    float: left;
+    width: 250px;
+    margin: 0 15px 10px 0;
+    -webkit-box-shadow: 1px 1px 3px #818181;
+    -moz-box-shadow: 1px 1px 3px #818181;
+    -ms-box-shadow:1px 1px 3px #818181;
+    box-shadow:1px 1px 3px #818181;
+}
+
 
 .campus_modal .campus-item .item-image{
     padding: 0;

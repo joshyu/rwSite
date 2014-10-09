@@ -36,9 +36,16 @@ regContributors add item to register link
 registerlink_personal
 registerlink_family
 
-software_siteadmin
-localization_siteadmin
-test_siteadmin
-cm_siteadmin
-pm_siteadmin
-IT_siteadmin
+teamsite_software_admin
+software team
+teamsite_localization_admin
+localization
+teamsite_test_admin
+test
+teamsite_cm_admin
+cm
+teamsite_pm_admin
+pm
+teamsite_IT_admin
+it 
+administrator group to manage the software team site.

@@ -1,6 +1,7 @@
 
-<div class="banner">created {{#if author}} by {{author}} {{/if}} at {{formatDate pubdate}}</div>
+<div class="banner">{{#if news.author}} <span class="glyphicon glyphicon-user"></span> {{news.author}} {{/if}} {{#if news.pubdate}} <span class="glyphicon glyphicon-calendar"></span> {{formatDate news.pubdate}} {{/if}}</div>
 
 <div class="content bodycontent">
-   <p>{{{content}}}</p>
+    {{#if news.imageUrl}}<div><img class="newspic" src="{{news.imageUrl}}"/></div>{{/if}}
+   <div>{{{news.content}}}</div>
 </div>

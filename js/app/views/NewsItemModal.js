@@ -13,10 +13,17 @@ define([
             contentClass : 'campus-item',
             'modal-class' : 'modal-lg'
         },
+        request: {
+            model: 'news',
+            key: 'campus:news:item',
+            getOptions: 'getRequestOption'
+        },
 
-        getTemplateData: function(){
-            this.templateData['modal-class'] = this.options.isLarge ? 'modal-lg' : '';
-            return _.extend(this.templateData, this.options.data);
+        getRequestOption: function(){
+            var itemId= this.options.itemId;
+            return {
+                id: itemId
+            };
         }
     });
 });

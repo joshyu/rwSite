@@ -16,6 +16,19 @@ define([
                 },
                 queryParameters: {
                     orderby: 'NewsDate desc',
+                    expand: 'Author0'
+                },
+                returnFields: {
+                    "Id": "id",
+                    "Title": "title",
+                    "Author0/Title":"author",
+                    "NewsDate": "pubdate"
+                }
+            },
+             'campus:news:item' : {
+                url: "items",
+                queryParameters: {
+                    orderby: 'NewsDate desc',
                     expand: 'AttachmentFiles,Author0'
                 },
                 returnFields: {

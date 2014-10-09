@@ -193,7 +193,7 @@ define([
                     $dom.html(newNum);
                     if(error){
                         if(!$dom.hasClass('label-danger')){
-                            $dom.addClass('label-danger').attr('title', 'list not found');
+                            $dom.addClass('label-danger').attr({'title':'list not found', 'href': 'javascript:void(0);'});
                         }
                     }else{
                         if(!$dom.hasClass('label-primary')){

@@ -11,7 +11,7 @@ define([
         template: template,
         className:"row container",
         regions: {
-            news: '.panel-news',
+            /*news: '.panel-news',*/
             updates: '.panel-updates',
             /*survey:'.panel-survey',*/
             profile: '.panel-profile',
@@ -22,7 +22,7 @@ define([
         },
 
         panels: {
-            news: 'NewsPanelView',
+            /*news: 'NewsPanelView',*/
             updates: 'CampusUpdatesPanelView',
             /*survey:'SurveyPanelView',*/
             profile: 'ProfilePanelView',

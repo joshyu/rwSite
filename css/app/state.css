@@ -266,6 +266,18 @@
     color: #d9534f;
 }
 
+.label-news {
+  background: #76CAD8;
+}
+
+.label-src {
+background: #A2D17B;
+}
+
+.label-training{
+background: #DD6D7B;
+}
+
 /*
 http://www.mademyday.de/css-height-equals-width-with-pure-css.html
 */

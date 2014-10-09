@@ -3,21 +3,19 @@
 </div>
 <div class="panel-body">
     <div class="row">
-      <div class="col-md-6 ">
-        <div class="list-group list-group-src shadow-bottom-m">
-          <div class="list-group-item title"><span class="title-icon glyphicon glyphicon-list"></span> {{subtitle_src}}</div>
-          {{#each campus_src}}
-          <a data-item-id={{id}} href="#campus/src/{{id}}" class="list-group-item item-{{id}}"><span class="">{{title}}</span><span class='pull-right date'>{{formatDate pubdate}}</span></a>
-          {{/each}}
-        </div>
-      </div>
-      <div class="col-md-6 ">
-            <div class="list-group list-group-training shadow-bottom-m">
-                <div class="list-group-item title"><span class="title-icon glyphicon glyphicon-list"></span> {{subtitle_training}}</div>
-                {{#each campus_training}}
-                <a data-item-id={{id}}  href="#campus/trainings/{{id}}" class="list-group-item item-{{id}}"><span class="">{{title}}</span><span class='pull-right date'>{{formatDate pubdate}}</span></a>
-                {{/each}}
+        <div class="list-group list-group-src shadow-bottom-lr">
+          <div class="list-group-item title"><span class="title-icon glyphicon glyphicon-list"></span> {{subtitle_src}}
+          <div class="banner-right">
+            <span class="name site-role label label-news">News</span>
+            <span class="name site-role label label-src">SRC</span>
+            <span class="name site-role label label-training">Trainings</span>
           </div>
-      </div>
-  </div> 
+          </div>
+          <div>
+          {{#each data}}
+          <a data-item-id="{{id}}" data-type="{{type}}" href="#" class="list-group-item item-{{id}}"><span class="labelc label-{{type}}">{{labelc}}</span><span class="">{{title}}</span><span class='pull-right date'>{{formatDate pubdate}}</span></a>
+          {{/each}}
+          </div>
+        </div>
+     </div>
 </div>

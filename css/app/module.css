@@ -382,12 +382,17 @@ sidebar nav list
     border:none;
 }
 
-.list-group-src {
+.list-group-src,
+.list-group-training {
     margin:auto 15px;
 }
 
+.list-group-src{
+    margin-bottom: 20px;
+}
+
 .list-group-src .title{
-    background: #f8f8f8;
+    background: #F0F0F0;
 }
 
 .list-group-src  .list-group-item .date,
@@ -397,11 +402,11 @@ sidebar nav list
 }
 
 .list-group-training .title{
-    background: #f8f8f8;
+    background: #F0F0F0;
 }
 
 .list-group-survey .title{
-    background: #FFFFdd;
+    background: #F0F0F0;
 }
 
 .list-group-survey .list-group-item:hover{
@@ -409,22 +414,22 @@ sidebar nav list
      box-shadow: 6px 0px 12px -8px #333;
 }
 
-.list-group-survey .list-group-item.highlight,
-.list-group-survey .list-group-item:active{
+.list-group-survey a.list-group-item.highlight,
+.list-group-survey a.list-group-item:active{
     background: #eeeeee;
     box-shadow: 6px 0px 8px -6px #000;
 }
 
-.list-group-src .list-group-item:hover,
-.list-group-training .list-group-item:hover{
+.list-group-src a.list-group-item:hover,
+.list-group-training a.list-group-item:hover{
     background: #f1f1f1;
     box-shadow: 6px 0px 12px -8px #333;
 }
 
-.list-group-src .list-group-item.highlight,
-.list-group-src .list-group-item:active,
-.list-group-training .list-group-item.highlight,
-.list-group-training .list-group-item:active{
+.list-group-src a.list-group-item.highlight,
+.list-group-src a.list-group-item:active,
+.list-group-training a.list-group-item.highlight,
+.list-group-training a.list-group-item:active{
     background: #E4E4E4;
     box-shadow: 6px 0px 8px -6px #000;
 }
@@ -451,6 +456,7 @@ sidebar nav list
     text-shadow:1px 1px 3px #5A5A5A;
     cursor: pointer;
     border-radius: .3em;
+    text-transform: uppercase;
 }
 
 .panel-container .edit-link{

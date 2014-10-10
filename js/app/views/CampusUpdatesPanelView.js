@@ -1,10 +1,11 @@
 define([
     'marionette',
+    'underscore',
     'app',
     'views/ViewBase',
     'views/ModalHelper',
     'hbs!templates/home/campus_update',
-], function(Marionette, app, ViewBase, ModalHelper, template) {
+], function(Marionette, _, app, ViewBase, ModalHelper, template) {
     'use strict';
     return ViewBase.extend({
         template: template,
@@ -14,11 +15,13 @@ define([
         },
         events: {
             'click @ui.srcLinks': 'clickLinkItem',
+            'click @ui.trainingLinks': 'clickTrainingLink',
+            'click .banner-right .label': 'clickNewsType'
         },
 
         templateData: {
             title: 'Campus News',
-            subtitle_src: 'Latest News',
+            subtitle_news: 'Latest News',
             subtitle_training: 'Training Center'
         },
         requests: [
@@ -40,26 +43,28 @@ define([
         ],
 
         renderData: function(data){
-            var _data = [];
+            var _news = [];
             var labelcs = {
                 'news' : 'news',
-                'campus_src' : 'src',
-                'campus_training': 'training'
+                'campus_src' : 'src'
             };
+
+            var _trainingData = data.campus_training;
+            data.campus_training = null;
 
             _.each(data, function(items, key){
                 _.each(items, function(item){
                    item.type = labelcs[key];
                    item.labelc = labelcs[key][0].toUpperCase();
                 });
-                _data.push.apply(_data, items);
+                _news.push.apply(_news, items);
             });
 
-            _data = _data.sort(function(v1, v2){
+            _news = _news.sort(function(v1, v2){
                 return new Date(v2.pubdate) - new Date(v1.pubdate);
             });
 
-            this._renderData({data: _data});           
+            this._renderData({news: _news, newsTypes: _.values(labelcs),  trainingData: _trainingData});           
         },
 
         clickLinkItem: function(e){
@@ -72,6 +77,31 @@ define([
                 ModalHelper.get(itemType, {itemId: itemId, domTrigger: domTrigger}).show();
             }
             return false;
+        },
+        
+        clickTrainingLink: function(e){
+            var domTrigger= e.currentTarget;
+            var itemId= Marionette.$(domTrigger).data('item-id');
+            if(itemId){
+                ModalHelper.get('training', {itemId: itemId, domTrigger: domTrigger}).show();
+            }
+            return false;
+        },
+
+        clickNewsType: function(e){
+            var domTrigger = e.currentTarget;
+            var $dom = $(domTrigger);
+            $dom.toggleClass('disabled');
+            var disabled = $dom.hasClass('disabled');
+            var $newsNodes = this.$('.list-group-src a.list-group-item');
+            var type = $dom.data('type');
+            if(!type || !$newsNodes.length) return false;
+
+            _.each(this.templateData.news, function(item, i){
+               if(item.type == type ){
+                    $newsNodes.eq(i)[disabled ? 'slideUp' : 'slideDown']('slow');
+               }
+            });
         }
     });
 });

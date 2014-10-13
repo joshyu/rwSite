@@ -456,6 +456,10 @@ sidebar nav list
     text-shadow:1px 1px 3px #5A5A5A;
     cursor: pointer;
     border-radius: .3em;
+    text-transform: capitalize;
+}
+
+.list-group-src .banner-right .label-src{
     text-transform: uppercase;
 }
 

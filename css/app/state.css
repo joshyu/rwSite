@@ -313,7 +313,26 @@ background: #B8DF97;
 }
 
 .label-training{
-background: #DD6D7B;
+ background: #E9A2AB;
+ -webkit-box-shadow:  inset 1px 1px 6px #BE5C68;
+  -moz-box-shadow:  inset 1px 1px 6px #BE5C68;
+  -ms-box-shadow: inset 1px 1px 6px #BE5C68;
+  box-shadow:  inset 1px 1px 6px #BE5C68;
+}
+
+.label-training.disabled {
+    background: #A7626A;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    color: #D3D3D3  !important;
+}
+
+.label-training.disabled:hover{
+  background: #BD6D76;
+}
+
+.label-training:hover {
+background: #E9B4BA;
 }
 
 /*

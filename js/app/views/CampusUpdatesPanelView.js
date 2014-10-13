@@ -11,11 +11,11 @@ define([
         template: template,
         ui: {
             srcLinks : '.list-group-src  .list-group-item',
-            trainingLinks: '.list-group-training .list-group-item'
+            /*trainingLinks: '.list-group-training .list-group-item'*/
         },
         events: {
             'click @ui.srcLinks': 'clickLinkItem',
-            'click @ui.trainingLinks': 'clickTrainingLink',
+            /*'click @ui.trainingLinks': 'clickTrainingLink',*/
             'click .banner-right .label': 'clickNewsType'
         },
 
@@ -46,11 +46,9 @@ define([
             var _news = [];
             var labelcs = {
                 'news' : 'news',
-                'campus_src' : 'src'
+                'campus_src' : 'src',
+                'campus_training': 'training'
             };
-
-            var _trainingData = data.campus_training;
-            data.campus_training = null;
 
             _.each(data, function(items, key){
                 _.each(items, function(item){
@@ -64,7 +62,7 @@ define([
                 return new Date(v2.pubdate) - new Date(v1.pubdate);
             });
 
-            this._renderData({news: _news, newsTypes: _.values(labelcs),  trainingData: _trainingData});           
+            this._renderData({news: _news, newsTypes: _.values(labelcs)});           
         },
 
         clickLinkItem: function(e){

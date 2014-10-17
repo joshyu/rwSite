@@ -19,8 +19,10 @@
                 <div class="item  {{#unless @index}}active{{/unless}}">
                     {{#each this}}
                             <div class="col-md-4">
-                                <a href="#employees/{{id}}" data-employee-id="{{id}}" class="profilelink"><img src="{{photo}}" alt="" class="img-circle img-thumbnail">                                
-                                </a>
+                                <div class="squareimg">
+                                    <a href="#employees/{{nameRecordId}}" data-employee-id="{{nameRecordId}}" class="profilelink"><img src="{{photo}}" alt="" class="img-circle img-thumbnail">                                
+                                    </a>
+                                 </div>
                                 <div class="label label-default">{{formatDate birthday}}</div>
                             </div>
                     {{/each}}

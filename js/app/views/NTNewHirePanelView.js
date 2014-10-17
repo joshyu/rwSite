@@ -24,12 +24,6 @@ define([
             this.$el.find('.carousel').carousel({interval: 6000}).on('slid.bs.carousel', function(){
                 that.setViewFullButtons();
             });
-
-            app.modelHelper.get('contacts').fetchListPermissionForCurUser('newhire').then(function(link) {
-                if (link) {
-                    that.$el.prepend(app.modelHelper.get('roles').getEditLinkHtml(link));
-                }
-            });
         },
 
         events: {

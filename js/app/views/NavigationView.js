@@ -43,15 +43,6 @@ define([
             this.triggerMethod("render", this);
         },
 
-        onRender: function() {
-            var that = this;
-            app.modelHelper.get('navigation').fetchListPermissionForCurUser().then(function(link) {
-                if (link) {
-                    that.$el.parent().prepend(app.modelHelper.get('roles').getEditLinkHtml(link));
-                }
-            });
-        },
-
         toggleFolder: function(e) {
             var $folderNode = $(e.target).parents('li:first');
             if ($folderNode.hasClass('menu-folder')) {

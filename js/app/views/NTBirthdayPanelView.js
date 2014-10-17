@@ -32,7 +32,10 @@ define([
         },
 
         onRender: function() {
-            this.$el.find('.carousel').carousel({interval: 5000});
+            var $carouselDom= this.$el.find('.carousel');
+            if($carouselDom.find('.item').length > 1){
+                $carouselDom.carousel({interval: 5000});    
+            }
         }
     });
 });

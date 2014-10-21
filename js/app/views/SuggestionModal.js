@@ -46,7 +46,7 @@ define([
             e.preventDefault();
             
             if(! this.validateForm()){
-                this.showErrorMsg('Some Fields not provided');
+                this.showErrorMsg('Some Fields are missing.');
                 return false;
             }
 
@@ -76,13 +76,13 @@ define([
             var posted = {data : data};
             var that = this;
             posted.success = function(){
-                 that.showSuccessMsg('Post message successfully.');
+                 that.showSuccessMsg('The message has been sent successfully.');
                  $butSubmit.button('reset');
                  frm.reset();
             }
 
             posted.error = function(){
-                that.showErrorMsg('Fail to post message');
+                that.showErrorMsg('Fail to send the message.');
                 $butSubmit.button('reset');
             }
             

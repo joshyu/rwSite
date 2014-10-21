@@ -8,10 +8,12 @@
     -ms-user-select: none;
     -o-user-select: none;
     user-select: none;
+/*
+    cause IE no break line.    
     display: flex;
-    display: -ms-flexbox;
-    justify-content: center;
-    -ms-flex-pack: center;
+   display: -ms-flexbox;
+     justify-content: center;
+-ms-flex-pack: center; */
 }
 
 .tree ul {
@@ -84,11 +86,24 @@ right connector from last child*/
 }
 
 .tree li.item-leaf{
-    left: -20px;
+    /* left: -20px; */ /* forget why I add this */
 }
 
-.tree li.nochild  > div{
-    cursor: not-allowed;
+.tree .item-supervisor > div{
+    -webkit-box-shadow: 2px 3px 9px #C8C7C7;
+    -moz-box-shadow:2px 3px 9px #C8C7C7;
+    -ms-box-shadow: 2px 3px 9px #C8C7C7;
+    -o-box-shadow: 2px 3px 9px #C8C7C7;
+    box-shadow: 2px 3px 9px #C8C7C7;
+}
+
+.tree li.is-superVisor  > div{
+    border: 2px solid #B1D4DF;
+    -webkit-box-shadow: 1px 4px 7px #E0E0E0;
+    -moz-box-shadow: 1px 4px 7px #E0E0E0;
+    -ms-box-shadow: 1px 4px 7px #E0E0E0;
+    -o-box-shadow: 1px 4px 7px #E0E0E0;
+    box-shadow: 1px 4px 7px #E0E0E0;
 }
 
 .tree li >div{
@@ -163,7 +178,7 @@ right connector from last child*/
     bottom: 0;
 }
 .tree li > div:active {
-    background: #E0E0E0;
+    background: #F2F2F2;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     -ms-box-shadow: none;

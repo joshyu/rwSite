@@ -2,8 +2,9 @@ define([
     'marionette',
     'app',
     'views/ViewBase',
+    'views/ModalHelper',
     'hbs!templates/partials/orgchart',
-], function(Marionette, app, ViewBase,  template) {
+], function(Marionette, app, ViewBase, ModalHelper, template) {
     'use strict';
      var _RootBanner = {
         init : function(view, elem){
@@ -58,6 +59,7 @@ define([
 
         events: {
             'click .item-leaf > div' : 'changeChartRoot',
+            'click .item-supervisor > div' : 'viewProfile',
             'click .oc-banner .btn' : 'onChangeRoot'
         },
 
@@ -113,6 +115,7 @@ define([
             var itemData= this.contacts.relations[itemId];
 
             if(!itemData.reportees || !itemData.reportees.length){
+                this.viewProfile(e);
                 return false; //real leaf, cannot take root.
             }
             
@@ -122,6 +125,16 @@ define([
 
             this.root = itemData;
             this.drawtree(itemData);
+        },
+
+        viewProfile: function(e){
+            var domTrigger= e.currentTarget;
+            var empId= Marionette.$(domTrigger).data('item-id');
+            if(empId){
+                ModalHelper.get('employee', {itemId: empId, domTrigger: domTrigger}).show();
+            }
+
+            return false;
         },
 
         onChangeRoot: function(e){

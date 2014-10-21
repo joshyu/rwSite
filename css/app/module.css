@@ -41,21 +41,36 @@
 #header .navbar-brand img {
 }
 
-#header .signed-user   {
+#header .top-right-banner   {
     position: absolute;
-    bottom: -5px;
+    bottom: 0px;
     right: 15px;
     font-size: 1em;
     font-weight: bolder;
 }
 
-#header .signed-user   .feedback{
-    position: relative;
-    bottom: 2px;
+#header .top-right-banner .suggestion {
+    margin-left: 10px;
 }
 
-#header .signed-user   .feedback:hover{
-    opacity: .8;
+#header .top-right-banner .suggestion img {
+    position: relative;
+    bottom: 2px;
+    width: 30px;
+}
+
+#header .top-right-banner .suggestion .suggestion-link a{
+    color: #333;
+}
+
+#header .top-right-banner .suggestion .suggestion-link a:hover{
+    text-decoration: none;
+    color: #000;
+    text-shadow:1px 3px 6px #A0A0A0;    
+}
+
+#header .top-right-banner > .item{
+    display: inline-block;
 }
 
 /*footer*/
@@ -984,24 +999,19 @@ a.profilelink:hover img{
     border: none;
 }
 .panel-sugesstion  img {
-     width:48px;
 }
 
-.panel-sugesstion .suggestion-link{
+.panel-sugesstion .feedback-link{
     position: relative;
     top: 5px;
-    font-size: 1.33em;
     left:6px;
     font-weight: bolder;
 }
-
-.panel-sugesstion .suggestion-link a{
-    color: #000;
+.panel-sugesstion .feedback-link a{
+    color: #333;
 }
-.panel-sugesstion .suggestion-link a:hover{
-    text-decoration: none;
-    color:#333;
-    text-shadow:1px 5px 6px #6F6F6F;
+.panel-sugesstion .feedback-link a:hover{
+    color:#777;
 }
 
 /*modal dialog */
@@ -1314,8 +1324,12 @@ a.profilelink:hover img{
     margin-left: 100px;
 }
 
-.contact_modal_body  .relation .items {
-    
+.contact_modal_body  .reportees .items {
+    display: none;
+}
+
+.contact_modal_body  .reportees .items.active{
+    display: block;
 }
 
 .contact_modal_body  .relation .items li img{
@@ -1332,7 +1346,40 @@ a.profilelink:hover img{
     font-size: 1em
 }
 
-.contact_modal_body  .reportee{
+.contact_modal_body  .reportees .indicators{
+    position: absolute;
+    top: 0;
+    right: 0;
+    list-style:none;
+}
+
+.contact_modal_body  .reportees .indicators li{
+    background: #ccc;
+    width: 8px;
+    display: inline-block;
+    height: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    position: relative;
+}
+
+.contact_modal_body  .reportees .indicators li:hover{
+    background: #aaa;
+}
+
+.contact_modal_body  .reportees .indicators li.active:hover{
+    background: #000;
+}
+
+.contact_modal_body  .reportees .indicators li.active{
+    background: #333;
+    width: 10px;
+    border-radius: 10px;
+    height: 10px;
+    top: 1px;
+}
+
+.contact_modal_body  .reporter{
     margin-bottom: 10%
 }
 
@@ -1364,12 +1411,17 @@ a.profilelink:hover img{
 
 .suggestion_modal  .modal-content  form  .item{
     padding-bottom: 10px;
+    position: relative;
 }
 
+.suggestion_modal .modal-content form .to input[type=radio]{
+    position: relative;
+    bottom: 3px;
+}
 
 .suggestion_modal .modal-body{
     padding: 10px;
-    position: initial;
+    position: relative;
 }
 
 .suggestion_modal .modal-body .footer{
@@ -1379,8 +1431,8 @@ a.profilelink:hover img{
 
 .suggestion_modal .modal-body .footer .buttons{
     position: absolute;
-    right: 15px;
-    bottom: 10px;
+    right: -5px;
+    bottom: -5px;
 }
 
 /*profile page : data panel */
@@ -1408,10 +1460,16 @@ a.profilelink:hover img{
 }
 
 
-.panel-emprofile .reporters,
-.panel-emprofile  .reportee {
+.panel-emprofile .reporter,
+.panel-emprofile  .reportees {
     width: 80%;
-    margin-left: 10%
+    margin-left: 10%;
+    position: relative;
+}
+
+.empitem_modal .reporter,
+.empitem_modal .reportees {
+    position: relative;
 }
 
 
@@ -1468,7 +1526,12 @@ a.profilelink:hover img{
 }
 
 .campus-item .head h4{
-    font-size: 1.2em
+    font-size: 1.1em;
+}
+
+.panel-src-list .campus-item .head h4 {
+    word-break:break-word;
+    margin-right: 120px;
 }
 
 .campus-item.seemore {

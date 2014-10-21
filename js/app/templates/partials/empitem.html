@@ -30,7 +30,7 @@
 </div>
 <div class="col-md-6 relation">
       {{#if contacts.managerId}}
-      <div class="reportee">
+      <div class="reporter">
             <div class="title label label-default">report to</div>
             <ul class="items list-inline">
                 <li><a class="profilelink" href="#profile/{{contacts.managerId}}" data-contactId="{{contacts.managerId}}">
@@ -41,17 +41,26 @@
       </div>
       {{/if}}
 
-      {{#if contacts.relations.reportees}}
-      <div class="reporters">
+      {{#if contacts.reportees}}
+      <div class="reportees">
           <div class="title label label-default">direct reports</div>
-          <ul class="items   list-inline">
-                {{#each contacts.relations.reportees}}
-                    <li><a href="#profile/{{id}}" class="profilelink" data-contactId="{{nameRecordId}}">
-                        <img src="{{#if photo}}{{photo}}{{else}}images/defaultavatar.png{{/if}}" alt="" class="img-thumbnail img-circle" data-toggle="tooltip" data-placement="bottom" title="{{name}}"/>
-                        </a>
-                    </li>
-                {{/each}}
-            </ul>
+          {{#ifCond reporteeArr.length '>' 1}}
+              <ol class="indicators">
+              {{#each reporteeArr}}
+                <li class="{{#unless @index}}active{{/unless}}" data-index= "{{@index}}"></li>
+              {{/each}}
+              </ol>
+          {{/ifCond}}
+          {{#each reporteeArr}}
+            <ul class="items  list-inline {{#unless @index}}active{{/unless}}">
+                  {{#each this}}
+                      <li><a href="#profile/{{id}}" class="profilelink" data-contactId="{{nameRecordId}}">
+                          <img src="{{#if photo}}{{photo}}{{else}}images/defaultavatar.png{{/if}}" alt="" class="img-thumbnail img-circle" data-toggle="tooltip" data-placement="bottom" title="{{name}}"/>
+                          </a>
+                      </li>
+                  {{/each}}
+              </ul>
+            {{/each}}
       </div>
       {{/if}}
 </div>

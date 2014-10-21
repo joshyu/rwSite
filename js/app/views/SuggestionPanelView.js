@@ -7,14 +7,6 @@ define([
 ], function(Marionette, app, ViewBase, ModalHelper, template) {
     'use strict';
     return ViewBase.extend({
-        template: template,
-        events: {
-            'click .opener': 'openSuggestionBox'
-        },
-
-        openSuggestionBox: function(e){
-            ModalHelper.get('suggestion').show();
-            return false;
-        }
+        template: template
     });
 });

@@ -21,9 +21,13 @@ define([
         onRender: function () {
             var that = this;
             this.setViewFullButtons();
-            this.$el.find('.carousel').carousel({interval: 6000}).on('slid.bs.carousel', function(){
-                that.setViewFullButtons();
-            });
+            
+            var $carouselDom= this.$el.find('.carousel');
+            if($carouselDom.find('.item').length > 1){
+                $carouselDom.carousel({interval: 6000}).on('slid.bs.carousel', function(){
+                    that.setViewFullButtons();
+                });
+            }
         },
 
         events: {

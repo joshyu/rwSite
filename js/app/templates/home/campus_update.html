@@ -12,9 +12,13 @@
           </div>
           </div>
           <div>
-          {{#each news}}
-          <a data-item-id="{{id}}" data-type="{{type}}" href="#" class="list-group-item item-{{id}}"><span class="labelc label-{{type}}">{{labelc}}</span><span class="">{{title}}</span><span class='pull-right date'>{{formatDate pubdate}}</span></a>
-          {{/each}}
+          {{#if news}}
+              {{#each news}}
+              <a data-item-id="{{id}}" data-type="{{type}}" href="#" class="list-group-item item-{{id}}"><span class="labelc label-{{type}}">{{labelc}}</span><span class="">{{title}}</span><span class='pull-right date'>{{formatDate pubdate}}</span></a>
+              {{/each}}
+          {{else}}
+              <a class="list-group-item item-empty">No News.</a>
+          {{/if}}
           </div>
         </div>
         </div>

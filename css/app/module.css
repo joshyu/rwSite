@@ -836,6 +836,10 @@ a.profilelink:hover img{
     font-size:0.83em;
 }
 
+.panel-notify-sub-hire-information .alert{
+    font-size: 1.2em;
+}
+
 .panel-notify-sub-hire-information .carousel .carousel-control{
     background: none;
     color:#333;

@@ -1,5 +1,6 @@
 <div class="panel-notify-sub-heading">{{title}}</div>
 <div class="panel-notify-sub-list panel-notify-sub-hire-information">
+   {{#if contacts}}
     <div class="carousel slide" data-ride="carousel">
         <!-- Bottom Carousel Indicators -->
         {{#ifCond contacts.length '>' 1}}
@@ -37,5 +38,8 @@
         <!-- Carousel Buttons Next/Prev -->
         <a data-slide="prev" href="#quote-carousel" class="left carousel-control"><i class="fa fa-chevron-left"></i></a>
         <a data-slide="next" href="#quote-carousel" class="right carousel-control"><i class="fa fa-chevron-right"></i></a>
-      </div>                                                  
+      </div>    
+      {{else}}
+          <div class="alert" role="alert"> No New Hires. </div> 
+      {{/if}}
 </div>

@@ -50,7 +50,10 @@ define([
                 'campus_training': 'training'
             };
 
+            var _existingLabelcs = {};
             _.each(data, function(items, key){
+                if(!items.length) return;
+                _existingLabelcs[key] = labelcs[key];
                 _.each(items, function(item){
                    item.type = labelcs[key];
                    item.labelc = labelcs[key][0].toUpperCase();
@@ -62,7 +65,7 @@ define([
                 return new Date(v2.pubdate) - new Date(v1.pubdate);
             });
 
-            this._renderData({news: _news, newsTypes: _.values(labelcs)});           
+            this._renderData({news: _news, newsTypes: _.values(_existingLabelcs)});           
         },
 
         clickLinkItem: function(e){

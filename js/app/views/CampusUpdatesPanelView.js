@@ -9,6 +9,7 @@ define([
     'use strict';
     return ViewBase.extend({
         template: template,
+        news_count: 10,
         ui: {
             srcLinks : '.list-group-src  .list-group-item',
             /*trainingLinks: '.list-group-training .list-group-item'*/
@@ -50,10 +51,12 @@ define([
                 'campus_training': 'training'
             };
 
-            var _existingLabelcs = {};
+           // data.news = data.campus_src = null;
+
+            //var _existingLabelcs = {};
             _.each(data, function(items, key){
-                if(!items.length) return;
-                _existingLabelcs[key] = labelcs[key];
+                if(!items || !items.length) return;
+               // _existingLabelcs[key] = labelcs[key];
                 _.each(items, function(item){
                    item.type = labelcs[key];
                    item.labelc = labelcs[key][0].toUpperCase();
@@ -63,9 +66,9 @@ define([
 
             _news = _news.sort(function(v1, v2){
                 return new Date(v2.pubdate) - new Date(v1.pubdate);
-            });
+            }).slice(0, this.news_count);
 
-            this._renderData({news: _news, newsTypes: _.values(_existingLabelcs)});           
+            this._renderData({news: _news, newsTypes: _.values(labelcs)});           
         },
 
         clickLinkItem: function(e){

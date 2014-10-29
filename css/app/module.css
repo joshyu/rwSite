@@ -283,7 +283,7 @@ sidebar nav list
 
 #sidebar .nav-list ul {
     margin: 0;
-    padding: 7px 0
+    padding: 12px 0
 }
 
 #sidebar .nav-list ul ul {
@@ -632,8 +632,12 @@ sidebar nav list
     padding-right: 15px;
 }
 
+.panel-container.panel-updates {
+    min-height: 520px;
+}
+
  .panel-notify {
-     padding-top:10px;
+/*      padding-top:10px; */
  }
 
  .row > div {
@@ -648,6 +652,18 @@ sidebar nav list
     background: -webkit-linear-gradient(top,  #ffffff 0%,#f7f7f7 32%,#eaeaea 37%,#f6f6f6 100%);
     background: -ms-linear-gradient(top,  #ffffff 0%,#f7f7f7 32%,#eaeaea 37%,#f6f6f6 100%);
     background: linear-gradient(to bottom,  #ffffff 0%,#f7f7f7 32%,#eaeaea 37%,#f6f6f6 100%);
+    min-height: 191px;
+}
+
+.panel-notify .panel-notify-sub  .alert {
+    /*vertical middle */
+    position: relative;
+    top:50%;
+    -webkit-transform: translateY(70%);
+      -ms-transform: translateY(70%);
+      transform: translateY(70%);
+      background: #E5E5E5;
+      text-shadow:1px 1px 4px #A8A7A7;
 }
 
  .panel-notify-sub-heading{
@@ -667,6 +683,7 @@ sidebar nav list
  .panel-notify-sub-list {
      margin-top: 20px;
      text-align: center;
+     min-height: 113px;
  }
 
  .panel-notify-sub-list.empty-list {
@@ -694,6 +711,10 @@ sidebar nav list
     font-weight: normal;
     margin-top:10px;
     display: inline-block;
+    letter-spacing: 1px;
+    background: #555;
+    color: #FFE4C4;
+    font-size: .8em;
 }
 
 .panel-notify-sub-list  .controls {
@@ -834,6 +855,7 @@ a.profilelink:hover img{
 
 .panel-notify-sub-hire-information {
     font-size:0.83em;
+    min-height: 113px;
 }
 
 .panel-notify-sub-hire-information .alert{
@@ -985,6 +1007,7 @@ a.profilelink:hover img{
     border-bottom:1px solid #ddd !important;
     /* box-shadow: 0px 5px 10px -9px #333; */
     border-radius: 0px;
+    padding: 11px 15px;
 }
 
 .panel-links .list-group-item:hover{

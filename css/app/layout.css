@@ -47,7 +47,7 @@ body {
 /* sidebar */
 #sidebar {
     display: block;
-    padding: 20px 0px;
+    padding: 20px 0px 28px;
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
     background: #fff;

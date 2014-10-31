@@ -73,7 +73,7 @@ define([
             if(!info) return false;
 
             info = { title: info.name, content: info.intro};
-            ModalHelper.get('news', {data: info}).show();
+            ModalHelper.get('newhires', {data: info}).show();
         }
     });
 });

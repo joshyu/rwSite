@@ -9,7 +9,7 @@ define([
        modelId: 'campus_training',
         templateData: {
             title : 'Training Center',
-            caption: "Training plan for 2014",
+            caption: "Training plan",
             tip : 'click each line of items to see the detail of the training session.',
             itemMode : false,  //itemMode is false, then we will show the results as table list.
             tableColumns : [
@@ -28,6 +28,12 @@ define([
                  itemMode : false
               }
             }
+        },
+
+        initialize: function(){
+            var curYear = new Date().getFullYear();
+            this.templateData.caption = this.templateData.caption + " for " + curYear;
+            ListPageBaseView.prototype.initialize.apply(this, arguments);
         },
 
         loadSearch: function  () {

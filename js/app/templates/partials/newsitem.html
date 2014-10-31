@@ -1,7 +1,25 @@
-
 <div class="banner">{{#if news.author}} <span class="glyphicon glyphicon-user"></span> {{news.author}} {{/if}} {{#if news.pubdate}} <span class="glyphicon glyphicon-calendar"></span> {{formatDate news.pubdate}} {{/if}}</div>
 
 <div class="content bodycontent">
-    {{#if news.imageUrl}}<div><img class="newspic" src="{{news.imageUrl}}"/></div>{{/if}}
+    <!-- {{#if news.imageUrl}}<div class="newspic"><img class="" src="{{news.imageUrl}}"/></div>{{/if}} -->
+    {{#if news.attachments.length}}
+        <div class="newspic carousel carousel-news slide" data-ride="carousel">
+            <!-- Carousel items -->
+            <div class="carousel-inner">
+                  {{#each news.attachments}}
+                  <div class="item  {{#unless @index}}active{{/unless}}">
+                     <img src="{{ServerRelativeUrl}}"/>
+                  </div>
+                  {{/each}}
+            </div>
+            <ol class="carousel-indicators">
+              {{#ifCond news.attachments.length '>' 1}}
+                {{#each news.attachments}}
+                <li data-target=".carousel-news" data-slide-to="{{@index}}" class="{{#unless @index}}active{{/unless}}"></li>
+                {{/each}}
+              {{/ifCond}}
+            </ol>
+        </div>
+    {{/if}}
    <div>{{{news.content}}}</div>
 </div>

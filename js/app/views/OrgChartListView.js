@@ -65,9 +65,22 @@ define([
 
         renderData: function(data){
             this.contacts = data.contacts;
-            this.root = this.contacts.roots[0];
+            this.root = this.findRoot(this.contacts.roots);
             this.drawtree(this.root ,true);
             _RootBanner.init(this, this.$('.oc-banner') );            
+        },
+
+        //right now, we can only display one root
+        //hr manager doesn't report to campus manager, we have to ignore her in the orgchart.
+        //will fix later.
+        findRoot: function(roots){
+            if(roots.length <1){
+                return false;
+            }else if(roots.length == 1){
+                return roots[0];
+            }else{
+                return _.find(roots, function(v){return v.title.toLowerCase().indexOf('campus') >= 0});
+            }
         },
 
         bindEvents: function(){

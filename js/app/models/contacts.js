@@ -210,6 +210,14 @@ define([
                 return false;
             }
 
+            data = data.sort(function(a,b){
+                var a1= a.name.toLowerCase();
+                var b1= b.name.toLowerCase();
+                if(a1 < b1) return -1;
+                if(a1 > b1) return 1;
+                return 0;
+            });
+
             var _data= {};
             var _roots = [];
 

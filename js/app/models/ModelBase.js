@@ -299,7 +299,7 @@ define([
                         _attach;
 
                     while (k-- >= 0 && (_attach = attaches[k])) {
-                        if (/(jpg|gif|png)$/.test(_attach.FileName)) {
+                        if (/(bmp|jpg|gif|png)$/.test(_attach.FileName.toLowerCase())) {
                             item.imageUrl = _attach.ServerRelativeUrl;
                             attaches.splice(k, 1);
                             break;

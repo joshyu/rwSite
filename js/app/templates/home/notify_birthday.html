@@ -18,12 +18,12 @@
                 {{#each contacts}}
                 <div class="item  {{#unless @index}}active{{/unless}}">
                     {{#each this}}
-                            <div class="col-md-4">
+                            <div class="col-xs-4">
                                 <div class="squareimg">
                                     <a href="#campus/employees" data-employee-id="{{nameRecordId}}" class="profilelink"><img src="{{photo}}" alt="" class="img-circle img-thumbnail">                                
                                     </a>
                                  </div>
-                                <div class="label label-default">{{formatDate birthday  year=false}}</div>
+                               <div class="label">&nbsp;</div> 
                             </div>
                     {{/each}}
                 </div>

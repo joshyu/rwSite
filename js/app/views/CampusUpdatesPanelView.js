@@ -9,7 +9,7 @@ define([
     'use strict';
     return ViewBase.extend({
         template: template,
-        news_count: 10,
+        news_count: 13,
         ui: {
             srcLinks : '.list-group-src  .list-group-item',
             /*trainingLinks: '.list-group-training .list-group-item'*/
@@ -22,7 +22,7 @@ define([
 
         templateData: {
             title: 'Campus News',
-            subtitle_news: 'Latest News',
+            subtitle_news: 'News and Events',
             subtitle_training: 'Training Center'
         },
         requests: [

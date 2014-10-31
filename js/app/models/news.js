@@ -39,7 +39,9 @@ define([
                     "content" : "content",
                     "AttachmentFiles": "attachments",
                     "NewsDate": "pubdate"
-                }
+                },
+
+                noHandleAttachedImage: true
             }
         },
         permissionDef: {

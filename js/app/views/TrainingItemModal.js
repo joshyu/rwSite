@@ -49,13 +49,16 @@ define([
         handleData: function(data){
             var userownedIds = app.preloaded.user.trainingDataIds;
             var userownedData = app.preloaded.user.trainingData;
+            var item = data.campus_training;
 
-            this.joinLinkTitle = data.campus_training.joinLinkTitle;
+            this.joinLinkTitle = item.joinLinkTitle;
 
-            if( data.campus_training.id in userownedIds ){
-                var _item = userownedData[ userownedIds[data.campus_training.id] ];
-                data.campus_training.regId = _item.regId;
-                data.campus_training.joined = true;
+            if( item.id in userownedIds ){
+                var _item = userownedData[ userownedIds[item.id] ];
+                if(_item && _item.regId){
+                    item.regId = _item.regId;
+                    item.joined = true;    
+                }                
             }
 
             var d= new Date();
@@ -63,10 +66,11 @@ define([
             var month = d.getMonth() + 1;
             var day = d.getDate();
             d = new Date(year + '/'+ month +'/' + day);
+            item.available = new Date(item.pubdate)  >= d;
 
-            if( new Date(data.campus_training.pubdate) < d){
-                data.campus_training.outdated = true;
-            }
+            /*if( new Date(item.pubdate) < d){
+                item.outdated = true;
+            }*/
 
             data.curUserId = app.preloaded.user.info.related.nameRecordId;
             return ModalBase.prototype.handleData.apply(this, arguments);

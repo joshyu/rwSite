@@ -48,7 +48,9 @@ define(['app','module'],
 
                     if(_jobs.length > 0){
                         _.each(_jobs, function(jobDef){
-                            jobDef.job.trigger(jobDef.delay);
+                            if(jobDef.delay > 0){
+                                jobDef.job.trigger(jobDef.delay);
+                            }
                         });
                     }
 

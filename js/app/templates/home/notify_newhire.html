@@ -1,5 +1,5 @@
 <div class="panel-notify-sub-heading">{{title}}</div>
-<div class="panel-notify-sub-list panel-notify-sub-hire-information">
+<div class="panel-notify-sub-list panel-notify-sub-hire-information  {{#unless contacts}}empty-list{{/unless}}">
    {{#if contacts}}
     <div class="carousel slide" data-ride="carousel">
         <!-- Bottom Carousel Indicators -->

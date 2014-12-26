@@ -11,7 +11,8 @@ define(['require',
             'models/campus_office',
             'models/contacts',
             'models/suggestion',
-            'models/roles'
+            'models/roles',
+            'models/sitestats'
             ],  function (require) {
     'use strict';
     var _cache= {};

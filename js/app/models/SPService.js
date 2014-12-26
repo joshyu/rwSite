@@ -109,7 +109,7 @@ define([
         getListItemType: function(linkname) {
             if(!linkname) return false;
 
-            var another = linkname.slice(1).replace(/_/g, '_x005f_').replace(/\s/g, '_x0020_');
+            var another = linkname.slice(1).replace(/_/g, '_x005f_').replace(/(\s|%20)/g, '_x0020_');
             return "SP.Data." + linkname.charAt(0).toUpperCase() + another + "ListItem";
         },
 
@@ -203,7 +203,7 @@ define([
             //parse filter parameter.
             //if the result is item not list, need not filter.
             var _filters = "";
-            if (options.asList) {
+            if (options.asList || options.needfilter) {
                 _filters = url.filters || "";
 
                 if (options.queryParameters && options.queryParameters.filters) {
@@ -298,11 +298,14 @@ define([
                 var _model = this.options.model;
                 
                 return this._fetchitem(options, true).then(function(data) {
-                    if (data.__next) {
-                        _model.setNextSkipToken(data.__next);
-                    }else{
-                        _model.setNextSkipToken(null, true);
+                    if( options.data && 'num' in options.data ){
+                        if (data.__next) {
+                            _model.setNextSkipToken(data.__next);
+                        }else{
+                            _model.setNextSkipToken(null, true);
+                        }    
                     }
+                    
 
                     return data.results;
                 });
@@ -320,16 +323,23 @@ define([
                     app.pace && app.pace.restart();
                 }
 
+                var _headers = {};
+                if(options.dataFormat == 'plain'){
+                    _headers['Accept'] = 'text/plain;charset=utf-8';
+                }else{
+                    _headers['Accept'] = "application/json; odata=verbose";
+                }
+
                 return $.ajax({
                     url: url,
                     method: "GET",
-                    headers: {
-                        "Accept": "application/json; odata=verbose"
-                    }
+                    headers:  _headers
                 }).then(function(data) {
-                    data = data.d;
-                    if (data.__metadata) {
-                        delete data.__metadata;
+                    if(data.d){
+                        data = data.d;
+                        if (data.__metadata) {
+                            delete data.__metadata;
+                        }
                     }
 
                     return data;

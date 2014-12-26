@@ -70,6 +70,12 @@ require.config({
                     model : 'contacts',
                     key: 'contacts:teamCategoryNames',
                     cacheKey : 'teamCategoryNames'
+                },
+                {
+                    model : 'sitestats',
+                    key: 'sitestats:report',
+                    cacheKey: 'siteStats',
+                    job: 'syncSiteStats'
                 }
             ]
         },

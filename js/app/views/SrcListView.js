@@ -98,14 +98,14 @@ define([
             _.each(data, function(item){
 
                 if(item.id in userownedIds ){
-                    item.joined = true;
                     var _item = userownedData[ userownedIds[item.id] ];
-                    item.regId = _item.regId;
+                    if(_item && _item.regId){
+                        item.joined = true;
+                        item.regId = _item.regId;
+                    }                    
                 }
 
-                if( new Date(item.pubdate) < d){
-                    item.outdated = true;
-                }
+                item.available = new Date(item.pubdate)  >= d;
             });
         },
 

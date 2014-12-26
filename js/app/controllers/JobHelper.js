@@ -41,7 +41,8 @@ define([
         },
 
         trigger: function(delay){
-            _.delay(_.bind(this.run, this, true), Number(delay) || 0);
+            delay = Number(delay) || 0;
+            _.delay(_.bind(this.run, this, true), delay);
         },
 
         runjob: function(){},
@@ -192,17 +193,17 @@ define([
                 $dom.fadeOut(function(){
                     $dom.html(newNum);
                     if(error){
-                        if(!$dom.hasClass('label-danger')){
+                        $dom.hide();
+                        /*if(!$dom.hasClass('label-danger')){
                             $dom.addClass('label-danger').attr({'title':'list not found', 'href': 'javascript:void(0);'});
-                        }
+                        }*/
                     }else{
                         if(!$dom.hasClass('label-primary')){
                             $dom.addClass('label-primary');
-                        }    
-                    }
-                    
+                        } 
 
-                    $dom.fadeIn('slow');
+                        $dom.fadeIn('slow');   
+                    }                    
                 });
             }
         },
@@ -245,6 +246,25 @@ define([
                     triggerDef.callback.call(triggerDef.context, data);
                 }
             },this);
+        }
+    });
+
+//syncSiteStats
+    Jobs.syncSiteStats = Jobs.dbRequestJob.extend({
+        duration: 10000,
+        namespace: 'syncSiteStats',
+        onTimerEnd: function(data, item){
+            var _data = data[0];
+            var datacallback = item.DataCallback;
+            var context = item.context;
+
+            if(typeof datacallback === 'string' && context && $.isFunction( context[ datacallback ] )){
+                _data= context[ datacallback ](_data);
+            }
+
+            //this.triggerChanges(_data, app.preloaded[ item.cacheKey ]);
+            app.preloaded[ item.cacheKey ] = _data;
+            app.vent.trigger('app:sitestats:updated', _data);
         }
     });
 

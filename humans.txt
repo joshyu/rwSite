@@ -3,7 +3,7 @@
 
 # TEAM
 
-    Josh Yu  -- FTVP (Rockwell Automation Dalian Campus)
+    Josh Yu  -- FTVP (Rockwell Automation Dalian Campus) 
 
 # THANKS
     Zeno Jia

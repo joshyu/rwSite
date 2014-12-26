@@ -122,38 +122,47 @@ define([
             return _data.slice(num*pageNo, num*(pageNo+1));
         },
 
-        //fetch whose birthday is in this month.
+        /*
+        (1.0) fetch whose birthday is in this month.
+        (1.1) fetch the birthday list of today, if less than 3 ( we use FETCH_MAX here), we need to check tomorrow, so on.
+        */
+
         fetchRecentBirthday: function(data){
             var d = new Date();
-            var year = d.getFullYear();
-            var month = d.getMonth() + 1;
-            var days = new Date(year, month ,0).getDate();  // will get the day number of the month
-            d = Date.parse(year + '/'+ month +'/' + days);
-            var dayminiutes = 1000*3600*24 * days;
+            var today = new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
+            var n=0, items= [];
+            var _empty = false;
+            var FETCH_MAX = 3;
 
-            data=  _.filter(data.raw, function(item){
-                if(!item.birthday){
-                    return false;
-                }
-
-                var d1 = new Date(item.birthday).setFullYear(year);
-                var pass = d>= d1 && (d - d1)  < dayminiutes;
-                if(pass){
-                    //d1 = new Date(item.birthday);
-                    //item.birthday = (d1.getMonth()+1) + "/" + d1.getDate();
-                }
-
-                return pass;
-
+            data = data.raw.sort(function(a,b){
+                return (new Date(a.birthday).getTime() - new Date(b.birthday).getTime()) || (a.id - b.id);
             });
 
-            var _empty = data.length === 0; 
+            for(var i=0,num= data.length;i<num;++i){
+                var _birthday = data[i].birthday;
+                if(!_birthday) continue;
 
-            data =  this._splitArray(data);
-            data.morepage = data.length > 1;
-            data.empty = _empty;
+                _birthday =  new Date(_birthday).getTime();
+                if(_birthday < today) continue;
 
-            return data;
+                if(_birthday == today){
+                    n++;
+                    items.push(data[i]);
+                }else{
+                    if( n>= FETCH_MAX ) break;
+                    else{
+                        n++;
+                        items.push(data[i]);
+                    }
+                }
+            }
+
+            _empty = items.length === 0;
+            items =  this._splitArray(items);
+            items.morepage = items.length > 1;
+            items.empty = _empty;
+
+            return items;
         },
 
         _splitArray: function(arr, num){

@@ -63,6 +63,7 @@ define([
         },
 
         removeSeeMoreButton: function(){
+            //TODO: fix it. no all scenarios need to trigger this.
             this.$el.find(".seemore").hide();
         },
 

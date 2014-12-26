@@ -41,7 +41,10 @@ define(['app' , 'module', 'require', 'marionette', 'backbone', 'underscore',
                 var parms = [].slice.call(arguments,1);
                 if(!view || !_.isFunction(view)) return false;
 
-                app.execute('navigation:highlight' , Backbone.history.getFragment());
+                var hashfrag = Backbone.history.getFragment();
+
+                app.modelHelper.get('sitestats').visit(hashfrag);
+                app.execute('navigation:highlight' , hashfrag);
                 app.execute('main:showpage' , view);
             },
 

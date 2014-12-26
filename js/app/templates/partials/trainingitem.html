@@ -8,19 +8,11 @@
     <span class="banner-right">
          <span class="numjoined-container "><a href="{{campus_training.joinLink}}" class="numjoined label" target="_blank"><img src="images/loading.gif"/></a></span>
         {{#if campus_training.available}}
-            {{#ifCond ../curUserId campus_training.authorId}}
-                <span class="btnJoin label label-info"> I am trainer </span>
+            {{#if campus_training.joined}}
+                <span class="btnJoin"><a href="#" class="btn btn-success  btn-xs btn-cancel">Unregister</a></span>
             {{else}}
-                {{#if campus_training.joined}}
-                    <span class="btnJoin"><a href="#" class="btn btn-success  btn-xs btn-cancel">Unregister</a></span>
-                {{else}}
-                    {{#if campus_training.outdated}}
-                        <span class="btnJoin label label-warning">Out of Date</span>
-                    {{else}}
-                        <span class="btnJoin label label-primary">Available</span>
-                    {{/if}}
-                {{/if}}
-            {{/ifCond}}
+                <span class="btnJoin label label-primary">Opening</span>
+            {{/if}}
         {{else}}
         <span class="btnJoin label label-default">Closed</span>
         {{/if}}

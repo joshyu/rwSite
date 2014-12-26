@@ -145,5 +145,19 @@ define({
             url: '/_api/SP.Utilities.Utility.SendEmail'
             //url: '/_vti_bin/client.svc/SP.Utilities.Utility.SendEmail'
         }
+    },
+    sitestats: {
+        items: {
+            url: {
+                site: 'campus',
+                title: 'SiteStats',
+                name: 'Visitors'
+            }
+        },
+        count: {
+            url: '/campus/_vti_bin/listdata.svc/SiteStats/$count',
+            needfilter: true,
+            dataFormat: 'plain' //otherwise , 'json' by default.
+        }
     }
 });

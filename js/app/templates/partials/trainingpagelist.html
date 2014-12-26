@@ -1,7 +1,7 @@
 {{#if campus_training.length}}
 {{#each campus_training}}
 <tr data-item-id="{{id}}">
-  <td>{{@index}}</td>
+  <td></td>
   <td>{{title}}</td>
   <td>{{author}}</td>
   <td><b>{{formatDate pubdate}}</b> <sub class="splitter">{{timespan}}</span> </td>
@@ -12,19 +12,11 @@
       <span class="state-inner">
       <span class="numjoined-container "><a href="{{joinLink}}" class="numjoined label" target="_blank"><img src="images/loading.gif"/></a></span>
       {{#if available}}
-          {{#ifCond ../../curUserId authorId}}
-              <span class="btnJoin label label-info"> I am trainer </span>
+          {{#if joined}}
+              <span class="btnJoin"><a href="#" class="btn btn-success  btn-xs btn-cancel" data-index="{{@index}}">Unregister</a></span>
           {{else}}
-              {{#if joined}}
-                  <span class="btnJoin"><a href="#" class="btn btn-success  btn-xs btn-cancel" data-index="{{@index}}">Unregister</a></span>
-              {{else}}
-                  {{#if outdated}}
-                      <span class="btnJoin label label-warning">Out of Date</span>
-                  {{else}}
-                      <span class="btnJoin label label-primary">Available</span>
-                  {{/if}}
-              {{/if}}
-          {{/ifCond}}
+              <span class="btnJoin label label-primary">Opening</span>
+          {{/if}}
       {{else}}
           <span class="btnJoin label label-default">Closed</span>
       {{/if}}

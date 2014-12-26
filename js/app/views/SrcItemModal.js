@@ -49,14 +49,17 @@ define([
 
         handleData: function(data){
             if(!data ) return false;
-            this.joinLinkTitle = data.campus_src.joinLinkTitle;
             var userownedIds = app.preloaded.user.srcDataIds;
             var userownedData = app.preloaded.user.srcData;
+            var item = data.campus_src;
+            this.joinLinkTitle = item.joinLinkTitle;
 
-            if( data.campus_src.id in userownedIds ){
-                var _item = userownedData[ userownedIds[data.campus_src.id] ];
-                data.campus_src.regId = _item.regId;
-                data.campus_src.joined = true;
+            if( item.id in userownedIds ){
+                var _item = userownedData[ userownedIds[item.id] ];
+                if(_item && _item.regId){
+                    item.regId = _item.regId;
+                    item.joined = true;
+                }                
             }
 
             var d= new Date();
@@ -64,9 +67,7 @@ define([
             var month = d.getMonth() + 1;
             var day = d.getDate();
             d = new Date(year + '/'+ month +'/' + day);
-            if( new Date(data.campus_src.pubdate) < d){
-                data.campus_src.outdated = true;
-            }
+            item.available = new Date(item.pubdate)  >= d;
 
             return ModalBase.prototype.handleData.apply(this, arguments);
         },

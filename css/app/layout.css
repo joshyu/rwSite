@@ -30,19 +30,11 @@ body {
 
 #footer{
       width: 100%;
-      background-color: rgba(31, 31, 31, 0.98);
+      background-color: #272727;
       letter-spacing:.7px;
 }
 
-#footer .container {
-    font-size:.91em;
-    text-align: center;
-}
 
-#footer .container p{
-    margin-top:10px;
-    font-family: arial;
-}
 
 /* sidebar */
 #sidebar {

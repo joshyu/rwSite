@@ -30,6 +30,8 @@ define(['marionette', 'app', 'views/RegionTypes'],
         var LayoutMan= {
             init: function() {
                 app.preloader.init().then(app.pace.init.bind(app.pace)).done(function(){
+                    app.modelHelper.get('sitestats').visit(Backbone.history.getFragment());
+                    
                      app.addRegions({
                         header: _regions.header,
                         main: _regions.main,

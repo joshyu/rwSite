@@ -25,23 +25,50 @@ define([
                 opts.noJoinLink = true;
             }
 
+           this.markitemStates( this._templateData  );
             this.joinLinkTitles =  _.pluck(opts.campus_training, 'joinLinkTitle');
             opts.curUserId = app.preloaded.user.info.related.nameRecordId;
 
             return opts;  
         },
 
+        markitemStates: function(data){
+            if(!data) return false;
+            var d= new Date();
+            var year = d.getFullYear();
+            var month = d.getMonth() + 1;
+            var day = d.getDate();
+            d = new Date(year + '/'+ month +'/' + day);
+
+            _.each(data, function(item){
+                item.available = new Date(item.pubdate)  >= d;
+            });
+        },
+
         onRender: function(){
             var that = this;
             var numNodes = this.$('.numjoined');
-            var model = app.modelHelper.get('campus_training');
+            if(this.joinLinkTitles){
+                var job = app.jobHelper.get('requestJoinNum','pagelist');
+                 _.each(this.joinLinkTitles, function(title, i){
+                    job.register({
+                        dom: numNodes[i],
+                        title : title,
+                        modelId : "campus_training"
+                    });
+                });
+
+                job.trigger();
+            }
+            
+            /*var model = app.modelHelper.get('campus_training');
             if(this.joinLinkTitles){
                 _.each(this.joinLinkTitles, function(title, i){
                     $.when(model.requestJoinNum(title)).done(function(num){
                          numNodes.eq(i).html(num).addClass('label-primary');
                     });
                 });
-            }
+            }*/
         },
 
         cancel: function(e){
@@ -75,7 +102,7 @@ define([
                      if(!isNaN(num)){
                         $bannerContainer.fadeOut('slow', function(){
                             $numDom.text(num-1);
-                            $dom.parent().replaceWith('<span class="btnJoin label label-primary">Available</span>');
+                            $dom.parent().replaceWith('<span class="btnJoin label label-primary">Opening</span>');
                             $bannerContainer.fadeIn();
 
                             var itemId = item.id;                            

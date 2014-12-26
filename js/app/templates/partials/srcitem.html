@@ -10,11 +10,7 @@
             {{#if campus_src.joined}}
             <span class="btnJoin"><a href="#" class="btn btn-success  btn-xs btn-cancel" >Cancel</a></span>
             {{else}}
-                {{#if campus_src.outdated}}
-                <span class="btnJoin label label-warning">Out of Date</span>
-                {{else}}
-                <span class="btnJoin label label-primary">Available</span>
-                {{/if}}
+            <span class="btnJoin label label-primary">Opening</span>
             {{/if}}        
         {{else}}
          <span class="btnJoin label label-default">Closed</span>

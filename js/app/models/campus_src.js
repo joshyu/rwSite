@@ -21,12 +21,31 @@ define([
                     "AttachmentFiles": "attachments",
                     "EventDate": "pubdate",
                     "JoinLink": "joinLink",
-                    "joinLinkTitle":"joinLinkTitle",
-                    "available": "available"
+                    "joinLinkTitle":"joinLinkTitle"
                 },
-                queryParameters: {
-                    expand: 'Category,AttachmentFiles,contact',
-                    orderby: 'EventDate desc'
+                getQueryParameters: function(args){
+                    var _params = {
+                        expand: 'Category,AttachmentFiles,contact',
+                        orderby: 'EventDate desc'
+                    };
+
+                    var d= new Date();
+                    var year = d.getFullYear();
+                    var month = d.getMonth() + 1;
+                    var day = d.getDate();
+                    d = new Date(year + '/'+ month +'/' + day);
+                    
+                    if(args && args.filters && args.filters.available){
+                        if(args.filters.available == 1){
+                            _params.filters = "EventDate ge datetime'"+ d.toISOString()  +"'";
+                        }else{
+                            _params.filters = "EventDate lt datetime'"+ d.toISOString()  +"'";
+                        }
+
+                        delete args.filters.available;
+                    }
+
+                    return _params;
                 }
             },
 
@@ -66,7 +85,7 @@ define([
                     var day = d.getDate();
                     d = new Date(year + '/'+ month +'/' + day);
 
-                    _params.filters = "available eq 1 and EventDate ge datetime'"+ d.toISOString()  +"'";
+                    _params.filters = "EventDate ge datetime'"+ d.toISOString()  +"'";
                     return _params;
                 },
                 returnFields: {
@@ -80,8 +99,7 @@ define([
                     "AttachmentFiles": "attachments",
                     "EventDate": "pubdate",
                     "JoinLink": "joinLink",
-                    "joinLinkTitle":"joinLinkTitle",
-                    "available": "available"
+                    "joinLinkTitle":"joinLinkTitle"
                 }
             },
 
@@ -125,8 +143,7 @@ define([
                     "AttachmentFiles": "attachments",
                     "EventDate": "pubdate",
                     "JoinLink": "joinLink",
-                    "joinLinkTitle":"joinLinkTitle",
-                    "available": "available"
+                    "joinLinkTitle":"joinLinkTitle"
                 },
                 queryParameters: {
                     expand: 'Category,AttachmentFiles,contact'
@@ -194,7 +211,7 @@ define([
                 states: [
                     {
                         id: 1,
-                        title: 'Available'
+                        title: 'Opening'
                     },
                     {
                         id: 0,

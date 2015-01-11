@@ -44,7 +44,7 @@ define([
            for(i=0,len=data.length;i<len;++i){
                 item= data[i];
 
-                if(item.link && /^http(s)?\:/.test(item.link)){
+                if(item.link && !/^#/.test(item.link)){
                     item.isExternalLink = true;
                 }
 

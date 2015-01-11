@@ -68,6 +68,26 @@ define([
                 returnFields: "ItemCount"
             },
 
+            'campus:events:src:fresh:short': {
+                url: 'items',
+                type: 'list',
+                getQueryParameters: function(){
+                    var _params = {
+                        orderby: 'EventDate desc'
+                    };
+
+                    var d= new Date();
+                    d.setHours(0,0,0,0);
+                    _params.filters = "EventDate ge datetime'"+ d.toISOString()  +"'";
+                    return _params;
+                },
+                returnFields: {
+                    "Id": "id",
+                    "Title": "title",
+                    "EventDate": "pubdate"
+                }
+            },
+
             //fetch those available and not outdated src events.
             'campus:events:src:fresh': {
                 url: 'items',

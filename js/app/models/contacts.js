@@ -129,8 +129,9 @@ define([
 
         fetchRecentBirthday: function(data){
             var d = new Date();
-            var today = new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
-            var n=0, items= [];
+            var curyear = d.getFullYear();
+            var today = new Date(curyear, d.getMonth(), d.getDate()).getTime();
+            var items= [];
             var _empty = false;
             var FETCH_MAX = 3;
 
@@ -138,22 +139,33 @@ define([
                 return (new Date(a.birthday).getTime() - new Date(b.birthday).getTime()) || (a.id - b.id);
             });
 
+            var wraparound = false;
+            var shot = false;
+
             for(var i=0,num= data.length;i<num;++i){
                 var _birthday = data[i].birthday;
                 if(!_birthday) continue;
 
-                _birthday =  new Date(_birthday).getTime();
-                if(_birthday < today) continue;
-
-                if(_birthday == today){
-                    n++;
+                if(wraparound){
+                   if( items.length >= FETCH_MAX ) break;
                     items.push(data[i]);
-                }else{
-                    if( n>= FETCH_MAX ) break;
-                    else{
-                        n++;
-                        items.push(data[i]);
-                    }
+                    continue;
+                }
+
+                _birthday =  new Date(_birthday);
+                _birthday.setFullYear(curyear);
+                _birthday = _birthday.getTime();
+
+                if( _birthday >= today){
+                    if(_birthday > today && items.length >= FETCH_MAX) break;
+                    items.push(data[i]);
+                }
+                
+                if(i == num-1){
+                    if( wraparound ) break;
+                    
+                    i = -1;
+                    wraparound = true;
                 }
             }
 

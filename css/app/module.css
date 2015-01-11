@@ -1388,6 +1388,11 @@ a.profilelink:hover img{
     line-height: 1.5em;
 }
 
+.newsitem .bodycontent .generalupdate_filelink{
+    margin-top:20px;
+    font-weight: bolder;
+}
+
 .newsitem .carousel-news .carousel-indicators{
     bottom: -20px;
     left: 15px;
@@ -1414,6 +1419,15 @@ a.profilelink:hover img{
     background: #ccc;
     margin-top: 15px;
     padding: 15px 10px 5px;
+    font-family: arial;
+}
+
+.pmimageitem > .modal-dialog {
+    width: 1024px;
+    margin-top: 10px;
+}
+.pmimageitem > .modal-dialog > .campus-item {
+    top:10px;
 }
 
 .pmimageitem .item-image{

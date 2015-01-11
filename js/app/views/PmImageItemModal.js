@@ -15,6 +15,7 @@ define([
         },
 
         getTemplateData: function(){
+            this.options.data.title = this.options.data.title || 'No Title';
             return _.extend(this.templateData, this.options.data);
         }
     });

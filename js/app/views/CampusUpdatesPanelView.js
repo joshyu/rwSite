@@ -12,11 +12,9 @@ define([
         news_count: 13,
         ui: {
             srcLinks : '.list-group-src  .list-group-item',
-            /*trainingLinks: '.list-group-training .list-group-item'*/
         },
         events: {
             'click @ui.srcLinks': 'clickLinkItem',
-            /*'click @ui.trainingLinks': 'clickTrainingLink',*/
             'click .banner-right .label': 'clickNewsType'
         },
 
@@ -29,17 +27,17 @@ define([
             {
                 model: 'news',
                 key: 'campus:news:list',
-                options: {num:5}
+                options: {num:13}
             },
             {
                 model: 'campus_src',
-                key: 'campus:events:src:updates:short',
-                options: {num:5}
+                key: 'campus:events:src:fresh:short',
+                options: {num:13}
             },
             {
                 model: 'campus_training',
-                key: 'campus:events:training:updates:short',
-                options: {num:5}
+                key: 'campus:events:training:fresh:oneweek:short',
+                options: {num:13}
             }            
         ],
 
@@ -51,12 +49,15 @@ define([
                 'campus_training': 'training'
             };
 
-           // data.news = data.campus_src = null;
+            //when sorting two items, if pubdate is equal, then the item with lower priority will be placed before.
+            var priority = {
+                'src' : 0,
+                'training' : 1,
+                'news' : 2
+            };
 
-            //var _existingLabelcs = {};
             _.each(data, function(items, key){
                 if(!items || !items.length) return;
-               // _existingLabelcs[key] = labelcs[key];
                 _.each(items, function(item){
                    item.type = labelcs[key];
                    item.labelc = labelcs[key][0].toUpperCase();
@@ -65,7 +66,8 @@ define([
             });
 
             _news = _news.sort(function(v1, v2){
-                return new Date(v2.pubdate) - new Date(v1.pubdate);
+                //return new Date(v2.pubdate) - new Date(v1.pubdate);
+                return v1.pubdate !== v2.pubdate ?  ( new Date(v2.pubdate) - new Date(v1.pubdate) ) : ( priority[v1.type] - priority[v2.type] );
             }).slice(0, this.news_count);
 
             this._renderData({news: _news, newsTypes: _.values(labelcs)});           
@@ -83,15 +85,6 @@ define([
             return false;
         },
         
-        clickTrainingLink: function(e){
-            var domTrigger= e.currentTarget;
-            var itemId= Marionette.$(domTrigger).data('item-id');
-            if(itemId){
-                ModalHelper.get('training', {itemId: itemId, domTrigger: domTrigger}).show();
-            }
-            return false;
-        },
-
         clickNewsType: function(e){
             var domTrigger = e.currentTarget;
             var $dom = $(domTrigger);

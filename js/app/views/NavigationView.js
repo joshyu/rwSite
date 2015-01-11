@@ -63,7 +63,7 @@ define([
         clickMenuItem: function(e) {
             var linkdom = e.target;
             var href = $(linkdom).attr('href');
-            if (!/^http(s)?\:/.test(href)) {
+            if (/^#/.test(href)) {
                 this.highlight(linkdom);
             }
         },

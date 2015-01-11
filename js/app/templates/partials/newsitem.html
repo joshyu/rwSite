@@ -1,14 +1,14 @@
 <div class="banner">{{#if news.author}} <span class="glyphicon glyphicon-user"></span> {{news.author}} {{/if}} {{#if news.pubdate}} <span class="glyphicon glyphicon-calendar"></span> {{formatDate news.pubdate}} {{/if}}</div>
 
-<div class="content bodycontent">
-    <!-- {{#if news.imageUrl}}<div class="newspic"><img class="" src="{{news.imageUrl}}"/></div>{{/if}} -->
+<div class="content bodycontent clearfix">
+    {{#unless news.isgeneral}}
     {{#if news.attachments.length}}
         <div class="newspic carousel carousel-news slide" data-ride="carousel">
             <!-- Carousel items -->
             <div class="carousel-inner">
                   {{#each news.attachments}}
                   <div class="item  {{#unless @index}}active{{/unless}}">
-                     <img src="{{ServerRelativeUrl}}"/>
+                     <img alt="{{FileName}}" src="{{ServerRelativeUrl}}"/>
                   </div>
                   {{/each}}
             </div>
@@ -21,5 +21,16 @@
             </ol>
         </div>
     {{/if}}
+    {{/unless}}
    <div>{{{news.content}}}</div>
 </div>
+{{#if news.isgeneral}}
+   {{#if news.attachments.length}}
+       <div class="attachments">
+          <span class="glyphicon glyphicon-paperclip"></span> 
+          {{#each news.attachments}}
+              <span class="attach_{{@index}} item"><a target="_blank" class="label label-default" title="{{FileName}}" href="{{ServerRelativeUrl}}">{{FileName}}</a></span>
+          {{/each}}
+      </div>
+   {{/if}}  
+{{/if}}

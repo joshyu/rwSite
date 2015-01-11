@@ -67,6 +67,31 @@ define([
                 }
             },
 
+            'campus:events:training:fresh:oneweek:short': {
+                url: 'items',
+                type: 'list',
+                getQueryParameters: function(){
+                    var _params = {
+                        orderby: 'EventDate desc'
+                    };
+
+                    var d= new Date();
+                    var year = d.getFullYear();
+                    var month = d.getMonth() + 1;
+                    var day = d.getDate();
+                    d = new Date(year + '/'+ month +'/' + day);
+                    d.setDate(day-7);
+                    _params.filters = "EventDate ge datetime'"+ d.toISOString()  +"'";
+                    return _params;
+                },
+
+                returnFields: {
+                    "Id": "id",
+                    "Title": "title",
+                    "EventDate": "pubdate"
+                }
+            },
+
              //fetch those available and not outdated src events.
             'campus:events:training:fresh': {
                 url: 'items',

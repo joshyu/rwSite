@@ -34,8 +34,9 @@ define([
                     var d= new Date();
                     var year = d.getFullYear();
                     var month = d.getMonth() + 1;
-                    var day = d.getDate()-7;
+                    var day = d.getDate();
                     d = new Date(year + '/'+ month +'/' + day);
+                    d.setDate(day-7);                    
                     _params.filters = "Created ge datetime'"+ d.toISOString()  +"'"; //Created
 
                     return _params;
@@ -50,6 +51,12 @@ define([
                     var year = d.getFullYear();
                     var month = d.getMonth() ;
                     var day = d.getDate();
+
+                    if(month == 0){
+                        month = 12;
+                        year --;
+                    }
+
                     d = new Date(year + '/'+ month +'/' + day);
                     _params.filters = "Created ge datetime'"+ d.toISOString()  +"'";
 

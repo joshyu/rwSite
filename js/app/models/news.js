@@ -16,13 +16,15 @@ define([
                 },
                 queryParameters: {
                     orderby: 'NewsDate desc',
-                    expand: 'Author0'
+                    expand: 'Author0',
+                    //filters: 'Is_x0020_it_x0020_General_x0020_  ne 1'
                 },
                 returnFields: {
                     "Id": "id",
                     "Title": "title",
                     "Author0/Title":"author",
-                    "NewsDate": "pubdate"
+                    "NewsDate": "pubdate",
+                    "Is_x0020_it_x0020_General_x0020_": 'isgeneral'
                 }
             },
              'campus:news:item' : {
@@ -38,7 +40,8 @@ define([
                     "Attachments": "",
                     "content" : "content",
                     "AttachmentFiles": "attachments",
-                    "NewsDate": "pubdate"
+                    "NewsDate": "pubdate",
+                    "Is_x0020_it_x0020_General_x0020_": 'isgeneral'
                 },
 
                 noHandleAttachedImage: true

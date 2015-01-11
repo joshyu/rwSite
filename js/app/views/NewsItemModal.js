@@ -19,6 +19,23 @@ define([
             getOptions: 'getRequestOption'
         },
 
+        handleData: function(data){
+            /*var newsitem = data.news;
+            var newsitemAttachments = newsitem.attachments;
+            var images = [];
+            if(newsitem.isgeneral !== true){
+                 newsitem.attachments = _.map(newsitemAttachments, function(item, i){
+                     if ( /(bmp|jpg|gif|png)$/.test(item.ServerRelativeUrl.toLowerCase())) {
+                        newsitem.imageUrl = item.ServerRelativeUrl;
+                    }
+                 })
+            }*/
+            
+
+
+            return ModalBase.prototype.handleData.apply(this, arguments);
+        },
+
         getRequestOption: function(){
             var itemId= this.options.itemId;
             return {
